@@ -1,0 +1,42 @@
+<div vdb-modal-header></div>
+
+<div class="modal-body">
+
+  <form name="login" class="reg-page">
+    <div class="reg-header">
+      <h2><center>Login To Your Account</center></h2>
+    </div>
+
+    <input type="hidden" id="id" name="id" ng-model="formData.id"></input>
+
+    <div ng-hide="oAuth" class="input-group margin-bottom-20" id="user">
+      <span class="input-group-addon" ><i class="fa fa-user"></i></span>
+      <input type="text" id="username" name="username" placeholder="Username or Email" class="form-control" ng-model="formData.username"></input>
+    </div>
+
+    <div ng-hide="oAuth" class="input-group margin-bottom-20" id="pass">
+      <span class="input-group-addon"><i class="fa fa-lock"></i></span>
+      <input type="password" id="password" name="password" placeholder="Password" class="form-control" ng-model="formData.password"></input>
+    </div>
+
+  </form>
+
+  <div class="modal-footer">
+    <div class="col-md-6">
+      <h4><a class="color-green" ng-click="register()">Not Registered?</a></h4>
+    </div>
+
+    <div class="col-md-6 pull-right">
+      <button ng-disabled="isDisabled"
+      type="button"
+      class="btn-u pull-right"
+      ng-click="submit()"
+      ng-if="!submitted">
+      Login
+    </button>
+    <span ng-if="submitted"
+    class="pull-right">
+    <i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
+  </span>
+</div>
+</div>

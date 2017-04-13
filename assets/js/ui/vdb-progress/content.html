@@ -1,0 +1,10 @@
+<div ng-repeat="layer in data" class="vdb-progress"
+<h4 class="m-b-n-xs">//layer.title\\
+  <span class="">(//mf(layer.value)\\)</span>
+</h4>
+<uib-progress class="">
+  <uib-bar ng-repeat="level in layer.data track by $index" value="(level.value/layer.value)*100" type="//level.type\\">
+    //((level.value/layer.value)*100).toFixed(1)\\%
+  </uib-bar>
+</uib-progress>
+</div>

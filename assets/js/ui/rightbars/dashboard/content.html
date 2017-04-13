@@ -1,0 +1,93 @@
+
+<div id="rightbar-panel" class="rightbar-panel">
+	<div id="Today">
+		<h4>Today <span class="badge badge-info pull-right"></span></h4>
+		<div id="severity-placeholder" class="pie-chart" style="padding: 0px; position: relative;">
+			<canvas class="flot-base" width="101" height="101" style="direction: ltr; position: absolute; left: 0px; top: 0px; width: 135px; height: 135px;"></canvas><canvas class="flot-overlay" width="101" height="101" style="direction: ltr; position: absolute; left: 0px; top: 0px; width: 135px; height: 135px;"></canvas></div>
+		</div>
+
+		<div id="Manufacturers">
+			<h4>Manufacturers <span class="badge badge-success pull-right ng-binding">3</span></h4>
+			<div id="flot-placeholder" style="width: 130px; height: 130px; left: 35px; padding: 0px; position: relative;">
+
+				<canvas class="flot-base" width="98" height="96" style="direction: ltr; position: absolute; left: 0px; top: 0px; width: 131px; height: 129px;"></canvas><canvas class="flot-overlay" width="98" height="96" style="direction: ltr; position: absolute; left: 0px; top: 0px; width: 131px; height: 129px;"></canvas></div>
+			</div>
+
+			<div id="Messages">
+				<h4>Messages <span class="badge badge-success pull-right ng-binding">3</span></h4>
+				<!-- ngRepeat: c in messages.global --><div class="feed-element ng-scope" ng-repeat="c in messages.global">
+				<a href="" class="pull-left">
+					<img alt="image" class="img-circle" ng-src="https://media.licdn.com/mpr/mpr/shrinknp_200_200/p/8/005/0a7/23b/16ffd31.jpg" src="https://media.licdn.com/mpr/mpr/shrinknp_200_200/p/8/005/0a7/23b/16ffd31.jpg">
+				</a>
+				<div class="media-body ng-binding">
+					1.6.2 is released!
+					<small class="text-muted ng-binding" style="display:block">05/24/16 at 05:00pm</small>
+				</div>
+			</div><!-- end ngRepeat: c in messages.global --><div class="feed-element ng-scope" ng-repeat="c in messages.global">
+				<a href="" class="pull-left">
+					<img alt="image" class="img-circle" ng-src="https://media.licdn.com/mpr/mpr/shrinknp_200_200/p/8/005/0a7/23b/16ffd31.jpg" src="https://media.licdn.com/mpr/mpr/shrinknp_200_200/p/8/005/0a7/23b/16ffd31.jpg">
+				</a>
+				<div class="media-body ng-binding">
+					1.6.1 is released!
+					<small class="text-muted ng-binding" style="display:block">05/22/16 at 11:55pm</small>
+				</div>
+			</div><!-- end ngRepeat: c in messages.global --><div class="feed-element ng-scope" ng-repeat="c in messages.global">
+				<a href="" class="pull-left">
+					<img alt="image" class="img-circle" ng-src="https://media.licdn.com/mpr/mpr/shrinknp_200_200/p/8/005/0a7/23b/16ffd31.jpg" src="https://media.licdn.com/mpr/mpr/shrinknp_200_200/p/8/005/0a7/23b/16ffd31.jpg">
+				</a>
+				<div class="media-body ng-binding">
+					Hi Everyone! This sidebar will evolve over time but for now I will use it to communicate changes!
+					<small class="text-muted ng-binding" style="display:block">05/16/16 at 2:04pm</small>
+				</div>
+			</div><!-- end ngRepeat: c in messages.global -->
+		</div>
+
+		<div id="Alerts" class="m-t-md">
+			<h4>Alerts<span class="badge badge-warning pull-right ng-binding"></span></h4>
+			<p>Here are your Top 5 Alerts.</p>
+
+			<!-- ngRepeat: a in alerts.global -->
+		</div>
+
+
+		<div id="Discussion" class="m-t-md">
+			<h4>Discussion<span class="badge badge-success pull-right">1</span></h4>
+			<ul class="list-group">
+				<li class="list-group-item">
+					New Features Released in Version 1.6!
+				</li>
+
+			</ul>
+		</div>
+
+		<div id="Historicals" class="well">
+			<h4>Historicals</h4>
+			<div id="Today" class="row m-t-sm">
+				<div class="col-md-4">
+					<div class="row text-center m-b-n-xs">
+						<span><i class="fa fa-clock-o fa-2x text-info"></i></span>
+					</div>
+					<div class="row text-center m-t-none">
+						<h5 class="ng-binding">6</h5>
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div class="row text-center m-b-n-xs">
+						<span><i class="fa fa-archive fa-2x text-info"></i></span>
+					</div>
+					<div class="row text-center m-t-none">
+						<h5 class="ng-binding">106.2G</h5>
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div class="row text-center m-b-n-xs">
+						<span><i class="fa fa-calendar fa-2x text-info"></i></span>
+					</div>
+					<div class="row text-center m-t-none">
+						<h5 class="ng-binding">0</h5>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</div> <!--End Sidebar-->

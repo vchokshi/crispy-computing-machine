@@ -1,0 +1,112 @@
+.spin-icon.left {
+  z-index: 99;
+  position: absolute;
+  padding: 7px 10px 7px 13px;
+  border-radius: 0px 20px 20px 0px;
+  left: @leftbar-width;
+  font-size: 16px;
+  top: 0;
+  width: 40px;
+  cursor: pointer;
+}
+
+.theme-config {
+  top:100px;
+  z-index: 100;
+  margin-top: 10px;
+  margin-left: -@leftbar-width;
+  position: absolute;
+  width: @leftbar-width;
+  box-shadow: 7px -7px 20px #888888;
+  transition-duration: 0.8s;
+}
+
+.theme-config.show {
+  margin-left: 0px;
+}
+
+.skin-setttings {
+  // width: @leftbar-width;
+  // margin-left: 40px;
+}
+
+.skin-setttings .title {
+  text-align: center;
+  text-transform: uppercase;
+  font-weight: 600;
+  display: block;
+  padding: 10px 15px;
+  font-size: 12px;
+}
+
+.setings-item {
+  padding: 10px 20px 10px 20px;
+}
+
+.setings-item.skin {
+  text-align: center;
+}
+
+.setings-item .switch {
+  float: right;
+}
+
+.skin-name a {
+  text-transform: uppercase;
+}
+
+.setings-item a {
+  color: @text-color;
+}
+
+.default-skin, .blue-skin, .green-skin, .ultra-skin, .custom-skin {
+  text-align: center;
+  text-decoration: none;
+}
+
+.default-skin {
+  font-weight: 600;
+  background: @green;
+}
+
+.default-skin a {
+  color: @white;
+  text-decoration: none;
+}
+
+.default-skin:hover {
+  background: darken(@green, 10%);;
+}
+.blue-skin {
+  font-weight: 600;
+  background: @blue;
+}
+.blue-skin a, .green-skin a {
+  color: @white;
+  text-decoration: none;
+}
+
+.blue-skin:hover {
+  background: darken(@blue, 10%);;
+}
+
+.green-skin {
+  font-weight: 600;
+  background: @green;
+}
+
+.green-skin:hover {
+  background: darken(@green, 10%);;
+}
+
+.custom-skin {
+  font-weight: 600;
+  background: @white;
+}
+.custom-skin a {
+  color: darken(@orange, 10%);
+  text-decoration: none;
+}
+.custom-skin:hover {
+  background: darken(@white, 10%);;
+}

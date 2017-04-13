@@ -1,0 +1,63 @@
+/* SVG styling */
+.svg-small {
+  height: 320px;
+  margin: 0 auto;
+  position: relative;
+  top: 50%;
+  // transform: translateY(-50%);
+  width: 320px;
+}
+.svg-medium {
+  height: 640px;
+  margin: 0 auto;
+  position: relative;
+  top: 50%;
+  // transform: translateY(-50%);
+  width: 640px;
+}
+.svg-medium {
+  height: 1280px;
+  margin: 0 auto;
+  position: relative;
+  top: 50%;
+  // transform: translateY(-50%);
+  width: 1280px;
+}
+
+path, line {}
+
+.shape {
+  // fill: transparent;
+  // stroke-dasharray: 140 540;
+  // stroke-dashoffset: -474;
+  // stroke-width: 8px;
+  stroke: @green;
+}
+
+.text {
+  color: @text-color;
+  font-size: 22px;
+  letter-spacing: 8px;
+  line-height: 32px;
+  position: relative;
+  top: -48px;
+}
+
+@keyframes draw {
+  0% {
+    stroke-dasharray: 140 540;
+    stroke-dashoffset: 0;
+    stroke-width: 2px;
+  }
+  100% {
+    stroke-dasharray: 760;
+    stroke-dashoffset: 0;
+    stroke: @blue;
+    stroke-width: 10px;
+  }
+}
+
+.svg-small:hover .shape {
+  -webkit-animation: 0.5s draw linear forwards;
+  animation: 0.5s draw linear forwards;
+}

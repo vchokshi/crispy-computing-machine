@@ -1,0 +1,189 @@
+<!-- <vdb-breadcrumb data="{'version': 'v1', 'title':'Videbligo Blogs', 'subtitle': 'Excellence in statistical graphics consists of complex ideas communicated with clarity, precision, and eficiency. - Edward Tufte' }"></vdb-breadcrumb> -->
+<vdb-parralax />
+<div class="container blog-leftbar">
+    <div class="headline-v2 blog"><h2>Latest Posts</h2></div>
+    <!-- Trending -->
+    <ul class="list-unstyled blog-trending">
+      
+        <li>
+          <h3>
+            <a ui-sref=
+              "home.blogs.posts({
+                cat:'about',
+                year:'2017',month:'01',day:'23',title:'About-Us'})">
+             About Us
+            </a>
+          </h3>
+          <small>Jan 23, 2017 / About Us</small>
+        </li>
+      
+        <li>
+          <h3>
+            <a ui-sref=
+              "home.blogs.posts({
+                cat:'financial',
+                year:'2016',month:'12',day:'03',title:'The-Real-TCO-of-Big-Data'})">
+             The Real TCO of Big Data
+            </a>
+          </h3>
+          <small>Dec 3, 2016 / ROI</small>
+        </li>
+      
+    </ul>
+    <!-- End Trending -->
+
+    <div class="headline-v2"><h2>Tags</h2></div>
+    <!-- Tags v2 -->
+    <ul class="list-inline tags-v2">
+      
+      <li>
+        <a href="">
+         ROI 
+       </a>
+     </li>
+      
+      <li>
+        <a href="">
+         About Us 
+       </a>
+     </li>
+      
+      <!-- <li ng-repeat="tag in allTags"><a ui-sref="home.comingsoon"></a></li> -->
+    </ul>
+    <!-- End Tags v2 -->
+</div>
+
+<div class="blog-content">
+      <div class="blog">
+    <a href="javascript:void(0)" class="post-title post" itemprop="name headline">The Real TCO of Big Data</a>
+    <ul class="list-inline">
+      <li>By <a href="#">Vihar Chokshi</a></li>
+      <li>In <a href="#">financial</a></li>
+      <li>Posted Dec 3, 2016</li>
+    </ul>
+    <p><em>Editors Note: This is the first part in a multi-part series on the real costs of big data.</em></p>
+
+<h1 id="executive-summary">Executive Summary</h1>
+
+<p>The Total Cost of Ownership of a 1PB Big Data solution over 5 years can exceed $37M<sup id="fnref:1"><a href="#fn:1" class="footnote">1</a></sup>. Infrastructure requirements, licensing costs, Operations &amp; Maintenance (O&amp;M) costs, and growth are often timed underestimated. The biggest risk to budgetary adherence is the scarcity and wide range of salary requirements for qualified data scientists.</p>
+
+<p><strong>Videbligo makes it easy to adopt a Big Data Solution with our secure, cloud based platform and consulting services to free your data story.</strong></p>
+
+<h1 id="market-research">Market Research</h1>
+<p>We have interviewed 32 senior business and IT leaders who have implemented a Big Data Solution.  Implementations ranged from small<sup id="fnref:2"><a href="#fn:2" class="footnote">2</a></sup> to large<sup id="fnref:3"><a href="#fn:3" class="footnote">3</a></sup> with varying vendors, licensing models and deployment services. Additionally, each client had a unique use case, ranging from IT only data with director level sponsorship to identifying business relevant data with high executive engagement.</p>
+
+<p>In addition to the technical details associated with each implementation, we asked our clients to estimate returns with 3 different types of ROI: Hard ROI, Soft ROI and Strategic ROI.  For Hard ROI, we asked them to use their revenue as the base and provide a percentage increase in revenue as a result of the solution and a decrease in costs to the business.</p>
+
+<h1 id="acme-inc-overview">ACME, Inc. Overview</h1>
+<div class="row">
+<div class="col-lg-8">
+  To normalize the technical comparisons of our 32 implementations, we set out to put each implementation into a common size and framework.  Ultimately, we developed a mock company with a mock Big Data Project, called ACME, Inc.  
+</div>
+  <div class="col-lg-4">
+   <vdb-table data="blog.tco.projectdata"></vdb-table>
+  </div>
+
+</div>
+
+<h2 id="acme-inc-project-team">ACME, Inc. Project Team</h2>
+<div class="row">
+  <div class="col-lg-8 col-offset-2">
+<vdb-table data="blog.tco.team"></vdb-table>
+</div>
+<div class="col-lg-4">
+ACME has two teams, one is the “Business” and the other is “IT”. In our research, we found that while it was important that the business have appropriate levels of expectations of what a Big Data solution could provide, variability to the ROI could not be normalized and should therefore be excluded from calculation. For the project deployment, we chose to use the Plan, Build, Run approach to simplify the model and allocate normalized costs to coarse buckets.
+</div>
+</div>
+
+<h1 id="big-data-solution-requirements">Big Data Solution Requirements</h1>
+
+<p>Each of the 32 installations chose different solutions. On the smaller size, we found organizations tended to virtualize more, choose annual (term) licensing models, and buy commercial, off the shelf software (COTS) to manage costs and minimize risk. On the large end, we found organizations tended towards bare metal systems for reduced contention of resources, open source software with subscription licensing for support. In two cases, we found organizations choosing fully turnkey solutions where the OEM provided everything from hardware, to software, to racks and cabling for an all-in-one solution.</p>
+
+<h2 id="acme-inc-solution-requirements">ACME, Inc. Solution Requirements</h2>
+<div class="row">
+<div class="col-lg-7">
+<p>
+Based on current market trends, we chose to normalize our data by placing greater emphasis on virtualized systems and term licensing models. In our analysis, we found that the overall cost towards these solutions was lower in the short term and hence would be appropriate for a conservative ROI calculation.
+</p>
+<p>
+Variations in daily ingestion rate and active storage capabilities varied widely, so in order to normalize our model we calculated everything in terms of 1 Petabyte system. By taking this approach, we were able to again use the lowest costs due to economies of scale to present a conservative ROI calculation.
+</p>
+</div>
+  <div class="col-lg-5">
+<vdb-table data="blog.tco.solution"></vdb-table>
+</div>
+</div>
+
+<h2 id="project-timelines">Project Timelines</h2>
+<div class="row">
+ <div class="col-lg-6">
+  <d3-gantt />
+ </div>
+ <div class="col-lg-6">
+ <p>
+ The duration of time for plan varied between 60 days for the smallest implementations to 180 for the largest and most complex. As every organization had a different methodology for project execution, we placed greater emphasis on the quality of data where sponsorship was strong and implementations that had a disciplined approach to execution.
+ </p>
+ <p>
+ Build time varied in a similar manner a plan time based on sponsorship and disciplined execution. Therefore, greater emphasis on build was placed on quality of data where sponsorship and discipline were strong.
+ </p>
+ </div>
+</div>
+
+<!-- ## Project Costs
+To meet the demands of the business, it was important to identify the costs of the data scientists and analysts that would be required to produce the results required by the business. In our interviews, we found that most hiring managers were relatively disappointed with the lack of qualified resources available, the relatively low quality candidates they interviewed, and the quality of output generated. We categorized much of their frustration to three primary reasons: lack of chosen technology skill set, lack of interdisciplinary experience, lack of business/industry relevant knowledge. IT managers often times found themselves spending more time searching for scarce resources, and hiring from a limited pool of candidates.
+
+ACME Co. Data Scientists
+30
+
+Projected Business Benefits
+Projected benefits of Big Data Projects varied across each implementation. To simplify the hard ROI calculations, we asked each person to quantify the project benefits as a comparison to revenue.
+
+
+Based on the results of our interviews, you can see that most of our respondents projected a 1%-2% increase in revenues based on the Big Data Project.  A large proportion of respondents projected seeing greater returns on cost savings with Big Data.
+
+We wanted to get an idea of where business and IT saw the drivers and benefits, so we asked some more questions. -->
+
+<!-- ### The Results
+
+Our results show that the Total Cost of Ownership for a 1PB Big Data Solution can cost almost $38M. Data Science, and the people that transform large amounts of data into purposeful graphics, makes up almost 62% of the total costs.  
+
+
+
+<blockquote class="hero">
+<p><em>"Lorem ipsum dolor sit amet, consectetur adipiscing duis mollis, est non commodo luctus elit posuere erat a ante. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis lorem ipsum dolor sit amet, consectetur adipiscing"</em></p>
+</blockquote> -->
+
+<div class="footnotes">
+  <ol>
+    <li id="fn:1">
+      <p>Discounted Costs of Capital Assumed at 3%. <a href="#fnref:1" class="reversefootnote">&#8617;</a></p>
+    </li>
+    <li id="fn:2">
+      <p>&lt;50GB / Day with 1.5PB of active data, retention period of 30 Days. <a href="#fnref:2" class="reversefootnote">&#8617;</a></p>
+    </li>
+    <li id="fn:3">
+      <p>~45PB / Day with 90 Days of active data, retention period of 396 Days. <a href="#fnref:3" class="reversefootnote">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+
+  </div>
+<div class="blog-author margin-bottom-30">
+  <img src="img/team/vihar.png" alt="">
+  <div class="blog-author-desc">
+    <div class="overflow-h">
+      <h4>Vihar Chokshi</h4>
+      <ul class="list-inline">
+        <li><a href="https://www.facebook.com/viharchokshi"><i class="fa fa-facebook"></i></a></li>
+        <li><a href="https://twitter.com/vchokshi"><i class="fa fa-twitter"></i></a></li>
+        <li><a href="https://www.linkedin.com/in/viharchokshi"><i class="fa fa-google-plus"></i></a></li>
+      </ul>
+    </div>
+    <p>Vihar Chokshi is the CEO and Founder of Videbligo. Videbligo visualzes Big Data in the Cloud at a fraction of the cost of industry solutions.</p>
+  </div>
+</div>
+
+
+<hr>
+
+</div>

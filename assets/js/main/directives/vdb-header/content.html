@@ -1,0 +1,130 @@
+<div class="header">
+  <div class="container">
+    <a class="logo" ui-sref="home"></a>
+
+    <!--  Bgein Top Bar -->
+    <div class="topbar">
+      <ul class="loginbar pull-right">
+        <li class="hoverSelector">
+          <i class="fa fa-globe"></i>
+          <a>Languages</a>
+          <ul class="languages hoverSelectorBlock">
+            <li class="active">
+              <a href="#">English <i class="fa fa-check"></i></a>
+            </li>
+            <li><a href="#">Spanish</a></li>
+            <li><a href="#">Russian</a></li>
+            <li><a href="#">German</a></li>
+          </ul>
+        </li>
+        <li class="topbar-devider"></li>
+
+        <!--  Help-->
+        <i class="fa fa-question"></i>
+        <li><a ui-sref="home.resources.help">Help</a></li>
+        <li class="topbar-devider"></li>
+        <!--  Help -->
+
+        <!-- Timeframe Selector-->
+        <li ng-if="isDash()" name="Timerange" class="hoverSelector" is-open="timeFrame.isopen">
+          <a href class="dropdown-toggle">
+            <span><i class="fa fa-calendar"></i></span>
+            <span id="selectTimeFrame">//timeWindow.value\\</span>
+            <span id="customTimeFrame"></span>
+          </a>
+          <ul class="languages hoverSelectorBlock">
+            <li ng-repeat="(key,value) in timeWindow.options">
+              <a ng-if="value == 'Custom'" ng-click="openCalender('sm')" href>//value\\</a>
+              <a ng-if="value != 'Custom'" ng-click="setTimeWindow('now', key)" href>//value\\</a>
+            </li>
+          </ul>
+        </li>
+        <li ng-if="isDash()" class="topbar-devider"></li>
+        <!-- Timeframe Selector-->
+
+        <!-- Index Selector -->
+        <li ng-if="myIndices.length > 1" name="myIndices" class="hoverSelector">
+          <a href class="dropdown-toggle">
+            <span><i class="fa fa-database "></i></span>
+            //Index | removeUnderscores\\
+          </a>
+          <!-- dropdown -->
+          <ul class="languages hoverSelectorBlock">
+            <li ng-repeat="index in myIndices">
+              <a ng-click="setIndex(index)">//index | removeUnderscores\\</a>
+            </li>
+          </ul>
+          <!-- / dropdown -->
+        </li>
+        <li ng-show="myIndices.length > 1" class="topbar-devider"></li>
+        <!-- Index Selector -->
+
+        <!-- User Info-->
+        <li class="user" ng-show="user"><img src="//user.image\\" alt=""></li>
+        <li ng-show="user" class="hoverSelector" >
+          <a> Welcome //user.firstname\\! </a>
+
+          <ul class="languages hoverSelectorBlock">
+            <li><a ng-click="logout()">Logout <i class="fa fa-sign-out text-danger"></i></a></i></li>
+            <li><a ui-sref="home.myProfile">My Profile <i class="fa fa-user "></i></a></i></li>
+            <li ng-show="user"><a ui-sref="home.myCompany.billing">Billing <i class="fa fa-money text-success"></i></a></i></li>
+          </ul>
+        </li>
+        <!-- User Info-->
+        <li ng-show ="!user"><a ng-click="login()">Login</a></li>
+      </ul>
+    </div>
+    <!-- End Top Bar -->
+
+    <!-- Toggle get grouped for better mobile display -->
+    <!-- <div> -->
+    <button type="button" class="navbar-toggle rounded" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="fa fa-bars"></span>
+    </button>
+    <!-- </div> -->
+    <!-- End Toggle -->
+
+  </div><!-- End container -->
+
+  <!-- Begin Navbar -->
+  <div class="collapse navbar-collapse mega-menu navbar-responsive-collapse">
+    <div class="container">
+      <ul class="nav navbar-nav">
+
+        <li><a ui-sref="home">Home</a></li>
+
+        <li ng-repeat="page in pages" ng-class="{'dropdown': page.has_children}">
+          <a ng-if="wp_pages.is_parent(page)" ui-sref="home.//page.route\\">
+            //page.title.rendered\\
+          </a>
+          <ul ng-if="page.has_children" class="dropdown-menu">
+            <li ng-repeat="subpage in pages" >
+              <a ng-if="page.id == subpage.parent" ui-sref="home.//subpage.route\\">
+                //subpage.title.rendered\\
+              </a>
+            </li>
+          </ul>
+        </li>
+
+        <li ng-show="user" class="dropdown">
+          <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown">
+            My Services
+          </a>
+          <ul ng-if="myServices" class="dropdown-menu">
+            <li ng-repeat="service in myServices" >
+
+              <a ui-sref="//service.route\\">
+                <i class="//service.icon\\ "></i>
+                //service.title\\
+              </a>
+            </li>
+          </ul>
+        </li>
+
+      </ul>
+    </div>
+  </div>
+  <!-- End Navbar -->
+
+</div>

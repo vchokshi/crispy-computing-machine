@@ -1,0 +1,106 @@
+<div class="purchase">
+  <div class="container overflow-h">
+    <div class="row">
+      <div class="col-md-9 animated fadeInLeft">
+        <span>Videbligo is the solution for business outcomes through data driven documents</span>
+        <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi  vehicula sem ut volutpat. Ut non libero magna fusce condimentum eleifend enim a feugiat corrupti quos.</p>
+      </div>
+      <div class="col-md-3 btn-buy animated fadeInRight">
+        <a href="#" class="btn-u btn-u-lg"><i class="fa fa-cloud-download"></i> Contact Us</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container content-20">
+
+  <div class="row margin-bottom-30">
+    <div class="col-md-4">
+      <div class="service">
+        <i class="fa fa-compress service-icon"></i>
+        <div class="desc">
+          <h4>Consulting</h4>
+          <p>Videbligo is a data science consulting firm based in Scottsdale, Arizona. We specialize in answering the big questions of business; the ones that can be be found in monds of data. </p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="service">
+        <i class="fa fa-line-chart service-icon"></i>
+        <div class="desc">
+          <h4>Visualization</h4>
+          <p>We employ some of the best data scientists from around the world across multiple industries. We bring the best of data science and domain expertise to visualize your data for actionable, business outcomes. </p>
+
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="service">
+        <i class="fa fa-cloud service-icon"></i>
+        <div class="desc">
+          <h4>Software</h4>
+          <p>Don't have big data software or don't want to invest millions of dollars in building a platform? Don't worry, we have our own analytics platform that can deliver answers at a fraction of the cost.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+  <div class="headline"><h2>Recent Projects</h2></div>
+
+  <div class="row margin-bottom-20">
+
+    <div ng-repeat="post in posts" class="col-md-3 col-sm-6">
+      <div class="thumbnails thumbnail-style thumbnail-kenburn">
+        <div class="thumbnail-img">
+          <div class="overflow-hidden">
+            <img class="img-responsive" src="//post._embedded['wp:featuredmedia'][0].source_url\\" alt="">
+          </div>
+          <a class="btn-more hover-effect" ui-sref="home.posts({slug:post.slug})">read more +</a>
+        </div>
+        <div class="caption">
+          <h3><a class="hover-effect" ui-sref="home.posts({slug:page.slug})">//post.title.rendered\\</a></h3>
+          <div ng-bind-html="post.excerpt.rendered | trust"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="parallax-counter-v1 parallaxBg" style="background-position: 50% -202px;">
+  <div class="container">
+    <h2 class="title-v2 title-light title-center">SOME FACTS AND FIGURES</h2>
+    <p class="space-xlg-hor text-center color-light">If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary.</p>
+
+    <div class="margin-bottom-40"></div>
+
+    <div class="row margin-bottom-10">
+      <div class="col-sm-3 col-xs-6">
+        <div class="counters">
+          <span class="counter">10629</span>
+          <h4>Petabytes</h4>
+        </div>
+      </div>
+      <div class="col-sm-3 col-xs-6">
+        <div class="counters">
+          <span class="counter">277</span>
+          <h4>Response Time</h4>
+        </div>
+      </div>
+      <div class="col-sm-3 col-xs-6">
+        <div class="counters">
+          <span class="counter">78</span>
+          <h4>Team Members</h4>
+        </div>
+      </div>
+      <div class="col-sm-3 col-xs-6">
+        <div class="counters">
+          <span class="counter">2007</span>
+          <h4>Awards</h4>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

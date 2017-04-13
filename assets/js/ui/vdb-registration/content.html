@@ -1,0 +1,132 @@
+<div vdb-modal-header></div>
+
+<div class="modal-body">
+
+  <form class="reg-page" name="regForm">
+    <div class="reg-header">
+      <h2><center>Register a new account</center></h2>
+      <p>
+        <center>
+          Already Signed Up? Click
+          <a ng-click="login()" class="color-green">
+            Sign In
+          </a>
+          to login your account.
+        </center>
+      </p>
+    </div>
+
+    <div class="input-group margin-bottom-20"
+    ng-class="{ 'has-error' : regForm.username.$invalid && !regForm.username.$pristine }">
+
+      <span class="input-group-addon" >
+        <i class="fa fa-user"></i>
+      </span>
+      <input type="text" placeholder="Username or Email" name="username" class="form-control" ng-model="regData.username" ng-minlength="6" ng-maxlength="20" ng-pattern="/$/">
+
+    </div>
+
+    <p ng-show="regForm.username.$error.minlength && !regForm.username.$pristine" class="help-block">Username is too short.
+    </p>
+    <p ng-show="regForm.username.$error.maxlength && !regForm.username.$pristine" class="help-block">Username is too long.
+    </p>
+    <p ng-show="regForm.username.$error.pattern && !regForm.username.$pristine" class="help-block">Username is not available.
+    </p>
+
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="input-group margin-bottom-20" ng-class="{ 'has-error' : regForm.firstname.$invalid && !regForm.firstname.$pristine }">
+          <span class="input-group-addon" ><i class="fa fa-user"></i></span>
+          <input type="text" placeholder="Firstname" name="firstname" class="form-control" ng-model="regData.firstname" required>
+        </div>
+        <p ng-show="regForm.firstname.$invalid && !regForm.firstname.$pristine" class="help-block">First Name is required.</p>
+
+      </div>
+      <div class="col-sm-6">
+        <div class="input-group margin-bottom-20" ng-class="{ 'has-error' : regForm.lastname.$invalid && !regForm.lastname.$pristine }">
+          <span class="input-group-addon" ><i class="fa fa-user"></i></span>
+          <input type="text" placeholder="Lastname" name="lastname" class="form-control" ng-model="regData.lastname" required>
+        </div>
+        <p ng-show="regForm.lastname.$invalid && !regForm.lastname.$pristine" class="help-block">Last Name is required.</p>
+
+      </div>
+    </div>
+
+
+    <div class="input-group margin-bottom-20" ng-class="{ 'has-error' : regForm.company.$invalid && !regForm.company.$pristine }">
+      <span class="input-group-addon" ><i class="fa fa-building-o"></i></span>
+      <input type="text" placeholder="Company Name" name="company" class="form-control" ng-model="regData.company" required>
+    </div>
+
+    <p ng-show="regForm.company.$invalid && !regForm.company.$pristine" class="help-block">Company Name is required.
+    </p>
+
+    <div class="input-group margin-bottom-20" ng-class="{ 'has-error' : regForm.email.$invalid && !regForm.email.$pristine }">
+      <span class="input-group-addon" ><i class="fa fa-envelope"></i></span>
+      <input type="email" placeholder="Email Address" name="email" class="form-control" ng-model="regData.email" required>
+    </div>
+
+    <p ng-show="regForm.email.$invalid && !regForm.email.$pristine" class="help-block">Valid Email Address is required.
+    </p>
+
+    <div class="row">
+
+      <div class="col-sm-6">
+
+        <div class="input-group margin-bottom-20" ng-class="{ 'has-error' : regForm.password.$invalid && !regForm.password.$pristine }">
+          <span class="input-group-addon" ><i class="fa fa-lock"></i></span>
+          <input type="password" placeholder="Password" name="password" class="form-control" ng-model="regData.password" required >
+        </div>
+
+      </div>
+
+      <div class="col-sm-6">
+
+        <div class="input-group margin-bottom-20" ng-class="{ 'has-error' : regForm.confirm.$invalid && !regForm.confirm.$pristine }">
+          <span class="input-group-addon" ><i class="fa fa-lock"></i></span>
+          <input type="password" placeholder="Repeat Password" name="confirm" class="form-control"
+          ng-model="regData.confirm" required
+          compare-to="regData.password">
+        </div>
+
+        <p ng-show="regForm.confirm.$invalid && !regForm.confirm.$pristine" class="help-block">Passwords Do Not Match
+        </p>
+      </div>
+
+    </div>
+
+    <div ng-password-strength="regData.password"
+    strength="regParams.passStrength"
+    calculation-mode="regParams.mode"
+    goal="regParams.goal"
+    inner-class="progress-bar"
+    inner-class-prefix="progress-bar-">
+    </div>
+
+</form>
+
+<div class="modal-footer">
+  <div class="row">
+    <div class="col-lg-6">
+      <!-- <button class="btn-u" ng-click="steptwo()"></button> -->
+
+      <label class="checkbox">
+        <input type="checkbox" name="terms" ng-model="regData.terms" required>
+        I Accept <a ng-click="terms()" class="color-green">Terms & Conditions</a>
+      </label>
+    </div>
+    <div class="col-lg-6">
+      <button class="btn-success pull-right"
+        ng-disabled="regForm.$invalid || !regData.terms"
+        ng-click="submit()"
+        ng-if="!submitted">
+        Submit
+        <i class="fa fa-chevron-right" aria-hidden="true"></i>
+      </button>
+      <span ng-if="submitted"
+        class="pull-right">
+        <i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
+      </span>
+    </div>
+  </div>
+</div>

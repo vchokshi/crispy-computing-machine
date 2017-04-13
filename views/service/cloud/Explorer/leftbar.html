@@ -1,0 +1,51 @@
+<nav class="navbar-default navbar-static-side" role="navigation">
+	<div class="sidebar-collapse">
+		<ul side-navigation class="nav" id="side-menu">
+			<li class="nav-header">
+				<div class="dropdown profile-element">
+					<img alt="profile image" class="img-circle" src="//User.image\\" data-profile-image></img>
+					<a class="dropdown-toggle" ui-sref="home.myProfile">
+						<span class="clear">
+							<span  class="block m-t-xs">
+								<strong data-profile-fullname>//User.firstname\\ //User.lastname\\</strong>
+							</span>
+							<span class="text-xs block">
+								<data-profile-headline>//User.jobtitle\\
+								</span>
+							</span><!--End UserInfo-->
+						</a>
+					</div>
+					<div class="logo-element">
+						<img src="assets/img/Videbligo_1kx1k.png" width="32px" height="32px">
+					</div>
+				</li>
+
+				<li ng-class="{active: $state.includes('dashboards')}">
+					<a href="index.html"><i class="fa fa-th-large"></i>
+						<span class="nav-label">Dashboards</span> <span class="fa arrow"></span></a>
+						<ul class="nav nav-second-level" ng-class="{in: $state.includes('dassboard')}">
+							<li ui-sref-active="active"><a ui-sref="dashboards.dashboard_1">Dashboard v.1</a></li>
+						</ul>
+				</li>
+
+
+				<li ng-repeat="mfg in devices" ng-class="{active: selected.mfg === mfg}">
+					<a href=""><i class="fa fa-th-large text-success"></i>
+						<span class="nav-label">//mfg.title\\</span><span class="fa arrow"></span>
+					</a>
+
+					<ul class="nav nav-second-level" ng-class="{in: selected.mfg === mfg}">
+						<li ng-repeat="device in mfg.children" ui-sref-active="active">
+							<a ng-click="search(mfg.title,device.title)">//device.title\\</a></li>
+					</ul>
+				</li>
+			</ul>
+		</div>
+		<!--<div id="Advertising" style="text-align:center">
+		<h4>Our Featured Partners</h4>
+		<img alt="Small Ad" src="assets/img/adverts/small.png"></img>
+		<img alt="Medium Ad" src="assets/img/adverts/medium.png"></img>
+	</div>
+</div>
+-->
+</nav>

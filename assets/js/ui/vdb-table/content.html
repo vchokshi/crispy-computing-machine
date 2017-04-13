@@ -1,0 +1,20 @@
+<div class="vdb-table vdb-table-//data.background\\ margin-bottom-20">
+  <div class="vdb-table-heading">
+    <h3 class="vdb-table-title"><i class="fa //data.icon\\"></i>//data.title\\</h3>
+  </div>
+  <div ng-if="data.overview" class="vdb-table-body">
+    <p>//data.overview\\</p>
+  </div>
+  <table class="table">
+    <thead ng-if="data.tableheaders">
+      <tr>
+        <th ng-repeat="header in data.tableheaders">//header\\</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="record in data.tabledata">
+        <td ng-repeat="td in record">//td\\</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

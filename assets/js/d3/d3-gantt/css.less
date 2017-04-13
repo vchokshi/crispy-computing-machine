@@ -1,0 +1,47 @@
+
+.gantt {
+}
+.gantt .chart {
+	// font-family: Arial, sans-serif;
+	font-size: 18px;
+}
+
+.gantt .axis path,.gantt .axis line {
+	fill: none;
+	stroke: @text-color;
+	shape-rendering: crispEdges;
+}
+
+.gantt .bar {
+	stroke-width: 1px;
+	stroke: @dark-gray;
+	border-color: @dark-gray;
+	fill: @dark-gray;
+	fill-opacity: 0.5;
+
+}
+
+.gantt .bar-failed {
+	stroke-width: 1px;
+	stroke: @red;
+	border-color: @red;
+	fill: @red;
+	fill-opacity: 0.5;
+}
+
+.gantt .bar-running {
+	fill: @orange;
+	opacity: 0.5;
+}
+
+.gantt .bar-succeeded {
+	fill: @green;
+	opacity: 0.5;
+
+}
+
+.gantt .bar-killed {
+	fill: @yellow;
+	opacity: 0.5;
+
+}

@@ -1,0 +1,106 @@
+<div class="row wrapper">
+
+  <div class="col-xs-hidden col-sm-hidden col-md-2 col-lg-2 wrapper-content">
+    <div class="ibox float-e-margins">
+      <div class="ibox-title">
+        <h5>vdb Customer Management</h5>
+        <div ibox-tools></div>
+      </div>
+      <div class="ibox-content col-xs-hidden col-sm-hidden col-md-hidden" >
+        <div id="data" class="row">
+
+
+          <div class="col-xs-hidden col-sm-hidden col-md-12 col-lg-12">
+            <div class="btn-group" uib-dropdown is-open="company.isopen">
+              <button id="single-button" type="button" class="btn btn-primary" uib-dropdown-toggle ng-disabled="disabled">
+                Company Management <span class="caret"></span>
+              </button>
+              <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="single-button">
+                <li role="menuitem"><a ng-click="getCompanies()">List Companies</a></li>
+                <li role="menuitem"><a href="#">Modify Companies</a></li>
+                <li class="divider"></li>
+                <li role="menuitem"><a class="text-danger" href="#">Delete Document</a></li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="col-xs-hidden col-sm-hidden col-md-12 col-lg-12">
+            <div class="btn-group" uib-dropdown is-open="user.isopen">
+              <button id="single-button" type="button" class="btn btn-primary" uib-dropdown-toggle ng-disabled="disabled">
+                User Management <span class="caret"></span>
+              </button>
+              <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="single-button">
+                <li role="menuitem"><a ng-click="getCompanies()">List Companies</a></li>
+                <li role="menuitem"><a href="#">Modify Companies</a></li>
+                <li class="divider"></li>
+                <li role="menuitem"><a class="text-danger" href="#">Delete Document</a></li>
+              </ul>
+            </div>
+          </div>
+
+
+
+        </div>
+        <div id="help" class="row hidden">
+          <div class="col-xs-hidden col-sm-hidden col-md-12 col-lg-12">
+            <p>
+
+            </p>
+          </div>
+        </div>
+        <div id="settings" class="row hidden">
+          <div class="col-xs-hidden col-sm-hidden col-md-12 col-lg-12">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="col-xs-hidden col-sm-hidden col-md-10 col-lg-10 wrapper-content">
+    <div class="ibox float-e-margins">
+      <div class="ibox-title">
+        <h5>Content</h5>
+        <div ibox-tools></div>
+      </div>
+      <div class="ibox-content col-xs-hidden col-sm-hidden col-md-hidden" >
+        <div id="data" class="row">
+          <table class="table">
+            <thead>
+              <td>Action</td>
+              <td>Id</td>
+              <td>Title</td>
+              <td>Description</td>
+
+            </thead>
+            <tbody>
+              <tr ng-repeat="record in content">
+                <td width="5%">
+                  <i class="fa fa-trash-o text-danger" aria-hidden="true"></i>
+                  <i class="fa fa-pencil-square-o text-info" aria-hidden="true"></i>
+                  <i class="fa fa-files-o text-warning" aria-hidden="true"></i>
+
+                </td>
+                <td width="15%">//record._id\\</td>
+                <td width="25%">//record._source.title\\</td>
+                <td width="40%">//record._source.description\\</td>
+
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div id="help" class="row hidden">
+          <div class="col-xs-hidden col-sm-hidden col-md-12 col-lg-12">
+            <p>
+
+            </p>
+          </div>
+        </div>
+        <div id="settings" class="row hidden">
+          <div class="col-xs-hidden col-sm-hidden col-md-12 col-lg-12">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

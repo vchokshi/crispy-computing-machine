@@ -1,0 +1,120 @@
+
+<div class="footer">
+  <div class="footer-v1">
+    <div class="container">
+      <!-- <div class="row">
+        <minimize-footer />
+      </div> -->
+      <div class="row">
+        <!-- About -->
+        <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
+          <a ui-sref="home"><img class="logo" src="wp-content/uploads/2017/04/Videbligo_1kx1k.png" alt=""></a>
+          <p>Videbligo deliveres essential information from large volumes of Big Data to help customers take intelligent action.</p>
+          <p>Our solution helps enterprises find the right data, at the right time, and act with confidence.</p>
+        </div><!--/col-md-3-->
+        <!-- End About -->
+
+        <!-- Latest -->
+        <div class="ccol-xs-12 col-sm-6 col-md-3 col-lg-3">
+          <div class="posts">
+            <div class="headline"><h2>Latest Posts</h2></div>
+            <ul class="list-unstyled latest-list">
+              <!--<li><a href="#">Incredible content</a><small>May 8, 2014</small></li>
+              <li><a href="#">Best shoots</a><small>June 23, 2014</small></li>-->
+              <li ng-repeat="post in posts">
+                <a ui-sref="//post.route\\">//post.title\\</a>
+                <small>//post.date\\</small>
+              </li>
+            </ul>
+          </div>
+        </div><!--/col-md-3-->
+        <!-- End Latest -->
+
+        <!-- Link List -->
+        <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
+          <div class="headline"><h2>Useful Links</h2></div>
+          <ul class="list-unstyled link-list">
+            <li ng-repeat="link in links">
+              <a ui-sref="//link.route\\">//link.title\\</a>
+              <i class="fa fa-angle-right"></i>
+            </li>
+          </ul>
+        </div><!--/col-md-3-->
+
+
+        <!-- End Link List -->
+        <!-- Address -->
+        <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3 map-img ">
+          <div class="headline"><h2>Contact Us</h2></div>
+          <address class="md-margin-bottom-40">
+            10115 East Bell Rd. Suite 107-456 <br />
+            Scottsdale, AZ. 85260 <br />
+            <!--Phone: 800 123 3456 <br />-->
+            Email: <a href="mailto:info@videbligo.com" class="">info@videbligo.com</a>
+          </address>
+        </div><!--/col-md-3-->
+        <!-- End Address -->
+      </div>
+    </div>
+
+    <div class="copyright">
+      <div class="container">
+        <div class="row">
+          <div class="col-xs-hidden col-sm-8 col-md-6 col-lg-6">
+            <p>
+              2015 &copy; All Rights Reserved.
+              <a ng-click="showPrivacy()">Privacy Policy</a> | <a ng-click="showTerms()">Terms of Use</a> | v.//version\\
+            </p>
+          </div>
+
+          <!-- Dashboard Links -->
+          <!-- <div class="col-xs-6 col-sm-6 col-md-3 col-lg-6">
+            <ul class="footer-socials list-inline">
+              <li><i ng-show="unstructured" class="fa fa-exclamation-triangle text-warning" tooltip-placement="top" uib-tooltip="12% of messages have not been structured"></i></li>
+              <li><i ng-show="insecure" class="fa fa-unlock text-danger" tooltip-placement="top" uib-tooltip="We've seen 12M insecure messages this period"></i></li>
+            </ul>
+          </div> -->
+          <!-- End Dashboard Links -->
+          <!-- Social Links -->
+          <div class="col-xs-12 col-sm-4 col-md-6 col-lg-6">
+            <ul class="footer-socials list-inline">
+              <li>
+                <a href="https://www.facebook.com/videbligo" tooltip-placement="top" uib-tooltip="Find us on Facebook!">
+                  <i class="fa fa-facebook text-facebook"></i>
+                </a>
+              </li>
+              <li>
+                <a href="https://www.linkedin.com/company/videbligo" tooltip-placement="top" uib-tooltip="We're on LinkedIn also!!">
+                  <i class="fa fa-linkedin text-linkedin"></i>
+                </a>
+              </li>
+              <li>
+                <a href="https://twitter.com/videbligo" tooltip-placement="top" uib-tooltip="Find us on Twitter!">
+                  <i class="fa fa-twitter text-twitter"></i>
+                </a>
+              </li>
+              <li>
+                <a href="https://www.crunchbase.com/organization/pied-piper#/entity" tooltip-placement="top" uib-tooltip="Some fun ways we find inspiration!">
+                  <i class="fa fa-pied-piper text-success"></i>
+                </a>
+              </li>
+              <li>
+                <a href="#" tooltip-placement="top" uib-tooltip="Coming soon!">
+                  <i class="fa fa-google-plus text-googleplus"></i>
+                </a>
+              </li>
+              <li>
+                <a href="#" tooltip-placement="top" uib-tooltip="We use github to store our private repositories.">
+                  <i class="fa fa-github text-github"></i>
+                </a>
+              </li>
+            </ul>
+          </div>
+          <!-- End Social Links -->
+        </div>
+      </div>
+    </div><!--/copyright-->
+
+  </div>
+
+</div>

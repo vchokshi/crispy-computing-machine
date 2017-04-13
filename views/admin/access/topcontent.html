@@ -1,0 +1,149 @@
+<div class="row wrapper">
+
+  <div class="col-xs-hidden col-sm-hidden col-md-2 col-lg-2 wrapper-content">
+    <div class="ibox float-e-margins">
+      <div class="ibox-title">
+        <h5>vdb Records Management</h5>
+        <div ibox-tools></div>
+      </div>
+      <div class="ibox-content col-xs-hidden col-sm-hidden col-md-hidden" >
+        <div id="data" class="row">
+
+          <div class="col-xs-hidden col-sm-hidden col-md-12 col-lg-12">
+            <div class="btn-group" uib-dropdown is-open="roles.isopen">
+              <button id="single-button" type="button" class="btn btn-primary" uib-dropdown-toggle ng-disabled="disabled">
+                Roles Management <span class="caret"></span>
+              </button>
+              <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="single-button">
+                <li role="menuitem"><a ng-click="getRoles()">List Roles</a></li>
+                <li role="menuitem"><a href="#">Add Role</a></li>
+                <li role="menuitem"><a href="#">Modify Role</a></li>
+                <li class="divider"></li>
+                <li role="menuitem"><a class="text-danger" href="#">Delete Role</a></li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="col-xs-hidden col-sm-hidden col-md-12 col-lg-12">
+            <div class="btn-group" uib-dropdown is-open="documents.isopen">
+              <button id="single-button" type="button" class="btn btn-primary" uib-dropdown-toggle ng-disabled="disabled">
+                Document Management <span class="caret"></span>
+              </button>
+              <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="single-button">
+                <li role="menuitem"><a ng-click="getDocuments()">List Documents</a></li>
+                <li role="menuitem"><a href="#">Add Document</a></li>
+                <li role="menuitem"><a href="#">Modify Documents</a></li>
+                <li class="divider"></li>
+                <li role="menuitem"><a class="text-danger" href="#">Delete Document</a></li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="col-xs-hidden col-sm-hidden col-md-12 col-lg-12">
+            <div class="btn-group" uib-dropdown is-open="resources.isopen">
+              <button id="single-button" type="button" class="btn btn-primary" uib-dropdown-toggle ng-disabled="disabled">
+                Resource Management <span class="caret"></span>
+              </button>
+              <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="single-button">
+                <li role="menuitem"><a ng-click="getResources()">List Resources</a></li>
+                <li role="menuitem"><a href="#">Add Resource</a></li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="col-xs-hidden col-sm-hidden col-md-12 col-lg-12">
+            <div class="btn-group" uib-dropdown is-open="services.isopen">
+              <button id="single-button" type="button" class="btn btn-primary" uib-dropdown-toggle ng-disabled="disabled">
+                Service Management <span class="caret"></span>
+              </button>
+              <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="single-button">
+                <li role="menuitem"><a ng-click="getServices()">List Services</a></li>
+                <li role="menuitem"><a href="#">Modify Service</a></li>
+                <li class="divider"></li>
+                <li role="menuitem"><a class="text-danger" href="#">Delete Document</a></li>
+              </ul>
+            </div>
+          </div>
+
+
+          <div class="col-xs-hidden col-sm-hidden col-md-12 col-lg-12">
+            <div class="btn-group" uib-dropdown is-open="permissions.isopen">
+              <button id="single-button" type="button" class="btn btn-primary" uib-dropdown-toggle ng-disabled="disabled">
+                Permission Management <span class="caret"></span>
+              </button>
+              <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="single-button">
+                <li role="menuitem"><a ng-click="getPermissions()">List Permissions</a></li>
+                <li role="menuitem"><a href="#">Modify Service</a></li>
+                <li class="divider"></li>
+                <li role="menuitem"><a class="text-danger" href="#">Delete Document</a></li>
+              </ul>
+            </div>
+          </div>
+
+
+
+
+        </div>
+        <div id="help" class="row hidden">
+          <div class="col-xs-hidden col-sm-hidden col-md-12 col-lg-12">
+            <p>
+
+            </p>
+          </div>
+        </div>
+        <div id="settings" class="row hidden">
+          <div class="col-xs-hidden col-sm-hidden col-md-12 col-lg-12">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="col-xs-hidden col-sm-hidden col-md-10 col-lg-10 wrapper-content">
+    <div class="ibox float-e-margins">
+      <div class="ibox-title">
+        <h5>Content</h5>
+        <div ibox-tools></div>
+      </div>
+      <div class="ibox-content col-xs-hidden col-sm-hidden col-md-hidden" >
+        <div id="data" class="row">
+          <table class="table">
+            <thead>
+              <td>Action</td>
+              <td>Id</td>
+              <td>Title</td>
+              <td>Description</td>
+
+            </thead>
+            <tbody>
+              <tr ng-repeat="record in content">
+                <td width="5%">
+                  <i class="fa fa-trash-o text-danger" aria-hidden="true"></i>
+                  <i class="fa fa-pencil-square-o text-info" aria-hidden="true"></i>
+                  <i class="fa fa-files-o text-warning" aria-hidden="true"></i>
+
+                </td>
+                <td width="15%">//record._id\\</td>
+                <td width="25%">//record._source.title\\</td>
+                <td width="40%">//record._source.description\\</td>
+
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div id="help" class="row hidden">
+          <div class="col-xs-hidden col-sm-hidden col-md-12 col-lg-12">
+            <p>
+
+            </p>
+          </div>
+        </div>
+        <div id="settings" class="row hidden">
+          <div class="col-xs-hidden col-sm-hidden col-md-12 col-lg-12">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

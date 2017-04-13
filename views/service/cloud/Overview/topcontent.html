@@ -1,0 +1,64 @@
+  <div class="ibox col-xs-6 col-sm-4 col-md-2 col-lg-12">
+    <div class="ibox-title">
+      <div class="ibox-heading">Cloud Overview</div>
+      <div ibox-tools></div>
+    </div>
+    <div class="ibox-content">
+      <div class="front">
+        <div class="col-xs-6 col-sm-4 col-md-2 col-lg-2" ><vdb-widget data="rs.score" /></div>
+        <div class="col-xs-6 col-sm-4 col-md-2 col-lg-2"><vdb-widget data="rs.events" /></div>
+        <div class="col-xs-6 col-sm-4 col-md-2 col-lg-2" ><vdb-widget data="rs.threats" /></div>
+        <div class="col-xs-6 col-sm-4 col-md-2 col-lg-2" ><vdb-widget data="rs.sl" /></div>
+        <div class="col-xs-6 col-sm-4 col-md-2 col-lg-2" ><vdb-widget data="rs.devices" /></div>
+        <div class="col-xs-6 col-sm-4 col-md-2 col-lg-2" ><vdb-widget data="rs.users" /></div>
+      </div>
+      <div class="back">
+      </div>
+    </div>
+  </div>
+
+  <div class="ibox col-xs-6 col-sm-4 col-md-2 col-lg-2">
+    <div class="ibox-title">
+      <div class="ibox-heading">Layers</div>
+      <div ibox-tools></div>
+    </div>
+    <div class="ibox-content">
+      <div class="front">
+        <vdb-progress data=rs.layers></vdb-progress>
+      </div>
+      <div class="back">
+
+      </div>
+    </div>
+  </div>
+
+  <div class="ibox col-xs-6 col-sm-8 col-md-4 col-lg-4">
+    <div class="ibox-title">
+      <div class="ibox-heading">Devices</div>
+      <div ibox-tools></div>
+    </div>
+    <div class="ibox-content">
+      <div class="front">
+        <vdb-table-responsive data=rs.devicetable></vdb-table-responsive>
+      </div>
+      <div class="back">
+      </div>
+    </div>
+  </div>
+
+  <div class="ibox col-xs-6 col-sm-4 col-md-2 col-lg-6">
+    <div class="ibox-title">
+      <div class="ibox-heading">Over Time</div>
+      <div ibox-tools></div>
+    </div>
+    <div class="ibox-content">
+      <div class="front">
+        <div class="flot flot-chart lg">
+          <div id="flot-timeseries" flot class="flot-chart-content"></div>
+        </div>
+      </div>
+      <div class="back">
+
+      </div>
+    </div>
+  </div>

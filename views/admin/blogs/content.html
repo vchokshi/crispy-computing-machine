@@ -1,0 +1,32 @@
+<div class="row wrapper sidebar-content">
+  <div class="col-xs-hidden col-sm-hidden col-md-12 col-lg-12 wrapper-content">
+    <div class="ibox float-e-margins">
+      <div class="ibox-title">
+        <h5>Blog Authoring</h5>
+      </div>
+      <div class="ibox-content col-xs-hidden col-sm-hidden col-md-hidden" >
+        <div id="data">
+          <summernote config="options" ng-model="template"></summernote>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="Sidebar" class="sidebard-panel ">
+    <div class="col-xs-hidden col-sm-hidden col-md-12 col-lg-12 wrapper-content p-t-xs">
+      <h4>Template Options</h4>
+      <div class="btn-group" uib-dropdown>
+        <button id="btn-append-to-single-button" type="button" class="btn btn-primary" uib-dropdown-toggle>
+          Blog Template <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="btn-append-to-single-button">
+          <li role="menuitem"><a href="#">Right Sidebar</a></li>
+          <li role="menuitem"><a href="#">Left Sidebar</a></li>
+          <li role="menuitem"><a href="#">Full Width</a></li>
+        </ul>
+      </div>
+
+
+    </div>
+  </div>
+</div>
