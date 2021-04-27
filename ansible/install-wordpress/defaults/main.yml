@@ -1,0 +1,3 @@
+nginx_html_root: /usr/share/nginx/html
+nginx_sites_available: /etc/nginx/sites-available
+nginx_sites_enabled: /etc/nginx/sites-enabled

@@ -1,0 +1,74 @@
+- name: Install Additional Entropy for Ubuntu Systems
+  apt:
+    name: haveged
+    state: present
+  when: ansible_os_family == 'Debian'
+
+# - name: Install Additional Entropy for CentOs Systems
+#   yum:
+#     name: haveged
+#     update_cache: yes
+#     state: present
+#   when: ansible_os_family == 'RedHat'
+
+- name: Ensure all ssh keys are generated
+  command: /usr/bin/ssh-keygen -A
+
+- name: Remove uncessary users from the system
+  user:
+    name: "{{item}}"
+    state: absent
+  with_items:
+    - lp
+    - games
+    - irc
+    - news
+    - uucp
+    - gnats
+    - list
+    - backup
+    - sync
+    - proxy
+
+- name: Remove uncessary groups from the system
+  group:
+    name: "{{item}}"
+    state: absent
+  with_items:
+    - dialout
+    - fax
+    - voice
+    - cdrom
+    - floppy
+    - tape
+    - audio
+    - video
+
+- name: Uninstall uncessary packages on Ubuntu
+  apt:
+    name: "{{ item }}"
+    state: absent
+  with_items:
+   - eject
+   - ftp
+   - open-vm-tools
+   - ppp
+  when: ansible_os_family == 'Debian'
+
+- name: Remove dependencies that are no longer required
+  apt:
+    autoremove: yes
+  when: ansible_os_family == 'Debian'
+
+- name: Uninstall uncessary packages on RedHat
+  yum:
+    name: "{{ item }}"
+    state: absent
+  with_items:
+   - ftp
+   - open-vm-tools
+  when: ansible_os_family == 'RedHat'
+
+# - name: Run unattended-upgrades for security patches
+#   command: unattended-upgrades
+#   when: ansible_os_family == 'Debian'

@@ -1,0 +1,62 @@
+module(load="imuxsock") # provides support for local system logging
+module(load="imklog")   # provides kernel logging support
+
+# provides TCP syslog reception
+module(load="imtcp")
+#input(type="imtcp" port="514")
+
+# Enable non-kernel facility klog messages
+$KLogPermitNonKernelFacility on
+
+$ActionFileDefaultTemplate RSYSLOG_TraditionalFileFormat
+
+$RepeatedMsgReduction on
+
+$FileOwner syslog
+$FileGroup adm
+$FileCreateMode 0640
+$DirCreateMode 0755
+$Umask 0022
+$PrivDropToUser syslog
+$PrivDropToGroup syslog
+
+$WorkDirectory /var/spool/rsyslog
+
+#Where to send local logging
+#*.* /var/log/syslog
+
+# ### begin forwarding rule ###
+# The statement between the begin ... end define a SINGLE forwarding
+# rule. They belong together, do NOT split them. If you create multiple
+# forwarding rules, duplicate the whole block!
+#
+# An on-disk queue is created for this action. If the remote host is
+# down, messages are spooled to disk and sent when it is up again.
+
+#$ActionQueueFileName fwdRule1 # unique name prefix for spool files
+#$ActionQueueMaxDiskSpace 1g   # 1gb space limit (use as much as possible)
+#$ActionQueueSaveOnShutdown on # save messages to disk on shutdown
+#$ActionQueueType LinkedList   # run asynchronously
+#$ActionResumeRetryCount -1    # infinite retries if host is down
+
+*.*				@@localhost:5514
+
+# ### end of fwdRule1 ###
+
+#$ActionQueueFileName fwdRule2 # unique name prefix for spool files
+#$ActionQueueMaxDiskSpace 1g   # 1gb space limit (use as much as possible)
+#$ActionQueueSaveOnShutdown on # save messages to disk on shutdown
+#$ActionQueueType LinkedList   # run asynchronously
+#$ActionResumeRetryCount -1    # infinite retries if host is down
+
+#$DefaultNetstreamDriver gtls
+
+#$DefaultNetstreamDriverCAFile /etc/ssl/certs/signing-ca-chain.pem
+#$DefaultNetstreamDriverCertFile /etc/ssl/certs/videbligo.crt
+#$ActionSendStreamDriverAuthMode x509/name
+#$ActionSendStreamDriverAuthMode anon # server is NOT authenticated
+#$ActionSendStreamDriverMode 1
+# remote host is: name/ip:port, e.g. 192.168.0.1:514, port optional
+#*.*				@@logs.internal.{{tld}}:55514
+
+# ### end of fwdRule2 ###

@@ -1,0 +1,30 @@
+---
+  - name: Debug phpmyadmin directory
+    debug:
+      var: phpMyAdmin_dir
+      
+  - name: Stat the phpmyadmin directory to see if it exists
+    stat:
+      path: "{{phpMyAdmin_dir}}"
+    register: st
+
+  - name: Debug st
+    debug:
+      var: st
+
+  - name: Install phpmyadmin
+    block:
+      - name: Download phpMyAdmin
+        unarchive:
+          src: https://files.phpmyadmin.net/phpMyAdmin/{{phpMyAdmin_version}}/phpMyAdmin-{{phpMyAdmin_version}}-english.tar.gz
+          dest: "{{html_root}}"
+          remote_src: true
+
+      - name: Move the directory to just phpmyadmin
+        command: "mv {{html_root}}/phpMyAdmin-{{phpMyAdmin_version}}-english {{phpMyAdmin_dir}}"
+    when: st.stat.exists == false
+
+  - name: Deploy our config.inc.php files
+    template:
+      src: config.inc.php
+      dest: "{{phpMyAdmin_dir}}"

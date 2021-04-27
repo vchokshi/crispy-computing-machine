@@ -1,0 +1,33 @@
+input {
+  syslog {
+    port => 5514
+    add_field => ["[Analytics][Source]","syslog"]
+    add_field => ["Customer","Videbligo"]
+    add_field => ["Stasher","{{hostname}}"]
+  }
+  tcp {
+    codec => plain {
+     charset => "ISO-8859-1"
+    }
+    port => 55514
+    ssl_enable => true
+    ssl_cert   => "/etc/ssl/videbligo/videbligo.crt"
+    ssl_key    => "/etc/ssl/videbligo/videbligo.key"
+    ssl_extra_chain_certs => "/etc/ssl/certs/signing-ca-chain.pem"
+    ssl_verify => false
+    type => "secure_syslog"
+    add_field => ["[Analytics][Source]","secure_syslog"]
+    add_field => ["Customer","Videbligo"]
+    add_field => ["Stasher","{{hostname}}"]
+  }
+}
+
+output {
+  if [Customer] == "Videbligo" {
+    elasticsearch {
+      index => "it-videbligo-events-%{+YYYY.MM.dd}"
+      hosts => ["es"]
+      sniffing => true
+      }
+    }
+}

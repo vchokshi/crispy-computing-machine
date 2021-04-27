@@ -1,0 +1,44 @@
+- name: Add users to MySQL database
+  become: true
+  mysql_user:
+    login_host: "localhost"
+    login_user: "{{ mysql_root_username }}"
+    login_password: "{{ mysql_root_password }}"
+    name: "{{  mysql_user_name }}"
+    host: "%"
+    password: "{{ mysql_user_password }}"
+    priv: '*.*:ALL'
+    state: present
+
+- name: Disallow root login remotely
+  command: mysql -h localhost -u {{mysql_root_username}} -p{{mysql_root_password}} -NBe "{{ item }}"
+  with_items:
+    - DELETE FROM mysql.user WHERE User='{{ mysql_root_username }}' AND Host NOT IN ('localhost', '127.0.0.1', '::1')
+  changed_when: false
+
+- name: Get list of hosts for the root user.
+  command: mysql -u {{mysql_root_username}} -p"{{ mysql_root_password }}" -NBe "SELECT Host FROM mysql.user WHERE User = '{{ mysql_root_login }}' ORDER BY (Host='localhost') ASC"
+  register: mysql_root_hosts
+  changed_when: false
+  check_mode: no
+
+- name: Get list of hosts for the anonymous user.
+  command: mysql -u {{mysql_root_username}} -p{{ mysql_root_password }} -NBe 'SELECT Host FROM mysql.user WHERE User = ""'
+  register: mysql_anonymous_hosts
+  changed_when: false
+  check_mode: no
+
+- name: Remove anonymous MySQL users.
+  mysql_user:
+     name: ""
+     host: "{{ item }}"
+     state: absent
+  with_items: "{{ mysql_anonymous_hosts.stdout_lines|default([]) }}"
+
+- name: Remove MySQL test database.
+  mysql_db:
+    db: test
+    login_host: localhost
+    login_user: "{{ mysql_root_username }}"
+    login_password: "{{ mysql_root_password }}"
+    state: absent

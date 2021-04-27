@@ -1,0 +1,29 @@
+- debug:
+    msg: "MySQL config file is: {{ mysql_config_file }}"
+  when: debug
+
+- name: "Create the directory {{ mysql_config_include_dir }}"
+  file:
+    path: "{{ mysql_config_include_dir }}"
+    state: directory
+    owner: "{{mysql_user}}"
+
+- name: "Template my.cnf override files into {{ mysql_config_file }}"
+  template:
+    src: my.cnf.j2
+    dest: "{{ mysql_config_file }}"
+    force: true
+  notify: restart mysql
+
+- name: Create slow query log file (if configured)
+  file:
+    path: "{{ mysql_slow_query_log_file }}"
+    state: touch
+    owner: "{{mysql_user}}"
+    group: "{{mysql_user}}"
+
+- name: "Create directory {{ mysql_datadir }}"
+  file:
+    path: "{{ mysql_datadir }}"
+    state: directory
+    setype: mysqld_db_t

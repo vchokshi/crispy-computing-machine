@@ -1,0 +1,24 @@
+---
+    - name: Setup the ords stuff
+      block:
+
+        - name: Create a directory for ords files
+          become_user: glassfish
+          file:
+            path: ~/ords-installer
+            state: directory
+
+        - name: Copy the files from remote to local
+          become_user: glassfish
+          command: 'aws s3 cp s3://installer-archives/{{item}} ~/ords-installer'
+          with_items:
+            - ords.3.0.12.263.15.32.zip
+
+        - name: Unarchive the ords files
+          become_user: glassfish
+          unarchive:
+            src: /home/glassfish/ords-installer/ords.3.0.12.263.15.32.zip
+            dest: ~/ords-installer
+            remote_src: true
+            owner: glassfish
+            group: users

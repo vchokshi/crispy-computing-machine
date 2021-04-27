@@ -1,0 +1,63 @@
+- name: Add adm group to RedHat Systems
+  group:
+    name: adm
+    state: present
+  when: ansible_os_family == 'RedHat'
+
+- name: Add {{os_user}} to the system
+  user:
+    name: "{{os_user}}"
+    groups: root, adm, www-data
+    shell: /bin/bash
+    home: "/home/{{os_user}}"
+  when: ansible_os_family == 'Debian'
+
+- name: Add {{os_user}} to the system
+  user:
+    name: "{{os_user}}"
+    groups: root, adm
+    shell: /bin/bash
+    home: "/home/{{os_user}}"
+  when: ansible_os_family == 'RedHat'
+
+- name: Transfer {{os_user}} ed25519 ssh key to the Debian host.
+  authorized_key:
+    user: "{{os_user}}"
+    key: https://github.com/vchokshi.keys
+  ignore_errors: true
+
+- name: Adjust comments in /etc/sudoers.d/90-cloud-init-users for CentOS
+  lineinfile:
+    name: /etc/sudoers.d/90-cloud-init-users
+    state: present
+    regexp: '^# User rules for ec2-user$'
+    line: '# User rules for {{os_user}}'
+    validate: 'visudo -cf %s'
+  when: ansible_os_family == 'RedHat'
+
+- name: Change the ec2-user to be {{os_user}} in /etc/sudoers.d/90-cloud-init-users for CentOS
+  lineinfile:
+    name: /etc/sudoers.d/90-cloud-init-users
+    state: present
+    regexp: '^ec2-user ALL=(ALL) NOPASSWD:ALL$'
+    line: '{{os_user}} ALL=(ALL) NOPASSWD:ALL'
+    validate: 'visudo -cf %s'
+  when: ansible_os_family == 'RedHat'
+
+- name: Adjust comments in /etc/sudoers.d/90-cloud-init-users for Debian
+  lineinfile:
+    name: /etc/sudoers.d/90-cloud-init-users
+    state: present
+    regexp: '^# User rules for ubuntu$'
+    line: '# User rules for {{os_user}}'
+    validate: 'visudo -cf %s'
+  when: ansible_os_family == 'Debian'
+
+- name: Change the ubuntu to be {{os_user}} in /etc/sudoers.d/90-cloud-init-users for Debian
+  lineinfile:
+    name: /etc/sudoers.d/90-cloud-init-users
+    state: present
+    regexp: '^ubuntu ALL=(ALL) NOPASSWD:ALL'
+    line: '{{os_user}} ALL=(ALL) NOPASSWD:ALL'
+    validate: 'visudo -cf %s'
+  when: ansible_os_family == 'Debian'

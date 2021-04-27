@@ -1,0 +1,19 @@
+- name: Install MySQL Server packages.
+  yum:
+    name: mysql-server
+    state: present
+
+- name: Create error log file
+  file: 
+    path: "{{ mysql_log_error }}"
+    state: touch
+    owner: "{{mysql_user_name}}"
+
+- name: Start MySQL service
+  service:
+    name: "{{mysql_daemon}}"
+    state: restarted
+
+- pause:
+    seconds: 10
+    prompt: "Wait until mysql server starts"

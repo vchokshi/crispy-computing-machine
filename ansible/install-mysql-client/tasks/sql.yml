@@ -1,0 +1,6 @@
+- name: Install mysql server and clients
+  apt:
+    name: "{{item}}"
+    state: present
+  with_items:
+    - mysql-client-core-5.7

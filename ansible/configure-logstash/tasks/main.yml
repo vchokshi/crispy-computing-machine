@@ -1,0 +1,63 @@
+---
+  - name: Add {{os_user}} to the group logstash
+    user:
+      name: "{{os_user}}"
+      groups: logstash
+      append: yes
+
+  - name: Add logstash to the group root
+    user:
+      name: logstash
+      groups: adm,root
+      append: yes
+
+  - name: Deploy the logstash configuration file
+    template:
+      src: logstash.yml.j2
+      dest: /etc/logstash/logstash.yml
+      owner: logstash
+      group: logstash
+      mode: 750
+
+  - name: Configure JVM options for 25% memory usage
+    lineinfile:
+      dest: /etc/logstash/jvm.options
+      regexp: '^-Xms.+$'
+      line: -Xms{{ls_heap}}
+
+  - name: Change the logstash directories to be owned by logstash
+    file:
+      path: /etc/logstash
+      owner: logstash
+      group: logstash
+      recurse: yes
+      mode: 0770
+
+  - name: Change the logstash home directories to be writable by group logstash
+    file:
+      path: /usr/share/logstash
+      owner: logstash
+      group: logstash
+      recurse: yes
+      mode: 0770
+
+  - name: Install the logstash syslog output plugin
+    command: /usr/share/logstash/bin/logstash-plugin install logstash-output-syslog
+
+  - name: Create /usr/lib/logstash for queues
+    file:
+      path: /usr/lib/logstash
+      state: directory
+      owner: logstash
+      group: logstash
+      mode: 0750
+
+  - name: Template the client.conf.j2 for logstash clients
+    template:
+      src: client.conf.j2
+      dest: /etc/logstash/conf.d/server.conf
+      owner: logstash
+      group: logstash
+      mode: 0770
+    notify:
+     - restart logstash

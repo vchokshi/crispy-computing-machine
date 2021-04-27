@@ -1,0 +1,24 @@
+---
+    - name: Copy keystores to the domain directory
+      become_user: "{{runas}}"
+      copy:
+        remote_src: true
+        src: /mnt/glassfish-{{env}}/config/{{item}}
+        dest: /usr/local/glassfish3/glassfish/domains/{{env}}/config
+      with_items:
+        - cacerts.jks
+        - keystore.jks
+
+    - name: Template the domain.xml file over
+      become_user: "{{runas}}"
+      template:
+        src: domain.xml
+        dest: /usr/local/glassfish3/glassfish/domains/{{env}}/config
+
+    - name: Stop the {{env}} domain
+      become_user: "{{runas}}"
+      command: /usr/local/glassfish3/bin/asadmin stop-domain {{env}}
+
+    - name: Start the {{env}} domain
+      become_user: "{{runas}}"
+      command: /usr/local/glassfish3/bin/asadmin start-domain {{env}}

@@ -1,0 +1,48 @@
+---
+  - name: Add the {{elastic_user}} user to the system
+    user:
+      name: "{{elastic_user}}"
+      groups: admin,adm
+      shell: /usr/sbin/nologin
+      createhome: no
+
+  - name: Add {{os_user}} to the group elasticsearch
+    user:
+      name: "{{os_user}}"
+      groups: "{{elastic_group}}"
+      append: yes
+
+  - name: Make {{data_dir}} directory
+    file:
+      path: "{{data_dir}}"
+      state: directory
+      owner: root
+      group: root
+      mode: 0775
+
+  - name: Change the {{data_dir}} directory to be owned by elasticsearch
+    file:
+      path: "{{data_dir}}"
+      state: directory
+      owner: "{{elastic_user}}"
+      group: "{{elastic_group}}"
+      mode: 0775
+
+  - name: Enable Elasticsearch repository
+    apt_repository:
+      repo: "deb http://packages.elasticsearch.org/elasticsearch/2.x/debian stable main"
+      state: present
+
+  - name: Add Elasticsearch repo key
+    apt_key:
+      url: "http://packages.elasticsearch.org/GPG-KEY-elasticsearch"
+      state: present
+
+  - name: Install Elasticsearch and all Dependencies
+    apt:
+      name: elasticsearch=2.4.5
+      update_cache: yes
+      state: present
+      allow_unauthenticated: yes
+    notify:
+     - restart elasticsearch

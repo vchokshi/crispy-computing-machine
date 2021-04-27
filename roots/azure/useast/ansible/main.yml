@@ -1,0 +1,82 @@
+---
+- name: Config Web VM with Docker
+  hosts: webservers
+  become: true
+  tasks:
+  - name: docker.io
+    apt:
+      force_apt_get: yes
+      update_cache: yes
+      name: docker.io
+      state: present
+
+  - name: Install pip3
+    apt:
+      force_apt_get: yes
+      name: python3-pip
+      state: present
+
+  - name: Install Docker python module
+    pip:
+      name: docker
+      state: present
+
+  - name: download and launch a docker web container
+    docker_container:
+      name: dvwa
+      image: cyberxsecurity/dvwa
+      state: started
+      published_ports: 80:80
+
+  - name: Enable docker service
+    systemd:
+      name: docker
+      enabled: yes
+
+- name: Configure Elk VM with Docker
+  hosts: elkservers
+  become: true
+  tasks:
+    - name: Install docker.io
+      apt:
+        update_cache: yes
+        force_apt_get: yes
+        name: docker.io
+        state: present
+
+    - name: Install python3-pip
+      apt:
+        force_apt_get: yes
+        name: python3-pip
+        state: present
+
+    - name: Install Docker module
+      pip:
+        name: docker
+        state: present
+
+    - name: Increase virtual memory
+      command: sysctl -w vm.max_map_count=262144
+
+    - name: Use more memory
+      sysctl:
+        name: vm.max_map_count
+        value: '262144'
+        state: present
+        reload: yes
+    - name: download and launch a docker elk container
+      docker_container:
+        name: elk
+        image: sebp/elk:761
+        state: started
+        restart_policy: always
+        # Please list the ports that ELK runs on
+        published_ports:
+          -  5601:5601
+          -  9200:9200
+          -  5044:5044
+      # Use systemd module
+    - name: Enable service docker on boot
+      systemd:
+        name: docker
+        enabled: yes

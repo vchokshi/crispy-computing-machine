@@ -1,0 +1,31 @@
+- name: Install rssh for restricted users
+  become: yes
+  apt:
+    name: rssh
+    state: present
+  when: ansible_os_family == 'Debian'
+
+- name: Add rsshuser group to system
+  become: yes
+  group:
+    name: rsshuser
+    state: present
+
+- name: Change ownership of rssh binaries
+  file:
+    path: /usr/bin/rssh
+    owner: root
+    group: rsshuser
+    mode: 0550
+
+- name: Configure rssh for scp
+  lineinfile:
+    dest: /etc/rssh.conf
+    regexp: '^#allowscp'
+    line: 'allowscp'
+
+- name: Configure rssh for sftp
+  lineinfile:
+    dest: /etc/rssh.conf
+    regexp: '^#allowsftp'
+    line: 'allowsftp'

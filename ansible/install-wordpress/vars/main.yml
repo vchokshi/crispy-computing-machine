@@ -1,0 +1,213 @@
+
+wp_domains:
+  ##Domains in vchalk.net
+  # cloudbrew.io:
+  #   default: false
+  #   zone: cloudbrew
+  #   tld: io
+  #   admin_email: admin@cloudbrew.io
+  #   #username are 16 characters long.
+  #   #passwords are 64 characters long.
+  #   ##Access to the database
+  #   db_user: "@zfC*j<s#)-HrR%j"
+  #   db_pass: ">V@Cay*>U8YDAF:P=!)(9RX6f5Y0pQV6Qeg41g+VpUfZf9ve)k2?!67&%7bB$"
+  #   ##Access to Wordpress GUI
+  #   admin_user: "i7-zc=P8U_$<V6"
+  #   admin_pass: "d)qf(j+|q#Zy:ghboeKBdgK*btY*sX:FMkVBDRw%AcittzFRN69@mTOy2tmv6f<T"
+  #   salts:
+  #     AUTH_KEY: "zMb:kHXUT_43vJVQ%!?DvrGYN>^$@EjuPcOd)o*^s<g?LfIw_B)r$v5xn<g5vzz"
+  #     SECURE_AUTH_KEY: "0M3eCr2nU?DNETb<PM!+wc1$z?0EnA:o2-CEoE#xmM?_Y$KrJHXWJHbBHPY-J20"
+  #     LOGGED_IN_KEY: "GFF^0n^yJxqFc96DTNgvcYHNlcsjWujj<Y4<2)oLnO6AYc:y!a$?(qGaD(tgjMz9"
+  #     NONCE_KEY: "rE0tuo_R:28Sf16_b<(0huaUjE>C7qMy%M#e>Y&^!|D_+K<8AY8S9jstXj^%Kyju"
+  #     AUTH_SALT: "11J:ZwYGqiBm$suk7D?gWlJzFvk5%DA&FZkvE@WXiHLt@S&U)J_zA%jGPW+Bh"
+  #     SECURE_AUTH_SALT: "+hCsVj4zC3+3xYWkyL$u0#^^1rAYo?+l9yN^SSkaWhe9+<uvCdZC+Ln=?YXhQTC!"
+  #     LOGGED_IN_SALT: "76LZY&<A45K0+|vy8b>5Wf4P|@&KAoqHv?n9ZeK$kb$g6fPeqHk3WoSQ5EhF$I3e"
+  #     NONCE_SALT: "BqogF(Z0$+6Mkq9Ft&$2D(GVuqjxFVY%>jS>TU+ZTI00SFtEov=d?THj:|YOS"
+  #
+  # cloudbrew.org:
+  #   default: true
+  #   zone: cloudbrew
+  #   tld: org
+  #   admin_email: admin@cloudbrew.org
+  #   #username are 16 characters long.
+  #   #passwords are 64 characters long.
+  #   ##Access to the database
+  #   db_user: "=2bBlc%(Rj2<7o46"
+  #   db_pass: "UT$zz:$C<xB>PNWOQ*6>0<!Ra#Ih6Mo!m7fW1e>wQ$2kFR<tX@uNH2YqK_wcjdz"
+  #   ##Access to Wordpress GUI
+  #   admin_user: "rtbstpk!_3#gJz6:"
+  #   admin_pass: "d(o@vqFV>B84UlD1POu=:OY)SH6h-cba0z?w!x7S(gWJCfL7%_6YK^OisUAp&LA*"
+  #   salts:
+  #     AUTH_KEY: "1sj#!rAOHce0sZ7cVe<lFDrf|R2F8)HA9phBZ^=?0kZ6xBloWk$gM=aj1Qr>e#"
+  #     SECURE_AUTH_KEY: "0DBj^Ab^zvLG#3@7Z2<+O(6*<Xf@>=@v-jO$UZPabhR|kz1B>+5!3:Q!8yS7g3"
+  #     LOGGED_IN_KEY: "4zR(axDlJU?D|rF|$x<(d:@%U<js-zw2)4<Btl14dEF0:ox%cLY|wz^P#$4e^:"
+  #     NONCE_KEY: "iW:U6eVasg9*g3bO(ofNjL24h%*l=Tfhv9>BnMLP$VD0ZPOO:%hdwkhN45)3Y4k9"
+  #     AUTH_SALT: "dcKBZc7I(KIOfdi9-AntUE+ZK^$o<4y4g=F+bME0d3Oth&Den!I-lEX^qG9hKHl!"
+  #     SECURE_AUTH_SALT: "G!WSthSHlm<C9uRxafuvU8h1Orie(E_vlS3P)Wcb3O9xlGHB>:cbdNCw#r<XWc"
+  #     LOGGED_IN_SALT: "v!@lD:wC+1Mun8>Z0^>+5NyBv!s8CFEjmZWfcfcd@GB<yg<k7)hcCQO(w-+(CA8"
+  #     NONCE_SALT: "Zg^_s07G#O=S3eInmyEz>a3ZG1WvEcEjtpeWpmj8>h!|vphRXW6P&autc7ZQjj<N"
+
+  ##Domains in iot4.net
+
+  iot4.net:
+    default: false
+    dev: false
+    zone: iot4
+    tld: net
+    admin_email: admin@iot4.net
+    #username are 16 characters long.
+    #passwords are 64 characters long.
+    ##Access to the database
+    db_user: "m)owIBqA!RhdTd|W"
+    db_pass: "oT9|pUPmdbOhJlm^bKiT2Ja#gr+<F<N%JXZ)xucLG@#525>dQa*TT-C<pz@^qvP<"
+    ##Access to Wordpress GUI
+    admin_user: "9u!GZ?8lT>rW+j<N"
+    admin_pass: "uXn4VZ_1eW&F8Bvh&bYL3&*XXfzUzqo$4L*!r#@GFO1N5w%?IIDMvrp9HZ%+58Za"
+    salts:
+      AUTH_KEY: "TM<0vRG<lIDr|ojD*X5j5usMacIfkoq|>g_m*Cc90QB__Uy#yE1D(u6=GPe@:EW%"
+      SECURE_AUTH_KEY: "VS7JakSb<97&%GOi0QW)0$(Gy2orH0ciSk#$EA_vK2huJ&NKCpzD8n0Hqo)(p27-"
+      LOGGED_IN_KEY: "m)@@pWd<Zukoh*(UdodmLd%?CT!@V*Z=WGZ2i??-ndmF1bffztB0Hl?_T!QGFOj"
+      NONCE_KEY: "2ulkneiKrF5tQlI5P05cl=bhR?*eyCxA&TV9(|Ugz!J527aR7g$tf_K**y2m>AXX"
+      AUTH_SALT: "9y*=tIe#pY(r&=:f#nvX(jLml*dVK>^Z$so=bNW_J:CfW!KzO$1>4)5!z-Lz"
+      SECURE_AUTH_SALT: "Xv#1t:P6:KP?E87g)SQDCRvHHBn+y(wbkedN8#U2tp_*y34nVU@dscV)O=&2*ie7"
+      LOGGED_IN_SALT: "xrVFavIDVDraGvxi5fwys7o+5b=:td0@FWnP8^9%oA|^^s3>Hzq<HP&M!^Ga=H>D"
+      NONCE_SALT: "je9r0jbpT6aFyex+OY&btTY9EkjD@a+1p6tppFOLZE0:?-HQ%TDy8=TrBBCyC@"
+
+  # vchalk.net:
+  #   default: false
+  #   zone: vchalk
+  #   tld: net
+  #   admin_email: admin@vchalk.net
+  #   #username are 16 characters long.
+  #   #passwords are 64 characters long.
+  #   ##Access to the database
+  #   db_user: "3Ie:OTxVzlZI_qHq"
+  #   db_pass: "rPZ>Q#WUP51r:q3-)i>D>ofrK_)Glw&N1MESvht1musgVweKP54Guk(|fXBBao4c"
+  #   ##Access to Wordpress GUI
+  #   admin_user: "<J%m!en3IQkk2y^S"
+  #   admin_pass: "D)f*93#p@j!>H%3yt(Ua2=dLOx^R&QppGEdPI__peVgVGja<7%0a$eVxMG5ydvXT"
+  #   salts:
+  #     AUTH_KEY: ")<oy&kX0_:WCd&slRsvAH6(9N:H!olzebYM-=p=|jUwwHZRe73OO9DYWwlCVG?<S"
+  #     SECURE_AUTH_KEY: "QCQO#OJ2p_y&U61#9Qxj9b+Fxyh:r7M-KiMt*bvc6%@<0K0R-j!9gmGODA+L2:b"
+  #     LOGGED_IN_KEY: "lFF8Q<lXUkELl4L?2^Tb1_SQz8M0bFcw1RERH!vi0<$m|uf-g(9h$@(i<Aj2+vy="
+  #     NONCE_KEY: "2:QKT1#U>L+&+b$c0:u$Uj2LUlNQR2PU+lkPm2qeOm0Ly%YzX9jysl02HOTfQo)M"
+  #     AUTH_SALT: "J9i&cI0!^1sj&6SKf?HdKVNj<kH!&7)4|1M_#y+bR$hqtwis|wsE8_YflZ2tO"
+  #     SECURE_AUTH_SALT: "7nQUiz8fK!=#6sfpU9W3O%s$fOJh-dol%Dk7T^*RN|#kU?+XH@W)L>Ea9CoyX"
+  #     LOGGED_IN_SALT: "8xhtE<erI@mIKGiDD+0kT<^Lu+U*k8LtF#XT>riTN!jaWN+X*PNTg=Q>&>xlF"
+  #     NONCE_SALT: "f=E))&8IA)#K)Fe^i2B&WR^sJRjI4F3kDIatvi>^7Uw+fL#yNjlp>6SAY?=#x22<"
+  #
+  # d3s.io:
+  #   default: false
+  #   zone: d3s
+  #   tld: io
+  #   admin_email: admin@d3s.io
+  #   #username are 16 characters long.
+  #   #passwords are 64 characters long.
+  #   ##Access to the database
+  #   db_user: "ys_)7erOh3kiL+T8"
+  #   db_pass: "zZR>WmmVg=5?3grwbhDqI7HLs!doAlYf:P?g>Ox<NC#QS93%qGa)OSB+yOl))04"
+  #   ##Access to Wordpress GUI
+  #   admin_user: "$P-HLwxe)g^Ip(s"
+  #   admin_pass: "QvCFa++JLhyAhDk*Aju1P#gF=13n<v|m(AlwhI-z-yRASF<?)?HS82Qa5|1B(n"
+  #   salts:
+  #     AUTH_KEY: "poIoV!*Tg%7(l!tbSj4g?cjInpCo!qL6Pauq>i836+o*qAFKEVCR_1|kDi0%%6z"
+  #     SECURE_AUTH_KEY: "|BZ&TY|W^>1TiBe$_<mM^nG5!Z6LJd0EOZroEl1qd2vDefz4B1<ZI+Go37(g7s^"
+  #     LOGGED_IN_KEY: "*T9s_bS8eSER&U7>b9@<RYx+@E%=Mc$z&:##4A<i9v<_5-&h6O8YsFVaF8MS>2F"
+  #     NONCE_KEY: "%%n)ld7uJ=pP_b&2Z|@8ACiA=q2Qh4c2(z>9NEc-$@:_O+VIY$=h2zfsB&KF=Nu"
+  #     AUTH_SALT: "xEE1E=dB#_vXJrz85i7mlGCO-oeDn#*VnsW@q)j8^O&u+lC2EJoZ5@u36IGtru4O"
+  #     SECURE_AUTH_SALT: "W!v2QPbBj=&gkoiY(HE|o(-uxDYY(#tKJZNfuYROXD%-#3WQKgK)5IkD2=i<@LAq"
+  #     LOGGED_IN_SALT: "r3GV#dpFRaCzde5YvQOBe(_h&d7OZI|6LA#uO8<ljsUxH!b:xZuMOq$BD>5jz0q1"
+  #     NONCE_SALT: "B9v5hlrAO1*c#5gZA#t!M^kD<E?>^:s|pxbKYMf!ArJzwZe*HIN9t(MksFbdyD7"
+  #
+  # ##Domains in chokshis99@gmail.com
+  # educraft.io:
+  #   default: false
+  #   zone: educraft
+  #   tld: io
+  #   admin_email: admin@educraft.io
+  #   #username are 16 characters long.
+  #   #passwords are 64 characters long.
+  #   ##Access to the database
+  #   db_user: "%Plnf8*fPsz#CI1X"
+  #   db_pass: "4CxF2JeO9RV9EE+p9iMpqAF+#|ZkD!=Hiw3l_h)5)Lft5bTftlFUW0QE_vZzbY-t"
+  #   ##Access to Wordpress GUI
+  #   admin_user: "a0P6iEb86qBcCar&"
+  #   admin_pass: "w*G8*cN$HsiT6f3ggSmydxGjY=vg9X2GKJPyVihjKA?QP_*&N9l@H#0m!wD<9GxU"
+  #   salts:
+  #     AUTH_KEY: "529!kq^!?Cw*pjBzEi-mjk3QX:!jqAotJ5O<5zR-?4^inmS@FP4Z<7wN1c*sMcV"
+  #     SECURE_AUTH_KEY: "chp2nZUlRY6)1tH$)d*O3_1R+dEp!R0?(q_c5PxXuDNv&bfWp2rs=s0|FEjlbke0"
+  #     LOGGED_IN_KEY: "K9dQZKu94-F>9UNyX|!Vm!Q#l<3xbhyWrLs6bXgfVV7%wUiaO&>!CT1tXzE_*gm"
+  #     NONCE_KEY: "zJtLnK@=l(#SI0#dO4Z7Y@ABg_w4cSEW25M&-(UZGiZpvZ|AE2emCPCy1HKU1m"
+  #     AUTH_SALT: "W6lp:idN=U^X0hC|R-+^jzBW*DkydlV<s-flgs(e3U>3?u-Ks|vLt*ohqIQD$rtc"
+  #     SECURE_AUTH_SALT: "oJyE?nS_=K=<__An<&)jTdB0V7DFz*SXx6ipt>krCiiyeSW4FLoeZZfB&S-mGP:"
+  #     LOGGED_IN_SALT: "Wii6aDyMVQ1)pX|%pi4-eG%*D6t96n&pG?zq2V+3Kl!F55X5aUjQF69LAjRX5+"
+  #     NONCE_SALT: "j=wjoy|lBFHh0NnXSxy>3:-dFxxcbC9vAGOZ|J0w4HO4a>##ohUsaSFP6:#hv?N&"
+  #
+  # mistertech.org:
+  #   default: false
+  #   zone: mistertech
+  #   tld: org
+  #   admin_email: admin@mistertech.org
+  #   #username are 16 characters long.
+  #   #passwords are 64 characters long.
+  #   ##Access to the database
+  #   db_user: "BxjS=$t_w$Pc1yKJ"
+  #   db_pass: "9TrJ|@lS=1l?JNt+*1_Rv<3fGgh|@!3A7Mv)MQILS$Dhx*el(9?k0+zGcQA|xEv"
+  #   ##Access to Wordpress GUI
+  #   admin_user: "F7!uTw:l4WZm9MAu"
+  #   admin_pass: "BJnVKjb7w#Iqf2WU9C5$)=4:V$g^vQg&gDI!WT(9BwARycrIOxrDvvx6fN?Kk8xA"
+  #   salts:
+  #     AUTH_KEY: "L+hoP5x7C*Y>6zOD@8)dF+s9(:t+r$Hn1&:6j0J7ZA6^)VoR$d%p9cy-6#|xMBV"
+  #     SECURE_AUTH_KEY: "NnOUHOjOuTVfJwDggR0F@d|YkWTRpas:y-N+M*K+Hmb6TPn)mov4Bp$V2CtrMWk1"
+  #     LOGGED_IN_KEY: "T(=lVJhi^tpE=Nul>Zpt4857KyzdbTf%Id6kWoDIR#2Pww>nbgQgoWn)aW2mwi6_"
+  #     NONCE_KEY: "vdf8BSQ8BTY*6Pbh&#ybEW0Pz3>^l-!Rb+ZMOwV65A:b55t?*@3rE3+:7*Ys^F0+"
+  #     AUTH_SALT: "B!J6clchV6t@cWTEWq=!n>*bQg+cg:N+CU9X*qz:Ug6w)5>Lw)rT@f%xv@JMUdI"
+  #     SECURE_AUTH_SALT: "d(S>V=qPSGV5w!+-d&p&NFR1<zLC9Y1nMTfoSF:r2OxyvtwIfWv$h3%8CvLMaN)X"
+  #     LOGGED_IN_SALT: "n51+K|nNJU1_4yEka)3s?*Buj2-tQ*6:?7)C2d5M(7H:F1dQ<g$4AenDbQ9=W3<"
+  #     NONCE_SALT: "%:t&6zy_H+(3-1T(iTRm9&KN=gW+:Z*XShKZQVe_Kh?M<!%Ky7TlRnj(f#Z3Gy"
+  #
+  # videbligo.com:
+  #   default: false
+  #   zone: videbligo
+  #   tld: com
+  #   admin_email: admin@videbligo.com
+  #   #username are 16 characters long.
+  #   #passwords are 64 characters long.
+  #   ##Access to the database
+  #   db_user: "BMFOop0LF-7$46l"
+  #   db_pass: "TQ-kgg#ZB-o|CV$|ooINOIeaHchrgnN<:Kba@:)i>ecu<_oek*#)v-:9glqD(gx"
+  #   ##Access to Wordpress GUI
+  #   admin_user: "zrIglyzdMLICH&R#"
+  #   admin_pass: "TzR5xRG*k&r92ZIuoZQWe%o!s@oey6((Y:lw?#jdOLnRr&2PLSsZDQG^y%*>(V"
+  #   salts:
+  #     AUTH_KEY: "Q@-2UZm(u(b2f=4^JXdpg%^1iQ15H)@eRYgsEDg)rs>Gq_s<TFf)p1>HR:Nf$utA"
+  #     SECURE_AUTH_KEY: "8K#N3Cusu>SpjI=ZY(4!!MyTfNCJ-:SHWmLVZ+39*Wy7lx&0m>!2EeWU#fkZ8:n"
+  #     LOGGED_IN_KEY: "^f)G|^K3SnC!I<MJcEpfD>Tl6:1f&p02eH+8SwCz_s2EFG$UGnMfJT9K)+<)="
+  #     NONCE_KEY: "5x|5G|Y?xd*ZfrkWb_iyHx-hHI6Dz+BEuwJ<rn$YAQEQ=YsaUKIi-GzF5G=EDA=*"
+  #     AUTH_SALT: "*IYe&H:mex?dcln*^&5$tFoy2m?FX>tKz8YlQSI^6B=jWm6I9crCRP<U?$fPUJfa"
+  #     SECURE_AUTH_SALT: "R|wnM_8Tw7?9uRDb_$O&DHPScqhsA)m*c)#lJfsBoWA+fM_bvK-(7NGk:YMuO)"
+  #     LOGGED_IN_SALT: "h!Z1oeuZD6gzm#vyd_w13In:n<n>ZFSEFU$T4IdbZMyI-*W:jY+jnkcKaAC<+b"
+  #     NONCE_SALT: "vB^eb<Xo2C>B1)oX#IBZ@Y|pav@0r:w#YK:PniS!99@=yE!+_GXTGRQ2!RuT3d"
+  #
+  # viharchokshi.com:
+  #   default: false
+  #   zone: viharchokshi
+  #   tld: com
+  #   admin_email: admin@viharchokshi.com
+  #   #username are 16 characters long.
+  #   #passwords are 64 characters long.
+  #   ##Access to the database
+  #   db_user: "x^?Lf4p1gRz!RJfM"
+  #   db_pass: "8>LX-2aPr8Xw4s>Ce%3t)tu51%^Su1kC:&f<(qFfyjMCLE_!o=9drEjsp51T6lb"
+  #   ##Access to Wordpress GUI
+  #   admin_user: "7r<+Rwc6PYJhjE=H"
+  #   admin_pass: "C7V%M_d>0eK7AW7I3-FUtR!wqhP%fdnm)7)%l!%Ar><3=z6+|@qMIp=(GNSW@+"
+  #   salts:
+  #     AUTH_KEY: "Q4(BpOlZ_dQc6590&zMvZLjmf?=+(-M?^3hAp-wDOvQUAZVneoS:)?f4%e0SbNK"
+  #     SECURE_AUTH_KEY: "+R#x-Z$Ate64P&Z:03M|:Ea=oo-AMHxkq%h5NSz#ZDyMjrNn|HgySeX-dUx!i%1"
+  #     LOGGED_IN_KEY: "IPjOj>41RIzj@@&4Vula3A*0NIyu@jvq(O_7G9eHJyprlu2QPcT50UTJ93qszQg"
+  #     NONCE_KEY: "4LoLLyZ8-eyoz#r6yEZDEAd4Jgu>Q18UMxld^1m$fV8PDzV>|Bvz>IDBZ*sv(B6B"
+  #     AUTH_SALT: "(sPUt>DJNLe61<=_rtuj?*URV33JEa1tCQ3&IGvb8KhaBg5$Kz2CnWa=ZeIkoJN!"
+  #     SECURE_AUTH_SALT: "gRNYe)mK7w1nC%*?*pfKAeqOXK?neTD^nhm6l&dS(BaTo2GOi64xwTa-Lxbl>+"
+  #     LOGGED_IN_SALT: "I8_^fhRt)G%f82WXk$#RgB#d3gpo7l*ghSvyqYn&Jn2SqZvLIdjZO1:Rhi+pE$F"
+  #     NONCE_SALT: "VC<a#PyPeWR&2wiN_v&U0(OS6&Pvrz<3>@dUwLpLn+yqtQ:o2!3PNWVAr6@!-%S"

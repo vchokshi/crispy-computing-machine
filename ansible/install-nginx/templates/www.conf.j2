@@ -1,0 +1,15 @@
+server {
+
+	listen 80;
+	listen [::]:80;
+
+	root {{nginx_html_root}};
+
+	server_name _;
+
+	location / {
+		index index.html;
+  	#try_files $uri $uri/ /index.php?$args;
+	}
+
+}

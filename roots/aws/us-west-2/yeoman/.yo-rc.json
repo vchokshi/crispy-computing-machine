@@ -1,0 +1,18 @@
+{
+  "generator-fountain-react": {
+    "version": "1.0.0",
+    "props": {
+      "sharedData": {},
+      "framework": "react",
+      "modules": "webpack",
+      "js": "js",
+      "ci": "",
+      "css": "scss",
+      "resolved": "/usr/local/lib/node_modules/generator-fountain-webapp/node_modules/generator-fountain-react/generators/app/index.js",
+      "namespace": "fountain-react:app",
+      "_": [],
+      "sample": "techs",
+      "router": "none"
+    }
+  }
+}

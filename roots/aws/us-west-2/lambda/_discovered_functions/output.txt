@@ -1,0 +1,1 @@
+{"statusCode":200,"headers":{"x-custom-header":"MY CUSTOM header value"},"body":"{\"message\":\"Good day, you of Universe.\",\"input\":{}}"}

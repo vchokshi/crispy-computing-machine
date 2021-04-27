@@ -1,0 +1,47 @@
+<?php
+/**
+ *
+ * @package WordPress
+ */
+
+define('DB_NAME', 'wp_{{item.value.zone}}_{{item.value.tld}}_dev');
+define('DB_USER', '{{item.value.db_user}}');
+define('DB_PASSWORD','{{item.value.db_pass}}');
+define('DB_HOST', '{{rds_host}}:3306');
+define('DB_CHARSET', 'utf8');
+define('DB_COLLATE', '');
+
+define('AUTH_KEY',         '{{item.value.salts.AUTH_KEY}}');
+define('SECURE_AUTH_KEY',  '{{item.value.salts.SECURE_AUTH_KEY}}');
+define('LOGGED_IN_KEY',    '{{item.value.salts.LOGGED_IN_KEY}}');
+define('NONCE_KEY',        '{{item.value.salts.NONCE_KEY}}');
+define('AUTH_SALT',        '{{item.value.salts.AUTH_SALT}}');
+define('SECURE_AUTH_SALT', '{{item.value.salts.SECURE_AUTH_SALT}}');
+define('LOGGED_IN_SALT',   '{{item.value.salts.LOGGED_IN_SALT}}');
+define('NONCE_SALT',       '{{item.value.salts.NONCE_SALT}}');
+
+$table_prefix  = 'wp_';
+
+define('WP_DEBUG', false);
+
+define( 'WP_SITEURL', 'https://www-dev.{{item.key}}' );
+define( 'WP_HOME', 'https://www-dev.{{item.key}}' );
+
+define( 'FS_METHOD', 'direct' );
+define( 'FTP_PUBKEY', '/home/{{item.value.zone}}_{{item.value.tld}}_user/.ssh/id_rsa.pub' );
+define( 'FTP_PRIKEY', '/home/{{item.value.zone}}_{{item.value.tld}}_user/.ssh/id_rsa' );
+define( 'FTP_USER', '{{item.value.zone}}_{{item.value.tld}}_user' );
+define( 'FTP_HOST', '{{facts.ansible_facts.ipify_public_ip}}' );
+define( 'FTP_SSL', true );
+
+define('FORCE_SSL_ADMIN', true);
+// in some setups HTTP_X_FORWARDED_PROTO might contain
+// a comma-separated list e.g. http,https
+// so check for https existence
+if (strpos($_SERVER['HTTP_X_FORWARDED_PROTO'], 'https') !== false)
+       $_SERVER['HTTPS']='on';
+
+if ( !defined('ABSPATH') )
+	define('ABSPATH', dirname(__FILE__) . '/');
+
+require_once(ABSPATH . 'wp-settings.php');

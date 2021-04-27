@@ -1,0 +1,10 @@
+- name: Add all rssh users to the system
+  become: yes
+  user:
+    name: "{{item.value.zone}}_{{item.value.tld}}_user"
+    group: rsshuser
+    shell: /usr/bin/rssh
+    generate_ssh_key: yes
+    ssh_key_bits: 2048
+    ssh_key_file: .ssh/id_rsa
+  with_dict: "{{domains}}"

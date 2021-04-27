@@ -1,0 +1,47 @@
+# - name: Install python-pip for Ubuntu
+#   become: yes
+#   apt:
+#     name: "{{ item }}"
+#     update_cache: yes
+#     state: present
+#   with_items:
+#    - python-pip
+#   when: ansible_os_family == 'Debian'
+#
+# - name: Install aws-cli with pip
+#   pip:
+#     name: "{{ item }}"
+#     state: present
+#   with_items:
+#    - awscli
+#   when: ansible_os_family == 'Debian'
+#
+# - name: Add Docker repo key
+#   become: yes
+#   apt_key:
+#     url: "https://download.docker.com/linux/ubuntu/gpg"
+#     state: present
+
+- name: Enable Docker repository
+  become: yes
+  apt_repository:
+    repo: "deb https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+    state: present
+
+- name: Install Docker
+  become: yes
+  apt:
+    name: "{{ item }}"
+    update_cache: yes
+    state: present
+  with_items:
+   - docker-ce
+  when: ansible_os_family == 'Debian'
+
+- name: Add {{os_user}} to the group docker
+  become: yes
+  user:
+    name: "{{os_user}}"
+    groups: docker
+    append: yes
+  when: ansible_os_family == 'Debian'

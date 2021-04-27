@@ -1,0 +1,30 @@
+---
+  - name: Update rc scripts to start elasticsearch on boot
+    command: update-rc.d elasticsearch defaults 95 10
+    notify:
+     - restart elasticsearch
+
+  - name: Increase open file limits for elasticsearch
+    lineinfile:
+      dest: /etc/security/limits.conf
+      regexp: '^elasticsearch.+65536$'
+      line: 'elasticsearch  - nofile  65536'
+
+  - name: Make sure ubuntu servers don't ignore limits.conf
+    lineinfile:
+      dest: /etc/pam.d/su
+      regexp: '^#.+session.+required.+pam_limits.so$'
+      line: 'session  required  pam_limits.so'
+
+  - name: Copy Elasticsearch configuration (elasticsearch.yml)
+    template: src=elasticsearch.yml.j2 dest={{ elastic_conf }} owner=root group=root mode=0644
+    notify:
+     - restart elasticsearch
+
+  - name: Update /etc/default/elasticsearch to have 25% of real memory
+    lineinfile:
+      dest: /etc/default/elasticsearch
+      regexp: '^.ES_HEAP_SIZE'
+      line: ES_HEAP_SIZE={{heap_size}}
+    notify:
+     - restart elasticsearch

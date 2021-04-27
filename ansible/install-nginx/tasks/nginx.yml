@@ -1,0 +1,102 @@
+- name: Install Nginx for Debian
+  become: yes
+  apt:
+    name: nginx
+    update_cache: yes
+    state: present
+  when: ansible_os_family == 'Debian'
+
+- name: Deploy our custom nginx.conf file for Debian
+  become: yes
+  template:
+    src: nginx.conf.j2
+    dest: "/etc/nginx/nginx.conf"
+  notify:
+    - restart nginx
+  when: ansible_os_family == 'Debian'
+
+- name: Install Nginx Repo for RedHat
+  become: yes
+  copy:
+    src: nginx.repo
+    dest: /etc/yum.repos.d
+    owner: root
+    group: root
+    mode: 0644
+  when: ansible_os_family == 'RedHat'
+
+
+- name: Install Nginx for RedHat
+  become: yes
+  yum:
+    name: nginx
+    update_cache: yes
+    state: present
+  when: ansible_os_family == 'RedHat'
+
+- name: Deploy our custom nginx.conf file for RedHat
+  become: yes
+  copy:
+    src: nginx.conf.centos
+    dest: /etc/nginx/nginx.conf
+  notify:
+    - restart nginx
+  when: ansible_os_family == 'RedHat'
+
+- name: Put SELinux httpd into permissive mode for now on RedHat @@@@@todo!!
+  become: yes
+  command: semanage permissive -a httpd_t
+  when: ansible_os_family == 'RedHat'
+
+# - name: Copy our index.html file
+#   copy:
+#     src: index.html
+#     dest: "{{nginx_html_root}}"
+#     owner: www-data
+#     group: www-data
+#     mode: 0755
+
+# - name: Deploy our dummy sites_enabled file
+#   become: yes
+#   template:
+#     src: www.conf.j2
+#     dest: "{{nginx_sites_available}}/dummy.conf"
+#   notify:
+#     - restart nginx
+
+# - name: Activate nginx Virtual Server
+#   become: yes
+#   file:
+#     src: "{{nginx_sites_available}}/dummy.conf"
+#     dest: "{{nginx_sites_enabled}}/dummy.conf"
+#     state: link
+#   notify:
+#     - restart nginx
+
+- name: Disable default Vhost
+  become: yes
+  file:
+    path: /etc/nginx/sites-enabled/default
+    state: absent
+  notify:
+   - restart nginx
+  when: ansible_os_family == 'Debian'
+
+
+- name: Delete default Vhost
+  become: yes
+  file:
+    path: /etc/nginx/sites-available/default
+    state: absent
+  notify:
+   - restart nginx
+  when: ansible_os_family == 'Debian'
+
+# - name: Set nginx directory permissions
+#   become: yes
+#   file:
+#     path: /usr/share/nginx/html
+#     owner: "{{os_user}}"
+#     group: www-data
+#     mode: 0775
+#     recurse: true

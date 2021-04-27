@@ -1,0 +1,19 @@
+- name: Install basic packages for Ubuntu
+  apt:
+    name: ['unzip', 'acct', 'ntp']
+    update_cache: yes
+    state: present
+  when: ansible_os_family == 'Debian'
+
+- name: Install basic packages for RedHat
+  yum:
+    name: ['unzip', 'acct', 'ntp']
+    update_cache: yes
+    state: present
+  when: ansible_os_family == 'RedHat'
+
+- name: Install aws cli packages with pip
+  pip:
+    name: awscli
+    state: present
+  when: ansible_os_family == 'RedHat'

@@ -1,0 +1,12 @@
+- name: start mysql
+  become: true
+  service:
+    name: "{{mysql_daemon}}"
+    state: started
+    enabled: true
+
+- name: restart mysql
+  become: true
+  service:
+    name: "{{mysql_daemon}}"
+    state: restarted

@@ -1,0 +1,27 @@
+---
+    - name: Apex stuff
+      block:
+
+      - name: Create a directory for apex install files
+        become_user: glassfish
+        file:
+          path: ~/apex-installer
+          state: directory
+
+      - name: Transfer the glassfish file to system
+        become_user: glassfish
+        command: 'aws s3 cp s3://installer-archives/{{item}} ~/apex-installer'
+        with_items:
+          - apex_5.1.2.zip
+
+      - name: Unarchive the apex files
+        become_user: glassfish
+        unarchive:
+          src: /home/glassfish/apex-installer/apex_5.1.2.zip
+          dest: ~/apex-installer
+          remote_src: true
+          owner: glassfish
+          group: users
+
+
+        ### END block

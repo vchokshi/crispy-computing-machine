@@ -1,0 +1,6 @@
+table_exists_action=replace
+exclude=statistics,index
+schemas=ITRONADM
+logfile=ITRONADM_import.log
+dumpfile=ITRONADM_%U.dmp
+directory=dmpdir

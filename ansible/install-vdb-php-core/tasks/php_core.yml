@@ -1,0 +1,16 @@
+---
+
+  - name: Clone into videbligo php-core repository
+    become: no
+    git:
+      repo: ssh://git@github.com/vchokshi/php-core.git
+      dest: /usr/share/php/videbligo.com/core
+      version: master
+      accept_hostkey: true
+      force: yes
+
+  - name: Run composer to install all dependencies
+    become: no
+    composer:
+      command: install
+      working_dir: /usr/share/php/videbligo.com/core

@@ -1,0 +1,4 @@
+elastic_user: elasticsearch
+elastic_group: elasticsearch
+data_dir: /elasticsearch
+work_dir: /elasticsearch

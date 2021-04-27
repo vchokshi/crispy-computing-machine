@@ -1,0 +1,67 @@
+---
+
+    - stat:
+        path: /usr/local/glassfish3/glassfish/domains/domain1
+      register: d
+
+    - name: Stop the default domain in case it is running.
+      become_user: "{{runas}}"
+      command: /usr/local/glassfish3/bin/asadmin stop-domain domain1
+      when: d.stat.isdir is defined and d.stat.isdir
+      #
+    - name: Delete the default domain
+      become_user: "{{runas}}"
+      command: /usr/local/glassfish3/bin/asadmin delete-domain domain1
+      when: d.stat.isdir is defined and d.stat.isdir
+
+    - stat:
+        path: /usr/local/glassfish3/glassfish/domains/{{env}}
+      register: e
+
+    - name: Stop the {{env}} domain in case it is running.
+      become_user: "{{runas}}"
+      command: /usr/local/glassfish3/bin/asadmin stop-domain {{env}}
+      when: e.stat.isdir is defined and e.stat.isdir
+      ignore_errors: true
+
+    - name: Delete the {{env}} domain
+      become_user: "{{runas}}"
+      command: /usr/local/glassfish3/bin/asadmin delete-domain {{env}}
+      when: e.stat.isdir is defined and e.stat.isdir
+
+    - name: Create the {{env}} domain
+      become_user: "{{runas}}"
+      command: /usr/local/glassfish3/bin/asadmin create-domain --nopassword true {{env}}
+
+    - name: Start the {{env}} domain
+      become_user: "{{runas}}"
+      command: /usr/local/glassfish3/bin/asadmin start-domain {{env}}
+
+    - name: Deploy the ords.war app
+      become_user: "{{runas}}"
+      command: /usr/local/glassfish3/bin/asadmin deploy --force=true --properties implicitCdiEnabled=false /mnt/glassfish-{{env}}/ords.war
+
+    - name: Deploy the i.war file
+      become_user: "{{runas}}"
+      command: /usr/local/glassfish3/bin/asadmin deploy --force=true --properties implicitCdiEnabled=false /mnt/glassfish-{{env}}/i.war
+
+    - name: Stop the {{env}} domain
+      become_user: glassfish
+      command: /usr/local/glassfish3/bin/asadmin stop-domain {{env}}
+
+    - name: Start the {{env}} domain
+      become_user: glassfish
+      command: /usr/local/glassfish3/bin/asadmin start-domain {{env}}
+
+    - name: Copy the glassfish init.d script to the System
+      become: true
+      template:
+        src: glassfish
+        dest: /etc/init.d
+        owner: root
+        group: root
+        mode: 0755
+
+    - name: Register the startup scrupt to run at 345
+      become: true
+      command: chkconfig --level 345 glassfish on

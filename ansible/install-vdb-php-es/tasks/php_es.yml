@@ -1,0 +1,9 @@
+---
+  - name: Clone into videbligo php-es repository
+    become: no
+    git:
+      repo: ssh://git@github.com/vchokshi/php-es.git
+      dest: /usr/share/php/videbligo.com/es
+      version: master
+      accept_hostkey: true
+      force: yes

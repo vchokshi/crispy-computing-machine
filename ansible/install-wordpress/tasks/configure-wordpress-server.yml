@@ -1,0 +1,270 @@
+---
+
+- name: Get ip facts
+  ipify_facts:
+  register: facts
+
+- name: 'Touch {{nginx_html_root}}/{{item.key}}/wordpress/index.html file in each PRODUCTION domain'
+  template:
+    src: index.html.j2
+    dest: "{{nginx_html_root}}/{{item.key}}/wordpress/index.html"
+    mode: 0644
+  with_dict: "{{wp_domains}}"
+
+# - name: 'Touch {{nginx_html_root}}/{{item.key}}-dev/wordpress/index.html file in each DEVELOPMENT domain'
+#   template:
+#     src: index.html.j2
+#     dest: "{{nginx_html_root}}/{{item.key}}-dev/wordpress/index.html"
+#     mode: 0644
+#   with_dict: "{{wp_domains}}"
+#   when: item.value.dev is defined
+
+- name: Copy wp-config.php.j2 confguration file to PRODUCTION systems
+  template:
+    src: wp-config.php.j2
+    dest: "{{nginx_html_root}}/{{item.key}}/wordpress/wp-config.php"
+    mode: 0644
+  with_dict: "{{wp_domains}}"
+
+# - name: Copy wp-config-dev.php.n2 confguration file to DEVELOPMENT systems
+#   template:
+#     src: wp-config-dev.php.j2
+#     dest: "{{nginx_html_root}}/{{item.key}}-dev/wordpress/wp-config.php"
+#     mode: 0644
+#   with_dict: "{{wp_domains}}"
+#   when: item.value.dev is defined
+
+- name: Set user and group ownership of the files in PRODUCTION wp-content to www-data
+  file:
+    path: "{{nginx_html_root}}/{{item.key}}"
+    owner: '{{os_user}}'
+    group: www-data
+    mode: 0775
+    recurse: true
+  with_dict: "{{wp_domains}}"
+
+# - name: Set user and group ownership of the files in DEVELOPMENT wp-content to www-data
+#   file:
+#     path: "{{nginx_html_root}}/{{item.key}}-dev"
+#     owner: '{{os_user}}'
+#     group: www-data
+#     mode: 0775
+#     recurse: true
+#   with_dict: "{{wp_domains}}"
+#   when: item.value.dev is defined
+
+- name: Build each PRODUCTION website with the basic configuration
+  become: no
+  command: wp core install --url=http://www.{{item.key}} --title="Welcome to {{item.key}}" --admin_user="{{item.value.admin_user}}" --admin_password="{{item.value.admin_pass}}" --admin_email="{{item.value.admin_email}}"
+  args:
+    chdir: "{{nginx_html_root}}/{{item.key}}/wordpress"
+  with_dict: "{{wp_domains}}"
+
+# - name: Build each DEVELOPMENT website with the basic configuration
+#   become: no
+#   command: wp core install --url=http://www-dev.{{item.key}} --title="Welcome to {{item.key}} - DEVELOPMENT" --admin_user="{{item.value.admin_user}}" --admin_password="{{item.value.admin_pass}}" --admin_email="{{item.value.admin_email}}"
+#   args:
+#     chdir: "{{nginx_html_root}}/{{item.key}}-dev/wordpress"
+#   with_dict: "{{wp_domains}}"
+#   when: item.value.dev is defined
+
+# - name: Stat the PRODUCTION directory of each domain in the nginx_html_root dir
+#   stat:
+#     path: "{{nginx_html_root}}/{{item.key}}/wordpress/wp-content"
+#   register: wp_content_dir
+#   with_dict: "{{wp_domains}}"
+
+# - name: Stat the DEVELOPMENT directory of each domain in the nginx_html_root dir
+#   stat:
+#     path: "{{nginx_html_root}}/{{item.key}}-dev/wordpress/wp-content"
+#   register: wp_dev_content_dir
+#   with_dict: "{{wp_domains}}"
+#   when: item.value.dev is defined
+
+# - name: Create the PRODUCTION domain directory on the nfs share
+#   file:
+#     path: "/mnt/{{item.key}}"
+#     state: directory
+#     group: www-data
+#     mode: 0775
+#   with_dict: "{{wp_domains}}"
+
+# - name: Create the DEVELOPMENT domain directory on the nfs share
+#   file:
+#     path: "/mnt/{{item.key}}-dev"
+#     state: directory
+#     group: www-data
+#     mode: 0775
+#   with_dict: "{{wp_domains}}"
+#   when: item.value.dev is defined
+
+# - name: Create the PRODUCTION wp-content directory on the nfs share
+#   file:
+#     path: "/mnt/{{item.key}}/wp-content"
+#     state: directory
+#     group: www-data
+#     mode: 0775
+#   with_dict: "{{wp_domains}}"
+
+# - name: Create the DEVELOPMENT wp-content directory on the nfs share
+#   file:
+#     path: "/mnt/{{item.key}}-dev/wp-content"
+#     state: directory
+#     group: www-data
+#     mode: 0775
+#   with_dict: "{{wp_domains}}"
+#   when: item.value.dev is defined
+
+# - name: Stat each PRODUCTION directory in NFS of each domain in the share - looking for empty dirs
+#   stat:
+#     path: "/mnt/{{item.key}}/wp-content"
+#   register: wp_efs_dir
+#   with_dict: "{{wp_domains}}"
+
+# - name: Stat each DEVELOPMENT directory in NFS of each domain in the share - looking for empty dirs
+#   stat:
+#     path: "/mnt/{{item.key}}-dev/wp-content"
+#   register: wp_dev_efs_dir
+#   when: item.value.dev is defined
+#   with_dict: "{{wp_domains}}"
+
+# - name: Move files from template into PRODUCTION nfs share when links is < 3
+#   become: no
+#   command: aws s3 cp s3://iot4-wp-content /mnt/{{item.1.item.key}}/wp-content --recursive
+#   when: item.1.stat.nlink < 3
+#   with_indexed_items: "{{wp_efs_dir.results}}"
+
+# - name: Move files from template into DEVELOPMENT nfs share when links is < 3
+#   become: no
+#   command: aws s3 cp s3://iot4-wp-content /mnt/{{item.1.item.key}}-dev/wp-content --recursive
+#   when: item.1.stat is defined and item.1.stat.nlink < 3
+#   with_indexed_items: "{{wp_dev_efs_dir.results}}"
+
+# - name: Delete the original PRODUCTION wp-content directory
+#   file:
+#     path: "{{nginx_html_root}}/{{item.1.item.key}}/wordpress/wp-content"
+#     state: absent
+#   when: item.1.stat.islnk == false
+#   with_indexed_items: "{{wp_content_dir.results}}"
+
+# - name: Delete the original DEVELOPMENT wp-content directory
+#   file:
+#     path: "{{nginx_html_root}}/{{item.1.item.key}}-dev/wordpress/wp-content"
+#     state: absent
+#   when: item.1.stat is defined and ((item.1.stat.islnk is defined and item.1.stat.islnk == false) or (item.1.stat.exists is defined and item.1.stat.exists != false))
+#   with_indexed_items: "{{wp_dev_content_dir.results}}"
+
+# - name: Link old PRODUCTION wp-content to new wp-content
+#   file:
+#     path: "{{nginx_html_root}}/{{item.1.item.key}}/wordpress/wp-content"
+#     src: /mnt/{{item.1.item.key}}/wp-content
+#     state: link
+#     force: yes
+#     group: www-data
+#   when: item.1.stat.islnk == false
+#   with_indexed_items: "{{wp_content_dir.results}}"
+
+# - name: Debug
+#   debug:
+#     var: wp_dev_content_dir
+
+# - name: Link old DEVELOPMENT wp-content to new wp-content
+#   file:
+#     path: "{{nginx_html_root}}/{{item.1.item.key}}-dev/wordpress/wp-content"
+#     src: /mnt/{{item.1.item.key}}-dev/wp-content
+#     state: link
+#     force: yes
+#     group: www-data
+#   when: item.1.stat is defined and item.1.stat.islnk == false
+#   with_indexed_items: "{{wp_dev_content_dir.results}}"
+
+# - name: Set user and group ownership of the files in PRODUCTION NFS share
+#   file:
+#     path: /mnt/{{item.key}}/
+#     owner: '{{os_user}}'
+#     group: www-data
+#     mode: 0775
+#     recurse: true
+#   with_dict: "{{wp_domains}}"
+
+# - name: Set user and group ownership of the files in DEVELOPMENT NFS share
+#   file:
+#     path: /mnt/{{item.key}}-dev/
+#     owner: '{{os_user}}'
+#     group: www-data
+#     mode: 0775
+#     recurse: true
+#   with_dict: "{{wp_domains}}"
+#   when: item.value.dev is defined
+
+- name: Deploy www.conf.j2 file for PRODUCTION systems.
+  become: yes
+  template:
+    src: www.conf.j2
+    dest: "{{nginx_sites_available}}/{{item.key}}.conf"
+    owner: root
+    group: root
+    mode: 0644
+  with_dict: "{{wp_domains}}"
+  notify:
+    - restart nginx
+
+# - name: Deploy www-dev.conf.j2 file for DEVELOPMENT systems.
+#   become: yes
+#   template:
+#     src: www-dev.conf.j2
+#     dest: "{{nginx_sites_available}}/{{item.key}}-dev.conf"
+#     owner: root
+#     group: root
+#     mode: 0644
+#   with_dict: "{{wp_domains}}"
+#   when: item.value.dev is defined
+#   notify:
+#     - restart nginx
+
+- name: Deploy www.conf.default.j2 file for PRODUCTION default server.
+  become: yes
+  template:
+    src: www.conf.default.j2
+    dest: "{{nginx_sites_available}}/{{item.key}}.conf"
+    owner: root
+    group: root
+    mode: 0644
+  when: item.value.default
+  with_dict: "{{wp_domains}}"
+  notify:
+    - restart nginx
+
+# - name: Deploy www-dev.conf.default.j2 file for DEVELOPMENT default server.
+#   become: yes
+#   template:
+#     src: www-dev.conf.default.j2
+#     dest: "{{nginx_sites_available}}/{{item.key}}-dev.conf"
+#     owner: root
+#     group: root
+#     mode: 0644
+#   when: item.value.default and item.value.dev is defined
+#   with_dict: "{{wp_domains}}"
+#   notify:
+#     - restart nginx
+
+- name: Activate Web Server on port 80 for PRODUCTION servers
+  become: yes
+  file:
+    src: "{{nginx_sites_available}}/{{item.key}}.conf"
+    dest: "{{nginx_sites_enabled}}/{{item.key}}.conf"
+    state: link
+  with_dict: "{{wp_domains}}"
+  notify:
+    - restart nginx
+
+# - name: Activate Web Server on port 80 for DEVELOPMENT servers
+#   become: yes
+#   file:
+#     src: "{{nginx_sites_available}}/{{item.key}}-dev.conf"
+#     dest: "{{nginx_sites_enabled}}/{{item.key}}-dev.conf"
+#     state: link
+#   with_dict: "{{wp_domains}}"
+#   when: item.value.dev is defined
+#   notify:
+#     - restart nginx

@@ -1,0 +1,68 @@
+- name: Copy the oracle 12.1 instant client to the Servers
+  copy:
+    src: "{{item}}"
+    dest: /tmp
+  with_items:
+    - oracle-instantclient12.2-basiclite-12.2.0.1.0-1.x86_64.rpm
+    - oracle-instantclient12.2-devel-12.2.0.1.0-1.x86_64.rpm
+    - oracle-instantclient12.2-sqlplus-12.2.0.1.0-1.x86_64.rpm
+
+- name: Install Alien for Using RPMs on Debian
+  become: yes
+  apt:
+    name: alien
+    update_cache: yes
+    state: present
+
+- name: Convert the basic rpm files and install
+  become: yes
+  command: alien -i /tmp/oracle-instantclient12.2-basiclite-12.2.0.1.0-1.x86_64.rpm
+
+- name: Convert the development rpm files and install
+  become: yes
+  command: alien -i /tmp/oracle-instantclient12.2-devel-12.2.0.1.0-1.x86_64.rpm
+
+- name: Convert the sqlplus rpm files and install
+  become: yes
+  command: alien -i /tmp/oracle-instantclient12.2-sqlplus-12.2.0.1.0-1.x86_64.rpm
+
+- name: Install libaio for Using RPMs on Debian
+  become: yes
+  apt:
+    name: libaio1
+    update_cache: yes
+    state: present
+
+- name: Install Oracle Libraries for php
+  become: yes
+  command: pecl install oci8
+  ignore_errors: yes
+
+- name: Copy oracle.conf file to system
+  become: yes
+  copy:
+    src: oracle.conf
+    dest: /etc/ld.so.conf.d
+    owner: root
+    group: root
+    mode: 0644
+
+- name: Restart dynamic linker run-time libraries
+  become: yes
+  command: ldconfig
+
+- name: Update php.ini file to use oracle extension
+  become: yes
+  lineinfile:
+    dest: /etc/php/7.1/cli/php.ini
+    insertafter: '\[OCI8\]'
+    line: 'extension=/usr/lib/php/20160303/oci8.so'
+    state: present
+
+- name: Update php.ini file to allow privilged access
+  become: yes
+  lineinfile:
+    dest: /etc/php/7.1/cli/php.ini
+    regexp: '^;oci8.privileged_connect = Off'
+    line: 'oci8.privileged_connect = On'
+    state: present

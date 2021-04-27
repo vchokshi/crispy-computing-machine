@@ -1,0 +1,58 @@
+- name: Add syslog user to RedHat Systems
+  user:
+    name: syslog
+    group: adm
+  when: ansible_os_family == 'RedHat'
+
+- name: Copy standard rsyslog configuration to the client
+  template:
+    src: rsyslog.conf.j2
+    dest: /etc/rsyslog.conf
+    owner: root
+    group: root
+    mode: 0740
+  notify: restart rsyslogd
+
+- name: Touch the var/log/syslog file if it does not exist
+  file:
+    path: /var/log/syslog
+    owner: syslog
+    group: adm
+    state: touch
+    mode: 0640
+
+- name: Make sure users in group adm can write to /var/log/syslog
+  file:
+    path: /var/log/syslog
+    owner: syslog
+    group: adm
+    mode: 0640
+
+- name: Delete /var/log/messages so there is no confusion anymore!!
+  file:
+    path: /var/log/messages
+    state: absent
+
+# - name: Install rsyslog-gnutls module for debian systems
+#   apt:
+#     name: rsyslog-gnutls
+#     state: absent
+#   when: ansible_os_family == "Debian"
+#
+- name: Install rsyslog-gnutls module for debian systems
+  apt:
+    name: rsyslog-gnutls
+    state: present
+  when: ansible_os_family == "Debian"
+
+# - name: Install rsyslog-gnutls module for CentOS systems
+#   yum:
+#     name: rsyslog-gnutls
+#     state: absent
+#   when: ansible_os_family == "RedHat"
+#
+# - name: Install rsyslog-gnutls module for CentOS systems
+#   yum:
+#     name: rsyslog-gnutls
+#     state: present
+#   when: ansible_os_family == "RedHat"

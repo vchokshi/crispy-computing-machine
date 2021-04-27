@@ -1,0 +1,11 @@
+{ 
+    "TableName": "iot4-speedtest",
+    "Item": {
+	"testID": {
+            "S": "$context.requestId"
+            },
+        "sourceIP": {
+            "S": "$input.path('$.client.ip')"
+        }
+    }
+}
