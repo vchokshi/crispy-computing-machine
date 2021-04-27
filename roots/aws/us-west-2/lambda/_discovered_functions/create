@@ -1,0 +1,65 @@
+from __future__ import print_function
+
+def search(name, dict):
+    return dict.get(name)
+    
+def create_elb_listeners(event, context):
+    
+    import boto3
+    from botocore.exceptions import ClientError
+
+    client = boto3.client('elbv2')
+    try:
+        response = client.create_listener(
+            LoadBalancerArn=event['elb_arn'],
+            Protocol='HTTPS',
+            Port=443,
+            Certificates=[
+                {
+                    'CertificateArn': event['acm_arn']
+                },
+            ],
+            DefaultActions=[
+                {
+                    'Type': 'forward',
+                    'TargetGroupArn': event['elb_tg_arn']
+                },
+            ]
+        )
+        
+    except ClientError as e:
+        print(e)
+        return 'FAILED'
+        
+    try:
+        response = client.create_listener(
+            LoadBalancerArn=event['elb_arn'],
+            Protocol='HTTP',
+            Port=80,
+            DefaultActions=[
+                {
+                    'Type': 'forward',
+                    'TargetGroupArn': event['elb_tg_arn']
+                },
+            ]
+        )
+        
+    except ClientError as e:
+        return 'FAILED'
+    
+    return True
+
+def lambda_handler(event, context):
+
+    import json
+    import urllib
+    
+    required_input = ['elb_arn','acm_arn', 'elb_tg_arn']
+
+    for val in required_input:
+        print(val)
+        if event.get(val) is None:
+            return 'FAILED'
+    
+    return create_elb_listeners(event, context)
+

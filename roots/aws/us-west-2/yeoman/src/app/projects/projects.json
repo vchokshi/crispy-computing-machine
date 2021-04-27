@@ -1,0 +1,128 @@
+[
+  {
+    "key": "terraform",
+    "title": "Immutable Architechture with IaC",
+    "logo": "https://iot4-group.s3-us-west-2.amazonaws.com/images/terraform.png",
+    "text1": "Modernize the Department of Defense",
+    "text2": "In collaboration with the DoD, DDS and MEPCOM, develop and Immutable Architechture for MIRS 1.1."
+  },
+  {
+    "key": "ansible",
+    "title": "IOT Analytics For Service Providers",
+    "logo": "https://iot4-group.s3-us-west-2.amazonaws.com/images/ansible.png",
+    "text1": "Multiple Installations | Multiple Tenancies",
+    "text2": "Multicloud functionality for Cable Modem Analytics using Apache Web and Nifi, MySQL and Cassandra."
+  },
+  {
+    "key": "jupyter",
+    "title": "Data Science Forecasting Analytics",
+    "logo": "https://iot4-group.s3-us-west-2.amazonaws.com/images/jupyter.png",
+    "text1": "iPython Analytics - 1.1M Daily Records",
+    "text2": "Perform ETL, Sanitization, Masking of wear measurements to predict remaining useful life of rubber components."
+  },
+  {
+    "key": "docker",
+    "title": "Containerize Legacy Applications",
+    "logo": "https://iot4-group.s3-us-west-2.amazonaws.com/images/docker.png",
+    "text1": "Migration out of AWS Elastic Beanstalk",
+    "text2": "Map and migrate numerous web properties using Docker Container saving $60K / year."
+  },
+  {
+    "key": "jenkins",
+    "title": "Application Release Automation",
+    "logo": "https://iot4-group.s3-us-west-2.amazonaws.com/images/jenkins.png",
+    "text1": "Java Maven + Ansible Packaging for Installation and Deplpoyment",
+    "text2": "Package Java Based Application with Ansible with inspiration from the famous Wordpress 5-Minute Install."
+  },
+  {
+    "key": "python",
+    "title": "Python 2.7 Migrations",
+    "logo": "https://iot4-group.s3-us-west-2.amazonaws.com/images/python.png",
+    "text1": "Because Python 2.7 is so 2019",
+    "text2": "Refactor software applications dependent on EOL Python to version 3.8. Decompose and migrate key functions to Lambda."
+  },
+  {
+    "key": "cassandra",
+    "title": "Installation, Operation & Management of C*",
+    "logo": "https://iot4-group.s3-us-west-2.amazonaws.com/images/cassandra.png",
+    "text1": "Multi-Cluster Operations & Management",
+    "text2": "Wide Column Stores for Telemetry Data9"
+  },
+  {
+    "key": "packer",
+    "title": "DISA Compliant AWS AMI",
+    "logo": "https://iot4-group.s3-us-west-2.amazonaws.com/images/packer.svg",
+    "text1": "Treating servers like Cattle, Not Pets.",
+    "text2": "Automated weekly build, burn and deploy of DoD approved Linux images to advance from IATT to ATO within the DoD."
+  },
+  {
+    "key": "Openshift",
+    "title": "Cyberwarfare Simulation Microservices",
+    "logo": "https://iot4-group.s3-us-west-2.amazonaws.com/images/openshift.jpg",
+    "text1": "Container Orchestration for Microservices Trafficking",
+    "text2": "A docker based microservices trafficking platform for cross-cloud consumption using Kubernetes"
+  },
+  {
+    "key": "Github",
+    "title": "Repository Strategy",
+    "logo": "https://iot4-group.s3-us-west-2.amazonaws.com/images/github.jpg",
+    "text1": "Mono-repo or multi-repo strategy, or a little bit of both?",
+    "text2": "Strategic consulting on the tradeoffs for repository strategy considering security, automation and velocity."
+  },
+  {
+    "key": "Apex",
+    "title": "Student Admissions Portal",
+    "logo": "https://iot4-group.s3-us-west-2.amazonaws.com/images/apex.png",
+    "text1": "Apex based cloud migration and transisiton to Glassfish",
+    "text2": "Migrate an existing International Students Admission Portal to AWS while also transitioning to Glassfish and RDS"
+  },
+  {
+    "key": "crio",
+    "title": "Oracle CRI-O",
+    "logo": "https://iot4-group.s3-us-west-2.amazonaws.com/images/crio.png",
+    "text1": "Architecture for DevOps Pipeline to support various CRI on ECS, EKS and K8s.",
+    "text2": "Design a CI/CD system to support multiple Container Runtime Interfaces on top of multiple O&A platforms for agile support."
+  },
+  {
+    "key": "smartgrid",
+    "title": "Furfural Concentration Analysis",
+    "logo": "https://iot4-group.s3-us-west-2.amazonaws.com/images/smartgrid.png",
+    "text1": "Predictive pole top transformers replacements to ensure continuity in retail energy.",
+    "text2": "Map Reduced computation using algorithms measuring the detrioration of paper insulation of tranformer widings in oil."
+  },
+  {
+    "key": "pki",
+    "title": "Building a PKI",
+    "logo": "https://iot4-group.s3-us-west-2.amazonaws.com/images/pki.png",
+    "text1": "Root and Signing CAs with various signing chains for privileged access.",
+    "text2": "Build and maintain a production Certificate Authority with both Root and Signing privilages without HSM support"
+  },
+  {
+    "key": "php",
+    "title": "PHP 5.6 Migrations",
+    "logo": "https://iot4-group.s3-us-west-2.amazonaws.com/images/php.png",
+    "text1": "Because PHP 5.6 is so 2018",
+    "text2": "While PHP has fallen out of favor in recent years, legacy PHP 5.6 implementatios must be pulled forward to 7.0."
+  },
+  {
+    "key": "js",
+    "title": "Javascript",
+    "logo": "https://iot4-group.s3-us-west-2.amazonaws.com/images/js.jpg",
+    "text1": "What is a front end or a nodeJS app without JS?",
+    "text2": "Because ES6 Linters are not my favorite."
+  },
+  {
+    "key": "python",
+    "title": "Python Development Training",
+    "logo": "https://iot4-group.s3-us-west-2.amazonaws.com/images/python.png",
+    "text1": "Setting up and Using Virtual Environments",
+    "text2": "Because Python 2.7 is so 2019"
+  },
+  {
+    "key": "git",
+    "title": "Branching Strategies for Retail Sales",
+    "logo": "https://iot4-group.s3-us-west-2.amazonaws.com/images/git.jpg",
+    "text1": "Strategic consulting for Cultural Fit",
+    "text2": "Your code, your culture, your business objectives and your KPIs all contribute to a successful branching model that works for you."
+  }
+]
