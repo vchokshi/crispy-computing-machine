@@ -1,0 +1,55 @@
+data "aws_subnet_ids" "all" {
+  vpc_id = module.vpc.vpc_id
+}
+
+data "aws_security_group" "default" {
+  vpc_id = module.vpc.vpc_id
+  name   = "default"
+}
+
+
+module "postgres" {
+  source  = "terraform-aws-modules/rds/aws"
+  version = "2.20.0"
+
+  identifier = "${local.project}-db-postgres"
+
+  engine            = "postgres"
+  engine_version    = "9.6.9"
+  instance_class    = "db.t2.small"
+  allocated_storage = 5
+  storage_encrypted = false
+
+  name     = "${local.project}db"
+  username = var.rds_user
+
+  password = var.rds_password
+  port     = "5432"
+
+  vpc_security_group_ids = [data.aws_security_group.default.id]
+
+  maintenance_window = "Mon:00:00-Mon:03:00"
+  backup_window      = "03:00-06:00"
+
+  backup_retention_period = 0
+
+  subnet_ids = module.vpc.private_subnets
+
+  family = "postgres9.6"
+
+  major_engine_version = "9.6"
+
+  final_snapshot_identifier = "${local.project}-db-final"
+
+  deletion_protection = false
+
+  tags = local.common_tags
+}
+
+resource "aws_route53_record" "r" {
+  zone_id = data.aws_route53_zone.private.id
+  name    = "${local.project}-rds.internal.${local.dns_hosted_zone_name}"
+  type    = "CNAME"
+  ttl     = "300"
+  records = [module.postgres.this_db_instance_address]
+}

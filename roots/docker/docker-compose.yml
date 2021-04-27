@@ -1,0 +1,175 @@
+version: "3.8"
+############################################################
+## For testing, make sure no existing docker network collisions exist then:
+## docker-compose down && docker-compose up --remove-orphans --force-recreate --renew-anon-volumes
+## This will remove all anonymous volumes (databases, etc.).
+############################################################
+services: 
+  kali:
+    container_name: kali
+    image: kalilinux/kali-rolling
+    command: tail -f /dev/null
+    ports:
+      - 1337:8080
+    volumes:
+      - ./:/var/www/html
+    networks:
+      vuln-net:
+        ipv4_address: 192.168.13.37
+
+  juiceshop:
+    container_name: juiceshop
+    image: bkimminich/juice-shop
+    ports:
+      - 10005:3000
+    environment:
+      - NODE_ENV=unsafe
+      - NODE_ENV=tutorial
+    volumes:
+      - ./:/home
+    networks:
+      vuln-net:
+        ipv4_address: 192.168.13.24
+
+  bwapp:
+    container_name: bwapp
+    image: cyberxsecurity/bwapp
+    ports:
+      - 10011:8880
+    networks:
+      vuln-net:
+        ipv4_address: 192.168.13.35
+
+  bodgeit:
+    container_name: bodgeit
+    image: psiinon/bodgeit
+    ports:
+      - 10012:8080
+    volumes:
+      - ./:/home
+    networks:
+      vuln-net:
+        ipv4_address: 192.168.13.30
+
+  webgoat-dn:
+    container_name: webgoat-dn
+    image: appsecco/owasp-webgoat-dot-net
+    stdin_open: true # docker run -i
+    tty: true        # docker run -t
+    ports:
+      - 10013:9000
+    volumes:
+      - ./:/home
+    networks:
+      vuln-net:
+        ipv4_address: 192.168.13.31
+
+  heartbleed:
+    container_name: heartbleed
+    image: andrewmichaelsmith/docker-heartbleed
+    restart: always
+    ports:
+      - 10009:80
+    volumes:
+      - ./:/home
+    networks:
+      vuln-net:
+        ipv4_address: 192.168.13.36
+
+  dvwa:
+    container_name: dvwa
+    image: cyberxsecurity/dvwa
+    ports:
+      - 80:8888
+    volumes:
+      - ./:/home
+    # privileged: true
+    # command: --storage-driver=aufs
+    networks:
+      vuln-net:
+        ipv4_address: 192.168.13.25
+
+  hackazon:
+    container_name: hackazon
+    image: cyberxsecurity/hackazon
+    ports:
+      - 10001:80
+    volumes:
+      - ./:/home
+    networks:
+      vuln-net:
+        ipv4_address: 192.168.13.26
+
+  mutillidae:
+    container_name: mutillidae
+    image: cyberxsecurity/mutillidae
+    ports:
+      - 10002:80
+      - 20002:3306
+    volumes:
+      - ./:/home
+    networks:
+      vuln-net:
+        ipv4_address: 192.168.13.27
+
+  webgoatwolf:
+    image: webgoat/goatandwolf:v8.1.0
+    container_name: webgoatwolf
+    environment:
+      - TZ=America/New_York
+    ports:
+      - 10003:8080
+      - 10004:9090
+    networks:
+      vuln-net:
+        ipv4_address: 192.168.13.28
+    ### Use the following URLs to login
+    ## http://localhost:10003/WebGoat/login
+  #   ## http://localhost:10004/login
+
+  bricks:
+    container_name: bricks
+    image: citizenstig/owaspbricks
+    ports:
+      - 10006:80
+    volumes:
+      - ./:/home
+    networks:
+      vuln-net:
+        ipv4_address: 192.168.13.29
+
+  shellshock:
+    container_name: shellshock
+    image: cyberxsecurity/shellshock:latest
+    restart: always
+    ports:
+      - 10007:80
+      - 20007:443
+    volumes:
+      - ./:/home
+    working_dir: /
+    tty: true
+    shm_size: 256M
+    command: main.sh #tail -f /dev/null
+    stdin_open: true
+    networks:
+      vuln-net:
+        ipv4_address: 192.168.13.34
+
+############################################################
+networks: 
+  vuln-net:
+    name: vuln-net
+    ipam:
+      driver: default
+      config:
+        - subnet: "192.168.13.0/24"
+############################################################
+volumes: 
+  juiceshop:
+  dvwa:
+  mutillidae:
+  hackazon:
+  webgoatwolf:
+  bricks:
+  shellshock:
