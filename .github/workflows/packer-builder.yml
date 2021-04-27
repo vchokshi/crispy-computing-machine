@@ -1,0 +1,297 @@
+name: Packer Builder
+
+on:
+  issue_comment:
+    types: [created]
+
+  pull_request:
+    types: [opened, reopened, closed]
+    paths:
+      - 'packer/**/*.json'
+      - 'packer/**/*.hcl'
+
+jobs:
+  pr_load:
+    name: Load Branch Details Outside Container
+    if: |
+      startsWith(github.event.comment.body, 'packer')
+      && startsWith(github.event.issue.pull_request.url, 'https://')
+    outputs:
+      pr_branch: ${{ steps.load-pr.outputs.branch  }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Load PR Details
+        id: load-pr
+        run: |
+          set -eu
+          resp=$(curl -sSf --url ${{ github.event.issue.pull_request.url }} --header 'authorization: Bearer ${{ secrets.GITHUB_TOKEN }}'  --header 'content-type: application/json')
+          branch=$(python3 -c "import sys, json; print(json.load(sys.stdin)['head']['ref'])" <<< "$resp")
+          echo "::set-output name=branch::$branch"
+
+  linter:
+    name: Code Lint
+    if: |
+      github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    container: 
+      ##Using packer light which is tied to latest, currently at 1.7.2
+      image: hashicorp/packer@sha256:523457b5371562c4d9c21621ee85c71c31e7ff53d5ec303a5daf07c55531b84e
+    steps:
+      - name: Checkout the code
+        id: checkout
+        uses: actions/checkout@v2
+        with:
+          ref: ${{ env.BRANCH  }}
+      - name: Lint Packer Files
+        id: lint
+        shell: bash
+        run: |
+          cd $GITHUB_WORKSPACE
+          echo "::set-output name=result::$(packer validate --syntax-only ./packer)"
+          packer validate --syntax-only ./packer
+    outputs:
+      r: ${{ steps.lint.outputs.result }}
+  
+  dev_builder:
+    name: Development Builder
+    if: |
+      endsWith(github.event.comment.body, 'build dev')
+      && startsWith(github.event.issue.pull_request.url, 'https://')
+    needs: [pr_load, comment]
+    runs-on: ubuntu-latest
+    container:
+      ##Using packer light which is tied to latest, currently at 1.7.2
+      image: hashicorp/packer@sha256:516a72625ab41f03754e4b31465bdb3d46ac2d9dfefcc10df2ad59e7212b67fe
+    steps:
+      - name: Checkout Code From PR Branch
+        uses: actions/checkout@v2
+        with:
+          ref: ${{ needs.pr_load.outputs.pr_branch }}
+      - name: Run Packer Build
+        run: cd $GITHUB_WORKSPACE && sh scripts/packer-builder.sh ${{ github.event.comment.body}}
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.PACKER_BUILD_AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.PACKER_BUILD_AWS_SECRET_ACCESS_KEY }}
+          AWS_DEFAULT_REGION: us-west-2
+        continue-on-error: true
+      - name: Artifact upload
+        uses: actions/upload-artifact@v2
+        with:
+          name: manifest
+          path: ${{ github.workspace }}/packer-manifest.json
+
+  prod_builder:
+    name: Production Builder
+    if: |
+      ( endsWith(github.event.comment.body, 'build') ||
+      endsWith(github.event.comment.body, 'build prod') )
+      && startsWith(github.event.issue.pull_request.url, 'https://')
+    needs: [pr_load, comment]
+    environment: prod
+    runs-on: ubuntu-latest
+    container:
+      ##Using packer light which is tied to latest, currently at 1.7.2
+      image: hashicorp/packer@sha256:516a72625ab41f03754e4b31465bdb3d46ac2d9dfefcc10df2ad59e7212b67fe
+    steps:
+      - name: Checkout Code From PR Branch
+        uses: actions/checkout@v2
+        with:
+          ref: ${{ needs.pr_load.outputs.pr_branch }}
+      - name: Run Packer Build
+        run: cd $GITHUB_WORKSPACE && sh scripts/packer-builder.sh ${{ github.event.comment.body}}
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.PACKER_BUILD_AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.PACKER_BUILD_AWS_SECRET_ACCESS_KEY }}
+          AWS_DEFAULT_REGION: us-west-2
+        continue-on-error: true
+      - name: Artifact upload 
+        uses: actions/upload-artifact@v2
+        with:
+          name: manifest
+          path: ${{ github.workspace }}/packer-manifest.json
+
+  helper_builder:
+    name: Helper Builder
+    if: |
+      endsWith(github.event.comment.body, 'build -h') &&
+      startsWith(github.event.issue.pull_request.url, 'https://')
+    needs: [pr_load, comment]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code From PR Branch
+        uses: actions/checkout@v2
+      - name: Run Packer Build -h
+        id: helper_build
+        run: |
+          cd $GITHUB_WORKSPACE && 
+          sh scripts/packer-builder.sh packer build -h > help.txt
+      - name: Artifact upload 
+        uses: actions/upload-artifact@v2
+        with:
+          name: help
+          path: ${{ github.workspace }}/help.txt
+
+  comment:
+    name: Comment Init
+    if: |
+      github.event_name == 'issue_comment' &&
+      startsWith(github.event.comment.body, 'packer') &&
+      startsWith(github.event.issue.pull_request.url, 'https://')
+    runs-on: ubuntu-latest
+    steps:
+      - name: Comment the PR on Start
+        env:
+          URL: ${{ github.event.issue.comments_url }}
+          GITHUB_TOKEN: ${{ secrets.FOE_PAT }}
+          API_VERSION: "application/vnd.github.v3.json"
+          GITHUB_COMMENT: "Starting Packer Build"
+        run: |
+          curl \
+            -X POST $URL \
+            -H "Accept: $API_VERSION" \
+            -H "Content-Type: application/json" \
+            -H "Authorization: token $GITHUB_TOKEN" \
+            -d '{"body":"${{ env.GITHUB_COMMENT}}"}'
+
+  build_output:
+    name: Code Build Output
+    needs: [dev_builder, prod_builder, helper_builder]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Successful Build Artifact download 
+        if: |
+          needs.dev_builder.result == 'success' ||
+          needs.prod_builder.result == 'success' 
+        uses: actions/download-artifact@v2
+        with:
+          name: manifest
+      - name: Get the artifact ids
+        if: |
+          needs.dev_builder.result == 'success' || 
+          needs.prod_builder.result == 'success'
+        id: result
+        run: >
+          echo "::set-output name=artifact_id::$(jq -r
+          '.builds[0].artifact_id
+          | split(",")
+          | map(split(":") | "\(.[1]) (\(.[0]))")
+          | join("\\n")'
+          ./packer-manifest.json)"
+      - name: Successful Help Text download 
+        if: needs.helper_builder.result == 'success' 
+        uses: actions/download-artifact@v2
+        with:
+          name: help
+      - name: Read in the help file
+        id: sanitized_help
+        if: needs.helper_builder.result == 'success'
+        run: | 
+          HELP=$(cat ./help.txt)
+          HELP="${HELP//$'\n'/'\n'}"
+          HELP="${HELP//$'\r'/'\r'}"
+          HELP="${HELP//$'\t'/'\t'}"
+          echo "::set-output name=help::$(echo "$HELP")"
+      - name: Add comment on Builder Success
+        if: |
+          needs.dev_builder.result == 'success' || 
+          needs.prod_builder.result == 'success'
+        env:
+          URL: ${{ github.event.issue.comments_url }}
+          GITHUB_TOKEN: ${{ secrets.FOE_PAT }}
+          API_VERSION: "application/vnd.github.v3.json"
+          GITHUB_COMMENT: "Image will be marked approved and distributed on PR approval! :tada:"
+        run: |
+          curl \
+            -X POST $URL \
+            -H "Accept: $API_VERSION" \
+            -H "Content-Type: application/json" \
+            -H "Authorization: token $GITHUB_TOKEN" \
+            -d '{"body":"Successfully built AMIs:\n${{ steps.result.outputs.artifact_id }}\n${{ env.GITHUB_COMMENT}} "}'
+      - name: Add comment on Builder Helper
+        if: needs.helper_builder.result == 'success' 
+        env:
+          URL: ${{ github.event.issue.comments_url }}
+          GITHUB_TOKEN: ${{ secrets.FOE_PAT }}
+          API_VERSION: "application/vnd.github.v3.json"
+          GITHUB_COMMENT: ${{ steps.sanitized_help.outputs.help}}
+        run: |
+          curl \
+            -X POST $URL \
+            -H "Accept: $API_VERSION" \
+            -H "Content-Type: text/plain" \
+            -H "Authorization: token $GITHUB_TOKEN" \
+            -d '{"body":"${{ env.GITHUB_COMMENT}} "}'
+
+      - name: Add comment on Builder Failure
+        if: |
+          needs.dev_builder.result == 'failure'  || 
+          needs.prod_builder.result == 'failure' ||
+          needs.helper_builder.result == 'failure' 
+        env:
+          URL: ${{ github.event.issue.comments_url }}
+          GITHUB_TOKEN: ${{ secrets.FOE_PAT }}
+          API_VERSION: "application/vnd.github.v3.json"
+          GITHUB_COMMENT: "Code Build Failed. Please try again."
+        run: |
+          curl \
+            -X POST $URL \
+            -H "Accept: $API_VERSION" \
+            -H "Content-Type: application/json" \
+            -H "Authorization: token $GITHUB_TOKEN" \
+            -d '{"body":"${{ env.GITHUB_COMMENT}} "}'
+
+  approve:
+    name: AMI Image Approval
+    runs-on: ubuntu-latest
+    if: |
+      github.event_name == 'pull_request' && 
+      github.event.action == 'closed' &&
+      github.event.merged == 'true'
+    steps:
+      - name: Approve and Distribute
+        run: |
+          set -eu
+          IMAGE_FILTER=${{ github.head_ref }}
+          if ! command -v aws &> /dev/null; then
+            echo "aws not found. Exiting." && exit 1
+          fi
+          REGIONS=($(aws ec2 describe-regions --query 'Regions[*].[RegionName]' --output text ))
+          for r in ${REGIONS[@]}; do
+            ami=$(aws ec2 describe-images --region $r \
+              --filters="Name=tag:pr_branch,Values=$IMAGE_FILTER" \
+              --query 'sort_by(Images,&CreationDate)[-1].[ImageId]' \
+              --output text
+            )
+            if [ $ami != "None" ]; then
+              res=$(aws ec2 create-tags --resources $ami --region $r \
+                --tags Key=approval_status,Value=approved
+              )
+              share=$(aws lambda invoke \
+                --region $r \
+                --function-name=ami_share \
+                --invocation_type Event \
+                --cli-binary-format raw-in-base64-out \
+                -- payload '{"ImageId": $ami}' \
+                response.json
+              )
+            fi
+          done
+          
+  exit:
+    name: Complete the Workflow
+    needs: approve
+    runs-on: ubuntu-latest
+    steps:
+      - name: Goodbye from the PR
+        env:
+          URL: ${{ github.event.pull_request._links.comments.href }}
+          GITHUB_TOKEN: ${{ secrets.FOE_PAT }}
+          API_VERSION: "application/vnd.github.v3.json"
+          GITHUB_COMMENT: "Hasta La Vista, Baby."
+        run: |
+          curl \
+            -X POST $URL \
+            -H "Accept: $API_VERSION" \
+            -H "Content-Type: application/json" \
+            -H "Authorization: token $GITHUB_TOKEN" \
+            -d '{"body":"${{ env.GITHUB_COMMENT}}"}'

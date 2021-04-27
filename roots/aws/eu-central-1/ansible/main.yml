@@ -1,0 +1,93 @@
+# If you want to write
+# a block-commented Haiku
+# you'll need three pound signs
+
+- name: Build the lamp stack 
+  become: true
+  hosts: all
+  roles:
+          #- role: install-phpmyadmin
+  pre_tasks: 
+    - name: Enable lamp php and php
+      shell: amazon-linux-extras install -y lamp-mariadb10.2-php7.2 php7.2
+    - name: yum install dependencies
+      yum:
+        name: [httpd, php-mbstring, python-pip, python-wheel]
+        update_cache: yes
+        state: present
+    - name: Enable the httpd service
+      service:
+        name: httpd
+        state: started
+        enabled: true
+    - name: Deploy Application
+      copy:
+        src: "{{ item }}"
+        dest: "{{ html_root }}"
+      with_items:
+        - index.html
+        - phpinfo.php
+    - name: pip install psycopg2-binary
+      become: true
+      pip:
+         name: psycopg2-binary
+    - name: Template the postgres python test file over
+      become: false
+      template:
+         src: pgtest.py
+         dest: ~/pgtest.py
+
+    - name: Install elastio using yum localinstall from url
+      shell: yum localinstall https://repo.assur.io/master/linux/rpm/Amazon/$(rpm -E %amzn)/x86_64/Packages/elastio-repo-0.0.2-1.amzn$(rpm -E %amzn).noarch.rpm -y
+    - name: Install more elastio packages
+      yum:
+        name: [elastio, kernel-devel, elastio-snap-utils]
+        update_cache: yes
+        state: present
+    - name: Copy the elastio helpers script over for sourcery
+      become: false
+      copy:
+         src: helpers.sh
+         dest: ~/helpers.sh
+    - name: Install terraform for teardown purposes only
+      unarchive:
+        remote_src: true
+        src: https://releases.hashicorp.com/terraform/0.14.7/terraform_0.14.7_linux_amd64.zip
+        dest: /usr/bin
+    - name: Download the version 2 of the AWS cli
+      unarchive:
+        remote_src: true
+        src: https://awscli.amazonaws.com/awscli-exe-linux-x86_64-2.0.30.zip
+        dest: /tmp
+    - name: Uninstall aws cli v1
+      file:
+        path: /bin/aws
+        state: absent
+    - name: Uninstall aws_completer cli v1
+      file:
+        path: /bin/aws_completer
+        state: absent
+    - name: Install aws cli v2
+      shell: /tmp/aws/install --update
+    - name: Go get the red-deploy.sh script
+      become: false
+      get_url:
+        url: https://raw.githubusercontent.com/elastio/elastio-stack/master/scripts/reds-deploy.sh
+        dest: ~/reds-deploy.sh
+    - name: Symlink aws cli
+      file:
+        src: /usr/local/bin/aws
+        dest: /usr/bin/aws
+        state: link
+    - name: Symlink aws_completer cli
+      file:
+        src: /usr/local/bin/aws_completer
+        dest: /usr/bin/aws_completer
+        state: link
+
+
+
+
+
+
+

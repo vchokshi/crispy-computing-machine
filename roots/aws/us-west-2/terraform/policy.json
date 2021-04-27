@@ -1,0 +1,13 @@
+{
+    "Version": "2012-10-17",
+    "Id": "Policy1585261245822",
+    "Statement": [
+        {
+            "Sid": "Stmt1585261240275",
+            "Effect": "Allow",
+            "Principal": "*",
+            "Action": "s3:GetObject",
+            "Resource": "arn:aws:s3:::iot4-group/*"
+        }
+    ]
+}
