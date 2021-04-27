@@ -1,0 +1,486 @@
+name: Packer Builder CloudInfra
+
+on:
+  push:
+  issue_comment:
+    types: [created]
+
+  pull_request:
+    types: [opened, reopened, closed]
+    paths:
+      - 'packer/**/*.json'
+      - 'packer/**/*.hcl'
+
+jobs:
+  pr_load:
+    name: Load Branch Details Outside Container
+    if: |
+      startsWith(github.event.comment.body, 'packer')
+      && startsWith(github.event.issue.pull_request.url, 'https://')
+    outputs:
+      pr_branch: ${{ steps.load-pr.outputs.branch  }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Load PR Details
+        id: load-pr
+        run: |
+          set -eu
+          resp=$(curl -sSf --url ${{ github.event.issue.pull_request.url }} --header 'authorization: Bearer ${{ secrets.GITHUB_TOKEN }}'  --header 'content-type: application/json')
+          branch=$(python3 -c "import sys, json; print(json.load(sys.stdin)['head']['ref'])" <<< "$resp")
+          echo "::set-output name=branch::$branch"
+
+  linter:
+    name: Code Lint
+    if: |
+      github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    container: 
+      ##Using packer light which is tied to latest, currently at 1.7.2
+      image: hashicorp/packer@sha256:523457b5371562c4d9c21621ee85c71c31e7ff53d5ec303a5daf07c55531b84e
+    steps:
+      - name: Checkout the code
+        id: checkout
+        uses: actions/checkout@v2
+        with:
+          ref: ${{ env.BRANCH  }}
+      - name: Lint Packer Files
+        id: lint
+        shell: bash
+        run: |
+          cd $GITHUB_WORKSPACE
+          echo "::set-output name=result::$(packer validate --syntax-only ./packer)"
+          packer validate --syntax-only ./packer
+    outputs:
+      r: ${{ steps.lint.outputs.result }}
+  
+  dev_builder:
+    name: Development Builder
+    if: |
+      endsWith(github.event.comment.body, 'build dev')
+      && startsWith(github.event.issue.pull_request.url, 'https://')
+    needs: [pr_load, comment]
+    continue-on-error: true
+    outputs:
+      build_status: ${{ steps.build_status.outputs.build_status }}
+      report_status: ${{ steps.report_status.outputs.report_status }}
+    runs-on: ubuntu-latest
+    container:
+      ##Using packer light which is tied to latest, currently at 1.7.2
+      image: hashicorp/packer@sha256:516a72625ab41f03754e4b31465bdb3d46ac2d9dfefcc10df2ad59e7212b67fe
+    steps:
+      - name: Checkout Code From PR Branch
+        uses: actions/checkout@v2
+        with:
+          ref: ${{ needs.pr_load.outputs.pr_branch }}
+      - name: Run Packer Build
+        id: packer_build
+        run: >
+          set -o pipefail &&
+          cd $GITHUB_WORKSPACE &&
+          sh scripts/packer-builder.sh ${{ github.event.comment.body}}
+          | tee packer_out.txt
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.PACKER_BUILD_AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.PACKER_BUILD_AWS_SECRET_ACCESS_KEY }}
+          AWS_DEFAULT_REGION: us-west-2
+      - name: Manifest upload
+        if: ${{ success() }}
+        uses: actions/upload-artifact@v2
+        with:
+          name: manifest
+          path: ${{ github.workspace }}/packer-manifest.json
+      - name: Base checks upload
+        if: |
+          failure() && hashFiles('./base_test_results.json') != ''
+        uses: actions/upload-artifact@v2
+        with:
+          name: base_checks
+          path: ${{ github.workspace }}/base_test_results.json
+          if-no-files-found: error
+      - name: MSB upload
+        id: msb_upload
+        if: |
+          failure() && hashFiles('./msb_report.json') != ''
+        uses: actions/upload-artifact@v2
+        with:
+          name: msb
+          path: ${{ github.workspace }}/msb_report.json
+          if-no-files-found: error
+      - name: Packer output upload
+        id: packer_upload
+        # Note: The string here is the hashFiles() hash of a single empty file
+        if: |
+          failure() &&
+          (hashFiles('./base_test_results.json') == '' ||
+          hashFiles('./base_test_results.json') == '5df6e0e2761359d30a8275058e299fcc0381534545f55cf43e41983f5d4c9456')
+        uses: actions/upload-artifact@v2
+        with:
+          name: packer_output
+          path: ${{ github.workspace }}/packer_out.txt
+          if-no-files-found: error
+      - name: Set build status
+        id: build_status
+        if: success() || failure()
+        run: echo "::set-output name=build_status::${{ steps.packer_build.outcome }}"
+      - name: Mark reports status
+        id: report_status
+        if: failure()
+        # Note: The string here is the hashFiles() hash of a single empty file
+        run: |
+          echo "::set-output name=report_status::$(
+            file_hash="${{ hashFiles('./base_test_results.json') }}"
+            if [ -z "$file_hash" ] || [ "$file_hash" = "5df6e0e2761359d30a8275058e299fcc0381534545f55cf43e41983f5d4c9456" ]; then 
+              printf "failure"
+            else
+              printf "success"
+            fi
+          )"
+
+  prod_builder:
+    name: Production Builder
+    if: |
+      ( endsWith(github.event.comment.body, 'build') ||
+      endsWith(github.event.comment.body, 'build prod') )
+      && startsWith(github.event.issue.pull_request.url, 'https://')
+    needs: [pr_load, comment]
+    environment: prod
+    continue-on-error: true
+    outputs:
+      build_status: ${{ steps.build_status.outputs.build_status }}
+      report_status: ${{ steps.report_status.outputs.report_status }}
+    runs-on: ubuntu-latest
+    container:
+      ##Using packer light which is tied to latest, currently at 1.7.2
+      image: hashicorp/packer@sha256:516a72625ab41f03754e4b31465bdb3d46ac2d9dfefcc10df2ad59e7212b67fe
+    steps:
+      - name: Checkout Code From PR Branch
+        uses: actions/checkout@v2
+        with:
+          ref: ${{ needs.pr_load.outputs.pr_branch }}
+      - name: Run Packer Build
+        id: packer_build
+        run: >
+          set -o pipefail &&
+          cd $GITHUB_WORKSPACE &&
+          sh scripts/packer-builder.sh ${{ github.event.comment.body}}
+          | tee packer_out.txt
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.PACKER_BUILD_AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.PACKER_BUILD_AWS_SECRET_ACCESS_KEY }}
+          AWS_DEFAULT_REGION: us-west-2
+      - name: Manifest upload
+        if: ${{ success() }}
+        uses: actions/upload-artifact@v2
+        with:
+          name: manifest
+          path: ${{ github.workspace }}/packer-manifest.json
+      - name: Base checks upload
+        if: |
+          failure() && hashFiles('./base_test_results.json') != ''
+        uses: actions/upload-artifact@v2
+        with:
+          name: base_checks
+          path: ${{ github.workspace }}/base_test_results.json
+          if-no-files-found: error
+      - name: MSB upload
+        id: msb_upload
+        if: |
+          failure() && hashFiles('./msb_report.json') != ''
+        uses: actions/upload-artifact@v2
+        with:
+          name: msb
+          path: ${{ github.workspace }}/msb_report.json
+          if-no-files-found: error
+      - name: Packer output upload
+        id: packer_upload
+        # Note: The string here is the hashFiles() hash of a single empty file
+        if: |
+          failure() && 
+          (hashFiles('./base_test_results.json') == '' ||
+          hashFiles('./base_test_results.json') == '5df6e0e2761359d30a8275058e299fcc0381534545f55cf43e41983f5d4c9456')
+        uses: actions/upload-artifact@v2
+        with:
+          name: packer_output
+          path: ${{ github.workspace }}/packer_out.txt
+          if-no-files-found: error
+      - name: Set build status
+        id: build_status
+        if: success() || failure()
+        run: echo "::set-output name=build_status::${{ steps.packer_build.outcome }}"
+      - name: Mark reports status
+        id: report_status
+        if: failure()
+        # Note: The string here is the hashFiles() hash of a single empty file
+        run: |
+          echo "::set-output name=report_status::$(
+            file_hash="${{ hashFiles('./base_test_results.json') }}"
+            if [ -z "$file_hash" ] || [ "$file_hash" = "5df6e0e2761359d30a8275058e299fcc0381534545f55cf43e41983f5d4c9456" ]; then 
+              printf "failure"
+            else
+              printf "success"
+            fi
+          )"
+
+  helper_builder:
+    name: Helper Builder
+    if: |
+      endsWith(github.event.comment.body, 'build -h') &&
+      startsWith(github.event.issue.pull_request.url, 'https://')
+    needs: [pr_load, comment]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code From PR Branch
+        uses: actions/checkout@v2
+      - name: Run Packer Build -h
+        id: helper_build
+        run: |
+          cd $GITHUB_WORKSPACE && 
+          sh scripts/packer-builder.sh packer build -h > help.txt
+      - name: Artifact upload 
+        uses: actions/upload-artifact@v2
+        with:
+          name: help
+          path: ${{ github.workspace }}/help.txt
+
+  comment:
+    name: Comment Init
+    if: |
+      github.event_name == 'issue_comment' &&
+      startsWith(github.event.comment.body, 'packer') &&
+      startsWith(github.event.issue.pull_request.url, 'https://')
+    runs-on: ubuntu-latest
+    steps:
+      - name: Comment the PR on Start
+        env:
+          URL: ${{ github.event.issue.comments_url }}
+          GITHUB_TOKEN: ${{ secrets.FOE_PAT }}
+          API_VERSION: "application/vnd.github.v3.json"
+          GITHUB_COMMENT: "Starting Packer Build"
+        run: |
+          curl \
+            -X POST $URL \
+            -H "Accept: $API_VERSION" \
+            -H "Content-Type: application/json" \
+            -H "Authorization: token $GITHUB_TOKEN" \
+            -d '{"body":"${{ env.GITHUB_COMMENT}}"}'
+
+  output_success:
+    name: Report Success
+    if: >
+      always() &&
+      needs.dev_builder.outputs.build_status == 'success' ||
+      needs.prod_builder.outputs.build_status == 'success'
+    needs: [dev_builder, prod_builder]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Dump Context
+        env: 
+          GHC: ${{ toJSON(github)}}
+        run: echo "$GHC"
+      - name: Successful Build Artifact download 
+        id: artifact_file
+        uses: actions/download-artifact@v2
+        with:
+          name: manifest
+      - name: Get the artifact ids
+        if: steps.artifact_file.outcome == 'success'
+        id: result
+        run: >
+          echo "::set-output name=artifact_id::$(jq -r
+          '.builds[0].artifact_id
+          | split(",")
+          | map(split(":") | "\(.[1]) (\(.[0]))")
+          | join("\\n")'
+          ./packer-manifest.json)"
+      - name: Delete the artifact
+        if: steps.result.outcome == 'success'
+        env:
+          URL:  "https://api.github.com/repos/vchokshi/crispy-computing-machine/actions/artifacts/1"
+          GITHUB_TOKEN: ${{ secrets.FOE_PAT }}
+          API_VERSION: "application/vnd.github.v3.json"
+        run: |
+          curl \
+            -X POST $URL \
+            -H "Accept: $API_VERSION"
+
+
+      - name: Add comment on Builder Success
+        env:
+          URL: ${{ github.event.issue.comments_url }}
+          GITHUB_TOKEN: ${{ secrets.FOE_PAT }}
+          API_VERSION: "application/vnd.github.v3.json"
+          GITHUB_COMMENT: "Image will be marked approved and distributed on PR approval! :tada:"
+        run: |
+          curl \
+            -X POST $URL \
+            -H "Accept: $API_VERSION" \
+            -H "Content-Type: application/json" \
+            -H "Authorization: token $GITHUB_TOKEN" \
+            -d '{"body":"Successfully built AMIs:\n${{ steps.result.outputs.artifact_id }}\n${{ env.GITHUB_COMMENT}} "}'
+
+  output_helper:
+    name: Print Help
+    needs: [helper_builder]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Successful Help Text download 
+        uses: actions/download-artifact@v2
+        with:
+          name: help
+      - name: Read in the help file
+        id: sanitized_help
+        run: | 
+          HELP=$(cat ./help.txt)
+          HELP="${HELP//$'\n'/'\n'}"
+          HELP="${HELP//$'\r'/'\r'}"
+          HELP="${HELP//$'\t'/'\t'}"
+          echo "::set-output name=help::$(echo "$HELP")"
+      - name: Add comment on Builder Helper
+        env:
+          URL: ${{ github.event.issue.comments_url }}
+          GITHUB_TOKEN: ${{ secrets.FOE_PAT }}
+          API_VERSION: "application/vnd.github.v3.json"
+          GITHUB_COMMENT: ${{ steps.sanitized_help.outputs.help}}
+        run: |
+          curl \
+            -X POST $URL \
+            -H "Accept: $API_VERSION" \
+            -H "Content-Type: text/plain" \
+            -H "Authorization: token $GITHUB_TOKEN" \
+            -d '{"body":"${{ env.GITHUB_COMMENT}} "}'
+
+  output_failure:
+    name: Report Failure
+    if: >
+      always() && 
+      (needs.dev_builder.outputs.build_status == 'failure' || 
+      needs.prod_builder.outputs.build_status == 'failure')
+    needs: [dev_builder, prod_builder]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get report status
+        id: report_status
+        run: |
+          echo "::set-output name=status::$(
+            if [ "${{ needs.dev_builder.outputs.build_status }}" == "failure" ]; then
+              echo -n "${{ needs.dev_builder.outputs.report_status }}"
+            else
+              echo -n "${{ needs.prod_builder.outputs.report_status }}"
+            fi
+          )"
+      - name: Base checks download
+        id: base_checks_file
+        if: steps.report_status.outputs.status == 'success'
+        uses: actions/download-artifact@v2
+        with:
+          name: base_checks
+      - name: MSB download
+        id: msb_file
+        if: steps.report_status.outputs.status == 'success'
+        uses: actions/download-artifact@v2
+        with:
+          name: msb
+      - name: Packer output download
+        id: packer_out
+        if: |
+          steps.report_status.outputs.status == 'failure' ||
+          steps.report_status.outputs.status == 'skipped'
+        uses: actions/download-artifact@v2
+        with:
+          name: packer_output
+      - name: Get failed checks
+        id: failed_checks
+        if: >
+          steps.msb_file.outcome == 'success' &&
+          steps.base_checks_file.outcome == 'success'
+        run: >
+          echo "::set-output name=inspec_failures::$(jq -s .
+          <(jq '.profiles[0].controls[] | select(any(.results[]; .status == "failed")) | .results=(.results[] | select(.status == "failed"))' ./msb_report.json)
+          <(jq '.profiles[0].controls[] | select(any(.results[]; .status == "failed")) | .results=(.results[] | select(.status == "failed"))' ./base_test_results.json)
+          | ruby -e 'puts STDIN.read.gsub("%", "%25").gsub("\r", "%0D").gsub("\n", "%0A")')"
+      - name: Get packer output contents
+        id: packer_log
+        if: >
+          steps.packer_out.outcome != 'skipped' &&
+          steps.packer_out.outcome != 'cancelled'
+        run: >
+          echo "::set-output name=contents::$(sed 's/\x1b\[[0-9;]*m//g' ./packer_out.txt | 
+          ruby -e 'puts STDIN.read.gsub("%", "%25").gsub("\r", "%0D").gsub("\n", "%0A")')"
+      - name: Add comment on test failure
+        uses: peter-evans/create-or-update-comment@v1.4.5
+        if: >
+          steps.failed_checks.outcome != 'skipped' &&
+          steps.failed_checks.outcome != 'cancelled'
+        with:
+          issue-number: ${{ github.event.issue.number }}
+          token: ${{ secrets.FOE_PAT }}
+          body: |
+            Build tests failed. The following checks failed:
+            ${{ steps.failed_checks.outputs.inspec_failures }}
+      - name: Add comment on build failure
+        uses: peter-evans/create-or-update-comment@v1.4.5
+        if: >
+          steps.packer_log.outcome != 'skipped' &&
+          steps.packer_log.outcome != 'cancelled'
+        with:
+          issue-number: ${{ github.event.issue.number }}
+          token: ${{ secrets.FOE_PAT }}
+          body: |
+            Build failed. Here is the output of your build:
+            ${{ steps.packer_log.outputs.contents }}
+
+  approve:
+    name: AMI Image Approval
+    runs-on: ubuntu-latest
+    if: |
+      github.event_name == 'pull_request' && 
+      github.event.action == 'closed' &&
+      github.event.merged == 'true'
+    steps:
+      - name: Approve and Distribute
+        run: |
+          set -eu
+          IMAGE_FILTER=${{ github.head_ref }}
+          if ! command -v aws &> /dev/null; then
+            echo "aws not found. Exiting." && exit 1
+          fi
+          REGIONS=($(aws ec2 describe-regions --query 'Regions[*].[RegionName]' --output text ))
+          for r in ${REGIONS[@]}; do
+            ami=$(aws ec2 describe-images --region $r \
+              --filters="Name=tag:pr_branch,Values=$IMAGE_FILTER" \
+              --query 'sort_by(Images,&CreationDate)[-1].[ImageId]' \
+              --output text
+            )
+            if [ $ami != "None" ]; then
+              res=$(aws ec2 create-tags --resources $ami --region $r \
+                --tags Key=approval_status,Value=approved
+              )
+              share=$(aws lambda invoke \
+                --region $r \
+                --function-name=ami_share \
+                --invocation_type Event \
+                --cli-binary-format raw-in-base64-out \
+                -- payload '{"ImageId": $ami}' \
+                response.json
+              )
+            fi
+          done
+          
+  exit:
+    name: Complete the Workflow
+    needs: approve
+    runs-on: ubuntu-latest
+    steps:
+      - name: Goodbye from the PR
+        env:
+          URL: ${{ github.event.pull_request._links.comments.href }}
+          GITHUB_TOKEN: ${{ secrets.FOE_PAT }}
+          API_VERSION: "application/vnd.github.v3.json"
+          GITHUB_COMMENT: "Hasta La Vista, Baby."
+        run: |
+          curl \
+            -X POST $URL \
+            -H "Accept: $API_VERSION" \
+            -H "Content-Type: application/json" \
+            -H "Authorization: token $GITHUB_TOKEN" \
+            -d '{"body":"${{ env.GITHUB_COMMENT}}"}'
