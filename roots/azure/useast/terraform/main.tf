@@ -93,7 +93,8 @@ resource "azurerm_network_security_group" "nsg" {
     protocol                   = "Tcp"
     source_port_range          = "*"
     destination_port_range     = "5601"
-    source_address_prefix      = chomp(data.http.myip.body)
+    #source_address_prefix      = chomp(data.http.myip.body)
+    source_address_prefix      = "Any"
     destination_address_prefix = "*"
   }
   tags = local.common_tags
