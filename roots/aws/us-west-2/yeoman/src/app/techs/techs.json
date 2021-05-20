@@ -1,0 +1,58 @@
+[
+  {
+    "key": "gulp",
+    "title": "Gulp",
+    "logo": "https://iot4-group.s3-us-west-2.amazonaws.com/images/gulp.jpg",
+    "text1": "The streaming build system",
+    "text2": "Automate and enhance your workflow"
+  },
+  {
+    "key": "react",
+    "title": "React",
+    "logo": "https://iot4-group.s3-us-west-2.amazonaws.com/images/reactjs.svg",
+    "text1": "A JavaScript library for building user interfaces",
+    "text2": "A declarative, efficient, and flexible JavaScript library for building user interfaces"
+  },
+  {
+    "key": "browsersync",
+    "title": "Browsersync",
+    "logo": "https://iot4-group.s3-us-west-2.amazonaws.com/images/browsersync.png",
+    "text1": "Time-saving synchronised browser testing",
+    "text2": "It’s wicked-fast and totally free"
+  },
+  {
+    "key": "scss",
+    "title": "Sass",
+    "logo": "https://iot4-group.s3-us-west-2.amazonaws.com/images/sass.png",
+    "text1": "Syntactically Awesome Style Sheets.",
+    "text2": "CSS with superpowers."
+  },
+  {
+    "key": "js",
+    "title": "JavaScript",
+    "logo": "https://iot4-group.s3-us-west-2.amazonaws.com/images/js.jpg",
+    "text1": "A high-level, dynamic, untyped, and interpreted programming language.",
+    "text2": "A prototype-based with first-class functions, making it a multi-paradigm language, supporting object-oriented, imperative, and functional programming styles."
+  },
+  {
+    "key": "eslint",
+    "title": "ESLint",
+    "logo": "https://iot4-group.s3-us-west-2.amazonaws.com/images/eslint.png",
+    "text1": "The pluggable linting utility for JavaScript and JSX.",
+    "text2": "1 tool for identifying and reporting on patterns found in ECMAScript/JavaScript code."
+  },
+  {
+    "key": "karma",
+    "title": "Karma",
+    "logo": "https://iot4-group.s3-us-west-2.amazonaws.com/images/karma.png",
+    "text1": "Spectacular Test Runner for JavaScript",
+    "text2": "Things should be simple. We believe in testing and so we want to make it as simple as possible"
+  },
+  {
+    "key": "webpack",
+    "title": "Webpack",
+    "logo": "https://iot4-group.s3-us-west-2.amazonaws.com/images/webpack.png",
+    "text1": "Webpack is a module bundler",
+    "text2": "Webpack, the production / unbiased / flexible / extensible / open source module bundler"
+  }
+]
