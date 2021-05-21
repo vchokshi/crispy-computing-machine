@@ -12,3 +12,7 @@ Vagrant Sandbox
 `docker-compose up -d` should raise these boxes. Bookmarks as follows:
 http://192.168.13.25/login.php
 
+# Github Actions
+
+packer-builder.yml builds images through github actions
+
