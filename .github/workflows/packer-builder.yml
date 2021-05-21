@@ -13,9 +13,12 @@ on:
 
 jobs:
   pr_load:
+    needs: comment
     name: Load Branch Details Outside Container
     if: |
-      startsWith(github.event.comment.body, 'packer')
+      ( endsWith(github.event.comment.body, 'build') ||
+      endsWith(github.event.comment.body, 'dev') ||
+      endsWith(github.event.comment.body, 'prod') )
       && startsWith(github.event.issue.pull_request.url, 'https://')
     outputs:
       pr_branch: ${{ steps.load-pr.outputs.branch  }}
@@ -58,7 +61,7 @@ jobs:
     if: |
       endsWith(github.event.comment.body, 'build dev')
       && startsWith(github.event.issue.pull_request.url, 'https://')
-    needs: [pr_load, comment]
+    needs: [pr_load]
     runs-on: ubuntu-latest
     container:
       ##Using packer light which is tied to latest, currently at 1.7.2
@@ -69,16 +72,16 @@ jobs:
         with:
           ref: ${{ needs.pr_load.outputs.pr_branch }}
       - name: Run Packer Build
+        id: build
         run: cd $GITHUB_WORKSPACE && sh scripts/packer-builder.sh ${{ github.event.comment.body}}
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.PACKER_BUILD_AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.PACKER_BUILD_AWS_SECRET_ACCESS_KEY }}
           AWS_DEFAULT_REGION: us-west-2
-        continue-on-error: true
       - name: Artifact upload
         uses: actions/upload-artifact@v2
         with:
-          name: manifest
+          name: dev_manifest
           path: ${{ github.workspace }}/packer-manifest.json
 
   prod_builder:
@@ -87,7 +90,7 @@ jobs:
       ( endsWith(github.event.comment.body, 'build') ||
       endsWith(github.event.comment.body, 'build prod') )
       && startsWith(github.event.issue.pull_request.url, 'https://')
-    needs: [pr_load, comment]
+    needs: [pr_load]
     environment: prod
     runs-on: ubuntu-latest
     container:
@@ -99,16 +102,16 @@ jobs:
         with:
           ref: ${{ needs.pr_load.outputs.pr_branch }}
       - name: Run Packer Build
+        id: build
         run: cd $GITHUB_WORKSPACE && sh scripts/packer-builder.sh ${{ github.event.comment.body}}
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.PACKER_BUILD_AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.PACKER_BUILD_AWS_SECRET_ACCESS_KEY }}
           AWS_DEFAULT_REGION: us-west-2
-        continue-on-error: true
       - name: Artifact upload 
         uses: actions/upload-artifact@v2
         with:
-          name: manifest
+          name: prod_manifest
           path: ${{ github.workspace }}/packer-manifest.json
 
   comment:
@@ -152,16 +155,19 @@ jobs:
             -H "Authorization: token $GITHUB_TOKEN" \
             -d '{"body":"${{ env.GITHUB_COMMENT}} "}'
 
-  build_output:
-    name: Code Build Output
-    needs: [dev_builder, prod_builder]
+  prod_build_output:
+    name: Prod Code Build Output
+    environment: prod
+    needs: [prod_builder]
     runs-on: ubuntu-latest
     steps:
       - name: Successful Build Artifact download 
+        if: needs.prod_builder.result == 'success' 
         uses: actions/download-artifact@v2
         with:
-          name: manifest
+          name: prod_manifest
       - name: Get the artifact ids
+        if: needs.prod_builder.result == 'success' 
         id: result
         run: >
           echo "::set-output name=artifact_id::$(jq -r
@@ -170,45 +176,66 @@ jobs:
           | map(split(":") | "\(.[1]) (\(.[0]))")
           | join("\\n")'
           ./packer-manifest.json)"
-      - name: Add comment on Builder Success
+      - name: Add comment on Production Builder Success
+        if: needs.prod_builder.result == 'success' 
         env:
           URL: ${{ github.event.issue.comments_url }}
           GITHUB_TOKEN: ${{ secrets.FOE_PAT }}
           API_VERSION: "application/vnd.github.v3.json"
-          GITHUB_COMMENT: "Image will be marked approved and distributed on PR approval! :tada:"
+          GITHUB_COMMENT: "Please fixup and submit you PR for approval. :tada:"
         run: |
           curl \
             -X POST $URL \
             -H "Accept: $API_VERSION" \
             -H "Content-Type: application/json" \
             -H "Authorization: token $GITHUB_TOKEN" \
-            -d '{"body":"Successfully built AMIs:\n${{ steps.result.outputs.artifact_id }}\n${{ env.GITHUB_COMMENT}} "}'
-      - name: Add comment on Builder Failure
-        if: |
-          needs.dev_builder.result == 'failure'  || 
-          needs.prod_builder.result == 'failure'
+            -d '{"body":"Successfully built AMIs:\n`${{ steps.result.outputs.artifact_id }}`\n\n${{ env.GITHUB_COMMENT}} "}'
+
+  dev_build_output:
+    name: Dev Code Build Output
+    needs: [dev_builder]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Successful Build Artifact download 
+        if: needs.dev_builder.result == 'success' 
+        uses: actions/download-artifact@v2
+        with:
+          name: dev_manifest
+      - name: Get the artifact ids
+        if: needs.dev_builder.result == 'success' 
+        id: result
+        run: >
+          echo "::set-output name=artifact_id::$(jq -r
+          '.builds[0].artifact_id
+          | split(",")
+          | map(split(":") | "\(.[1]) (\(.[0]))")
+          | join("\\n")'
+          ./packer-manifest.json)"
+      - name: Add comment on Development Builder Success
+        if: needs.dev_builder.result == 'success' 
         env:
           URL: ${{ github.event.issue.comments_url }}
           GITHUB_TOKEN: ${{ secrets.FOE_PAT }}
           API_VERSION: "application/vnd.github.v3.json"
-          GITHUB_COMMENT: "Code Build Failed. Please try again."
+          GITHUB_COMMENT: "Try `packer build prod` next! :tada:"
         run: |
           curl \
             -X POST $URL \
             -H "Accept: $API_VERSION" \
             -H "Content-Type: application/json" \
             -H "Authorization: token $GITHUB_TOKEN" \
-            -d '{"body":"${{ env.GITHUB_COMMENT}} "}'
+            -d '{"body":"Successfully built AMIs:\n`${{ steps.result.outputs.artifact_id }}`\n\n${{ env.GITHUB_COMMENT}} "}'
 
   approve:
     name: AMI Image Approval
+    needs: prod_builder
     runs-on: ubuntu-latest
     if: |
       github.event_name == 'pull_request' && 
       github.event.action == 'closed' &&
       github.event.merged == 'true'
     steps:
-      - name: Approve and Distribute
+      - name: Approve 
         run: |
           set -eu
           IMAGE_FILTER=${{ github.head_ref }}
@@ -224,19 +251,30 @@ jobs:
             )
             if [ $ami != "None" ]; then
               res=$(aws ec2 create-tags --resources $ami --region $r \
-                --tags Key=approval_status,Value=approved
-              )
-              share=$(aws lambda invoke \
-                --region $r \
-                --function-name=ami_share \
-                --invocation_type Event \
-                --cli-binary-format raw-in-base64-out \
-                -- payload '{"ImageId": $ami}' \
-                response.json
-              )
+                --tags Key=approval_status,Value=approved)
             fi
           done
-          
+      - name: Add comment AMI Image Approval Success
+        env:
+          URL: ${{ github.event.issue.comments_url }}
+          GITHUB_TOKEN: ${{ secrets.FOE_PAT }}
+          API_VERSION: "application/vnd.github.v3.json"
+        run: |
+          curl \
+            -X POST $URL \
+            -H "Accept: $API_VERSION" \
+            -H "Content-Type: application/json" \
+            -H "Authorization: token $GITHUB_TOKEN" \
+            -d '{"body":"Successfully approved AMIs."}' 
+  distribution:
+    name: AMI Image Distribution
+    needs: approve
+    runs-on: ubuntu-latest
+    steps:
+      - name: Dump Context
+        env:
+          GITHUB_CONTEXT: ${{ toJSON(github) }}
+        run: echo "$GITHUB_CONTEXT"
   exit:
     name: Complete the Workflow
     needs: approve
