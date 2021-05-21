@@ -111,22 +111,25 @@ jobs:
           name: manifest
           path: ${{ github.workspace }}/packer-manifest.json
 
-  helper_builder:
-    name: Helper Builder
+  comment:
+    name: Comment Init
     if: |
-      endsWith(github.event.comment.body, 'build -h') &&
+      github.event_name == 'issue_comment' &&
+      startsWith(github.event.comment.body, 'packer') &&
       startsWith(github.event.issue.pull_request.url, 'https://')
-    needs: [pr_load, comment]
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Code From PR Branch
+        if: endsWith(github.event.comment.body, 'build -h')
         uses: actions/checkout@v2
       - name: Run Packer Build -h
+        if: endsWith(github.event.comment.body, 'build -h')
         id: helper_build
         run: |
           cd $GITHUB_WORKSPACE && 
           sh scripts/packer-builder.sh packer build -h > help.txt
       - name: Read in the help file
+        if: endsWith(github.event.comment.body, 'build -h')
         id: sanitized_help
         run: | 
           HELP=$(cat ./help.txt)
@@ -135,6 +138,7 @@ jobs:
           HELP="${HELP//$'\t'/'\t'}"
           echo "::set-output name=help::$(echo "$HELP")"
       - name: Add comment on Builder Helper
+        if: endsWith(github.event.comment.body, 'build -h')
         env:
           URL: ${{ github.event.issue.comments_url }}
           GITHUB_TOKEN: ${{ secrets.FOE_PAT }}
@@ -147,28 +151,6 @@ jobs:
             -H "Content-Type: text/plain" \
             -H "Authorization: token $GITHUB_TOKEN" \
             -d '{"body":"${{ env.GITHUB_COMMENT}} "}'
-
-  comment:
-    name: Comment Init
-    if: |
-      github.event_name == 'issue_comment' &&
-      startsWith(github.event.comment.body, 'packer') &&
-      startsWith(github.event.issue.pull_request.url, 'https://')
-    runs-on: ubuntu-latest
-    steps:
-      - name: Comment the PR on Start
-        env:
-          URL: ${{ github.event.issue.comments_url }}
-          GITHUB_TOKEN: ${{ secrets.FOE_PAT }}
-          API_VERSION: "application/vnd.github.v3.json"
-          GITHUB_COMMENT: "Starting Packer Build"
-        run: |
-          curl \
-            -X POST $URL \
-            -H "Accept: $API_VERSION" \
-            -H "Content-Type: application/json" \
-            -H "Authorization: token $GITHUB_TOKEN" \
-            -d '{"body":"${{ env.GITHUB_COMMENT}}"}'
 
   build_output:
     name: Code Build Output
