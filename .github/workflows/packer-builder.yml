@@ -108,9 +108,10 @@ jobs:
           name: manifest
           path: ${{ github.workspace }}/packer-manifest.json
 
-  other_builder:
+  helper_builder:
     name: Helper Builder
     if: |
+      endsWith(github.event.comment.body, 'build -h')
       startsWith(github.event.issue.pull_request.url, 'https://')
     needs: [pr_load, comment]
     runs-on: ubuntu-latest
@@ -118,7 +119,7 @@ jobs:
       - name: Checkout Code From PR Branch
         uses: actions/checkout@v2
       - name: Run Packer Build -h
-        id: other_build
+        id: helper_build
         run: |
           cd $GITHUB_WORKSPACE && 
           sh scripts/packer-builder.sh packer build -h > help.txt
@@ -153,7 +154,7 @@ jobs:
   build_output:
     name: Code Build Output
     if: always()
-    needs: [dev_builder, prod_builder, other_builder]
+    needs: [dev_builder, prod_builder, helper_builder]
     runs-on: ubuntu-latest
     steps:
       - name: Successful Build Artifact download 
@@ -164,18 +165,25 @@ jobs:
         with:
           name: manifest
       - name: Get the artifact ids
-        if: needs.dev_builder.result == 'success' || needs.prod_builder.result == 'success'
-        id: manifest
-        run: |
-          echo "::set-output name=artifact_id::$(jq -r '.builds[0].artifact_id|split(":")[1]' ./packer-manifest.json)"
+        if: |
+          needs.dev_builder.result == 'success' || 
+          needs.prod_builder.result == 'success'
+        id: result
+        run: >
+          echo "::set-output name=artifact_id::$(jq -r
+          '.builds[0].artifact_id
+          | split(",")
+          | map(split(":") | "\(.[1]) (\(.[0]))")
+          | join("\\n")'
+          ./packer-manifest.json)"
       - name: Successful Help Text download 
-        if: needs.other_builder.result == 'success' 
+        if: needs.helper_builder.result == 'success' 
         uses: actions/download-artifact@v2
         with:
           name: help
       - name: Read in the help file
         id: sanitized_help
-        if: needs.other_builder.result == 'success'
+        if: needs.helper_builder.result == 'success'
         run: | 
           HELP=$(cat ./help.txt)
           HELP="${HELP//$'%'/''}"
@@ -184,7 +192,9 @@ jobs:
           HELP="${HELP//$'\t'/'  '}"
           echo "::set-output name=help::$(echo "$HELP")"
       - name: Add comment on Builder Success
-        if: needs.dev_builder.result == 'success' || needs.prod_builder.result == 'success'
+        if: |
+          needs.dev_builder.result == 'success' || 
+          needs.prod_builder.result == 'success'
         env:
           URL: ${{ github.event.issue.comments_url }}
           GITHUB_TOKEN: ${{ secrets.FOE_PAT }}
@@ -196,9 +206,9 @@ jobs:
             -H "Accept: $API_VERSION" \
             -H "Content-Type: application/json" \
             -H "Authorization: token $GITHUB_TOKEN" \
-            -d '{"body":"ImageId ${{ steps.manifest.outputs.artifact_id }} successfully built. ${{ env.GITHUB_COMMENT}} "}'
+            -d '{"body":"Successfully built AMIs:\n${{ steps.result.outputs.artifact_id }}\n${{ env.GITHUB_COMMENT}} "}'
       - name: Add comment on Builder Helper
-        if: needs.other_builder.result == 'success' 
+        if: needs.helper_builder.result == 'success' 
         env:
           URL: ${{ github.event.issue.comments_url }}
           GITHUB_TOKEN: ${{ secrets.FOE_PAT }}
@@ -216,7 +226,7 @@ jobs:
         if: |
           needs.dev_builder.result == 'failure'  || 
           needs.prod_builder.result == 'failure' ||
-          needs.other_builder.result == 'failure' 
+          needs.helper_builder.result == 'failure' 
         env:
           URL: ${{ github.event.issue.comments_url }}
           GITHUB_TOKEN: ${{ secrets.FOE_PAT }}
