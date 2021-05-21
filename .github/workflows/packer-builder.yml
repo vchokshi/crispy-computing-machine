@@ -128,7 +128,6 @@ jobs:
           sh scripts/packer-builder.sh packer build -h > help.txt
       - name: Read in the help file
         id: sanitized_help
-        if: needs.helper_builder.result == 'success'
         run: | 
           HELP=$(cat ./help.txt)
           HELP="${HELP//$'\n'/'\n'}"
