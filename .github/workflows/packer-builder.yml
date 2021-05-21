@@ -13,9 +13,13 @@ on:
 
 jobs:
   pr_load:
+    needs: comment
     name: Load Branch Details Outside Container
     if: |
-      startsWith(github.event.comment.body, 'packer')
+      startsWith(github.event.comment.body, 'packer') &&
+      ( endsWith(github.event.comment.body, 'build') ||
+      endsWith(github.event.comment.body, 'dev') ||
+      endsWith(github.event.comment.body, 'prod') )
       && startsWith(github.event.issue.pull_request.url, 'https://')
     outputs:
       pr_branch: ${{ steps.load-pr.outputs.branch  }}
@@ -58,7 +62,7 @@ jobs:
     if: |
       endsWith(github.event.comment.body, 'build dev')
       && startsWith(github.event.issue.pull_request.url, 'https://')
-    needs: [pr_load, comment]
+    needs: [pr_load]
     runs-on: ubuntu-latest
     container:
       ##Using packer light which is tied to latest, currently at 1.7.2
@@ -87,7 +91,7 @@ jobs:
       ( endsWith(github.event.comment.body, 'build') ||
       endsWith(github.event.comment.body, 'build prod') )
       && startsWith(github.event.issue.pull_request.url, 'https://')
-    needs: [pr_load, comment]
+    needs: [pr_load]
     environment: prod
     runs-on: ubuntu-latest
     container:
@@ -152,9 +156,10 @@ jobs:
             -H "Authorization: token $GITHUB_TOKEN" \
             -d '{"body":"${{ env.GITHUB_COMMENT}} "}'
 
-  build_output:
-    name: Code Build Output
-    needs: [dev_builder, prod_builder]
+  prod_build_output:
+    name: Prod Code Build Output
+    environment: prod
+    needs: [prod_builder]
     runs-on: ubuntu-latest
     steps:
       - name: Successful Build Artifact download 
@@ -170,7 +175,7 @@ jobs:
           | map(split(":") | "\(.[1]) (\(.[0]))")
           | join("\\n")'
           ./packer-manifest.json)"
-      - name: Add comment on Builder Success
+      - name: Add comment on Production Builder Success
         env:
           URL: ${{ github.event.issue.comments_url }}
           GITHUB_TOKEN: ${{ secrets.FOE_PAT }}
@@ -182,11 +187,46 @@ jobs:
             -H "Accept: $API_VERSION" \
             -H "Content-Type: application/json" \
             -H "Authorization: token $GITHUB_TOKEN" \
-            -d '{"body":"Successfully built AMIs:\n${{ steps.result.outputs.artifact_id }}\n${{ env.GITHUB_COMMENT}} "}'
+            -d '{"body":"Successfully built AMIs:\n${{ steps.result.outputs.artifact_id }}\n\n${{ env.GITHUB_COMMENT}} "}'
+
+  dev_build_output:
+    name: Dev Code Build Output
+    needs: [dev_builder]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Successful Build Artifact download 
+        uses: actions/download-artifact@v2
+        with:
+          name: manifest
+      - name: Get the artifact ids
+        id: result
+        run: >
+          echo "::set-output name=artifact_id::$(jq -r
+          '.builds[0].artifact_id
+          | split(",")
+          | map(split(":") | "\(.[1]) (\(.[0]))")
+          | join("\\n")'
+          ./packer-manifest.json)"
+      - name: Add comment on Development Builder Success
+        env:
+          URL: ${{ github.event.issue.comments_url }}
+          GITHUB_TOKEN: ${{ secrets.FOE_PAT }}
+          API_VERSION: "application/vnd.github.v3.json"
+          GITHUB_COMMENT: "Image will be marked approved and distributed on PR approval! :tada:"
+        run: |
+          curl \
+            -X POST $URL \
+            -H "Accept: $API_VERSION" \
+            -H "Content-Type: application/json" \
+            -H "Authorization: token $GITHUB_TOKEN" \
+            -d '{"body":"Successfully built AMIs:\n${{ steps.result.outputs.artifact_id }}\n\n${{ env.GITHUB_COMMENT}} "}'
+
+  failure_handler:
+    name: Failure Handler
+    runs-on: ubuntu-latest
+    if: failure()
+    steps:
       - name: Add comment on Builder Failure
-        if: |
-          needs.dev_builder.result == 'failure'  || 
-          needs.prod_builder.result == 'failure'
         env:
           URL: ${{ github.event.issue.comments_url }}
           GITHUB_TOKEN: ${{ secrets.FOE_PAT }}
