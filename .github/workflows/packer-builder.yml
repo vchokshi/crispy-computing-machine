@@ -205,7 +205,7 @@ jobs:
       - name: Add comment on Builder Failure
         if: |
           needs.dev_builder.result == 'failure'  || 
-          needs.prod_builder.result == 'failure' ||
+          needs.prod_builder.result == 'failure'
         env:
           URL: ${{ github.event.issue.comments_url }}
           GITHUB_TOKEN: ${{ secrets.FOE_PAT }}
