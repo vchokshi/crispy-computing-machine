@@ -42,7 +42,9 @@ resource "aws_lambda_permission" "py" {
 
 
 variable "app_version" {
+  default = ""
 }
+
 
 resource "aws_lambda_function" "hellojs" {
    function_name = "hellojs"

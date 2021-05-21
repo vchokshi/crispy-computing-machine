@@ -13,12 +13,15 @@ variable "www" {
 
 variable "project_name" {
   description = "Please Enter The Project Name"
+  default = "viper"
 }
 
 variable "public_key_path" {
   description = "Path to the SSH public key"
+  default = "~/.ssh/id_rsa"
 }
 
 variable "key_name" {
   description = "Desired name of AWS key pair"
+  default = "id_rsa"
 }
