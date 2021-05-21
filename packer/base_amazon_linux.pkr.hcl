@@ -114,17 +114,17 @@ build {
     "source.amazon-ebs.ami",
   ]
 
-  provisioner "file" {
-    sources = [
-      "${local.repo_root}/ansible",
-      "${local.repo_root}/scripts"
-    ]
-    destination = "/tmp/"
-  }
+  #provisioner "file" {
+    #sources = [
+      #"${local.repo_root}/ansible",
+      #"${local.repo_root}/scripts"
+    #]
+    #destination = "/tmp/"
+  #}
 
-  provisioner "shell" {
-    script          = "${local.repo_root}/scripts/standard_image_setup/bootstrap.sh"
-    execute_command = "chmod +x {{ .Path }}; {{ .Vars }} sudo -E -S /bin/bash '{{ .Path }}'"
-  }
+  #provisioner "shell" {
+    #script          = "${local.repo_root}/scripts/standard_image_setup/bootstrap.sh"
+    #execute_command = "chmod +x {{ .Path }}; {{ .Vars }} sudo -E -S /bin/bash '{{ .Path }}'"
+  #}
   post-processor "manifest" {}
 }
