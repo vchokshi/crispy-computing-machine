@@ -1,25 +1,27 @@
-data "aws_region" "current" {}
+data "aws_region" "current" {
+}
 
-data "aws_caller_identity" "current" {}
+data "aws_caller_identity" "current" {
+}
 
 output "account_id" {
-  value = "${data.aws_caller_identity.current.account_id}"
+  value = data.aws_caller_identity.current.account_id
 }
 
 output "caller_arn" {
-  value = "${data.aws_caller_identity.current.arn}"
+  value = data.aws_caller_identity.current.arn
 }
 
 output "caller_user" {
-  value = "${data.aws_caller_identity.current.user_id}"
+  value = data.aws_caller_identity.current.user_id
 }
 
 data "http" "ip" {
   url = "http://icanhazip.com"
 }
 
-output "My IP Zone" {
-  value       = "${data.http.ip.url}"
+output "My_IP_Zone" {
+  value = data.http.ip.url
 }
 
 data "aws_route53_zone" "public" {
@@ -27,14 +29,13 @@ data "aws_route53_zone" "public" {
   private_zone = false
 }
 
-output "DNS Zone" {
-  value       = "${data.aws_route53_zone.public.name}"
+output "DNS_Zone" {
+  value = data.aws_route53_zone.public.name
 }
 
 data "aws_ami" "amazon" {
-  most_recent      = true
-  owners = ["amazon"]
-
+  most_recent = true
+  owners      = ["amazon"]
 
   filter {
     name   = "name"
@@ -44,48 +45,42 @@ data "aws_ami" "amazon" {
     name   = "virtualization-type"
     values = ["hvm"]
   }
-
-}
-output "Amazon AMI" {
-  value       = "${data.aws_ami.amazon.id}"
 }
 
+output "Amazon_AMI" {
+  value = data.aws_ami.amazon.id
+}
 
 data "aws_ami" "ubuntu" {
-  most_recent      = true
-  owners = ["099720109477"] ## Canonical
+  most_recent = true
+  owners      = ["099720109477"] ## Canonical
 
-
-   filter {
-        name   = "name"
-        values = ["ubuntu/images/hvm-ssd/ubuntu-xenial-16.04-amd64-server-*"]
-    }
+  filter {
+    name   = "name"
+    values = ["ubuntu/images/hvm-ssd/ubuntu-xenial-16.04-amd64-server-*"]
+  }
   filter {
     name   = "virtualization-type"
     values = ["hvm"]
   }
-
-}
-output "Ubuntu AMI" {
-  value       = "${data.aws_ami.ubuntu.id}"
 }
 
+output "Ubuntu_AMI" {
+  value = data.aws_ami.ubuntu.id
+}
 
 #data "aws_ami" "windows" {
-  #most_recent      = true
-  #owners = ["461346954234"] ##Microsoft
-
-
-   #filter {
-        #name   = "name"
-        #values = ["Microsoft*Windows*2019*"]
-    #}
-  #filter {
-    #name   = "virtualization-type"
-    #values = ["hvm"]
-  #}
-
+#most_recent      = true
+#owners = ["461346954234"] ##Microsoft
+#filter {
+#name   = "name"
+#values = ["Microsoft*Windows*2019*"]
+#}
+#filter {
+#name   = "virtualization-type"
+#values = ["hvm"]
+#}
 #}
 #output "Windows AMI" {
-  #value       = "${data.aws_ami.windows.id}"
+#value       = "${data.aws_ami.windows.id}"
 #}

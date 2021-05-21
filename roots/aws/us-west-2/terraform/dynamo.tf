@@ -7,7 +7,8 @@ resource "aws_dynamodb_table" "terraform_state_lock" {
     name = "LockID"
     type = "S"
   }
-  tags {
-    Name = "${var.project_name}"
+  tags = {
+    Name = var.project_name
   }
 }
+
