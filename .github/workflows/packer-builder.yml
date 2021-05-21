@@ -1,7 +1,6 @@
 name: Packer Builder
 
 on:
-  push:
   issue_comment:
     types: [created]
 
