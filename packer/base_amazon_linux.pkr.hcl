@@ -69,7 +69,7 @@ source "amazon-ebs" "ami" {
     #"ca-central-1" : "alias/packer"
     #"eu-central-1" : "alias/packer"
     #"eu-west-1" : "alias/packer"
-    #"us-east-1" : "alias/packer"
+    "us-east-1" : "alias/packer"
     #"us-east-2" : "alias/packer"
     #"us-west-1" : "alias/packer"
     "us-west-2" : "alias/packer"
@@ -97,7 +97,7 @@ source "amazon-ebs" "ami" {
     #"ca-central-1",
     #"eu-central-1",
     #"eu-west-1",
-    #"us-east-1",
+    "us-east-1",
     #"us-east-2",
     #"us-west-1",
     "us-west-2"
