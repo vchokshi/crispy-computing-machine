@@ -10,6 +10,7 @@ on:
     paths:
       - 'packer/**/*.json'
       - 'packer/**/*.hcl'
+  workflow_dispatch:
 
 jobs:
   pr_load:
@@ -231,8 +232,9 @@ jobs:
     needs: prod_builder
     runs-on: ubuntu-latest
     if: |
-      github.event_name == 'pull_request' && 
-      github.event.action == 'closed' &&
+      (github.event_name == 'pull_request' && 
+      github.event.action == 'closed' && ) ||
+      github.event_name == 'workflow_dispatch'
     steps:
       - name: Dump Context
         env:
