@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -eux
+set -eu
 
 IMAGE_FILTER="$(git branch --show-current)"
 
@@ -22,6 +22,7 @@ for r in ${REGIONS[@]}; do
 		res=$(aws ec2 create-tags --resources $ami --region $r \
 			--tags Key=approval_status,Value=approved
 		)
+		echo "Sharing the ami $ami"
 		share=$(aws lambda invoke \
 			--region $r \
                 	--function-name=ami_share \
@@ -29,6 +30,6 @@ for r in ${REGIONS[@]}; do
                 	--cli-binary-format raw-in-base64-out \
                 	-- payload '{"ImageId": $ami}' \
                 	response.json
-              )
+		)
 	fi
 done
