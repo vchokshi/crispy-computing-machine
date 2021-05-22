@@ -11,8 +11,8 @@ resource "aws_db_instance" "prod" {
   engine_version       = "5.7"
   instance_class       = "db.t2.small"
   name                 = "iot4"
-  username             = "root"
-  password             = "XEbkeitNuu9DUPrVXrFzAyoE"
+  username             = ""
+  password             = ""
   parameter_group_name = "default.mysql5.7"
   multi_az             = true
   db_subnet_group_name = "${aws_db_subnet_group.iot4.name}"
