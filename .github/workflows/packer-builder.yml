@@ -86,7 +86,6 @@ jobs:
           path: ${{ github.workspace }}/packer-manifest.json
 
   prod_builder:
-    needs: linter
     name: Production Builder
     if: |
       ( endsWith(github.event.comment.body, 'build') ||
