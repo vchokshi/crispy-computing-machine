@@ -230,33 +230,11 @@ jobs:
   approve:
     name: AMI Image Approval
     environment: prod
-    needs: prod_builder
     runs-on: ubuntu-latest
     if: github.event_name == 'workflow_dispatch'
     steps:
-      - name: Dump Context
-        env:
-          GITHUB_CONTEXT: ${{ toJSON(github) }}
-        run: echo "$GITHUB_CONTEXT"
       - name: Approve 
-        run: |
-          set -eu
-          IMAGE_FILTER=${{ github.head_ref }}
-          if ! command -v aws &> /dev/null; then
-            echo "aws not found. Exiting." && exit 1
-          fi
-          REGIONS=($(aws ec2 describe-regions --query 'Regions[*].[RegionName]' --output text ))
-          for r in ${REGIONS[@]}; do
-            ami=$(aws ec2 describe-images --region $r \
-              --filters="Name=tag:pr_branch,Values=$IMAGE_FILTER" \
-              --query 'sort_by(Images,&CreationDate)[-1].[ImageId]' \
-              --output text
-            )
-            if [ $ami != "None" ]; then
-              res=$(aws ec2 create-tags --resources $ami --region $r \
-                --tags Key=approval_status,Value=approved)
-            fi
-          done
+        run: cd $GITHUB_WORKSPACE && bash scripts/packer-approver.sh
       - name: Add comment AMI Image Approval Success
         env:
           URL: ${{ github.event.issue.comments_url }}
