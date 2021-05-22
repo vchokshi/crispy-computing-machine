@@ -16,7 +16,6 @@ jobs:
     needs: comment
     name: Load Branch Details Outside Container
     if: |
-      startsWith(github.event.comment.body, 'packer') &&
       ( endsWith(github.event.comment.body, 'build') ||
       endsWith(github.event.comment.body, 'dev') ||
       endsWith(github.event.comment.body, 'prod') )
@@ -127,13 +126,11 @@ jobs:
         if: endsWith(github.event.comment.body, 'build -h')
         uses: actions/checkout@v2
       - name: Run Packer Build -h
-        if: endsWith(github.event.comment.body, 'build -h')
         id: helper_build
         run: |
           cd $GITHUB_WORKSPACE && 
           sh scripts/packer-builder.sh packer build -h > help.txt
       - name: Read in the help file
-        if: endsWith(github.event.comment.body, 'build -h')
         id: sanitized_help
         run: | 
           HELP=$(cat ./help.txt)
@@ -142,7 +139,6 @@ jobs:
           HELP="${HELP//$'\t'/'\t'}"
           echo "::set-output name=help::$(echo "$HELP")"
       - name: Add comment on Builder Helper
-        if: endsWith(github.event.comment.body, 'build -h')
         env:
           URL: ${{ github.event.issue.comments_url }}
           GITHUB_TOKEN: ${{ secrets.FOE_PAT }}
