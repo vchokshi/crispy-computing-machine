@@ -62,7 +62,7 @@ jobs:
     if: |
       endsWith(github.event.comment.body, 'build dev')
       && startsWith(github.event.issue.pull_request.url, 'https://')
-    needs: [pr_load, linter]
+    needs: [pr_load]
     runs-on: ubuntu-latest
     container:
       ##Using packer light which is tied to latest, currently at 1.7.2
@@ -91,7 +91,7 @@ jobs:
       ( endsWith(github.event.comment.body, 'build') ||
       endsWith(github.event.comment.body, 'build prod') )
       && startsWith(github.event.issue.pull_request.url, 'https://')
-    needs: [pr_load, linter]
+    needs: [pr_load]
     environment: prod
     runs-on: ubuntu-latest
     container:
