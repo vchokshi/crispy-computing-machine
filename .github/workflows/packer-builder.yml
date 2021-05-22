@@ -242,9 +242,9 @@ jobs:
           AWS_DEFAULT_REGION: us-west-2
         shell: bash
         run: cd $GITHUB_WORKSPACE && bash scripts/packer-approver.sh
-
   distribution:
     name: AMI Image Distribution
+    environment: prod
     needs: approve
     runs-on: ubuntu-latest
     steps:
@@ -252,21 +252,13 @@ jobs:
         env:
           GITHUB_CONTEXT: ${{ toJSON(github) }}
         run: echo "$GITHUB_CONTEXT"
-  exit:
-    name: Complete the Workflow
-    needs: approve
-    runs-on: ubuntu-latest
-    steps:
-      - name: Goodbye from the PR
+      - name: Download the manifest file
+        uses: actions/download-artifact@v2
+        with:
+          name: prod_manifest
         env:
-          URL: ${{ github.event.pull_request._links.comments.href }}
-          GITHUB_TOKEN: ${{ secrets.FOE_PAT }}
-          API_VERSION: "application/vnd.github.v3.json"
-          GITHUB_COMMENT: "Hasta La Vista, Baby."
-        run: |
-          curl \
-            -X POST $URL \
-            -H "Accept: $API_VERSION" \
-            -H "Content-Type: application/json" \
-            -H "Authorization: token $GITHUB_TOKEN" \
-            -d '{"body":"${{ env.GITHUB_COMMENT}}"}'
+          AWS_ACCESS_KEY_ID: ${{ secrets.PACKER_BUILD_AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.PACKER_BUILD_AWS_SECRET_ACCESS_KEY }}
+          AWS_DEFAULT_REGION: us-west-2
+        shell: bash
+        run: cd $GITHUB_WORKSPACE && bash scripts/packer-distributor.sh
