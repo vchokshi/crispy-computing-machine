@@ -58,6 +58,7 @@ jobs:
       r: ${{ steps.lint.outputs.result }}
   
   dev_builder:
+    needs: linter
     name: Development Builder
     if: |
       endsWith(github.event.comment.body, 'build dev')
@@ -86,6 +87,7 @@ jobs:
           path: ${{ github.workspace }}/packer-manifest.json
 
   prod_builder:
+    needs: linter
     name: Production Builder
     if: |
       ( endsWith(github.event.comment.body, 'build') ||
