@@ -233,20 +233,16 @@ jobs:
     runs-on: ubuntu-latest
     if: github.event_name == 'workflow_dispatch'
     steps:
+      - name: Checkout Code From PR Branch
+        uses: actions/checkout@v2
       - name: Approve 
-        run: cd $GITHUB_WORKSPACE && bash scripts/packer-approver.sh
-      - name: Add comment AMI Image Approval Success
         env:
-          URL: ${{ github.event.issue.comments_url }}
-          GITHUB_TOKEN: ${{ secrets.FOE_PAT }}
-          API_VERSION: "application/vnd.github.v3.json"
-        run: |
-          curl \
-            -X POST $URL \
-            -H "Accept: $API_VERSION" \
-            -H "Content-Type: application/json" \
-            -H "Authorization: token $GITHUB_TOKEN" \
-            -d '{"body":"Successfully approved AMIs."}' 
+          AWS_ACCESS_KEY_ID: ${{ secrets.PACKER_BUILD_AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.PACKER_BUILD_AWS_SECRET_ACCESS_KEY }}
+          AWS_DEFAULT_REGION: us-west-2
+        shell: bash
+        run: cd $GITHUB_WORKSPACE && bash scripts/packer-approver.sh
+
   distribution:
     name: AMI Image Distribution
     needs: approve

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -eu
+set -eux
 
 IMAGE_FILTER="$(git branch --show-current)"
 
@@ -23,5 +23,4 @@ for r in ${REGIONS[@]}; do
 			--tags Key=approval_status,Value=approved
 		)
 	fi
-
 done
