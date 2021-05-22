@@ -58,12 +58,11 @@ jobs:
       r: ${{ steps.lint.outputs.result }}
   
   dev_builder:
-    needs: linter
     name: Development Builder
     if: |
       endsWith(github.event.comment.body, 'build dev')
       && startsWith(github.event.issue.pull_request.url, 'https://')
-    needs: [pr_load]
+    needs: [pr_load, linter]
     runs-on: ubuntu-latest
     container:
       ##Using packer light which is tied to latest, currently at 1.7.2
@@ -93,7 +92,7 @@ jobs:
       ( endsWith(github.event.comment.body, 'build') ||
       endsWith(github.event.comment.body, 'build prod') )
       && startsWith(github.event.issue.pull_request.url, 'https://')
-    needs: [pr_load]
+    needs: [pr_load, linter]
     environment: prod
     runs-on: ubuntu-latest
     container:
