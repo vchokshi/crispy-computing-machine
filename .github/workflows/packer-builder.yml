@@ -226,7 +226,6 @@ jobs:
             -H "Content-Type: application/json" \
             -H "Authorization: token $GITHUB_TOKEN" \
             -d '{"body":"Successfully built AMIs:\n`${{ steps.result.outputs.artifact_id }}`\n\n${{ env.GITHUB_COMMENT}} "}'
-
   approve:
     name: AMI Image Approval
     environment: prod
@@ -242,8 +241,9 @@ jobs:
           AWS_DEFAULT_REGION: us-west-2
         shell: bash
         run: cd $GITHUB_WORKSPACE && bash scripts/packer-approver.sh
-  distribution:
-    name: AMI Image Distribution
+
+  sharing:
+    name: AMI Image Sharing
     environment: prod
     needs: approve
     runs-on: ubuntu-latest
@@ -256,9 +256,11 @@ jobs:
         uses: actions/download-artifact@v2
         with:
           name: prod_manifest
+      - name: Share the AMI
+        id: share
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.PACKER_BUILD_AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.PACKER_BUILD_AWS_SECRET_ACCESS_KEY }}
           AWS_DEFAULT_REGION: us-west-2
         shell: bash
-        run: cd $GITHUB_WORKSPACE && bash scripts/packer-distributor.sh
+        run: cd $GITHUB_WORKSPACE && bash scripts/packer-share.sh
