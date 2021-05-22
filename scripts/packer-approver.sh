@@ -22,5 +22,13 @@ for r in ${REGIONS[@]}; do
 		res=$(aws ec2 create-tags --resources $ami --region $r \
 			--tags Key=approval_status,Value=approved
 		)
+		share=$(aws lambda invoke \
+			--region $r \
+                	--function-name=ami_share \
+                	--invocation_type Event \
+                	--cli-binary-format raw-in-base64-out \
+                	-- payload '{"ImageId": $ami}' \
+                	response.json
+              )
 	fi
 done
