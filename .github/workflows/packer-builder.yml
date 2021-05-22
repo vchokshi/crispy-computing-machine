@@ -229,6 +229,7 @@ jobs:
 
   approve:
     name: AMI Image Approval
+    env: prod
     needs: prod_builder
     runs-on: ubuntu-latest
     if: |
