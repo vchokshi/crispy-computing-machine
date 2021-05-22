@@ -233,8 +233,11 @@ jobs:
     if: |
       github.event_name == 'pull_request' && 
       github.event.action == 'closed' &&
-      github.event.merged == 'true'
     steps:
+      - name: Dump Context
+        env:
+          GITHUB_CONTEXT: ${{ toJSON(github) }}
+        run: echo "$GITHUB_CONTEXT"
       - name: Approve 
         run: |
           set -eu
