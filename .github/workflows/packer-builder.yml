@@ -230,7 +230,10 @@ jobs:
     name: AMI Image Approval
     environment: prod
     runs-on: ubuntu-latest
-    if: github.event_name == 'workflow_dispatch'
+    if: |
+      github.event_name == 'issue_comment' &&
+      startsWith(github.event.comment.body, 'homer') &&
+      startsWith(github.event.issue.pull_request.url, 'https://')
     steps:
       - name: Checkout Code From PR Branch
         uses: actions/checkout@v2
@@ -263,4 +266,4 @@ jobs:
           AWS_SECRET_ACCESS_KEY: ${{ secrets.PACKER_BUILD_AWS_SECRET_ACCESS_KEY }}
           AWS_DEFAULT_REGION: us-west-2
         shell: bash
-        run: cd $GITHUB_WORKSPACE && bash scripts/packer-share.sh
+        run: cd $GITHUB_WORKSPACE && ls -l && bash scripts/packer-share.sh
