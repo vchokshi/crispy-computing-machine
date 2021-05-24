@@ -22,21 +22,14 @@ for r in ${REGIONS[@]}; do
 		res=$(aws ec2 create-tags --resources $ami --region $r \
 			--tags Key=approval_status,Value=approved
 		)
-		echo "Sharing the ami $ami in region $r"
-
-		PAYLOAD=$( jq -n \
-                  --arg ami "$ami" \
-                  --arg region "$r" \
-                  '{ImageId: $ami, region: $region}' )
-
-		echo "$PAYLOAD"
-
+		echo "Sharing the ami $ami"
+		PAYLOAD='{"ImageId":"$ami","region":"$r"}'
 		aws lambda invoke \
 			--region us-east-1 \
-			--function-name ami_share \
-			--invocation-type Event\
-			--cli-binary-format raw-in-base64-out\
-			--payload $PAYLOAD\
-			response.json
+                	--function-name ami_share \
+                	--invocation-type Event \
+                	--cli-binary-format raw-in-base64-out \
+			--payload $PAYLOAD \
+                	response.json
 	fi
 done
