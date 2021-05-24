@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -eux
+set -eu
 
 IMAGE_FILTER="$(git branch --show-current)"
 
@@ -22,15 +22,21 @@ for r in ${REGIONS[@]}; do
 		res=$(aws ec2 create-tags --resources $ami --region $r \
 			--tags Key=approval_status,Value=approved
 		)
-		echo "Sharing the ami $ami"
-		PAYLOAD="{'ImageId':$ami}"
-		share=$(aws lambda invoke \
-			--region $r \
-                	--function-name ami_share \
-                	--invocation-type Event \
-                	--cli-binary-format raw-in-base64-out \
-                	--payload \'$PAYLOAD\' \
-                	response.json
-		)
+		echo "Sharing the ami $ami in region $r"
+
+		PAYLOAD=$( jq -n \
+                  --arg ami "$ami" \
+                  --arg region "$r" \
+                  '{ImageId: $ami, region: $region}' )
+
+		echo "$PAYLOAD"
+
+		aws lambda invoke \
+			--region us-east-1 \
+			--function-name ami_share \
+			--invocation-type Event\
+			--cli-binary-format raw-in-base64-out\
+			--payload $PAYLOAD\
+			response.json
 	fi
 done
