@@ -121,7 +121,7 @@ jobs:
       startsWith(github.event.issue.pull_request.url, 'https://')
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout Code From PR Branch
+      - name: Checkout Code Default Branch
         if: endsWith(github.event.comment.body, 'build -h')
         uses: actions/checkout@v2
       - name: Run Packer Build -h
@@ -150,7 +150,7 @@ jobs:
           curl \
             -X POST $URL \
             -H "Accept: $API_VERSION" \
-            -H "Content-Type: text/plain" \
+            -H "Content-Type: application/json" \
             -H "Authorization: token $GITHUB_TOKEN" \
             -d '{"body":"${{ env.GITHUB_COMMENT}} "}'
 
@@ -181,14 +181,14 @@ jobs:
           URL: ${{ github.event.issue.comments_url }}
           GITHUB_TOKEN: ${{ secrets.FOE_PAT }}
           API_VERSION: "application/vnd.github.v3.json"
-          GITHUB_COMMENT: "Please fixup and submit you PR for approval. :tada:"
+          GITHUB_COMMENT: "Well Done! Type `approve_prod` to approve and distribute your new images!. :tada:"
         run: |
           curl \
             -X POST $URL \
             -H "Accept: $API_VERSION" \
             -H "Content-Type: application/json" \
             -H "Authorization: token $GITHUB_TOKEN" \
-            -d '{"body":"Successfully built AMIs:\n`${{ steps.result.outputs.artifact_id }}`\n\n${{ env.GITHUB_COMMENT}} "}'
+            -d '{"body":"Successfully built AMIs:\n${{ steps.result.outputs.artifact_id }}\n\n${{ env.GITHUB_COMMENT}} "}'
 
   dev_build_output:
     name: Dev Code Build Output
@@ -223,7 +223,8 @@ jobs:
             -H "Accept: $API_VERSION" \
             -H "Content-Type: application/json" \
             -H "Authorization: token $GITHUB_TOKEN" \
-            -d '{"body":"Successfully built AMIs:\n`${{ steps.result.outputs.artifact_id }}`\n\n${{ env.GITHUB_COMMENT}} "}'
+            -d '{"body":"Successfully built AMIs:\n${{ steps.result.outputs.artifact_id }}\n\n${{ env.GITHUB_COMMENT}} "}'
+
   dev_approve:
     name: Development AMI Image Approval and Distro
     runs-on: ubuntu-latest
@@ -231,7 +232,6 @@ jobs:
       github.event_name == 'issue_comment' &&
       startsWith(github.event.comment.body, 'approve_dev') &&
       startsWith(github.event.issue.pull_request.url, 'https://')
-    environment: dev
     steps:
       - name: Checkout Code from Master
         uses: actions/checkout@v2
@@ -242,6 +242,7 @@ jobs:
           AWS_DEFAULT_REGION: us-west-2
         shell: bash
         run: cd $GITHUB_WORKSPACE && bash scripts/packer-approver.sh
+
   prod_approve:
     name: Prod AMI Image Approval and Distro
     runs-on: ubuntu-latest

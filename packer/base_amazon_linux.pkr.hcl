@@ -6,11 +6,10 @@ locals {
   output_name  = var.ami_name == null ? local.stamped_name : var.ami_name
 }
 
-variable "subnet_id" {
+variable "vpc_id" {
   type = string
 }
-
-variable "vpc_id" {
+variable "subnet_id" {
   type = string
 }
 
@@ -39,13 +38,17 @@ variable "pr_branch" {
   type        = string
   default     = ""
 }
+variable "pr_sha" {
+  description = "The PR sha for traceability"
+  type        = string
+  default     = ""
+}
 
 source "amazon-ebs" "ami" {
   ami_name = local.output_name
-
   vpc_id = "${var.vpc_id}"
   subnet_id = "${var.subnet_id}"
-  region        = "us-west-2"
+  region        = "us-east-1"
   instance_type = "t2.small"
   run_tags = {
     Name    = "${local.output_name}-builder"
@@ -112,6 +115,7 @@ source "amazon-ebs" "ami" {
     ami_category    = "base"
     approval_status = "testing"
     pr_branch       = "${var.pr_branch}"
+    pr_sha          = "${var.pr_sha}"
   }
 }
 

@@ -14,8 +14,6 @@ if [ $# -eq 0 ]; then echo "No Arguments supplied. Exiting." && usage && exit 1;
 
 if [ $1 != "packer" ]; then echo "This script to be used with packer only. Exiting." && usage && exit 1; fi
 
-MACHINE_READABLE=0
-
 CMD="packer build "
 ENV="prod"
 
@@ -27,12 +25,13 @@ while [ $# -gt 0 ]; do
 	case $1 in
 		-h ) 	usage && exit 0;;
 		dev )  			ENV="dev" ;;
-		prod )  		ENV="prod" ;;
+		prod ) 			ENV="prod" ;;
 		*)	               ;;
 	esac
 	shift 
 done
 
 PR_BRANCH="pr_branch=$(git branch --show-current)"
+PR_SHA="pr_sha=$(git rev-parse --short --verify HEAD)"
 
-$CMD -var $PR_BRANCH -var-file=packer/$ENV.pkrvars.hcl packer/base_amazon_linux.pkr.hcl
+$CMD -var $PR_BRANCH -var $PR_SHA -var-file=packer/$ENV.pkrvars.hcl packer/base_amazon_linux.pkr.hcl

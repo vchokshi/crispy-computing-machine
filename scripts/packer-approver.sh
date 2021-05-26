@@ -1,6 +1,11 @@
 #!/bin/bash
 
-set -eu
+#Usage: bash scripts/packer-approver.sh
+
+# Requires: AWS credentials
+# Depends on: current branch matches AMI tag in AWS
+
+set -eux
 
 IMAGE_FILTER="$(git branch --show-current)"
 
@@ -11,25 +16,24 @@ fi
 REGIONS=($(aws ec2 describe-regions --query 'Regions[*].[RegionName]' --output text ))
 
 for r in ${REGIONS[@]}; do
-	echo "Looking for AMI in region $r with Image Filter $IMAGE_FILTER"
 	ami=$(aws ec2 describe-images --region $r\
 		--filters="Name=tag:pr_branch,Values=$IMAGE_FILTER" \
 		--query 'sort_by(Images,&CreationDate)[-1].[ImageId]' \
 		--output text
 	)
 	if [ $ami != "None" ]; then
-		echo "Found ami $ami"
 		res=$(aws ec2 create-tags --resources $ami --region $r \
 			--tags Key=approval_status,Value=approved
 		)
-		echo "Sharing the ami $ami"
-		PAYLOAD='{"ImageId":"$ami","region":"$r"}'
-		aws lambda invoke \
+		PAYLOAD="{\"imageId\":\"$ami\",\"region\":\"$r\"}"
+		res=$(aws lambda invoke \
 			--region us-east-1 \
                 	--function-name ami_share \
                 	--invocation-type Event \
                 	--cli-binary-format raw-in-base64-out \
 			--payload $PAYLOAD \
-                	response.json
+			response.json)
 	fi
 done
+
+echo "Successfully approved and shared AMIs"
