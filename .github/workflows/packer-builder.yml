@@ -229,8 +229,29 @@ jobs:
             -H "Authorization: token $GITHUB_TOKEN" \
             -d '{"body":"Successfully built AMIs:\n${{ steps.result.outputs.artifact_id }}\n\n${{ env.GITHUB_COMMENT}} "}'
 
+  dev_approve:
+    name: Image Approval and Distribution
+    needs: pr_load 
+    runs-on: ubuntu-latest
+    if: |
+      endsWith(github.event.comment.body, 'approve dev')
+      && startsWith(github.event.issue.pull_request.url, 'https://')
+    environment: dev
+    steps:
+      - name: Checkout Code From PR Branch
+        uses: actions/checkout@v2
+        with:
+          ref: ${{ needs.pr_load.outputs.pr_branch }}
+      - name: Approve 
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.PACKER_BUILD_AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.PACKER_BUILD_AWS_SECRET_ACCESS_KEY }}
+          AWS_DEFAULT_REGION: us-west-2
+        shell: bash
+        run: cd $GITHUB_WORKSPACE && bash scripts/packer-approver.sh
+
   prod_approve:
-    name: Prod AMI Image Approval and Distro
+    name: Image Approval and Distribution
     needs: pr_load 
     runs-on: ubuntu-latest
     if: |
