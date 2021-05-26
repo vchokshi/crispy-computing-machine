@@ -256,8 +256,16 @@ jobs:
       startsWith(github.event.issue.pull_request.url, 'https://')
     environment: prod
     steps:
+      - name: Load PR Details
+        id: load-pr
+        run: |
+          set -eu
+          resp=$(curl -sSf --url ${{ github.event.issue.pull_request.url }} --header 'authorization: Bearer ${{ secrets.GITHUB_TOKEN }}'  --header 'content-type: application/json')
+          branch=$(python3 -c "import sys, json; print(json.load(sys.stdin)['head']['ref'])" <<< "$resp")
+          echo "::set-output name=branch::$branch"
       - name: Checkout Code 
         uses: actions/checkout@v2
+          ref: ${{steps.load-pr.output.branch }}
       - name: Approve 
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.PACKER_BUILD_AWS_ACCESS_KEY_ID }}
