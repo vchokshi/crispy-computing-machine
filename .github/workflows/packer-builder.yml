@@ -181,7 +181,7 @@ jobs:
           URL: ${{ github.event.issue.comments_url }}
           GITHUB_TOKEN: ${{ secrets.FOE_PAT }}
           API_VERSION: "application/vnd.github.v3.json"
-          GITHUB_COMMENT: "Well Done! Type `approve_prod` to approve and distribute your new images!. :tada:"
+          GITHUB_COMMENT: "On PR close, your AMIs will be available. Optional: type `approve_prod` to distribute new images!. :tada:"
         run: |
           curl \
             -X POST $URL \
