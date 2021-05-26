@@ -238,8 +238,9 @@ jobs:
       startsWith(github.event.issue.pull_request.url, 'https://')
     environment: prod
     steps:
-      - name: Checkout Code 
+      - name: Checkout Code From PR Branch
         uses: actions/checkout@v2
+        with:
           ref: ${{ needs.pr_load.outputs.pr_branch }}
       - name: Approve 
         env:
