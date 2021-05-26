@@ -42,7 +42,7 @@ jobs:
       ##Using packer light which is tied to latest, currently at 1.7.2
       image: hashicorp/packer@sha256:523457b5371562c4d9c21621ee85c71c31e7ff53d5ec303a5daf07c55531b84e
     steps:
-      - name: Checkout code from env Branch
+      - name: Checkout the code
         id: checkout
         uses: actions/checkout@v2
         with:
@@ -123,11 +123,9 @@ jobs:
       startsWith(github.event.issue.pull_request.url, 'https://')
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout Code from env Branch
+      - name: Checkout the code
         if: endsWith(github.event.comment.body, 'build -h')
         uses: actions/checkout@v2
-        with:
-          ref: ${{ env.BRANCH  }}
       - name: Run Packer Build -h
         if: endsWith(github.event.comment.body, 'build -h')
         id: helper_build
