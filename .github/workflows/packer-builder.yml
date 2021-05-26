@@ -17,6 +17,7 @@ jobs:
     name: Load Branch Details Outside Container
     if: |
       ( endsWith(github.event.comment.body, 'build') ||
+      endsWith(github.event.comment.body, 'approve') ||
       endsWith(github.event.comment.body, 'dev') ||
       endsWith(github.event.comment.body, 'prod') )
       && startsWith(github.event.issue.pull_request.url, 'https://')
@@ -230,12 +231,12 @@ jobs:
 
   prod_approve:
     name: Prod AMI Image Approval and Distro
-    needs: pr_load
+    needs: pr_load 
     runs-on: ubuntu-latest
     if: |
-      github.event_name == 'issue_comment' &&
-      startsWith(github.event.comment.body, 'approve_prod') &&
-      startsWith(github.event.issue.pull_request.url, 'https://')
+      endsWith(github.event.comment.body, 'approve')
+      endsWith(github.event.comment.body, 'approve prod')
+      && startsWith(github.event.issue.pull_request.url, 'https://')
     environment: prod
     steps:
       - name: Checkout Code From PR Branch
