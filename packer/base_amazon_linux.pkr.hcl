@@ -48,7 +48,7 @@ source "amazon-ebs" "ami" {
   ami_name = local.output_name
   vpc_id = "${var.vpc_id}"
   subnet_id = "${var.subnet_id}"
-  region        = "us-east-1"
+  region        = "us-west-2"
   instance_type = "t2.small"
   run_tags = {
     Name    = "${local.output_name}-builder"
