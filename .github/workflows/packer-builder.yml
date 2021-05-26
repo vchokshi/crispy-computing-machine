@@ -271,7 +271,7 @@ jobs:
   prod_close:
     name: Prod AMI Image Approval and Distro on Close
     runs-on: ubuntu-latest
-     if: |
+    if: |
       github.event_name == 'pull_request' &&
       github.event.action == 'closed' &&
       github.event.merged == 'true'
