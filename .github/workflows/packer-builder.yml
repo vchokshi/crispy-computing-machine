@@ -256,10 +256,8 @@ jobs:
       startsWith(github.event.issue.pull_request.url, 'https://')
     environment: prod
     steps:
-      - name: Checkout Code from env Branch
+      - name: Checkout Code 
         uses: actions/checkout@v2
-        with:
-          ref: ${{ env.BRANCH  }}
       - name: Approve 
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.PACKER_BUILD_AWS_ACCESS_KEY_ID }}
