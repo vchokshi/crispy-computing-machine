@@ -230,7 +230,7 @@ jobs:
             -d '{"body":"Successfully built AMIs:\n${{ steps.result.outputs.artifact_id }}\n\n${{ env.GITHUB_COMMENT}} "}'
 
   dev_approve:
-    name: Image Approval and Distribution
+    name: Dev Image Approval and Distribution
     needs: pr_load 
     runs-on: ubuntu-latest
     if: |
@@ -251,7 +251,7 @@ jobs:
         run: cd $GITHUB_WORKSPACE && bash scripts/packer-approver.sh
 
   prod_approve:
-    name: Image Approval and Distribution
+    name: Prod Image Approval and Distribution
     needs: pr_load 
     runs-on: ubuntu-latest
     if: |
@@ -264,6 +264,35 @@ jobs:
         uses: actions/checkout@v2
         with:
           ref: ${{ needs.pr_load.outputs.pr_branch }}
+      - name: Approve 
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.PACKER_BUILD_AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.PACKER_BUILD_AWS_SECRET_ACCESS_KEY }}
+          AWS_DEFAULT_REGION: us-west-2
+        shell: bash
+        run: cd $GITHUB_WORKSPACE && bash scripts/packer-approver.sh
+
+
+  prod_approve_on_close:
+    name: AUTO PROD Image Approval and Distribution
+    if: |
+      github.event_name == 'pull_request' &&
+      github.event.action == 'closed' &&
+      github.event.merged == 'true'
+    runs-on: ubuntu-latest
+    environment: prod
+    steps:
+      - name: Load PR Details
+        id: load-pr
+        run: |
+          set -eu
+          resp=$(curl -sSf --url ${{ github.event.issue.pull_request.url }} --header 'authorization: Bearer ${{ secrets.GITHUB_TOKEN }}'  --header 'content-type: application/json')
+          branch=$(python3 -c "import sys, json; print(json.load(sys.stdin)['head']['ref'])" <<< "$resp")
+          echo "::set-output name=branch::$branch"
+      - name: Checkout Code From PR Branch
+        uses: actions/checkout@v2
+        with:
+          ref: ${{ steps.load-pr.outputs.pr_branch }}
       - name: Approve 
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.PACKER_BUILD_AWS_ACCESS_KEY_ID }}
