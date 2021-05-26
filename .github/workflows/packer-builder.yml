@@ -234,7 +234,7 @@ jobs:
     needs: pr_load 
     runs-on: ubuntu-latest
     if: |
-      endsWith(github.event.comment.body, 'approve')
+      endsWith(github.event.comment.body, 'approve') ||
       endsWith(github.event.comment.body, 'approve prod')
       && startsWith(github.event.issue.pull_request.url, 'https://')
     environment: prod
