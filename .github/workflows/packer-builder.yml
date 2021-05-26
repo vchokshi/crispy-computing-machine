@@ -40,7 +40,7 @@ jobs:
       ##Using packer light which is tied to latest, currently at 1.7.2
       image: hashicorp/packer@sha256:523457b5371562c4d9c21621ee85c71c31e7ff53d5ec303a5daf07c55531b84e
     steps:
-      - name: Checkout the code
+      - name: Checkout code from env Branch
         id: checkout
         uses: actions/checkout@v2
         with:
@@ -121,9 +121,11 @@ jobs:
       startsWith(github.event.issue.pull_request.url, 'https://')
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout Code Default Branch
+      - name: Checkout Code from env Branch
         if: endsWith(github.event.comment.body, 'build -h')
         uses: actions/checkout@v2
+        with:
+          ref: ${{ env.BRANCH  }}
       - name: Run Packer Build -h
         if: endsWith(github.event.comment.body, 'build -h')
         id: helper_build
@@ -233,8 +235,10 @@ jobs:
       startsWith(github.event.comment.body, 'approve_dev') &&
       startsWith(github.event.issue.pull_request.url, 'https://')
     steps:
-      - name: Checkout Code from Master
+      - name: Checkout Code from env Branch
         uses: actions/checkout@v2
+        with:
+          ref: ${{ env.BRANCH  }}
       - name: Approve 
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.PACKER_BUILD_AWS_ACCESS_KEY_ID }}
@@ -252,8 +256,31 @@ jobs:
       startsWith(github.event.issue.pull_request.url, 'https://')
     environment: prod
     steps:
-      - name: Checkout Code from Master
+      - name: Checkout Code from env Branch
         uses: actions/checkout@v2
+        with:
+          ref: ${{ env.BRANCH  }}
+      - name: Approve 
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.PACKER_BUILD_AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.PACKER_BUILD_AWS_SECRET_ACCESS_KEY }}
+          AWS_DEFAULT_REGION: us-west-2
+        shell: bash
+        run: cd $GITHUB_WORKSPACE && bash scripts/packer-approver.sh
+
+  prod_close:
+    name: Prod AMI Image Approval and Distro on Close
+    runs-on: ubuntu-latest
+     if: |
+      github.event_name == 'pull_request' &&
+      github.event.action == 'closed' &&
+      github.event.merged == 'true'
+    environment: prod
+    steps:
+      - name: Checkout Code from env Branch
+        uses: actions/checkout@v2
+        with:
+          ref: ${{ env.BRANCH  }}
       - name: Approve 
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.PACKER_BUILD_AWS_ACCESS_KEY_ID }}
