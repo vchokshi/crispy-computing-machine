@@ -246,7 +246,7 @@ jobs:
           echo "::set-output name=branch::$branch"
       - name: Checkout Code 
         uses: actions/checkout@v2
-          ref: ${{steps.load-pr.output.branch }}
+          ref: ${{ steps.load-pr.outputs.branch }}
       - name: Approve 
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.PACKER_BUILD_AWS_ACCESS_KEY_ID }}
