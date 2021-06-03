@@ -274,7 +274,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Dump Context
-        env: GHC: ${{ toJSON(github)}}
+        env: 
+          GHC: ${{ toJSON(github)}}
         run: echo "$GHC"
       - name: Successful Build Artifact download 
         id: artifact_file
