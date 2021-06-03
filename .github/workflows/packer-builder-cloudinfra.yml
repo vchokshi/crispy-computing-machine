@@ -12,6 +12,7 @@ on:
       - 'packer/**/*.hcl'
 
 jobs:
+<<<<<<< Updated upstream
   cleanup:
     if: always()
     outputs: nothing
@@ -27,6 +28,8 @@ jobs:
           API_VERSION: "application/vnd.github.v3.json"
 
 
+=======
+>>>>>>> Stashed changes
   pr_load:
     name: Load Branch Details Outside Container
     if: |
@@ -288,6 +291,9 @@ jobs:
     needs: [dev_builder, prod_builder]
     runs-on: ubuntu-latest
     steps:
+      - name: Dump Context
+        env: GHC: ${{ toJSON(github)}}
+        run: echo "$GHC"
       - name: Successful Build Artifact download 
         id: artifact_file
         uses: actions/download-artifact@v2
@@ -303,6 +309,18 @@ jobs:
           | map(split(":") | "\(.[1]) (\(.[0]))")
           | join("\\n")'
           ./packer-manifest.json)"
+      - name: Delete the artifact
+        if: steps.result.outcome == 'success'
+        env:
+          URL:  "https://api.github.com/repos/vchokshi/crispy-computing-machine/actions/artifacts/1"
+          GITHUB_TOKEN: ${{ secrets.FOE_PAT }}
+          API_VERSION: "application/vnd.github.v3.json"
+        run: |
+          curl \
+            -X POST $URL \
+            -H "Accept: $API_VERSION"
+
+
       - name: Add comment on Builder Success
         env:
           URL: ${{ github.event.issue.comments_url }}
