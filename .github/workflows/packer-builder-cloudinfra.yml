@@ -12,24 +12,6 @@ on:
       - 'packer/**/*.hcl'
 
 jobs:
-<<<<<<< Updated upstream
-  cleanup:
-    if: always()
-    outputs: nothing
-    runs-on: ubuntu-latest
-    steps:
-      - name: Erase all artifacts in the artifactory using the REST API
-        id: eraser
-        run: |
-          echo "Something"
-        env:
-          URI: "/repos/{owner}/{repo}/actions/artifacts/{artifact_id}" 
-          GITHUB_TOKEN: ${{ secrets.FOE_PAT }}
-          API_VERSION: "application/vnd.github.v3.json"
-
-
-=======
->>>>>>> Stashed changes
   pr_load:
     name: Load Branch Details Outside Container
     if: |
