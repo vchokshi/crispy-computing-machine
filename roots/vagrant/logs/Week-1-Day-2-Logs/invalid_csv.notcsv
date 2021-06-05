@@ -1,0 +1,13 @@
+Name, Age, Race, gender, address, city
+John,40,Blue, , ,philly
+Jim,30,Green, ,1234, ,
+
+Login = Success
+
+I am Microsoft and I log things like this.
+
+Error Code: 1234
+
+Please call support
+
+Jim, 30, Red, , 

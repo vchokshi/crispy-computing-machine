@@ -1,0 +1,194 @@
+Access_Right,Account_Domain,Account_Expires,Account_Name,Account_That_Was_Locked_Out,Additional_Information,Algorithm_Name,AllowedToDelegateTo,Allowed_To_Delegate_To,Attributes,Authentication_Package,Caller_Computer_Name,Caller_Domain,Caller_Logon_ID,Caller_Machine_Name,Caller_Process_ID,Caller_Process_Name,Caller_User_Name,CategoryString,Change_Type,Client_Address,Client_Domain,Client_Logon_ID,Client_Machine_Name,Client_User_Name,Computer,ComputerName,Creator_Process_ID,Description,Display_Name,Domain,Domain_Behavior_Version,Domain_ID,Domain_Name,Elevated_Token,Error_Code,EventCode,EventCodeDescription,EventType,Exit_Status,Failure_Reason,File_Path,Force_Logoff,Group_Domain,Group_Name,Group_Type_Change,Home_Directory,Home_Drive,Image_File_Name,Impersonation_Level,IpAddress,IpPort,Key_Length,Key_Name,Key_Type,Keywords,Linked_Logon_ID,Lockout_Duration,Lockout_Observation_Window,Lockout_Threshold,LogName,LogonType,Logon_Account,Logon_GUID,Logon_Hours,Logon_ID,Logon_Process,Logon_Type,Logon_account,MSADChangedAttributes,Machine_Account_Quota,Max__Password_Age,Member_ID,Member_Name,Message,Min__Password_Age,Min__Password_Length,Mixed_Domain_Mode,Network_Account_Domain,Network_Account_Name,Network_Address,New_Account,New_Account_Name,New_Domain,New_Process_ID,New_Process_Name,New_UAC_Value,OEM_Information,Old_UAC_Value,OpCode,Operation,Package_Name__NTLM_only_,Password_History_Length,Password_Last_Set,Password_Properties,Port,Primary_Domain,Primary_Group_ID,Primary_User_Name,PrivilegeList,Privileges,Process_ID,Process_Name,Profile_Path,Provider_Name,RecordNumber,Restricted_Admin_Mode,Return_Code,SAM_Account_Name,SID_History,Script_Path,Security_ID,Server,Service_Name,SourceName,Source_Network_Address,Source_Port,Source_Workstation,Status,Sub_Status,Subject,SubjectDomainName,SubjectLogonId,SubjectUserName,Supplied_Realm_Name,TargetDomainName,TargetServerName,TargetUserName,Target_Account_ID,Target_Account_Name,Target_Domain,Target_Server_Name,Target_User_Name,TaskCategory,TokenElevationType,Token_Elevation_Type,Token_Elevation_Type_id,Transited_Services,Type,User,User_Account_Control,User_ID,User_Name,User_Parameters,User_Principal_Name,User_Workstations,Virtual_Account,Workstation,WorkstationName,Workstation_Name,_raw,_time,action,app,body,bunit,category,change_type,city,country,date_hour,date_mday,date_minute,date_month,date_second,date_wday,date_year,date_zone,dest,dest_asset_id,dest_asset_tag,dest_bunit,dest_category,dest_city,dest_country,dest_dns,dest_ip,dest_is_expected,dest_lat,dest_long,dest_mac,dest_nt_domain,dest_nt_host,dest_owner,dest_pci_domain,dest_priority,dest_requires_av,dest_should_timesync,dest_should_update,dns,dvc,dvc_asset_id,dvc_asset_tag,dvc_bunit,dvc_category,dvc_city,dvc_country,dvc_dns,dvc_ip,dvc_is_expected,dvc_lat,dvc_long,dvc_mac,dvc_nt_host,dvc_owner,dvc_pci_domain,dvc_priority,dvc_requires_av,dvc_should_timesync,dvc_should_update,enabled,event_id,eventtype,host,id,ids_type,index,ip,is_expected,lat,linecount,long,mac,member_dn,member_id,member_nt_domain,msad_action,name,nt_host,object,object_category,owner,pci_domain,priority,privilege,privilege_id,process_id,product,protocol,protocol_name,punct,range,requires_av,result,session_id,severity,severity_id,should_timesync,should_update,signature,signature_id,source,sourcetype,splunk_server,splunk_server_group,src,src_asset_id,src_asset_tag,src_bunit,src_category,src_city,src_country,src_dns,src_ip,src_is_expected,src_lat,src_long,src_mac,src_nt_domain,src_nt_host,src_owner,src_pci_domain,src_port,src_priority,src_requires_av,src_service,src_should_timesync,src_should_update,src_user,src_user_bunit,src_user_category,src_user_email,src_user_endDate,src_user_first,src_user_identity,src_user_identity_tag,src_user_last,src_user_managedBy,src_user_nick,src_user_phone,src_user_phone2,src_user_prefix,src_user_priority,src_user_startDate,src_user_suffix,src_user_watchlist,src_user_work_city,src_user_work_country,src_user_work_lat,src_user_work_long,status,status_description,subject,ta_windows_action,ta_windows_security_CategoryString,ta_windows_status,tag,tag::Logon_Type,tag::Service_Name,tag::Token_Elevation_Type_id,tag::action,tag::app,tag::dest_requires_av,tag::dest_should_timesync,tag::dest_should_update,tag::eventtype,tag::is_expected,tag::privilege_id,tag::requires_av,tag::should_timesync,tag::should_update,tag::signature,tag::sourcetype,tag::src_user_category,tag::src_user_identity_tag,tag::src_user_watchlist,tag::user_category,tag::user_identity_tag,tag::user_watchlist,threat_intel_source,timeendpos,timestartpos,transport,user,user_bunit,user_category,user_email,user_endDate,user_first,user_group_id,user_identity,user_identity_tag,user_last,user_managedBy,user_nick,user_phone,user_phone2,user_prefix,user_priority,user_startDate,user_suffix,user_type,user_watchlist,user_work_city,user_work_country,user_work_lat,user_work_long,vendor,vendor_privilege,vendor_product
+
+
+"Domain_ADomain_A",,"BUSDEV-007user_k",,,,,,,Kerberos,,,,,,,,,,,,,,,,BUSDEV-007,,,,,,,,Yes,-,4624,An account was successfully logged on,0,,,,,,,,,,,Identification,,,0,,,Audit Success,953D,,,,Security,,,{27C4A2F2-13CA-AA25-E903-D31268740239},,"0x70E40xBAC3",User32,3,,,,,,,"An account was successfully logged on.
+
+Subject:
+ Security ID:  Domain_A\SYSTEM
+ Account Name:  BUSDEV-007
+ Account Domain:  Domain_A
+ Logon ID:  0x70E4
+
+Logon Information:
+ Logon Type:  3
+ Restricted Admin Mode: No
+ Virtual Account:  Yes
+ Elevated Token:  Yes
+
+Impersonation Level:  Identification
+
+New Logon:
+ Security ID:  Domain_A\user_k
+ Account Name:  user_k
+ Account Domain:  Domain_A
+ Logon ID:  0xBAC3
+ Linked Logon ID:  953D
+ Network Account Name: user_a
+ Network Account Domain: -
+ Logon GUID:  {27C4A2F2-13CA-AA25-E903-D31268740239}
+
+Process Information:
+ Process ID:  0xF272
+ Process Name:  C:\Windows\System32\example_c.exe
+
+Network Information:
+ Workstation Name: BUSDEV-007
+ Source Network Address: 195.172.164.52
+ Source Port:  42095
+
+Detailed Authentication Information:
+ Logon Process:  User32 
+ Authentication Package: Kerberos
+ Transited Services: service_B
+ Package Name (NTLM only): -
+ Key Length:  0
+
+This event is generated when a logon session is created. It is generated on the computer that was accessed.
+
+The subject fields indicate the account on the local system which requested the logon. This is most commonly a service such as the Server service, or a local process such as C6B16.exe or C6B16.exe.
+
+The logon type field indicates the kind of logon that occurred. The most common types are 2 (interactive) and 3 (network).
+
+The New Logon fields indicate the account for whom the new logon was created, i.e. the account that was logged on.
+
+The network fields indicate where a remote logon request originated. Workstation name is not always available and may be left blank in some cases.
+
+The impersonation level field indicates the extent to which a process in the logon session can impersonate.
+
+The authentication information fields provide detailed information about this specific logon request.
+ - Logon GUID is a unique identifier that can be used to correlate this event with a KDC event.
+ - Transited services indicate which intermediate services have participated in this logon request.
+ - Package name indicates which sub-protocol was used among the NTLM protocols.
+ - Key length indicates the length of the generated session key. This will be 0 if no session key was requested."
+
+,,,,-,user_a,,,,,,,,,,Info,,-,,,,,,,,,,0xF272,C:\Windows\System32\example_c.exe,,,425008749,No,,,,,"Domain_A\SYSTEM Domain_A\user_k",,,Microsoft Windows security auditing.,195.172.164.52,42095,,,,,,,,,,,,,,,,,Logon,,,,service_B,Information,,,,,,,,Yes,,,BUSDEV-007,"01/28/2020 07:20:10 PM
+
+LogName=Security
+SourceName= Microsoft Windows security auditing.
+EventCode=4624
+EventType=0
+Type=Information
+ComputerName=BUSDEV-007
+TaskCategory=Logon
+OpCode=Info
+RecordNumber=425008749
+Keywords=Audit Success
+Message=An account was successfully logged on.
+
+Subject:
+ Security ID:  Domain_A\SYSTEM
+ Account Name:  BUSDEV-007
+ Account Domain:  Domain_A
+ Logon ID:  0x70E4
+
+Logon Information:
+ Logon Type:  3
+ Restricted Admin Mode: No
+ Virtual Account:  Yes
+ Elevated Token:  Yes
+
+Impersonation Level:  Identification
+
+New Logon:
+ Security ID:  Domain_A\user_k
+ Account Name:  user_k
+ Account Domain:  Domain_A
+ Logon ID:  0xBAC3
+ Linked Logon ID:  953D
+ Network Account Name: user_a
+ Network Account Domain: -
+ Logon GUID:  {27C4A2F2-13CA-AA25-E903-D31268740239}
+
+Process Information:
+ Process ID:  0xF272
+ Process Name:  C:\Windows\System32\example_c.exe
+
+Network Information:
+ Workstation Name: BUSDEV-007
+ Source Network Address: 195.172.164.52
+ Source Port:  42095
+
+Detailed Authentication Information:
+ Logon Process:  User32 
+ Authentication Package: Kerberos
+ Transited Services: service_B
+ Package Name (NTLM only): -
+ Key Length:  0
+
+This event is generated when a logon session is created. It is generated on the computer that was accessed.
+
+The subject fields indicate the account on the local system which requested the logon. This is most commonly a service such as the Server service, or a local process such as C6B16.exe or C6B16.exe.
+
+The logon type field indicates the kind of logon that occurred. The most common types are 2 (interactive) and 3 (network).
+
+The New Logon fields indicate the account for whom the new logon was created, i.e. the account that was logged on.
+
+The network fields indicate where a remote logon request originated. Workstation name is not always available and may be left blank in some cases.
+
+The impersonation level field indicates the extent to which a process in the logon session can impersonate.
+
+The authentication information fields provide detailed information about this specific logon request.
+ - Logon GUID is a unique identifier that can be used to correlate this event with a KDC event.
+ - Transited services indicate which intermediate services have participated in this logon request.
+ - Package name indicates which sub-protocol was used among the NTLM protocols.
+ - Key length indicates the length of the generated session key. This will be 0 if no session key was requested.
+
+",2020-01-28T19:20:10.000+0000,success,win:remote,"An account was successfully logged on.
+
+Subject:
+ Security ID:  Domain_A\SYSTEM
+ Account Name:  BUSDEV-007
+ Account Domain:  Domain_A
+ Logon ID:  0x70E4
+
+Logon Information:
+ Logon Type:  3
+ Restricted Admin Mode: No
+ Virtual Account:  Yes
+ Elevated Token:  Yes
+
+Impersonation Level:  Identification
+
+New Logon:
+ Security ID:  Domain_A\user_k
+ Account Name:  user_k
+ Account Domain:  Domain_A
+ Logon ID:  0xBAC3
+ Linked Logon ID:  953D
+ Network Account Name: user_a
+ Network Account Domain: -
+ Logon GUID:  {27C4A2F2-13CA-AA25-E903-D31268740239}
+
+Process Information:
+ Process ID:  0xF272
+ Process Name:  C:\Windows\System32\example_c.exe
+
+Network Information:
+ Workstation Name: BUSDEV-007
+ Source Network Address: 195.172.164.52
+ Source Port:  42095
+
+Detailed Authentication Information:
+ Logon Process:  User32 
+ Authentication Package: Kerberos
+ Transited Services: service_B
+ Package Name (NTLM only): -
+ Key Length:  0
+
+This event is generated when a logon session is created. It is generated on the computer that was accessed.
+
+The subject fields indicate the account on the local system which requested the logon. This is most commonly a service such as the Server service, or a local process such as C6B16.exe or C6B16.exe.
+
+The logon type field indicates the kind of logon that occurred. The most common types are 2 (interactive) and 3 (network).
+
+The New Logon fields indicate the account for whom the new logon was created, i.e. the account that was logged on.
+
+The network fields indicate where a remote logon request originated. Workstation name is not always available and may be left blank in some cases.
+
+The impersonation level field indicates the extent to which a process in the logon session can impersonate.
+
+The authentication information fields provide detailed information about this specific logon request.
+ - Logon GUID is a unique identifier that can be used to correlate this event with a KDC event.
+ - Transited services indicate which intermediate services have participated in this logon request.
+ - Package name indicates which sub-protocol was used among the NTLM protocols.
+ - Key length indicates the length of the generated session key. This will be 0 if no session key was requested."
