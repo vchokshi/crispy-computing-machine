@@ -94,7 +94,7 @@ resource "azurerm_network_security_group" "nsg" {
     source_port_range          = "*"
     destination_port_range     = "5601"
     #source_address_prefix      = chomp(data.http.myip.body)
-    source_address_prefix      = "Any"
+    source_address_prefix      = "0.0.0.0"
     destination_address_prefix = "*"
   }
   tags = local.common_tags
@@ -129,9 +129,9 @@ resource "azurerm_linux_virtual_machine" "jumphost" {
   network_interface_ids = [
     azurerm_network_interface.nic.id
   ]
-  admin_username = "vihar"
+  admin_username = "vchokshi"
   admin_ssh_key {
-    username   = "vihar"
+    username   = "vchokshi"
     public_key = file("~/.ssh/id_rsa.pub")
   }
   os_disk {
