@@ -26,9 +26,9 @@ resource "azurerm_linux_virtual_machine" "elk" {
   network_interface_ids = [azurerm_network_interface.elk_nic.id]
   size                  = "Standard_DS3_v2"
 
-  admin_username = "vihar"
+  admin_username = "vchokshi"
   admin_ssh_key {
-    username   = "vihar"
+    username   = "vchokshi"
     public_key = file("../id_rsa.pub")
   }
   os_disk {

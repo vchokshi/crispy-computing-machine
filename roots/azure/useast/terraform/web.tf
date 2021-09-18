@@ -19,9 +19,9 @@ resource "azurerm_linux_virtual_machine" "web" {
   network_interface_ids = [element(azurerm_network_interface.web_nic.*.id, count.index)]
   size                  = "Standard_B1s"
 
-  admin_username = "vihar"
+  admin_username = "vchokshi"
   admin_ssh_key {
-    username   = "vihar"
+    username   = "vchokshi"
     public_key = file("./../id_rsa.pub")
   }
   os_disk {

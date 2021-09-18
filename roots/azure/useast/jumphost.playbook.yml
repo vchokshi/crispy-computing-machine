@@ -1,0 +1,34 @@
+---
+- name: Install ansible
+  hosts: all
+  become: true
+  tasks:
+      - name: Enable ansible repository
+        ansible.builtin.apt_repository:
+            repo: ppa:ansible/ansible
+            state: present
+      - name: Install ansible
+        apt:
+            name: ansible
+            state: present
+- name: Deploy files to home dir
+  hosts: all
+  become: false
+  tasks:
+
+      - name: Copy main files over from files directory
+        copy: src={{ item.src  }} dest={{ item.dest  }}
+        with_items:
+            - { src: 'main.yml', dest: '~/main.yml'  }
+            - { src: 'hosts', dest: '~/hosts'  }
+            - { src: 'filebeat-ansible.yml', dest: '~/filebeat-ansible.yml'  }
+            - { src: 'metricbeat-ansible.yml', dest: '~/metricbeat-ansible.yml'  }
+
+      - name: Make files dir
+        command: mkdir ~/files
+
+      - name: Copy config files over from files directory
+        copy: src={{ item.src  }} dest={{ item.dest  }}
+        with_items:
+            - { src: 'filebeat-config.yml', dest: '~/files/filebeat-config.yml'  }
+            - { src: 'metricbeat-config.yml', dest: '~/files/metricbeat-config.yml'  }
