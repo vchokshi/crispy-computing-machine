@@ -1,5 +1,5 @@
 locals {
-  project     = "week-13-stack"
+  project     = "week-12-stack"
   owner       = "Vihar Chokshi"
   email       = "vc@iot4.net"
   stack-color = "green"
