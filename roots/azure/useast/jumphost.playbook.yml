@@ -3,32 +3,62 @@
   hosts: all
   become: true
   tasks:
-      - name: Enable ansible repository
-        ansible.builtin.apt_repository:
-            repo: ppa:ansible/ansible
-            state: present
-      - name: Install ansible
-        apt:
-            name: ansible
-            state: present
+    - name: docker.io
+      apt:
+        force_apt_get: yes
+        update_cache: yes
+        name: docker.io
+        state: present
+    - name: Install pip3
+      apt:
+        force_apt_get: yes
+        name: python3-pip
+        state: present
+
+    - name: Install Docker python module
+      pip:
+        name: docker
+        state: present
+
+    - name: download and launch a docker ANSIBLE container
+      docker_container:
+        name: dvwa
+        image: cyberxsecurity/ansible
+        state: started
+
+    - name: Enable docker service
+      systemd:
+        name: docker
+        enabled: yes
+
+    - name: Enable ansible repository
+      ansible.builtin.apt_repository:
+          repo: ppa:ansible/ansible
+          state: present
+
+    - name: Install ansible
+      apt:
+          name: ansible
+          state: present
+
 - name: Deploy files to home dir
   hosts: all
   become: false
   tasks:
 
-      - name: Copy main files over from files directory
-        copy: src={{ item.src  }} dest={{ item.dest  }}
-        with_items:
-            - { src: 'main.yml', dest: '~/main.yml'  }
-            - { src: 'hosts', dest: '~/hosts'  }
-            - { src: 'filebeat-ansible.yml', dest: '~/filebeat-ansible.yml'  }
-            - { src: 'metricbeat-ansible.yml', dest: '~/metricbeat-ansible.yml'  }
+    - name: Copy main files over from files directory
+      copy: src={{ item.src  }} dest={{ item.dest  }}
+      with_items:
+          - { src: 'main.yml', dest: '~/main.yml'  }
+          - { src: 'hosts', dest: '~/hosts'  }
+          - { src: 'filebeat-ansible.yml', dest: '~/filebeat-ansible.yml'  }
+          - { src: 'metricbeat-ansible.yml', dest: '~/metricbeat-ansible.yml'  }
 
-      - name: Make files dir
-        command: mkdir ~/files
+    - name: Make files dir
+      command: mkdir -p ~/files
 
-      - name: Copy config files over from files directory
-        copy: src={{ item.src  }} dest={{ item.dest  }}
-        with_items:
-            - { src: 'filebeat-config.yml', dest: '~/files/filebeat-config.yml'  }
-            - { src: 'metricbeat-config.yml', dest: '~/files/metricbeat-config.yml'  }
+    - name: Copy config files over from files directory
+      copy: src={{ item.src  }} dest={{ item.dest  }}
+      with_items:
+          - { src: 'filebeat-config.yml', dest: '~/files/filebeat-config.yml'  }
+          - { src: 'metricbeat-config.yml', dest: '~/files/metricbeat-config.yml'  }

@@ -15,7 +15,7 @@ resource "azurerm_network_interface" "elk_nic" {
     name                          = "${local.stack-color}-elk-nic-config"
     subnet_id                     = azurerm_subnet.e.id
     private_ip_address_allocation = "Dynamic"
-    public_ip_address_id = azurerm_public_ip.elk_ip.id
+    public_ip_address_id          = azurerm_public_ip.elk_ip.id
   }
 }
 
@@ -41,7 +41,7 @@ resource "azurerm_linux_virtual_machine" "elk" {
     sku       = "18.04-LTS"
     version   = "latest"
   }
-  tags                = local.common_tags
+  tags = local.common_tags
 }
 
 
