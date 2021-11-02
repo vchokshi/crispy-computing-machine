@@ -31,13 +31,13 @@ data "aws_route53_zone" "private" {
 }
 
 #data "aws_acm_certificate" "e" {
-  #domain   = "e.${local.dns_hosted_zone_name}"
-  #statuses = ["ISSUED"]
+#domain   = "e.${local.dns_hosted_zone_name}"
+#statuses = ["ISSUED"]
 #}
 
 #data "aws_acm_certificate" "ek" {
-  #domain   = "ek.${local.dns_hosted_zone_name}"
-  #statuses = ["ISSUED"]
+#domain   = "ek.${local.dns_hosted_zone_name}"
+#statuses = ["ISSUED"]
 #}
 
 output "aws_availablity_zones_available" {

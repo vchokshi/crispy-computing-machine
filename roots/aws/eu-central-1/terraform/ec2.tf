@@ -3,7 +3,7 @@ resource "aws_instance" "lamp" {
   subnet_id                   = module.vpc.public_subnets[0]
   instance_type               = local.ec2_instance_type
   associate_public_ip_address = true
-  key_name                    = local.email_address
+  key_name                    = aws_key_pair.v.key_name
   tags                        = local.common_tags
   volume_tags                 = local.common_tags
   iam_instance_profile        = aws_iam_instance_profile.elastio.name

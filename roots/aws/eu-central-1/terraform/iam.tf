@@ -46,7 +46,16 @@ resource "aws_iam_role_policy" "elastio" {
 	"sts:*",
 	"lambda:*",
 	"kms:*",
-	"ec2:*"
+	"ec2:*",
+    "cloudformation:*",
+    "events:*",
+    "sns:*",
+    "batch:*",
+"autoscaling:*",
+"application-autoscaling:*",
+"ecs:*",
+
+"cloudwatch:*"
       ],
       "Effect": "Allow",
       "Resource": "*"
