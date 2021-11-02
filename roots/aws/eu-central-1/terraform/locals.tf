@@ -1,7 +1,7 @@
 locals {
   project       = "elastio"
   owner         = "Vihar Chokshi"
-  email_address = "vihar@vipert490"
+  email_address = "vchokshi@vipert491"
 
   dns_hosted_zone_name = "iot4.net"
 
