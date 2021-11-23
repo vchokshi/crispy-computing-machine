@@ -7,7 +7,7 @@ module "vpc" {
   azs                      = data.aws_availability_zones.available.names
   private_subnets          = ["10.3.1.0/24", "10.3.2.0/24", "10.3.3.0/24"]
   public_subnets           = ["10.3.4.0/24", "10.3.5.0/24", "10.3.6.0/24"]
-  enable_nat_gateway       = true
+  enable_nat_gateway       = false
   single_nat_gateway       = true
   enable_dns_hostnames     = true
   enable_dns_support       = true
@@ -45,9 +45,4 @@ output "vpc_id" {
 }
 output "subnet_ids" {
   value = module.vpc.public_subnets
-}
-
-resource "aws_route53_zone_association" "elastio" {
-  zone_id = data.aws_route53_zone.private.zone_id
-  vpc_id  = module.vpc.vpc_id
 }

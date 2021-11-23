@@ -24,6 +24,16 @@ data "aws_iam_policy_document" "gator" {
       "arn:aws:iam::438513923646:role/OrganizationAccountAccessRole"
     ]
   }
+  statement {
+    sid = "AmazonBillingAccess"
+    actions = [
+      "aws-portal:*",
+      "budgets:*",
+      "cur:*"
+    ]
+    resources = ["*"]
+    effect    = "Allow"
+  }
 }
 
 resource "aws_iam_policy" "gator" {

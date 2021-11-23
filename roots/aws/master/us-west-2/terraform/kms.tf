@@ -1,4 +1,4 @@
-resource aws_kms_key packer {
+resource "aws_kms_key" "packer" {
   is_enabled          = true
   enable_key_rotation = true
 
@@ -10,7 +10,7 @@ resource aws_kms_key packer {
   policy = data.aws_iam_policy_document.packer_encryption_key_policy.json
 }
 
-resource aws_kms_alias packer {
+resource "aws_kms_alias" "packer" {
   name          = "alias/packer"
   target_key_id = aws_kms_key.packer.key_id
 }
