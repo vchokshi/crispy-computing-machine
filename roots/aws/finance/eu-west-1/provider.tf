@@ -1,5 +1,5 @@
 provider "aws" {
-  allowed_account_ids = ["308948682972"]
+  allowed_account_ids = ["375423940384"]
   region              = var.region
 }
 

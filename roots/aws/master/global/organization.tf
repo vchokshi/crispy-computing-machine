@@ -90,21 +90,25 @@ resource "aws_organizations_account" "account" {
   name      = "finance"
   email     = "finance@iot4.net"
   parent_id = aws_organizations_organizational_unit.fpna.id
+  #role_name = "origami"
 }
 
 resource "aws_organizations_account" "hosting" {
   name      = "hosting"
   email     = "ms@iot4.net"
   parent_id = aws_organizations_organizational_unit.main.id
+  #role_name = "origami"
 }
 
 resource "aws_organizations_account" "native" {
   name      = "native"
   email     = "vchokshi@iot4.net"
   parent_id = aws_organizations_organizational_unit.main.id
+  #role_name = "origami"
 }
 resource "aws_organizations_account" "backup" {
   name      = "backup"
   email     = "backup@iot4.net"
   parent_id = aws_organizations_organizational_unit.grc.id
+  #role_name = "origami"
 }
