@@ -12,7 +12,7 @@ module "vpc" {
   enable_dns_hostnames     = true
   enable_dns_support       = true
   enable_dhcp_options      = true
-  dhcp_options_domain_name = local.dns_hosted_zone_name
+  dhcp_options_domain_name = data.aws_route53_zone.public.name
 
 
   create_database_subnet_group           = true

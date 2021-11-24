@@ -1,0 +1,24 @@
+- name: Build the lamp stack 
+  become: true
+  hosts: all
+  roles:
+  pre_tasks: 
+    - name: Enable lamp php and php
+      shell: amazon-linux-extras install -y lamp-mariadb10.2-php7.2 php7.2
+    - name: yum install dependencies
+      yum:
+        name: [httpd, php-mbstring, python-pip, python-wheel]
+        update_cache: yes
+        state: present
+    - name: Enable the httpd service
+      service:
+        name: httpd
+        state: started
+        enabled: true
+    - name: Deploy Application
+      copy:
+        src: "{{ item }}"
+        dest: "{{ html_root }}"
+      with_items:
+        - index.html
+        - phpinfo.php

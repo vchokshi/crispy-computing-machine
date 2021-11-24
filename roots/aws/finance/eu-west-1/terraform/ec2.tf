@@ -6,12 +6,12 @@ resource "aws_instance" "f" {
   key_name                    = aws_key_pair.v.key_name
   tags                        = local.common_tags
   volume_tags                 = local.common_tags
-  #iam_instance_profile        = aws_iam_instance_profile.f.name
+  iam_instance_profile        = aws_iam_instance_profile.f.name
 }
 
 resource "aws_route53_record" "ssh" {
   zone_id = data.aws_route53_zone.public.id
-  name    = "${local.project}.${local.dns_hosted_zone_name}"
+  name    = "${local.project}.${data.aws_route53_zone.public.name}"
   type    = "A"
   ttl     = "300"
   records = [aws_instance.f.public_ip]
@@ -46,7 +46,7 @@ resource "aws_elb" "f" {
 
 resource "aws_route53_record" "w" {
   zone_id = data.aws_route53_zone.public.id
-  name    = "www.${local.dns_hosted_zone_name}"
+  name    = "www.${data.aws_route53_zone.public.name}"
   type    = "CNAME"
   ttl     = "300"
   records = [aws_elb.f.dns_name]
@@ -56,5 +56,5 @@ output "aws_instance_id" {
   value = aws_instance.f.id
 }
 output "finance_url" {
-  value = "https://f.${local.dns_hosted_zone_name}"
+  value = "https://www.${data.aws_route53_zone.public.name}"
 }

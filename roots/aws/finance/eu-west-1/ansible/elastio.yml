@@ -1,0 +1,22 @@
+- name: Deploy Elastio Backup as Code
+  become: true
+  hosts: all
+  tasks: 
+    - name: Download the Elastio CLI for Linux
+      get_url:
+        url: https://raw.githubusercontent.com/elastio/elastio-stack/master/scripts/install-elastio.sh
+        dest: /tmp
+        mode: 0755
+    - name: Install the Elastio CLI on Linux
+      shell: /tmp/install-elastio.sh
+    - name: Copy the Cloudformation Template to the EC2 Instance
+      copy:
+          src: cf-template.json
+          dest: /tmp/cf-template.json
+    - name: Deploy the elastio stack
+      shell: aws cloudformation deploy --template-file cf-template.json --stack-name elastio-account-level-stack --s3-bucket elastio-cf --capabilities CAPABILITY_NAMED_IAM --region eu-central-1
+      args:
+        chdir: /tmp
+        creates: stack.txt
+    - name: Enable the account with Elastio
+      shell: elastio stack deploy --tenant-name iot4.app.elastio.com
