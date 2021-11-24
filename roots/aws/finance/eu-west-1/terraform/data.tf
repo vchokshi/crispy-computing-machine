@@ -22,7 +22,7 @@ data "http" "myip" {
 }
 
 data "aws_route53_zone" "public" {
-  name = local.dns_hosted_zone_name
+  name = "finance.iot4.net"
 }
 
 output "aws_availablity_zones_available" {

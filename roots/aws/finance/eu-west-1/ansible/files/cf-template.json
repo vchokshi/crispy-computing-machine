@@ -1,0 +1,4238 @@
+{
+  "Resources": {
+    "tfstate42168D51": {
+      "Type": "AWS::S3::Bucket",
+      "Properties": {
+        "BucketEncryption": {
+          "ServerSideEncryptionConfiguration": [
+            {
+              "ServerSideEncryptionByDefault": {
+                "SSEAlgorithm": "AES256"
+              }
+            }
+          ]
+        },
+        "Tags": [
+          {
+            "Key": "elastio:resource",
+            "Value": "true"
+          }
+        ]
+      },
+      "UpdateReplacePolicy": "Retain",
+      "DeletionPolicy": "Retain",
+      "Metadata": {
+        "aws:cdk:path": "reds-account-level-stack/tf/state/Resource"
+      }
+    },
+    "tflocks48A1C6E6": {
+      "Type": "AWS::DynamoDB::Table",
+      "Properties": {
+        "KeySchema": [
+          {
+            "AttributeName": "LockID",
+            "KeyType": "HASH"
+          }
+        ],
+        "AttributeDefinitions": [
+          {
+            "AttributeName": "LockID",
+            "AttributeType": "S"
+          }
+        ],
+        "BillingMode": "PAY_PER_REQUEST",
+        "Tags": [
+          {
+            "Key": "elastio:resource",
+            "Value": "true"
+          }
+        ]
+      },
+      "UpdateReplacePolicy": "Retain",
+      "DeletionPolicy": "Retain",
+      "Metadata": {
+        "aws:cdk:path": "reds-account-level-stack/tf/locks/Resource"
+      }
+    },
+    "blueStackRole4C32D63B": {
+      "Type": "AWS::IAM::Role",
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
+              "Action": "sts:AssumeRole",
+              "Condition": {
+                "StringEquals": {
+                  "sts:ExternalId": {
+                    "Fn::Select": [
+                      1,
+                      {
+                        "Fn::Split": [
+                          "/",
+                          {
+                            "Ref": "externalBlueStackRoleArn"
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                }
+              },
+              "Effect": "Allow",
+              "Principal": {
+                "AWS": {
+                  "Ref": "externalBlueStackRoleArn"
+                }
+              }
+            }
+          ],
+          "Version": "2012-10-17"
+        },
+        "RoleName": "BlueStack",
+        "Tags": [
+          {
+            "Key": "elastio:resource",
+            "Value": "true"
+          }
+        ]
+      },
+      "Metadata": {
+        "aws:cdk:path": "reds-account-level-stack/blueStackRole/Resource"
+      },
+      "Condition": "blueStackAssumeRoleCondition"
+    },
+    "blueStackDefaultPolicy083EC82A": {
+      "Type": "AWS::IAM::Policy",
+      "Properties": {
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": [
+                "lambda:InvokeFunction",
+                "lambda:ListTags",
+                "lambda:GetFunction",
+                "lambda:GetFunctionConfiguration"
+              ],
+              "Effect": "Allow",
+              "Resource": "*"
+            },
+            {
+              "Action": "s3:*",
+              "Effect": "Allow",
+              "Resource": "*"
+            },
+            {
+              "Action": "iam:ListAccountAliases",
+              "Effect": "Allow",
+              "Resource": "*"
+            },
+            {
+              "Action": "sqs:ListQueues",
+              "Effect": "Allow",
+              "Resource": "*"
+            },
+            {
+              "Action": [
+                "sqs:DeleteMessage",
+                "sqs:GetQueueUrl",
+                "sqs:DeleteMessageBatch",
+                "sqs:SendMessageBatch",
+                "sqs:ReceiveMessage",
+                "sqs:SendMessage",
+                "sqs:ListQueueTags"
+              ],
+              "Effect": "Allow",
+              "Resource": "*"
+            },
+            {
+              "Action": "ssm:GetParameter",
+              "Condition": {
+                "StringLike": {
+                  "aws:ResourceTag/elastio:resource": "*"
+                }
+              },
+              "Effect": "Allow",
+              "Resource": "*"
+            },
+            {
+              "Action": [
+                "ec2:DescribeInstances",
+                "ec2:DescribeVolumes"
+              ],
+              "Effect": "Allow",
+              "Resource": "*"
+            }
+          ],
+          "Version": "2012-10-17"
+        },
+        "PolicyName": "blueStackDefaultPolicy083EC82A",
+        "Roles": [
+          {
+            "Ref": "blueStackRole4C32D63B"
+          }
+        ]
+      },
+      "Metadata": {
+        "aws:cdk:path": "reds-account-level-stack/blueStackDefaultPolicy/Resource"
+      },
+      "Condition": "blueStackAssumeRoleCondition"
+    },
+    "elastioInstallerRoleE71EF309": {
+      "Type": "AWS::IAM::Role",
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
+              "Action": "sts:AssumeRole",
+              "Condition": {
+                "StringEquals": {
+                  "sts:ExternalId": {
+                    "Fn::Select": [
+                      1,
+                      {
+                        "Fn::Split": [
+                          "/",
+                          {
+                            "Ref": "externalBlueStackRoleArn"
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                }
+              },
+              "Effect": "Allow",
+              "Principal": {
+                "AWS": {
+                  "Ref": "externalBlueStackRoleArn"
+                }
+              }
+            }
+          ],
+          "Version": "2012-10-17"
+        },
+        "ManagedPolicyArns": [
+          {
+            "Fn::Join": [
+              "",
+              [
+                "arn:",
+                {
+                  "Ref": "AWS::Partition"
+                },
+                ":iam::aws:policy/AdministratorAccess"
+              ]
+            ]
+          }
+        ],
+        "RoleName": "ElastioInstaller",
+        "Tags": [
+          {
+            "Key": "elastio:resource",
+            "Value": "true"
+          }
+        ]
+      },
+      "Metadata": {
+        "aws:cdk:path": "reds-account-level-stack/elastioInstallerRole/Resource"
+      },
+      "Condition": "elastioInstallerAssumeRoleCondition"
+    },
+    "catalog3F0047B1": {
+      "Type": "AWS::IAM::Role",
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "lambda.amazonaws.com"
+              }
+            }
+          ],
+          "Version": "2012-10-17"
+        },
+        "Tags": [
+          {
+            "Key": "elastio:resource",
+            "Value": "true"
+          }
+        ]
+      },
+      "Metadata": {
+        "aws:cdk:path": "reds-account-level-stack/catalog/Resource"
+      }
+    },
+    "catalogDefaultPolicyFD605694": {
+      "Type": "AWS::IAM::Policy",
+      "Properties": {
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": "s3:PutObject",
+              "Condition": {
+                "StringEquals": {
+                  "aws:ResourceTag/elastio:component": "telemetry"
+                }
+              },
+              "Effect": "Allow",
+              "Resource": "*"
+            },
+            {
+              "Action": "cloudwatch:DescribeAlarmsForMetric",
+              "Effect": "Allow",
+              "Resource": "*"
+            },
+            {
+              "Action": "ssm:GetParameter",
+              "Condition": {
+                "StringEquals": {
+                  "aws:ResourceTag/elastio:component": "telemetry"
+                }
+              },
+              "Effect": "Allow",
+              "Resource": "*"
+            },
+            {
+              "Action": [
+                "logs:CreateLogGroup",
+                "logs:CreateLogStream",
+                "logs:PutLogEvents"
+              ],
+              "Effect": "Allow",
+              "Resource": "arn:aws:logs:*:*:*"
+            },
+            {
+              "Action": "sqs:SendMessage",
+              "Effect": "Allow",
+              "Resource": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:aws:sqs:*:",
+                    {
+                      "Ref": "AWS::AccountId"
+                    },
+                    ":elastio-*"
+                  ]
+                ]
+              }
+            },
+            {
+              "Action": [
+                "dynamodb:Scan",
+                "dynamodb:Query",
+                "dynamodb:GetItem",
+                "dynamodb:PutItem",
+                "dynamodb:UpdateItem",
+                "dynamodb:DeleteItem",
+                "dynamodb:BatchGetItem",
+                "dynamodb:BatchWriteItem",
+                "dynamodb:ConditionCheckItem"
+              ],
+              "Effect": "Allow",
+              "Resource": [
+                {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:aws:dynamodb:*:",
+                      {
+                        "Ref": "AWS::AccountId"
+                      },
+                      ":table/elastio-*"
+                    ]
+                  ]
+                },
+                {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:aws:dynamodb:*:",
+                      {
+                        "Ref": "AWS::AccountId"
+                      },
+                      ":table/elastio-*/index/*"
+                    ]
+                  ]
+                }
+              ]
+            }
+          ],
+          "Version": "2012-10-17"
+        },
+        "PolicyName": "catalogDefaultPolicyFD605694",
+        "Roles": [
+          {
+            "Ref": "catalog3F0047B1"
+          }
+        ]
+      },
+      "Metadata": {
+        "aws:cdk:path": "reds-account-level-stack/catalog/DefaultPolicy/Resource"
+      }
+    },
+    "createVault33ECCB83": {
+      "Type": "AWS::IAM::Role",
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "lambda.amazonaws.com"
+              }
+            }
+          ],
+          "Version": "2012-10-17"
+        },
+        "Tags": [
+          {
+            "Key": "elastio:resource",
+            "Value": "true"
+          }
+        ]
+      },
+      "Metadata": {
+        "aws:cdk:path": "reds-account-level-stack/createVault/Resource"
+      }
+    },
+    "createVaultDefaultPolicy83D7B51D": {
+      "Type": "AWS::IAM::Policy",
+      "Properties": {
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": "s3:PutObject",
+              "Condition": {
+                "StringEquals": {
+                  "aws:ResourceTag/elastio:component": "telemetry"
+                }
+              },
+              "Effect": "Allow",
+              "Resource": "*"
+            },
+            {
+              "Action": "cloudwatch:DescribeAlarmsForMetric",
+              "Effect": "Allow",
+              "Resource": "*"
+            },
+            {
+              "Action": "ssm:GetParameter",
+              "Condition": {
+                "StringEquals": {
+                  "aws:ResourceTag/elastio:component": "telemetry"
+                }
+              },
+              "Effect": "Allow",
+              "Resource": "*"
+            },
+            {
+              "Action": [
+                "logs:CreateLogGroup",
+                "logs:CreateLogStream",
+                "logs:PutLogEvents"
+              ],
+              "Effect": "Allow",
+              "Resource": "arn:aws:logs:*:*:*"
+            },
+            {
+              "Action": "sqs:SendMessage",
+              "Effect": "Allow",
+              "Resource": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:aws:sqs:*:",
+                    {
+                      "Ref": "AWS::AccountId"
+                    },
+                    ":elastio-*"
+                  ]
+                ]
+              }
+            },
+            {
+              "Action": "lambda:InvokeFunction",
+              "Effect": "Allow",
+              "Resource": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:aws:lambda:*:",
+                    {
+                      "Ref": "AWS::AccountId"
+                    },
+                    ":function:elastio-*"
+                  ]
+                ]
+              }
+            },
+            {
+              "Action": [
+                "kms:Decrypt",
+                "kms:CreateKey",
+                "kms:TagResource",
+                "kms:ListResourceTags",
+                "kms:DescribeKey",
+                "kms:GenerateDataKey",
+                "kms:CreateAlias",
+                "kms:ListAliases",
+                "kms:ScheduleKeyDeletion"
+              ],
+              "Effect": "Allow",
+              "Resource": "*"
+            },
+            {
+              "Action": [
+                "s3:CreateBucket",
+                "s3:GetBucketVersioning",
+                "s3:PutBucketTagging",
+                "s3:PutEncryptionConfiguration",
+                "s3:PutLifecycleConfiguration",
+                "s3:PutBucketVersioning",
+                "s3:PutObject",
+                "s3:PutObjectTagging",
+                "s3:ListBucket",
+                "s3:ListBucketVersions"
+              ],
+              "Effect": "Allow",
+              "Resource": "arn:aws:s3:::*"
+            },
+            {
+              "Action": "ec2:DescribeVpcs",
+              "Effect": "Allow",
+              "Resource": "*"
+            }
+          ],
+          "Version": "2012-10-17"
+        },
+        "PolicyName": "createVaultDefaultPolicy83D7B51D",
+        "Roles": [
+          {
+            "Ref": "createVault33ECCB83"
+          }
+        ]
+      },
+      "Metadata": {
+        "aws:cdk:path": "reds-account-level-stack/createVault/DefaultPolicy/Resource"
+      }
+    },
+    "cwpump08DC851B": {
+      "Type": "AWS::IAM::Role",
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "lambda.amazonaws.com"
+              }
+            }
+          ],
+          "Version": "2012-10-17"
+        },
+        "Tags": [
+          {
+            "Key": "elastio:resource",
+            "Value": "true"
+          }
+        ]
+      },
+      "Metadata": {
+        "aws:cdk:path": "reds-account-level-stack/cwpump/Resource"
+      }
+    },
+    "cwpumpDefaultPolicyF8F779B3": {
+      "Type": "AWS::IAM::Policy",
+      "Properties": {
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": "s3:PutObject",
+              "Condition": {
+                "StringEquals": {
+                  "aws:ResourceTag/elastio:component": "telemetry"
+                }
+              },
+              "Effect": "Allow",
+              "Resource": "*"
+            },
+            {
+              "Action": "cloudwatch:DescribeAlarmsForMetric",
+              "Effect": "Allow",
+              "Resource": "*"
+            },
+            {
+              "Action": "ssm:GetParameter",
+              "Condition": {
+                "StringEquals": {
+                  "aws:ResourceTag/elastio:component": "telemetry"
+                }
+              },
+              "Effect": "Allow",
+              "Resource": "*"
+            },
+            {
+              "Action": [
+                "logs:CreateLogGroup",
+                "logs:CreateLogStream",
+                "logs:PutLogEvents"
+              ],
+              "Effect": "Allow",
+              "Resource": "arn:aws:logs:*:*:*"
+            },
+            {
+              "Action": "sqs:SendMessage",
+              "Effect": "Allow",
+              "Resource": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:aws:sqs:*:",
+                    {
+                      "Ref": "AWS::AccountId"
+                    },
+                    ":elastio-*"
+                  ]
+                ]
+              }
+            },
+            {
+              "Action": "cloudwatch:GetMetricData",
+              "Effect": "Allow",
+              "Resource": "*"
+            }
+          ],
+          "Version": "2012-10-17"
+        },
+        "PolicyName": "cwpumpDefaultPolicyF8F779B3",
+        "Roles": [
+          {
+            "Ref": "cwpump08DC851B"
+          }
+        ]
+      },
+      "Metadata": {
+        "aws:cdk:path": "reds-account-level-stack/cwpump/DefaultPolicy/Resource"
+      }
+    },
+    "writeProvisionerC8E50C86": {
+      "Type": "AWS::IAM::Role",
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "lambda.amazonaws.com"
+              }
+            }
+          ],
+          "Version": "2012-10-17"
+        },
+        "Tags": [
+          {
+            "Key": "elastio:resource",
+            "Value": "true"
+          }
+        ]
+      },
+      "Metadata": {
+        "aws:cdk:path": "reds-account-level-stack/writeProvisioner/Resource"
+      }
+    },
+    "writeProvisionerDefaultPolicy0781CE3D": {
+      "Type": "AWS::IAM::Policy",
+      "Properties": {
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": "s3:PutObject",
+              "Condition": {
+                "StringEquals": {
+                  "aws:ResourceTag/elastio:component": "telemetry"
+                }
+              },
+              "Effect": "Allow",
+              "Resource": "*"
+            },
+            {
+              "Action": "cloudwatch:DescribeAlarmsForMetric",
+              "Effect": "Allow",
+              "Resource": "*"
+            },
+            {
+              "Action": "ssm:GetParameter",
+              "Condition": {
+                "StringEquals": {
+                  "aws:ResourceTag/elastio:component": "telemetry"
+                }
+              },
+              "Effect": "Allow",
+              "Resource": "*"
+            },
+            {
+              "Action": [
+                "logs:CreateLogGroup",
+                "logs:CreateLogStream",
+                "logs:PutLogEvents"
+              ],
+              "Effect": "Allow",
+              "Resource": "arn:aws:logs:*:*:*"
+            },
+            {
+              "Action": "sqs:SendMessage",
+              "Effect": "Allow",
+              "Resource": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:aws:sqs:*:",
+                    {
+                      "Ref": "AWS::AccountId"
+                    },
+                    ":elastio-*"
+                  ]
+                ]
+              }
+            },
+            {
+              "Action": [
+                "dynamodb:Scan",
+                "dynamodb:Query",
+                "dynamodb:GetItem",
+                "dynamodb:PutItem",
+                "dynamodb:UpdateItem",
+                "dynamodb:DeleteItem",
+                "dynamodb:BatchGetItem",
+                "dynamodb:BatchWriteItem",
+                "dynamodb:ConditionCheckItem"
+              ],
+              "Effect": "Allow",
+              "Resource": [
+                {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:aws:dynamodb:*:",
+                      {
+                        "Ref": "AWS::AccountId"
+                      },
+                      ":table/elastio-*"
+                    ]
+                  ]
+                },
+                {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:aws:dynamodb:*:",
+                      {
+                        "Ref": "AWS::AccountId"
+                      },
+                      ":table/elastio-*/index/*"
+                    ]
+                  ]
+                }
+              ]
+            },
+            {
+              "Action": [
+                "ecs:DescribeTasks",
+                "ecs:DescribeContainerInstances",
+                "ecs:DescribeServices"
+              ],
+              "Condition": {
+                "StringLike": {
+                  "aws:ResourceTag/elastio:resource": "*"
+                }
+              },
+              "Effect": "Allow",
+              "Resource": "*"
+            },
+            {
+              "Action": "autoscaling:DescribeAutoScalingGroups",
+              "Effect": "Allow",
+              "Resource": "*"
+            },
+            {
+              "Action": "ecs:ListTasks",
+              "Effect": "Allow",
+              "Resource": "*"
+            },
+            {
+              "Action": "ecs:UpdateService",
+              "Condition": {
+                "StringLike": {
+                  "aws:ResourceTag/elastio:resource": "*"
+                }
+              },
+              "Effect": "Allow",
+              "Resource": "*"
+            },
+            {
+              "Action": "ec2:DescribeInstances",
+              "Effect": "Allow",
+              "Resource": "*"
+            },
+            {
+              "Action": "cloudwatch:PutMetricData",
+              "Condition": {
+                "StringEquals": {
+                  "cloudwatch:namespace": "Elastio/Provisioner"
+                }
+              },
+              "Effect": "Allow",
+              "Resource": "*"
+            },
+            {
+              "Action": "kms:Sign",
+              "Condition": {
+                "StringLike": {
+                  "aws:ResourceTag/elastio:service": "*"
+                }
+              },
+              "Effect": "Allow",
+              "Resource": "*"
+            },
+            {
+              "Action": "lambda:InvokeFunction",
+              "Effect": "Allow",
+              "Resource": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:aws:lambda:*:",
+                    {
+                      "Ref": "AWS::AccountId"
+                    },
+                    ":function:elastio-*"
+                  ]
+                ]
+              }
+            }
+          ],
+          "Version": "2012-10-17"
+        },
+        "PolicyName": "writeProvisionerDefaultPolicy0781CE3D",
+        "Roles": [
+          {
+            "Ref": "writeProvisionerC8E50C86"
+          }
+        ]
+      },
+      "Metadata": {
+        "aws:cdk:path": "reds-account-level-stack/writeProvisioner/DefaultPolicy/Resource"
+      }
+    },
+    "readProvisioner1E1B21EE": {
+      "Type": "AWS::IAM::Role",
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "lambda.amazonaws.com"
+              }
+            }
+          ],
+          "Version": "2012-10-17"
+        },
+        "Tags": [
+          {
+            "Key": "elastio:resource",
+            "Value": "true"
+          }
+        ]
+      },
+      "Metadata": {
+        "aws:cdk:path": "reds-account-level-stack/readProvisioner/Resource"
+      }
+    },
+    "readProvisionerDefaultPolicyE6896F2E": {
+      "Type": "AWS::IAM::Policy",
+      "Properties": {
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": "s3:PutObject",
+              "Condition": {
+                "StringEquals": {
+                  "aws:ResourceTag/elastio:component": "telemetry"
+                }
+              },
+              "Effect": "Allow",
+              "Resource": "*"
+            },
+            {
+              "Action": "cloudwatch:DescribeAlarmsForMetric",
+              "Effect": "Allow",
+              "Resource": "*"
+            },
+            {
+              "Action": "ssm:GetParameter",
+              "Condition": {
+                "StringEquals": {
+                  "aws:ResourceTag/elastio:component": "telemetry"
+                }
+              },
+              "Effect": "Allow",
+              "Resource": "*"
+            },
+            {
+              "Action": [
+                "logs:CreateLogGroup",
+                "logs:CreateLogStream",
+                "logs:PutLogEvents"
+              ],
+              "Effect": "Allow",
+              "Resource": "arn:aws:logs:*:*:*"
+            },
+            {
+              "Action": "sqs:SendMessage",
+              "Effect": "Allow",
+              "Resource": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:aws:sqs:*:",
+                    {
+                      "Ref": "AWS::AccountId"
+                    },
+                    ":elastio-*"
+                  ]
+                ]
+              }
+            },
+            {
+              "Action": [
+                "dynamodb:Scan",
+                "dynamodb:Query",
+                "dynamodb:GetItem",
+                "dynamodb:PutItem",
+                "dynamodb:UpdateItem",
+                "dynamodb:DeleteItem",
+                "dynamodb:BatchGetItem",
+                "dynamodb:BatchWriteItem",
+                "dynamodb:ConditionCheckItem"
+              ],
+              "Effect": "Allow",
+              "Resource": [
+                {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:aws:dynamodb:*:",
+                      {
+                        "Ref": "AWS::AccountId"
+                      },
+                      ":table/elastio-*"
+                    ]
+                  ]
+                },
+                {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:aws:dynamodb:*:",
+                      {
+                        "Ref": "AWS::AccountId"
+                      },
+                      ":table/elastio-*/index/*"
+                    ]
+                  ]
+                }
+              ]
+            },
+            {
+              "Action": [
+                "ecs:DescribeTasks",
+                "ecs:DescribeContainerInstances",
+                "ecs:DescribeServices"
+              ],
+              "Condition": {
+                "StringLike": {
+                  "aws:ResourceTag/elastio:resource": "*"
+                }
+              },
+              "Effect": "Allow",
+              "Resource": "*"
+            },
+            {
+              "Action": "autoscaling:DescribeAutoScalingGroups",
+              "Effect": "Allow",
+              "Resource": "*"
+            },
+            {
+              "Action": "ecs:ListTasks",
+              "Effect": "Allow",
+              "Resource": "*"
+            },
+            {
+              "Action": "ecs:UpdateService",
+              "Condition": {
+                "StringLike": {
+                  "aws:ResourceTag/elastio:resource": "*"
+                }
+              },
+              "Effect": "Allow",
+              "Resource": "*"
+            },
+            {
+              "Action": "ec2:DescribeInstances",
+              "Effect": "Allow",
+              "Resource": "*"
+            },
+            {
+              "Action": "cloudwatch:PutMetricData",
+              "Condition": {
+                "StringEquals": {
+                  "cloudwatch:namespace": "Elastio/Provisioner"
+                }
+              },
+              "Effect": "Allow",
+              "Resource": "*"
+            },
+            {
+              "Action": "kms:Sign",
+              "Condition": {
+                "StringLike": {
+                  "aws:ResourceTag/elastio:service": "*"
+                }
+              },
+              "Effect": "Allow",
+              "Resource": "*"
+            },
+            {
+              "Action": "lambda:InvokeFunction",
+              "Effect": "Allow",
+              "Resource": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:aws:lambda:*:",
+                    {
+                      "Ref": "AWS::AccountId"
+                    },
+                    ":function:elastio-*"
+                  ]
+                ]
+              }
+            }
+          ],
+          "Version": "2012-10-17"
+        },
+        "PolicyName": "readProvisionerDefaultPolicyE6896F2E",
+        "Roles": [
+          {
+            "Ref": "readProvisioner1E1B21EE"
+          }
+        ]
+      },
+      "Metadata": {
+        "aws:cdk:path": "reds-account-level-stack/readProvisioner/DefaultPolicy/Resource"
+      }
+    },
+    "deleteProvisioner53C1591A": {
+      "Type": "AWS::IAM::Role",
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "lambda.amazonaws.com"
+              }
+            }
+          ],
+          "Version": "2012-10-17"
+        },
+        "Tags": [
+          {
+            "Key": "elastio:resource",
+            "Value": "true"
+          }
+        ]
+      },
+      "Metadata": {
+        "aws:cdk:path": "reds-account-level-stack/deleteProvisioner/Resource"
+      }
+    },
+    "deleteProvisionerDefaultPolicyD084EC8D": {
+      "Type": "AWS::IAM::Policy",
+      "Properties": {
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": "s3:PutObject",
+              "Condition": {
+                "StringEquals": {
+                  "aws:ResourceTag/elastio:component": "telemetry"
+                }
+              },
+              "Effect": "Allow",
+              "Resource": "*"
+            },
+            {
+              "Action": "cloudwatch:DescribeAlarmsForMetric",
+              "Effect": "Allow",
+              "Resource": "*"
+            },
+            {
+              "Action": "ssm:GetParameter",
+              "Condition": {
+                "StringEquals": {
+                  "aws:ResourceTag/elastio:component": "telemetry"
+                }
+              },
+              "Effect": "Allow",
+              "Resource": "*"
+            },
+            {
+              "Action": [
+                "logs:CreateLogGroup",
+                "logs:CreateLogStream",
+                "logs:PutLogEvents"
+              ],
+              "Effect": "Allow",
+              "Resource": "arn:aws:logs:*:*:*"
+            },
+            {
+              "Action": "sqs:SendMessage",
+              "Effect": "Allow",
+              "Resource": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:aws:sqs:*:",
+                    {
+                      "Ref": "AWS::AccountId"
+                    },
+                    ":elastio-*"
+                  ]
+                ]
+              }
+            },
+            {
+              "Action": [
+                "dynamodb:Scan",
+                "dynamodb:Query",
+                "dynamodb:GetItem",
+                "dynamodb:PutItem",
+                "dynamodb:UpdateItem",
+                "dynamodb:DeleteItem",
+                "dynamodb:BatchGetItem",
+                "dynamodb:BatchWriteItem",
+                "dynamodb:ConditionCheckItem"
+              ],
+              "Effect": "Allow",
+              "Resource": [
+                {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:aws:dynamodb:*:",
+                      {
+                        "Ref": "AWS::AccountId"
+                      },
+                      ":table/elastio-*"
+                    ]
+                  ]
+                },
+                {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:aws:dynamodb:*:",
+                      {
+                        "Ref": "AWS::AccountId"
+                      },
+                      ":table/elastio-*/index/*"
+                    ]
+                  ]
+                }
+              ]
+            },
+            {
+              "Action": [
+                "ecs:DescribeTasks",
+                "ecs:DescribeContainerInstances",
+                "ecs:DescribeServices"
+              ],
+              "Condition": {
+                "StringLike": {
+                  "aws:ResourceTag/elastio:resource": "*"
+                }
+              },
+              "Effect": "Allow",
+              "Resource": "*"
+            },
+            {
+              "Action": "autoscaling:DescribeAutoScalingGroups",
+              "Effect": "Allow",
+              "Resource": "*"
+            },
+            {
+              "Action": "ecs:ListTasks",
+              "Effect": "Allow",
+              "Resource": "*"
+            },
+            {
+              "Action": "ecs:UpdateService",
+              "Condition": {
+                "StringLike": {
+                  "aws:ResourceTag/elastio:resource": "*"
+                }
+              },
+              "Effect": "Allow",
+              "Resource": "*"
+            },
+            {
+              "Action": "ec2:DescribeInstances",
+              "Effect": "Allow",
+              "Resource": "*"
+            },
+            {
+              "Action": "cloudwatch:PutMetricData",
+              "Condition": {
+                "StringEquals": {
+                  "cloudwatch:namespace": "Elastio/Provisioner"
+                }
+              },
+              "Effect": "Allow",
+              "Resource": "*"
+            },
+            {
+              "Action": "kms:Sign",
+              "Condition": {
+                "StringLike": {
+                  "aws:ResourceTag/elastio:service": "*"
+                }
+              },
+              "Effect": "Allow",
+              "Resource": "*"
+            },
+            {
+              "Action": "lambda:InvokeFunction",
+              "Effect": "Allow",
+              "Resource": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:aws:lambda:*:",
+                    {
+                      "Ref": "AWS::AccountId"
+                    },
+                    ":function:elastio-*"
+                  ]
+                ]
+              }
+            }
+          ],
+          "Version": "2012-10-17"
+        },
+        "PolicyName": "deleteProvisionerDefaultPolicyD084EC8D",
+        "Roles": [
+          {
+            "Ref": "deleteProvisioner53C1591A"
+          }
+        ]
+      },
+      "Metadata": {
+        "aws:cdk:path": "reds-account-level-stack/deleteProvisioner/DefaultPolicy/Resource"
+      }
+    },
+    "leaseReaper40B7179E": {
+      "Type": "AWS::IAM::Role",
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "lambda.amazonaws.com"
+              }
+            }
+          ],
+          "Version": "2012-10-17"
+        },
+        "Tags": [
+          {
+            "Key": "elastio:resource",
+            "Value": "true"
+          }
+        ]
+      },
+      "Metadata": {
+        "aws:cdk:path": "reds-account-level-stack/leaseReaper/Resource"
+      }
+    },
+    "leaseReaperDefaultPolicy48712B86": {
+      "Type": "AWS::IAM::Policy",
+      "Properties": {
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": "s3:PutObject",
+              "Condition": {
+                "StringEquals": {
+                  "aws:ResourceTag/elastio:component": "telemetry"
+                }
+              },
+              "Effect": "Allow",
+              "Resource": "*"
+            },
+            {
+              "Action": "cloudwatch:DescribeAlarmsForMetric",
+              "Effect": "Allow",
+              "Resource": "*"
+            },
+            {
+              "Action": "ssm:GetParameter",
+              "Condition": {
+                "StringEquals": {
+                  "aws:ResourceTag/elastio:component": "telemetry"
+                }
+              },
+              "Effect": "Allow",
+              "Resource": "*"
+            },
+            {
+              "Action": [
+                "logs:CreateLogGroup",
+                "logs:CreateLogStream",
+                "logs:PutLogEvents"
+              ],
+              "Effect": "Allow",
+              "Resource": "arn:aws:logs:*:*:*"
+            },
+            {
+              "Action": "sqs:SendMessage",
+              "Effect": "Allow",
+              "Resource": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:aws:sqs:*:",
+                    {
+                      "Ref": "AWS::AccountId"
+                    },
+                    ":elastio-*"
+                  ]
+                ]
+              }
+            },
+            {
+              "Action": [
+                "dynamodb:Scan",
+                "dynamodb:Query",
+                "dynamodb:GetItem",
+                "dynamodb:PutItem",
+                "dynamodb:UpdateItem",
+                "dynamodb:DeleteItem",
+                "dynamodb:BatchGetItem",
+                "dynamodb:BatchWriteItem",
+                "dynamodb:ConditionCheckItem"
+              ],
+              "Effect": "Allow",
+              "Resource": [
+                {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:aws:dynamodb:*:",
+                      {
+                        "Ref": "AWS::AccountId"
+                      },
+                      ":table/elastio-*"
+                    ]
+                  ]
+                },
+                {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:aws:dynamodb:*:",
+                      {
+                        "Ref": "AWS::AccountId"
+                      },
+                      ":table/elastio-*/index/*"
+                    ]
+                  ]
+                }
+              ]
+            },
+            {
+              "Action": "cloudwatch:PutMetricData",
+              "Effect": "Allow",
+              "Resource": "*"
+            }
+          ],
+          "Version": "2012-10-17"
+        },
+        "PolicyName": "leaseReaperDefaultPolicy48712B86",
+        "Roles": [
+          {
+            "Ref": "leaseReaper40B7179E"
+          }
+        ]
+      },
+      "Metadata": {
+        "aws:cdk:path": "reds-account-level-stack/leaseReaper/DefaultPolicy/Resource"
+      }
+    },
+    "provisionerBlueStackD94369FB": {
+      "Type": "AWS::IAM::Role",
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "lambda.amazonaws.com"
+              }
+            }
+          ],
+          "Version": "2012-10-17"
+        },
+        "Tags": [
+          {
+            "Key": "elastio:resource",
+            "Value": "true"
+          }
+        ]
+      },
+      "Metadata": {
+        "aws:cdk:path": "reds-account-level-stack/provisionerBlueStack/Resource"
+      }
+    },
+    "provisionerBlueStackDefaultPolicyCF176224": {
+      "Type": "AWS::IAM::Policy",
+      "Properties": {
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": "s3:PutObject",
+              "Condition": {
+                "StringEquals": {
+                  "aws:ResourceTag/elastio:component": "telemetry"
+                }
+              },
+              "Effect": "Allow",
+              "Resource": "*"
+            },
+            {
+              "Action": "cloudwatch:DescribeAlarmsForMetric",
+              "Effect": "Allow",
+              "Resource": "*"
+            },
+            {
+              "Action": "ssm:GetParameter",
+              "Condition": {
+                "StringEquals": {
+                  "aws:ResourceTag/elastio:component": "telemetry"
+                }
+              },
+              "Effect": "Allow",
+              "Resource": "*"
+            },
+            {
+              "Action": [
+                "logs:CreateLogGroup",
+                "logs:CreateLogStream",
+                "logs:PutLogEvents"
+              ],
+              "Effect": "Allow",
+              "Resource": "arn:aws:logs:*:*:*"
+            },
+            {
+              "Action": "sqs:SendMessage",
+              "Effect": "Allow",
+              "Resource": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:aws:sqs:*:",
+                    {
+                      "Ref": "AWS::AccountId"
+                    },
+                    ":elastio-*"
+                  ]
+                ]
+              }
+            },
+            {
+              "Action": [
+                "dynamodb:Scan",
+                "dynamodb:Query",
+                "dynamodb:GetItem",
+                "dynamodb:PutItem",
+                "dynamodb:UpdateItem",
+                "dynamodb:DeleteItem",
+                "dynamodb:BatchGetItem",
+                "dynamodb:BatchWriteItem",
+                "dynamodb:ConditionCheckItem"
+              ],
+              "Effect": "Allow",
+              "Resource": [
+                {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:aws:dynamodb:*:",
+                      {
+                        "Ref": "AWS::AccountId"
+                      },
+                      ":table/elastio-*"
+                    ]
+                  ]
+                },
+                {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:aws:dynamodb:*:",
+                      {
+                        "Ref": "AWS::AccountId"
+                      },
+                      ":table/elastio-*/index/*"
+                    ]
+                  ]
+                }
+              ]
+            }
+          ],
+          "Version": "2012-10-17"
+        },
+        "PolicyName": "provisionerBlueStackDefaultPolicyCF176224",
+        "Roles": [
+          {
+            "Ref": "provisionerBlueStackD94369FB"
+          }
+        ]
+      },
+      "Metadata": {
+        "aws:cdk:path": "reds-account-level-stack/provisionerBlueStack/DefaultPolicy/Resource"
+      }
+    },
+    "scalezLeaseLifecycle28E32345": {
+      "Type": "AWS::IAM::Role",
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "lambda.amazonaws.com"
+              }
+            }
+          ],
+          "Version": "2012-10-17"
+        },
+        "Tags": [
+          {
+            "Key": "elastio:resource",
+            "Value": "true"
+          }
+        ]
+      },
+      "Metadata": {
+        "aws:cdk:path": "reds-account-level-stack/scalezLeaseLifecycle/Resource"
+      }
+    },
+    "scalezLeaseLifecycleDefaultPolicy6B31916E": {
+      "Type": "AWS::IAM::Policy",
+      "Properties": {
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": "s3:PutObject",
+              "Condition": {
+                "StringEquals": {
+                  "aws:ResourceTag/elastio:component": "telemetry"
+                }
+              },
+              "Effect": "Allow",
+              "Resource": "*"
+            },
+            {
+              "Action": "cloudwatch:DescribeAlarmsForMetric",
+              "Effect": "Allow",
+              "Resource": "*"
+            },
+            {
+              "Action": "ssm:GetParameter",
+              "Condition": {
+                "StringEquals": {
+                  "aws:ResourceTag/elastio:component": "telemetry"
+                }
+              },
+              "Effect": "Allow",
+              "Resource": "*"
+            },
+            {
+              "Action": [
+                "logs:CreateLogGroup",
+                "logs:CreateLogStream",
+                "logs:PutLogEvents"
+              ],
+              "Effect": "Allow",
+              "Resource": "arn:aws:logs:*:*:*"
+            },
+            {
+              "Action": "sqs:SendMessage",
+              "Effect": "Allow",
+              "Resource": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:aws:sqs:*:",
+                    {
+                      "Ref": "AWS::AccountId"
+                    },
+                    ":elastio-*"
+                  ]
+                ]
+              }
+            },
+            {
+              "Action": [
+                "dynamodb:Scan",
+                "dynamodb:Query",
+                "dynamodb:GetItem",
+                "dynamodb:PutItem",
+                "dynamodb:UpdateItem",
+                "dynamodb:DeleteItem",
+                "dynamodb:BatchGetItem",
+                "dynamodb:BatchWriteItem",
+                "dynamodb:ConditionCheckItem"
+              ],
+              "Effect": "Allow",
+              "Resource": "*"
+            },
+            {
+              "Action": [
+                "ecs:DescribeTasks",
+                "ecs:ListTasks",
+                "ecs:DescribeServices",
+                "ecs:DescribeContainerInstances"
+              ],
+              "Condition": {
+                "StringLike": {
+                  "ecs:cluster": {
+                    "Fn::Join": [
+                      "",
+                      [
+                        "arn:aws:ecs:*:",
+                        {
+                          "Ref": "AWS::AccountId"
+                        },
+                        ":cluster/elastio-*"
+                      ]
+                    ]
+                  }
+                }
+              },
+              "Effect": "Allow",
+              "Resource": "*",
+              "Sid": "ECSReadOnlyActions"
+            },
+            {
+              "Action": "ecs:UpdateService",
+              "Effect": "Allow",
+              "Resource": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:aws:ecs:*:",
+                    {
+                      "Ref": "AWS::AccountId"
+                    },
+                    ":service/elastio-*"
+                  ]
+                ]
+              },
+              "Sid": "ECSWriteActionsElastioServices"
+            },
+            {
+              "Action": [
+                "autoscaling:DescribeAutoScalingGroups",
+                "ec2:DescribeInstances"
+              ],
+              "Effect": "Allow",
+              "Resource": "*",
+              "Sid": "VMsReadOnlyActions"
+            },
+            {
+              "Action": "autoscaling:SetDesiredCapacity",
+              "Condition": {
+                "StringLike": {
+                  "aws:ResourceTag/elastio:resource": "*"
+                }
+              },
+              "Effect": "Allow",
+              "Resource": "*",
+              "Sid": "VMsWriteActionsElastioServices"
+            },
+            {
+              "Action": "cloudwatch:PutMetricData",
+              "Effect": "Allow",
+              "Resource": "*"
+            },
+            {
+              "Action": "kms:Sign",
+              "Condition": {
+                "StringLike": {
+                  "aws:ResourceTag/elastio:service": "*"
+                }
+              },
+              "Effect": "Allow",
+              "Resource": "*"
+            }
+          ],
+          "Version": "2012-10-17"
+        },
+        "PolicyName": "scalezLeaseLifecycleDefaultPolicy6B31916E",
+        "Roles": [
+          {
+            "Ref": "scalezLeaseLifecycle28E32345"
+          }
+        ]
+      },
+      "Metadata": {
+        "aws:cdk:path": "reds-account-level-stack/scalezLeaseLifecycle/DefaultPolicy/Resource"
+      }
+    },
+    "jobsStatusService1B791F9F": {
+      "Type": "AWS::IAM::Role",
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "lambda.amazonaws.com"
+              }
+            }
+          ],
+          "Version": "2012-10-17"
+        },
+        "Tags": [
+          {
+            "Key": "elastio:resource",
+            "Value": "true"
+          }
+        ]
+      },
+      "Metadata": {
+        "aws:cdk:path": "reds-account-level-stack/jobsStatusService/Resource"
+      }
+    },
+    "jobsStatusServiceDefaultPolicy027C2E61": {
+      "Type": "AWS::IAM::Policy",
+      "Properties": {
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": "s3:PutObject",
+              "Condition": {
+                "StringEquals": {
+                  "aws:ResourceTag/elastio:component": "telemetry"
+                }
+              },
+              "Effect": "Allow",
+              "Resource": "*"
+            },
+            {
+              "Action": "cloudwatch:DescribeAlarmsForMetric",
+              "Effect": "Allow",
+              "Resource": "*"
+            },
+            {
+              "Action": "ssm:GetParameter",
+              "Condition": {
+                "StringEquals": {
+                  "aws:ResourceTag/elastio:component": "telemetry"
+                }
+              },
+              "Effect": "Allow",
+              "Resource": "*"
+            },
+            {
+              "Action": [
+                "logs:CreateLogGroup",
+                "logs:CreateLogStream",
+                "logs:PutLogEvents"
+              ],
+              "Effect": "Allow",
+              "Resource": "arn:aws:logs:*:*:*"
+            },
+            {
+              "Action": "sqs:SendMessage",
+              "Effect": "Allow",
+              "Resource": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:aws:sqs:*:",
+                    {
+                      "Ref": "AWS::AccountId"
+                    },
+                    ":elastio-*"
+                  ]
+                ]
+              }
+            },
+            {
+              "Action": [
+                "dynamodb:Scan",
+                "dynamodb:Query",
+                "dynamodb:GetItem",
+                "dynamodb:PutItem",
+                "dynamodb:UpdateItem",
+                "dynamodb:DeleteItem",
+                "dynamodb:BatchGetItem",
+                "dynamodb:BatchWriteItem",
+                "dynamodb:ConditionCheckItem"
+              ],
+              "Effect": "Allow",
+              "Resource": [
+                {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:aws:dynamodb:*:",
+                      {
+                        "Ref": "AWS::AccountId"
+                      },
+                      ":table/elastio-*jobs-status"
+                    ]
+                  ]
+                },
+                {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:aws:dynamodb:*:",
+                      {
+                        "Ref": "AWS::AccountId"
+                      },
+                      ":table/elastio-*jobs-status/index/*"
+                    ]
+                  ]
+                }
+              ]
+            },
+            {
+              "Action": "sns:Publish",
+              "Effect": "Allow",
+              "Resource": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:aws:sns:*:",
+                    {
+                      "Ref": "AWS::AccountId"
+                    },
+                    ":elastio-*jobs-status-notifications"
+                  ]
+                ]
+              }
+            },
+            {
+              "Action": "batch:TerminateJob",
+              "Effect": "Allow",
+              "Resource": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:aws:batch:*:",
+                    {
+                      "Ref": "AWS::AccountId"
+                    },
+                    ":job/elastio-*"
+                  ]
+                ]
+              }
+            }
+          ],
+          "Version": "2012-10-17"
+        },
+        "PolicyName": "jobsStatusServiceDefaultPolicy027C2E61",
+        "Roles": [
+          {
+            "Ref": "jobsStatusService1B791F9F"
+          }
+        ]
+      },
+      "Metadata": {
+        "aws:cdk:path": "reds-account-level-stack/jobsStatusService/DefaultPolicy/Resource"
+      }
+    },
+    "jobsStatusReaper9541A1BA": {
+      "Type": "AWS::IAM::Role",
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "lambda.amazonaws.com"
+              }
+            }
+          ],
+          "Version": "2012-10-17"
+        },
+        "Tags": [
+          {
+            "Key": "elastio:resource",
+            "Value": "true"
+          }
+        ]
+      },
+      "Metadata": {
+        "aws:cdk:path": "reds-account-level-stack/jobsStatusReaper/Resource"
+      }
+    },
+    "jobsStatusReaperDefaultPolicyA6CFEE65": {
+      "Type": "AWS::IAM::Policy",
+      "Properties": {
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": "s3:PutObject",
+              "Condition": {
+                "StringEquals": {
+                  "aws:ResourceTag/elastio:component": "telemetry"
+                }
+              },
+              "Effect": "Allow",
+              "Resource": "*"
+            },
+            {
+              "Action": "cloudwatch:DescribeAlarmsForMetric",
+              "Effect": "Allow",
+              "Resource": "*"
+            },
+            {
+              "Action": "ssm:GetParameter",
+              "Condition": {
+                "StringEquals": {
+                  "aws:ResourceTag/elastio:component": "telemetry"
+                }
+              },
+              "Effect": "Allow",
+              "Resource": "*"
+            },
+            {
+              "Action": [
+                "logs:CreateLogGroup",
+                "logs:CreateLogStream",
+                "logs:PutLogEvents"
+              ],
+              "Effect": "Allow",
+              "Resource": "arn:aws:logs:*:*:*"
+            },
+            {
+              "Action": "sqs:SendMessage",
+              "Effect": "Allow",
+              "Resource": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:aws:sqs:*:",
+                    {
+                      "Ref": "AWS::AccountId"
+                    },
+                    ":elastio-*"
+                  ]
+                ]
+              }
+            },
+            {
+              "Action": [
+                "dynamodb:Scan",
+                "dynamodb:Query",
+                "dynamodb:GetItem",
+                "dynamodb:PutItem",
+                "dynamodb:UpdateItem",
+                "dynamodb:DeleteItem",
+                "dynamodb:BatchGetItem",
+                "dynamodb:BatchWriteItem",
+                "dynamodb:ConditionCheckItem"
+              ],
+              "Effect": "Allow",
+              "Resource": [
+                {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:aws:dynamodb:*:",
+                      {
+                        "Ref": "AWS::AccountId"
+                      },
+                      ":table/elastio-*jobs-status"
+                    ]
+                  ]
+                },
+                {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:aws:dynamodb:*:",
+                      {
+                        "Ref": "AWS::AccountId"
+                      },
+                      ":table/elastio-*jobs-status/index/*"
+                    ]
+                  ]
+                }
+              ]
+            },
+            {
+              "Action": "sns:Publish",
+              "Effect": "Allow",
+              "Resource": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:aws:sns:*:",
+                    {
+                      "Ref": "AWS::AccountId"
+                    },
+                    ":elastio-*jobs-status-notifications"
+                  ]
+                ]
+              }
+            }
+          ],
+          "Version": "2012-10-17"
+        },
+        "PolicyName": "jobsStatusReaperDefaultPolicyA6CFEE65",
+        "Roles": [
+          {
+            "Ref": "jobsStatusReaper9541A1BA"
+          }
+        ]
+      },
+      "Metadata": {
+        "aws:cdk:path": "reds-account-level-stack/jobsStatusReaper/DefaultPolicy/Resource"
+      }
+    },
+    "jobsStatusAwsBatchHandlerE44B8522": {
+      "Type": "AWS::IAM::Role",
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "lambda.amazonaws.com"
+              }
+            }
+          ],
+          "Version": "2012-10-17"
+        },
+        "Tags": [
+          {
+            "Key": "elastio:resource",
+            "Value": "true"
+          }
+        ]
+      },
+      "Metadata": {
+        "aws:cdk:path": "reds-account-level-stack/jobsStatusAwsBatchHandler/Resource"
+      }
+    },
+    "jobsStatusAwsBatchHandlerDefaultPolicy9D0BE4F8": {
+      "Type": "AWS::IAM::Policy",
+      "Properties": {
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": "s3:PutObject",
+              "Condition": {
+                "StringEquals": {
+                  "aws:ResourceTag/elastio:component": "telemetry"
+                }
+              },
+              "Effect": "Allow",
+              "Resource": "*"
+            },
+            {
+              "Action": "cloudwatch:DescribeAlarmsForMetric",
+              "Effect": "Allow",
+              "Resource": "*"
+            },
+            {
+              "Action": "ssm:GetParameter",
+              "Condition": {
+                "StringEquals": {
+                  "aws:ResourceTag/elastio:component": "telemetry"
+                }
+              },
+              "Effect": "Allow",
+              "Resource": "*"
+            },
+            {
+              "Action": [
+                "logs:CreateLogGroup",
+                "logs:CreateLogStream",
+                "logs:PutLogEvents"
+              ],
+              "Effect": "Allow",
+              "Resource": "arn:aws:logs:*:*:*"
+            },
+            {
+              "Action": "sqs:SendMessage",
+              "Effect": "Allow",
+              "Resource": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:aws:sqs:*:",
+                    {
+                      "Ref": "AWS::AccountId"
+                    },
+                    ":elastio-*"
+                  ]
+                ]
+              }
+            },
+            {
+              "Action": [
+                "dynamodb:Scan",
+                "dynamodb:Query",
+                "dynamodb:GetItem",
+                "dynamodb:PutItem",
+                "dynamodb:UpdateItem",
+                "dynamodb:DeleteItem",
+                "dynamodb:BatchGetItem",
+                "dynamodb:BatchWriteItem",
+                "dynamodb:ConditionCheckItem"
+              ],
+              "Effect": "Allow",
+              "Resource": [
+                {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:aws:dynamodb:*:",
+                      {
+                        "Ref": "AWS::AccountId"
+                      },
+                      ":table/elastio-*jobs-status"
+                    ]
+                  ]
+                },
+                {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:aws:dynamodb:*:",
+                      {
+                        "Ref": "AWS::AccountId"
+                      },
+                      ":table/elastio-*jobs-status/index/*"
+                    ]
+                  ]
+                }
+              ]
+            },
+            {
+              "Action": "sns:Publish",
+              "Effect": "Allow",
+              "Resource": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:aws:sns:*:",
+                    {
+                      "Ref": "AWS::AccountId"
+                    },
+                    ":elastio-*jobs-status-notifications"
+                  ]
+                ]
+              }
+            }
+          ],
+          "Version": "2012-10-17"
+        },
+        "PolicyName": "jobsStatusAwsBatchHandlerDefaultPolicy9D0BE4F8",
+        "Roles": [
+          {
+            "Ref": "jobsStatusAwsBatchHandlerE44B8522"
+          }
+        ]
+      },
+      "Metadata": {
+        "aws:cdk:path": "reds-account-level-stack/jobsStatusAwsBatchHandler/DefaultPolicy/Resource"
+      }
+    },
+    "jobsStatusServiceBlueStack6D8E251A": {
+      "Type": "AWS::IAM::Role",
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "lambda.amazonaws.com"
+              }
+            }
+          ],
+          "Version": "2012-10-17"
+        },
+        "Tags": [
+          {
+            "Key": "elastio:resource",
+            "Value": "true"
+          }
+        ]
+      },
+      "Metadata": {
+        "aws:cdk:path": "reds-account-level-stack/jobsStatusServiceBlueStack/Resource"
+      }
+    },
+    "jobsStatusServiceBlueStackDefaultPolicy0D24A4E3": {
+      "Type": "AWS::IAM::Policy",
+      "Properties": {
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": "s3:PutObject",
+              "Condition": {
+                "StringEquals": {
+                  "aws:ResourceTag/elastio:component": "telemetry"
+                }
+              },
+              "Effect": "Allow",
+              "Resource": "*"
+            },
+            {
+              "Action": "cloudwatch:DescribeAlarmsForMetric",
+              "Effect": "Allow",
+              "Resource": "*"
+            },
+            {
+              "Action": "ssm:GetParameter",
+              "Condition": {
+                "StringEquals": {
+                  "aws:ResourceTag/elastio:component": "telemetry"
+                }
+              },
+              "Effect": "Allow",
+              "Resource": "*"
+            },
+            {
+              "Action": [
+                "logs:CreateLogGroup",
+                "logs:CreateLogStream",
+                "logs:PutLogEvents"
+              ],
+              "Effect": "Allow",
+              "Resource": "arn:aws:logs:*:*:*"
+            },
+            {
+              "Action": "sqs:SendMessage",
+              "Effect": "Allow",
+              "Resource": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:aws:sqs:*:",
+                    {
+                      "Ref": "AWS::AccountId"
+                    },
+                    ":elastio-*"
+                  ]
+                ]
+              }
+            },
+            {
+              "Action": [
+                "dynamodb:Scan",
+                "dynamodb:Query",
+                "dynamodb:GetItem",
+                "dynamodb:PutItem",
+                "dynamodb:UpdateItem",
+                "dynamodb:DeleteItem",
+                "dynamodb:BatchGetItem",
+                "dynamodb:BatchWriteItem",
+                "dynamodb:ConditionCheckItem"
+              ],
+              "Effect": "Allow",
+              "Resource": [
+                {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:aws:dynamodb:*:",
+                      {
+                        "Ref": "AWS::AccountId"
+                      },
+                      ":table/elastio-*jobs-status"
+                    ]
+                  ]
+                },
+                {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:aws:dynamodb:*:",
+                      {
+                        "Ref": "AWS::AccountId"
+                      },
+                      ":table/elastio-*jobs-status/index/*"
+                    ]
+                  ]
+                }
+              ]
+            },
+            {
+              "Action": "sns:Publish",
+              "Effect": "Allow",
+              "Resource": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:aws:sns:*:",
+                    {
+                      "Ref": "AWS::AccountId"
+                    },
+                    ":elastio-*jobs-status-notifications"
+                  ]
+                ]
+              }
+            }
+          ],
+          "Version": "2012-10-17"
+        },
+        "PolicyName": "jobsStatusServiceBlueStackDefaultPolicy0D24A4E3",
+        "Roles": [
+          {
+            "Ref": "jobsStatusServiceBlueStack6D8E251A"
+          }
+        ]
+      },
+      "Metadata": {
+        "aws:cdk:path": "reds-account-level-stack/jobsStatusServiceBlueStack/DefaultPolicy/Resource"
+      }
+    },
+    "bgJobsService0B958966": {
+      "Type": "AWS::IAM::Role",
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "lambda.amazonaws.com"
+              }
+            }
+          ],
+          "Version": "2012-10-17"
+        },
+        "Tags": [
+          {
+            "Key": "elastio:resource",
+            "Value": "true"
+          }
+        ]
+      },
+      "Metadata": {
+        "aws:cdk:path": "reds-account-level-stack/bgJobsService/Resource"
+      }
+    },
+    "bgJobsServiceDefaultPolicy0A4787C7": {
+      "Type": "AWS::IAM::Policy",
+      "Properties": {
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": "s3:PutObject",
+              "Condition": {
+                "StringEquals": {
+                  "aws:ResourceTag/elastio:component": "telemetry"
+                }
+              },
+              "Effect": "Allow",
+              "Resource": "*"
+            },
+            {
+              "Action": "cloudwatch:DescribeAlarmsForMetric",
+              "Effect": "Allow",
+              "Resource": "*"
+            },
+            {
+              "Action": "ssm:GetParameter",
+              "Condition": {
+                "StringEquals": {
+                  "aws:ResourceTag/elastio:component": "telemetry"
+                }
+              },
+              "Effect": "Allow",
+              "Resource": "*"
+            },
+            {
+              "Action": [
+                "logs:CreateLogGroup",
+                "logs:CreateLogStream",
+                "logs:PutLogEvents"
+              ],
+              "Effect": "Allow",
+              "Resource": "arn:aws:logs:*:*:*"
+            },
+            {
+              "Action": "sqs:SendMessage",
+              "Effect": "Allow",
+              "Resource": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:aws:sqs:*:",
+                    {
+                      "Ref": "AWS::AccountId"
+                    },
+                    ":elastio-*"
+                  ]
+                ]
+              }
+            },
+            {
+              "Action": "ssm:GetParameter",
+              "Condition": {
+                "StringLike": {
+                  "aws:ResourceTag/elastio:resource": "*"
+                }
+              },
+              "Effect": "Allow",
+              "Resource": "*"
+            },
+            {
+              "Action": "tag:GetResources",
+              "Effect": "Allow",
+              "Resource": "*"
+            },
+            {
+              "Action": [
+                "batch:DescribeJobDefinitions",
+                "batch:DescribeJobQueues"
+              ],
+              "Effect": "Allow",
+              "Resource": "*",
+              "Sid": "BatchReadOnlyActions"
+            },
+            {
+              "Action": "batch:SubmitJob",
+              "Effect": "Allow",
+              "Resource": [
+                {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:aws:batch:*:",
+                      {
+                        "Ref": "AWS::AccountId"
+                      },
+                      ":job-definition/elastio-*"
+                    ]
+                  ]
+                },
+                {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:aws:batch:*:",
+                      {
+                        "Ref": "AWS::AccountId"
+                      },
+                      ":job-queue/elastio-*"
+                    ]
+                  ]
+                }
+              ]
+            },
+            {
+              "Action": "batch:TagResource",
+              "Effect": "Allow",
+              "Resource": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:aws:batch:*:",
+                    {
+                      "Ref": "AWS::AccountId"
+                    },
+                    ":*/elastio-*"
+                  ]
+                ]
+              }
+            },
+            {
+              "Action": "lambda:InvokeFunction",
+              "Effect": "Allow",
+              "Resource": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:aws:lambda:*:",
+                    {
+                      "Ref": "AWS::AccountId"
+                    },
+                    ":function:elastio-*"
+                  ]
+                ]
+              }
+            }
+          ],
+          "Version": "2012-10-17"
+        },
+        "PolicyName": "bgJobsServiceDefaultPolicy0A4787C7",
+        "Roles": [
+          {
+            "Ref": "bgJobsService0B958966"
+          }
+        ]
+      },
+      "Metadata": {
+        "aws:cdk:path": "reds-account-level-stack/bgJobsService/DefaultPolicy/Resource"
+      }
+    },
+    "bgJobsServiceBlueStackE36FFC23": {
+      "Type": "AWS::IAM::Role",
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "lambda.amazonaws.com"
+              }
+            }
+          ],
+          "Version": "2012-10-17"
+        },
+        "Tags": [
+          {
+            "Key": "elastio:resource",
+            "Value": "true"
+          }
+        ]
+      },
+      "Metadata": {
+        "aws:cdk:path": "reds-account-level-stack/bgJobsServiceBlueStack/Resource"
+      }
+    },
+    "bgJobsServiceBlueStackDefaultPolicyA61BDDB3": {
+      "Type": "AWS::IAM::Policy",
+      "Properties": {
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": "s3:PutObject",
+              "Condition": {
+                "StringEquals": {
+                  "aws:ResourceTag/elastio:component": "telemetry"
+                }
+              },
+              "Effect": "Allow",
+              "Resource": "*"
+            },
+            {
+              "Action": "cloudwatch:DescribeAlarmsForMetric",
+              "Effect": "Allow",
+              "Resource": "*"
+            },
+            {
+              "Action": "ssm:GetParameter",
+              "Condition": {
+                "StringEquals": {
+                  "aws:ResourceTag/elastio:component": "telemetry"
+                }
+              },
+              "Effect": "Allow",
+              "Resource": "*"
+            },
+            {
+              "Action": [
+                "logs:CreateLogGroup",
+                "logs:CreateLogStream",
+                "logs:PutLogEvents"
+              ],
+              "Effect": "Allow",
+              "Resource": "arn:aws:logs:*:*:*"
+            },
+            {
+              "Action": "sqs:SendMessage",
+              "Effect": "Allow",
+              "Resource": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:aws:sqs:*:",
+                    {
+                      "Ref": "AWS::AccountId"
+                    },
+                    ":elastio-*"
+                  ]
+                ]
+              }
+            },
+            {
+              "Action": "ssm:GetParameter",
+              "Condition": {
+                "StringLike": {
+                  "aws:ResourceTag/elastio:resource": "*"
+                }
+              },
+              "Effect": "Allow",
+              "Resource": "*"
+            },
+            {
+              "Action": "tag:GetResources",
+              "Effect": "Allow",
+              "Resource": "*"
+            },
+            {
+              "Action": [
+                "batch:DescribeJobDefinitions",
+                "batch:DescribeJobQueues"
+              ],
+              "Effect": "Allow",
+              "Resource": "*",
+              "Sid": "BatchReadOnlyActions"
+            },
+            {
+              "Action": "batch:SubmitJob",
+              "Effect": "Allow",
+              "Resource": [
+                {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:aws:batch:*:",
+                      {
+                        "Ref": "AWS::AccountId"
+                      },
+                      ":job-definition/elastio-*"
+                    ]
+                  ]
+                },
+                {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:aws:batch:*:",
+                      {
+                        "Ref": "AWS::AccountId"
+                      },
+                      ":job-queue/elastio-*"
+                    ]
+                  ]
+                }
+              ]
+            },
+            {
+              "Action": "batch:TagResource",
+              "Effect": "Allow",
+              "Resource": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:aws:batch:*:",
+                    {
+                      "Ref": "AWS::AccountId"
+                    },
+                    ":*/elastio-*"
+                  ]
+                ]
+              }
+            },
+            {
+              "Action": "lambda:InvokeFunction",
+              "Effect": "Allow",
+              "Resource": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:aws:lambda:*:",
+                    {
+                      "Ref": "AWS::AccountId"
+                    },
+                    ":function:elastio-*"
+                  ]
+                ]
+              }
+            }
+          ],
+          "Version": "2012-10-17"
+        },
+        "PolicyName": "bgJobsServiceBlueStackDefaultPolicyA61BDDB3",
+        "Roles": [
+          {
+            "Ref": "bgJobsServiceBlueStackE36FFC23"
+          }
+        ]
+      },
+      "Metadata": {
+        "aws:cdk:path": "reds-account-level-stack/bgJobsServiceBlueStack/DefaultPolicy/Resource"
+      }
+    },
+    "createServiceLinkedRoleLambdaExecutionRole4111B113": {
+      "Type": "AWS::IAM::Role",
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "lambda.amazonaws.com"
+              }
+            }
+          ],
+          "Version": "2012-10-17"
+        },
+        "Tags": [
+          {
+            "Key": "elastio:resource",
+            "Value": "true"
+          }
+        ]
+      },
+      "Metadata": {
+        "aws:cdk:path": "reds-account-level-stack/createServiceLinkedRoleLambdaExecutionRole/Resource"
+      }
+    },
+    "createServiceLinkedRoleLambdaExecutionRoleDefaultPolicy59391EBA": {
+      "Type": "AWS::IAM::Policy",
+      "Properties": {
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": [
+                "logs:CreateLogGroup",
+                "logs:CreateLogStream",
+                "logs:PutLogEvents"
+              ],
+              "Effect": "Allow",
+              "Resource": "arn:aws:logs:*:*:*"
+            },
+            {
+              "Action": "iam:ListRoles",
+              "Effect": "Allow",
+              "Resource": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:aws:iam::",
+                    {
+                      "Ref": "AWS::AccountId"
+                    },
+                    ":role/aws-service-role/ecs.amazonaws.com/*"
+                  ]
+                ]
+              }
+            },
+            {
+              "Action": "iam:CreateServiceLinkedRole",
+              "Condition": {
+                "StringLike": {
+                  "iam:AWSServiceName": "ecs.amazonaws.com"
+                }
+              },
+              "Effect": "Allow",
+              "Resource": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:aws:iam::",
+                    {
+                      "Ref": "AWS::AccountId"
+                    },
+                    ":role/aws-service-role/ecs.amazonaws.com/*"
+                  ]
+                ]
+              }
+            },
+            {
+              "Action": "iam:ListRoles",
+              "Effect": "Allow",
+              "Resource": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:aws:iam::",
+                    {
+                      "Ref": "AWS::AccountId"
+                    },
+                    ":role/aws-service-role/batch.amazonaws.com/*"
+                  ]
+                ]
+              }
+            },
+            {
+              "Action": "iam:CreateServiceLinkedRole",
+              "Condition": {
+                "StringLike": {
+                  "iam:AWSServiceName": "batch.amazonaws.com"
+                }
+              },
+              "Effect": "Allow",
+              "Resource": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:aws:iam::",
+                    {
+                      "Ref": "AWS::AccountId"
+                    },
+                    ":role/aws-service-role/batch.amazonaws.com/*"
+                  ]
+                ]
+              }
+            },
+            {
+              "Action": "iam:ListRoles",
+              "Effect": "Allow",
+              "Resource": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:aws:iam::",
+                    {
+                      "Ref": "AWS::AccountId"
+                    },
+                    ":role/aws-service-role/spot.amazonaws.com/*"
+                  ]
+                ]
+              }
+            },
+            {
+              "Action": "iam:CreateServiceLinkedRole",
+              "Condition": {
+                "StringLike": {
+                  "iam:AWSServiceName": "spot.amazonaws.com"
+                }
+              },
+              "Effect": "Allow",
+              "Resource": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:aws:iam::",
+                    {
+                      "Ref": "AWS::AccountId"
+                    },
+                    ":role/aws-service-role/spot.amazonaws.com/*"
+                  ]
+                ]
+              }
+            },
+            {
+              "Action": "iam:ListRoles",
+              "Effect": "Allow",
+              "Resource": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:aws:iam::",
+                    {
+                      "Ref": "AWS::AccountId"
+                    },
+                    ":role/aws-service-role/spotfleet.amazonaws.com/*"
+                  ]
+                ]
+              }
+            },
+            {
+              "Action": "iam:CreateServiceLinkedRole",
+              "Condition": {
+                "StringLike": {
+                  "iam:AWSServiceName": "spotfleet.amazonaws.com"
+                }
+              },
+              "Effect": "Allow",
+              "Resource": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:aws:iam::",
+                    {
+                      "Ref": "AWS::AccountId"
+                    },
+                    ":role/aws-service-role/spotfleet.amazonaws.com/*"
+                  ]
+                ]
+              }
+            }
+          ],
+          "Version": "2012-10-17"
+        },
+        "PolicyName": "createServiceLinkedRoleLambdaExecutionRoleDefaultPolicy59391EBA",
+        "Roles": [
+          {
+            "Ref": "createServiceLinkedRoleLambdaExecutionRole4111B113"
+          }
+        ]
+      },
+      "Metadata": {
+        "aws:cdk:path": "reds-account-level-stack/createServiceLinkedRoleLambdaExecutionRole/DefaultPolicy/Resource"
+      }
+    },
+    "createServiceLinkedRoleLambda015EF537": {
+      "Type": "AWS::Lambda::Function",
+      "Properties": {
+        "Code": {
+          "ZipFile": "const aws = require(\"aws-sdk\");\nconst iam = new aws.IAM();\n\nconst SUCCESS = \"SUCCESS\";\nconst FAILED = \"FAILED\";\n\n// The `send` function code source https://github.com/ispyinternet/cfn-response-promise/blob/master/index.js\n// Built-in `cfn-response` modult doesn't work for async handlers.\nconst send = function (event, context, responseStatus, responseData, physicalResourceId, noEcho) {\n    return new Promise((resolve, reject) => {\n        var responseBody = JSON.stringify({\n            Status: responseStatus,\n            Reason: \"See the details in CloudWatch Log Stream: \" + context.logStreamName,\n            PhysicalResourceId: physicalResourceId || context.logStreamName,\n            StackId: event.StackId,\n            RequestId: event.RequestId,\n            LogicalResourceId: event.LogicalResourceId,\n            NoEcho: noEcho || false,\n            Data: responseData\n        });\n\n        console.log(\"Response body:\\n\", responseBody);\n\n        var https = require(\"https\");\n        var url = require(\"url\");\n\n        var parsedUrl = url.parse(event.ResponseURL);\n        var options = {\n            hostname: parsedUrl.hostname,\n            port: 443,\n            path: parsedUrl.path,\n            method: \"PUT\",\n            headers: {\n                \"content-type\": \"\",\n                \"content-length\": responseBody.length\n            }\n        };\n\n        var request = https.request(options, function (response) {\n            console.log(\"Status code: \" + response.statusCode);\n            console.log(\"Status message: \" + response.statusMessage);\n            resolve(context.done());\n        });\n\n        request.on(\"error\", function (error) {\n            console.log(\"send(..) failed executing https.request(..): \" + error);\n            reject(context.done(error));\n        });\n\n        request.write(responseBody);\n        request.end();\n    })\n}\n\nexports.handler = async (event, context) => {\n    console.log(\"Request received:\\n\" + JSON.stringify(event));\n\n    if (event.RequestType === \"Delete\") {\n        // we do not remove service linked role\n        // because it is a special one and it can be used by another resource\n        return await send(event, context, SUCCESS, {});\n    }\n\n    const {awsServiceName, rolePathPrefix} = event.ResourceProperties;\n\n    try {\n        const listRoles = await iam.listRoles({PathPrefix: rolePathPrefix, MaxItems: 1}).promise();\n        const serviceLinkedRoleFound = listRoles.Roles.length > 0;\n\n        if (!serviceLinkedRoleFound) {\n            console.log(`There is no role with prefix \"${rolePathPrefix}\" in the account. Creating...`);\n            await iam.createServiceLinkedRole({AWSServiceName: awsServiceName}).promise();\n        }\n\n        console.log('Success.');\n\n        return await send(event, context, SUCCESS, {});\n    } catch (e) {\n        console.log(e);\n\n        return await send(event, context, FAILED, {message: \"Call failed. See lambda logs for details.\"});\n    }\n};\n"
+        },
+        "Role": {
+          "Fn::GetAtt": [
+            "createServiceLinkedRoleLambdaExecutionRole4111B113",
+            "Arn"
+          ]
+        },
+        "Handler": "index.handler",
+        "Runtime": "nodejs12.x",
+        "Tags": [
+          {
+            "Key": "elastio:resource",
+            "Value": "true"
+          }
+        ],
+        "Timeout": 30
+      },
+      "DependsOn": [
+        "createServiceLinkedRoleLambdaExecutionRoleDefaultPolicy59391EBA",
+        "createServiceLinkedRoleLambdaExecutionRole4111B113"
+      ],
+      "Metadata": {
+        "aws:cdk:path": "reds-account-level-stack/createServiceLinkedRoleLambda/Resource"
+      }
+    },
+    "ecsCreateServiceLinkedRole": {
+      "Type": "AWS::CloudFormation::CustomResource",
+      "Properties": {
+        "ServiceToken": {
+          "Fn::GetAtt": [
+            "createServiceLinkedRoleLambda015EF537",
+            "Arn"
+          ]
+        },
+        "rolePathPrefix": "/aws-service-role/ecs.amazonaws.com",
+        "awsServiceName": "ecs.amazonaws.com"
+      },
+      "UpdateReplacePolicy": "Delete",
+      "DeletionPolicy": "Delete",
+      "Metadata": {
+        "aws:cdk:path": "reds-account-level-stack/ecsCreateServiceLinkedRole/Default"
+      }
+    },
+    "batchCreateServiceLinkedRole": {
+      "Type": "AWS::CloudFormation::CustomResource",
+      "Properties": {
+        "ServiceToken": {
+          "Fn::GetAtt": [
+            "createServiceLinkedRoleLambda015EF537",
+            "Arn"
+          ]
+        },
+        "rolePathPrefix": "/aws-service-role/batch.amazonaws.com",
+        "awsServiceName": "batch.amazonaws.com"
+      },
+      "UpdateReplacePolicy": "Delete",
+      "DeletionPolicy": "Delete",
+      "Metadata": {
+        "aws:cdk:path": "reds-account-level-stack/batchCreateServiceLinkedRole/Default"
+      }
+    },
+    "spotCreateServiceLinkedRole": {
+      "Type": "AWS::CloudFormation::CustomResource",
+      "Properties": {
+        "ServiceToken": {
+          "Fn::GetAtt": [
+            "createServiceLinkedRoleLambda015EF537",
+            "Arn"
+          ]
+        },
+        "rolePathPrefix": "/aws-service-role/spot.amazonaws.com",
+        "awsServiceName": "spot.amazonaws.com"
+      },
+      "UpdateReplacePolicy": "Delete",
+      "DeletionPolicy": "Delete",
+      "Metadata": {
+        "aws:cdk:path": "reds-account-level-stack/spotCreateServiceLinkedRole/Default"
+      }
+    },
+    "spotFleetCreateServiceLinkedRole": {
+      "Type": "AWS::CloudFormation::CustomResource",
+      "Properties": {
+        "ServiceToken": {
+          "Fn::GetAtt": [
+            "createServiceLinkedRoleLambda015EF537",
+            "Arn"
+          ]
+        },
+        "rolePathPrefix": "/aws-service-role/spotfleet.amazonaws.com",
+        "awsServiceName": "spotfleet.amazonaws.com"
+      },
+      "UpdateReplacePolicy": "Delete",
+      "DeletionPolicy": "Delete",
+      "Metadata": {
+        "aws:cdk:path": "reds-account-level-stack/spotFleetCreateServiceLinkedRole/Default"
+      }
+    },
+    "ecsTaskExecutionC01B20C8": {
+      "Type": "AWS::IAM::Role",
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "ecs-tasks.amazonaws.com"
+              }
+            }
+          ],
+          "Version": "2012-10-17"
+        },
+        "Tags": [
+          {
+            "Key": "elastio:resource",
+            "Value": "true"
+          }
+        ]
+      },
+      "Metadata": {
+        "aws:cdk:path": "reds-account-level-stack/ecsTaskExecution/Resource"
+      }
+    },
+    "ecsTaskExecutionDefaultPolicy0110E86D": {
+      "Type": "AWS::IAM::Policy",
+      "Properties": {
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": [
+                "logs:CreateLogGroup",
+                "logs:CreateLogStream",
+                "logs:PutLogEvents"
+              ],
+              "Effect": "Allow",
+              "Resource": "arn:aws:logs:*:*:*"
+            },
+            {
+              "Action": [
+                "ecr:GetAuthorizationToken",
+                "ecr:BatchCheckLayerAvailability",
+                "ecr:GetDownloadUrlForLayer",
+                "ecr:BatchGetImage"
+              ],
+              "Effect": "Allow",
+              "Resource": "*"
+            }
+          ],
+          "Version": "2012-10-17"
+        },
+        "PolicyName": "ecsTaskExecutionDefaultPolicy0110E86D",
+        "Roles": [
+          {
+            "Ref": "ecsTaskExecutionC01B20C8"
+          }
+        ]
+      },
+      "Metadata": {
+        "aws:cdk:path": "reds-account-level-stack/ecsTaskExecution/DefaultPolicy/Resource"
+      }
+    },
+    "ebsBgJobsEFF6DE00": {
+      "Type": "AWS::IAM::Role",
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "ecs-tasks.amazonaws.com"
+              }
+            }
+          ],
+          "Version": "2012-10-17"
+        },
+        "Tags": [
+          {
+            "Key": "elastio:resource",
+            "Value": "true"
+          }
+        ]
+      },
+      "Metadata": {
+        "aws:cdk:path": "reds-account-level-stack/ebsBgJobs/Resource"
+      }
+    },
+    "ebsBgJobsDefaultPolicy7D7A6F3B": {
+      "Type": "AWS::IAM::Policy",
+      "Properties": {
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": [
+                "logs:CreateLogGroup",
+                "logs:CreateLogStream",
+                "logs:PutLogEvents"
+              ],
+              "Effect": "Allow",
+              "Resource": "arn:aws:logs:*:*:*"
+            },
+            {
+              "Action": [
+                "ec2:CreateVolume",
+                "ec2:DetachVolume",
+                "ec2:AttachVolume",
+                "ec2:DescribeImages",
+                "ec2:DescribeInstances",
+                "ec2:DescribeTags",
+                "ec2:DescribeVolumes",
+                "ec2:DescribeSnapshots"
+              ],
+              "Effect": "Allow",
+              "Resource": "*"
+            },
+            {
+              "Action": "ebs:ListChangedBlocks",
+              "Effect": "Allow",
+              "Resource": "*"
+            },
+            {
+              "Action": "ec2:DeleteVolume",
+              "Condition": {
+                "StringLike": {
+                  "aws:ResourceTag/elastio:volume": "*"
+                }
+              },
+              "Effect": "Allow",
+              "Resource": "*"
+            },
+            {
+              "Action": "ec2:DeleteSnapshot",
+              "Condition": {
+                "StringLike": {
+                  "aws:ResourceTag/elastio:snapshot": "*"
+                }
+              },
+              "Effect": "Allow",
+              "Resource": "*"
+            },
+            {
+              "Action": [
+                "ec2:CreateSnapshot",
+                "ec2:CreateSnapshots"
+              ],
+              "Effect": "Allow",
+              "Resource": "*"
+            },
+            {
+              "Action": "ec2:CreateTags",
+              "Effect": "Allow",
+              "Resource": [
+                "arn:aws:ec2:*:*:volume/*",
+                "arn:aws:ec2:*::snapshot/*"
+              ]
+            },
+            {
+              "Action": [
+                "ssm:GetParameters",
+                "ssm:GetParameter"
+              ],
+              "Effect": "Allow",
+              "Resource": "*"
+            },
+            {
+              "Action": "lambda:InvokeFunction",
+              "Effect": "Allow",
+              "Resource": "*"
+            }
+          ],
+          "Version": "2012-10-17"
+        },
+        "PolicyName": "ebsBgJobsDefaultPolicy7D7A6F3B",
+        "Roles": [
+          {
+            "Ref": "ebsBgJobsEFF6DE00"
+          }
+        ]
+      },
+      "Metadata": {
+        "aws:cdk:path": "reds-account-level-stack/ebsBgJobs/DefaultPolicy/Resource"
+      }
+    },
+    "ebsBgJobsExecution2A2D5443": {
+      "Type": "AWS::IAM::Role",
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "ecs-tasks.amazonaws.com"
+              }
+            }
+          ],
+          "Version": "2012-10-17"
+        },
+        "Tags": [
+          {
+            "Key": "elastio:resource",
+            "Value": "true"
+          }
+        ]
+      },
+      "Metadata": {
+        "aws:cdk:path": "reds-account-level-stack/ebsBgJobsExecution/Resource"
+      }
+    },
+    "ebsBgJobsExecutionDefaultPolicy9DFAF107": {
+      "Type": "AWS::IAM::Policy",
+      "Properties": {
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": [
+                "logs:CreateLogGroup",
+                "logs:CreateLogStream",
+                "logs:PutLogEvents"
+              ],
+              "Effect": "Allow",
+              "Resource": "arn:aws:logs:*:*:*"
+            }
+          ],
+          "Version": "2012-10-17"
+        },
+        "PolicyName": "ebsBgJobsExecutionDefaultPolicy9DFAF107",
+        "Roles": [
+          {
+            "Ref": "ebsBgJobsExecution2A2D5443"
+          }
+        ]
+      },
+      "Metadata": {
+        "aws:cdk:path": "reds-account-level-stack/ebsBgJobsExecution/DefaultPolicy/Resource"
+      }
+    },
+    "ecsScalezTask48AD43DA": {
+      "Type": "AWS::IAM::Role",
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "ecs-tasks.amazonaws.com"
+              }
+            }
+          ],
+          "Version": "2012-10-17"
+        },
+        "Tags": [
+          {
+            "Key": "elastio:resource",
+            "Value": "true"
+          }
+        ]
+      },
+      "Metadata": {
+        "aws:cdk:path": "reds-account-level-stack/ecsScalezTask/Resource"
+      }
+    },
+    "ecsScalezTaskDefaultPolicy40CEA626": {
+      "Type": "AWS::IAM::Policy",
+      "Properties": {
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": "s3:PutObject",
+              "Condition": {
+                "StringEquals": {
+                  "aws:ResourceTag/elastio:component": "telemetry"
+                }
+              },
+              "Effect": "Allow",
+              "Resource": "*"
+            },
+            {
+              "Action": "cloudwatch:DescribeAlarmsForMetric",
+              "Effect": "Allow",
+              "Resource": "*"
+            },
+            {
+              "Action": "ssm:GetParameter",
+              "Condition": {
+                "StringEquals": {
+                  "aws:ResourceTag/elastio:component": "telemetry"
+                }
+              },
+              "Effect": "Allow",
+              "Resource": "*"
+            },
+            {
+              "Action": [
+                "logs:CreateLogGroup",
+                "logs:CreateLogStream",
+                "logs:PutLogEvents"
+              ],
+              "Effect": "Allow",
+              "Resource": "arn:aws:logs:*:*:*"
+            },
+            {
+              "Action": "sqs:SendMessage",
+              "Effect": "Allow",
+              "Resource": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:aws:sqs:*:",
+                    {
+                      "Ref": "AWS::AccountId"
+                    },
+                    ":elastio-*"
+                  ]
+                ]
+              }
+            },
+            {
+              "Action": "s3:*",
+              "Effect": "Allow",
+              "Resource": "*"
+            },
+            {
+              "Action": "kms:*",
+              "Effect": "Allow",
+              "Resource": "*"
+            }
+          ],
+          "Version": "2012-10-17"
+        },
+        "PolicyName": "ecsScalezTaskDefaultPolicy40CEA626",
+        "Roles": [
+          {
+            "Ref": "ecsScalezTask48AD43DA"
+          }
+        ]
+      },
+      "Metadata": {
+        "aws:cdk:path": "reds-account-level-stack/ecsScalezTask/DefaultPolicy/Resource"
+      }
+    },
+    "batchServiceBB54D443": {
+      "Type": "AWS::IAM::Role",
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "batch.amazonaws.com"
+              }
+            }
+          ],
+          "Version": "2012-10-17"
+        },
+        "ManagedPolicyArns": [
+          {
+            "Fn::Join": [
+              "",
+              [
+                "arn:",
+                {
+                  "Ref": "AWS::Partition"
+                },
+                ":iam::aws:policy/service-role/AWSBatchServiceRole"
+              ]
+            ]
+          }
+        ],
+        "Tags": [
+          {
+            "Key": "elastio:resource",
+            "Value": "true"
+          }
+        ]
+      },
+      "Metadata": {
+        "aws:cdk:path": "reds-account-level-stack/batchService/Resource"
+      }
+    },
+    "ec2SpotFleet212519BE": {
+      "Type": "AWS::IAM::Role",
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "spotfleet.amazonaws.com"
+              }
+            }
+          ],
+          "Version": "2012-10-17"
+        },
+        "ManagedPolicyArns": [
+          {
+            "Fn::Join": [
+              "",
+              [
+                "arn:",
+                {
+                  "Ref": "AWS::Partition"
+                },
+                ":iam::aws:policy/service-role/AmazonEC2SpotFleetTaggingRole"
+              ]
+            ]
+          }
+        ],
+        "Tags": [
+          {
+            "Key": "elastio:resource",
+            "Value": "true"
+          }
+        ]
+      },
+      "Metadata": {
+        "aws:cdk:path": "reds-account-level-stack/ec2SpotFleet/Resource"
+      }
+    },
+    "ecsInstanceB00E0026": {
+      "Type": "AWS::IAM::Role",
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": {
+                "Service": {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "ec2.",
+                      {
+                        "Ref": "AWS::URLSuffix"
+                      }
+                    ]
+                  ]
+                }
+              }
+            }
+          ],
+          "Version": "2012-10-17"
+        },
+        "ManagedPolicyArns": [
+          {
+            "Fn::Join": [
+              "",
+              [
+                "arn:",
+                {
+                  "Ref": "AWS::Partition"
+                },
+                ":iam::aws:policy/service-role/AmazonEC2ContainerServiceforEC2Role"
+              ]
+            ]
+          }
+        ],
+        "Tags": [
+          {
+            "Key": "elastio:resource",
+            "Value": "true"
+          }
+        ]
+      },
+      "Metadata": {
+        "aws:cdk:path": "reds-account-level-stack/ecsInstance/Resource"
+      }
+    },
+    "ecsScalezInstanceProfileId": {
+      "Type": "AWS::IAM::InstanceProfile",
+      "Properties": {
+        "Roles": [
+          {
+            "Ref": "ecsInstanceB00E0026"
+          }
+        ],
+        "InstanceProfileName": {
+          "Fn::Join": [
+            "",
+            [
+              {
+                "Ref": "ecsInstanceB00E0026"
+              },
+              "-ecsScalezInstanceProfile"
+            ]
+          ]
+        }
+      },
+      "Metadata": {
+        "aws:cdk:path": "reds-account-level-stack/ecsScalezInstanceProfileId"
+      }
+    },
+    "catalogJobsStatus2FC8C11A": {
+      "Type": "AWS::IAM::Role",
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "lambda.amazonaws.com"
+              }
+            }
+          ],
+          "Version": "2012-10-17"
+        },
+        "Tags": [
+          {
+            "Key": "elastio:resource",
+            "Value": "true"
+          }
+        ]
+      },
+      "Metadata": {
+        "aws:cdk:path": "reds-account-level-stack/catalogJobsStatus/Resource"
+      }
+    },
+    "catalogJobsStatusDefaultPolicyFCEFDEFD": {
+      "Type": "AWS::IAM::Policy",
+      "Properties": {
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": "s3:PutObject",
+              "Condition": {
+                "StringEquals": {
+                  "aws:ResourceTag/elastio:component": "telemetry"
+                }
+              },
+              "Effect": "Allow",
+              "Resource": "*"
+            },
+            {
+              "Action": "cloudwatch:DescribeAlarmsForMetric",
+              "Effect": "Allow",
+              "Resource": "*"
+            },
+            {
+              "Action": "ssm:GetParameter",
+              "Condition": {
+                "StringEquals": {
+                  "aws:ResourceTag/elastio:component": "telemetry"
+                }
+              },
+              "Effect": "Allow",
+              "Resource": "*"
+            },
+            {
+              "Action": [
+                "logs:CreateLogGroup",
+                "logs:CreateLogStream",
+                "logs:PutLogEvents"
+              ],
+              "Effect": "Allow",
+              "Resource": "arn:aws:logs:*:*:*"
+            },
+            {
+              "Action": "sqs:SendMessage",
+              "Effect": "Allow",
+              "Resource": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:aws:sqs:*:",
+                    {
+                      "Ref": "AWS::AccountId"
+                    },
+                    ":elastio-*"
+                  ]
+                ]
+              }
+            },
+            {
+              "Action": [
+                "dynamodb:Scan",
+                "dynamodb:Query",
+                "dynamodb:GetItem",
+                "dynamodb:PutItem",
+                "dynamodb:UpdateItem",
+                "dynamodb:DeleteItem",
+                "dynamodb:BatchGetItem",
+                "dynamodb:BatchWriteItem",
+                "dynamodb:ConditionCheckItem"
+              ],
+              "Effect": "Allow",
+              "Resource": [
+                {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:aws:dynamodb:*:",
+                      {
+                        "Ref": "AWS::AccountId"
+                      },
+                      ":table/elastio-*"
+                    ]
+                  ]
+                },
+                {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:aws:dynamodb:*:",
+                      {
+                        "Ref": "AWS::AccountId"
+                      },
+                      ":table/elastio-*/index/*"
+                    ]
+                  ]
+                }
+              ]
+            }
+          ],
+          "Version": "2012-10-17"
+        },
+        "PolicyName": "catalogJobsStatusDefaultPolicyFCEFDEFD",
+        "Roles": [
+          {
+            "Ref": "catalogJobsStatus2FC8C11A"
+          }
+        ]
+      },
+      "Metadata": {
+        "aws:cdk:path": "reds-account-level-stack/catalogJobsStatus/DefaultPolicy/Resource"
+      }
+    },
+    "catalogBlueStackEBB5A3EB": {
+      "Type": "AWS::IAM::Role",
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "lambda.amazonaws.com"
+              }
+            }
+          ],
+          "Version": "2012-10-17"
+        },
+        "Tags": [
+          {
+            "Key": "elastio:resource",
+            "Value": "true"
+          }
+        ]
+      },
+      "Metadata": {
+        "aws:cdk:path": "reds-account-level-stack/catalogBlueStack/Resource"
+      }
+    },
+    "catalogBlueStackDefaultPolicy3C97BEAB": {
+      "Type": "AWS::IAM::Policy",
+      "Properties": {
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": "s3:PutObject",
+              "Condition": {
+                "StringEquals": {
+                  "aws:ResourceTag/elastio:component": "telemetry"
+                }
+              },
+              "Effect": "Allow",
+              "Resource": "*"
+            },
+            {
+              "Action": "cloudwatch:DescribeAlarmsForMetric",
+              "Effect": "Allow",
+              "Resource": "*"
+            },
+            {
+              "Action": "ssm:GetParameter",
+              "Condition": {
+                "StringEquals": {
+                  "aws:ResourceTag/elastio:component": "telemetry"
+                }
+              },
+              "Effect": "Allow",
+              "Resource": "*"
+            },
+            {
+              "Action": [
+                "logs:CreateLogGroup",
+                "logs:CreateLogStream",
+                "logs:PutLogEvents"
+              ],
+              "Effect": "Allow",
+              "Resource": "arn:aws:logs:*:*:*"
+            },
+            {
+              "Action": "sqs:SendMessage",
+              "Effect": "Allow",
+              "Resource": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:aws:sqs:*:",
+                    {
+                      "Ref": "AWS::AccountId"
+                    },
+                    ":elastio-*"
+                  ]
+                ]
+              }
+            },
+            {
+              "Action": [
+                "dynamodb:Scan",
+                "dynamodb:Query",
+                "dynamodb:GetItem",
+                "dynamodb:PutItem",
+                "dynamodb:UpdateItem",
+                "dynamodb:DeleteItem",
+                "dynamodb:BatchGetItem",
+                "dynamodb:BatchWriteItem",
+                "dynamodb:ConditionCheckItem"
+              ],
+              "Effect": "Allow",
+              "Resource": [
+                {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:aws:dynamodb:*:",
+                      {
+                        "Ref": "AWS::AccountId"
+                      },
+                      ":table/elastio-*"
+                    ]
+                  ]
+                },
+                {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:aws:dynamodb:*:",
+                      {
+                        "Ref": "AWS::AccountId"
+                      },
+                      ":table/elastio-*/index/*"
+                    ]
+                  ]
+                }
+              ]
+            },
+            {
+              "Action": "lambda:InvokeFunction",
+              "Effect": "Allow",
+              "Resource": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:aws:lambda:*:",
+                    {
+                      "Ref": "AWS::AccountId"
+                    },
+                    ":function:elastio-*"
+                  ]
+                ]
+              }
+            },
+            {
+              "Action": "ssm:GetParameter",
+              "Condition": {
+                "StringLike": {
+                  "aws:ResourceTag/elastio:resource": "*"
+                }
+              },
+              "Effect": "Allow",
+              "Resource": "*"
+            }
+          ],
+          "Version": "2012-10-17"
+        },
+        "PolicyName": "catalogBlueStackDefaultPolicy3C97BEAB",
+        "Roles": [
+          {
+            "Ref": "catalogBlueStackEBB5A3EB"
+          }
+        ]
+      },
+      "Metadata": {
+        "aws:cdk:path": "reds-account-level-stack/catalogBlueStack/DefaultPolicy/Resource"
+      }
+    },
+    "CDKMetadata": {
+      "Type": "AWS::CDK::Metadata",
+      "Properties": {
+        "Modules": "aws-cdk=1.91.0,@aws-cdk/assets=1.91.0,@aws-cdk/aws-applicationautoscaling=1.91.0,@aws-cdk/aws-autoscaling-common=1.91.0,@aws-cdk/aws-cloudwatch=1.91.0,@aws-cdk/aws-codeguruprofiler=1.91.0,@aws-cdk/aws-dynamodb=1.91.0,@aws-cdk/aws-ec2=1.91.0,@aws-cdk/aws-ecr=1.91.0,@aws-cdk/aws-ecr-assets=1.91.0,@aws-cdk/aws-events=1.91.0,@aws-cdk/aws-iam=1.91.0,@aws-cdk/aws-kms=1.91.0,@aws-cdk/aws-lambda=1.91.0,@aws-cdk/aws-logs=1.91.0,@aws-cdk/aws-s3=1.91.0,@aws-cdk/aws-s3-assets=1.91.0,@aws-cdk/aws-sqs=1.91.0,@aws-cdk/aws-ssm=1.91.0,@aws-cdk/cloud-assembly-schema=1.91.0,@aws-cdk/core=1.91.0,@aws-cdk/custom-resources=1.91.0,@aws-cdk/cx-api=1.91.0,@aws-cdk/region-info=1.91.0,jsii-runtime=node.js/v14.16.0"
+      },
+      "Metadata": {
+        "aws:cdk:path": "reds-account-level-stack/CDKMetadata/Default"
+      },
+      "Condition": "CDKMetadataAvailable"
+    }
+  },
+  "Outputs": {
+    "terraformStateBucket": {
+      "Value": {
+        "Ref": "tfstate42168D51"
+      }
+    },
+    "terraformLocksTable": {
+      "Value": {
+        "Ref": "tflocks48A1C6E6"
+      }
+    },
+    "catalogRoleArn": {
+      "Value": {
+        "Fn::GetAtt": [
+          "catalog3F0047B1",
+          "Arn"
+        ]
+      }
+    },
+    "createVaultRoleArn": {
+      "Value": {
+        "Fn::GetAtt": [
+          "createVault33ECCB83",
+          "Arn"
+        ]
+      }
+    },
+    "cwpumpRoleArn": {
+      "Value": {
+        "Fn::GetAtt": [
+          "cwpump08DC851B",
+          "Arn"
+        ]
+      }
+    },
+    "writeProvisionerRoleArn": {
+      "Value": {
+        "Fn::GetAtt": [
+          "writeProvisionerC8E50C86",
+          "Arn"
+        ]
+      }
+    },
+    "readProvisionerRoleArn": {
+      "Value": {
+        "Fn::GetAtt": [
+          "readProvisioner1E1B21EE",
+          "Arn"
+        ]
+      }
+    },
+    "deleteProvisionerRoleArn": {
+      "Value": {
+        "Fn::GetAtt": [
+          "deleteProvisioner53C1591A",
+          "Arn"
+        ]
+      }
+    },
+    "leaseReaperRoleArn": {
+      "Value": {
+        "Fn::GetAtt": [
+          "leaseReaper40B7179E",
+          "Arn"
+        ]
+      }
+    },
+    "provisionerBlueStackRoleArn": {
+      "Value": {
+        "Fn::GetAtt": [
+          "provisionerBlueStackD94369FB",
+          "Arn"
+        ]
+      }
+    },
+    "scalezLeaseLifecycleRoleArn": {
+      "Value": {
+        "Fn::GetAtt": [
+          "scalezLeaseLifecycle28E32345",
+          "Arn"
+        ]
+      }
+    },
+    "jobsStatusServiceRoleArn": {
+      "Value": {
+        "Fn::GetAtt": [
+          "jobsStatusService1B791F9F",
+          "Arn"
+        ]
+      }
+    },
+    "jobsStatusReaperRoleArn": {
+      "Value": {
+        "Fn::GetAtt": [
+          "jobsStatusReaper9541A1BA",
+          "Arn"
+        ]
+      }
+    },
+    "jobsStatusAwsBatchHandlerRoleArn": {
+      "Value": {
+        "Fn::GetAtt": [
+          "jobsStatusAwsBatchHandlerE44B8522",
+          "Arn"
+        ]
+      }
+    },
+    "jobsStatusServiceBlueStackRoleArn": {
+      "Value": {
+        "Fn::GetAtt": [
+          "jobsStatusServiceBlueStack6D8E251A",
+          "Arn"
+        ]
+      }
+    },
+    "bgJobsServiceRoleArn": {
+      "Value": {
+        "Fn::GetAtt": [
+          "bgJobsService0B958966",
+          "Arn"
+        ]
+      }
+    },
+    "bgJobsServiceBlueStackRoleArn": {
+      "Value": {
+        "Fn::GetAtt": [
+          "bgJobsServiceBlueStackE36FFC23",
+          "Arn"
+        ]
+      }
+    },
+    "ecsTaskExecutionRoleArn": {
+      "Value": {
+        "Fn::GetAtt": [
+          "ecsTaskExecutionC01B20C8",
+          "Arn"
+        ]
+      }
+    },
+    "ebsBgJobsRoleArn": {
+      "Value": {
+        "Fn::GetAtt": [
+          "ebsBgJobsEFF6DE00",
+          "Arn"
+        ]
+      }
+    },
+    "ebsBgJobsExecutionRoleArn": {
+      "Value": {
+        "Fn::GetAtt": [
+          "ebsBgJobsExecution2A2D5443",
+          "Arn"
+        ]
+      }
+    },
+    "ecsScalezTaskRoleArn": {
+      "Value": {
+        "Fn::GetAtt": [
+          "ecsScalezTask48AD43DA",
+          "Arn"
+        ]
+      }
+    },
+    "batchServiceRoleArn": {
+      "Value": {
+        "Fn::GetAtt": [
+          "batchServiceBB54D443",
+          "Arn"
+        ]
+      }
+    },
+    "ec2SpotFleetRoleArn": {
+      "Value": {
+        "Fn::GetAtt": [
+          "ec2SpotFleet212519BE",
+          "Arn"
+        ]
+      }
+    },
+    "ecsInstanceRoleArn": {
+      "Value": {
+        "Fn::GetAtt": [
+          "ecsInstanceB00E0026",
+          "Arn"
+        ]
+      }
+    },
+    "ecsScalezInstanceProfile": {
+      "Value": {
+        "Fn::Join": [
+          "",
+          [
+            {
+              "Ref": "ecsInstanceB00E0026"
+            },
+            "-ecsScalezInstanceProfile"
+          ]
+        ]
+      }
+    },
+    "ecsScalezInstanceProfileRoleArn": {
+      "Value": {
+        "Fn::GetAtt": [
+          "ecsScalezInstanceProfileId",
+          "Arn"
+        ]
+      }
+    },
+    "catalogJobsStatusRoleArn": {
+      "Value": {
+        "Fn::GetAtt": [
+          "catalogJobsStatus2FC8C11A",
+          "Arn"
+        ]
+      }
+    },
+    "catalogBlueStackRoleArn": {
+      "Value": {
+        "Fn::GetAtt": [
+          "catalogBlueStackEBB5A3EB",
+          "Arn"
+        ]
+      }
+    }
+  },
+  "Parameters": {
+    "externalBlueStackRoleArn": {
+      "Type": "String",
+      "Default": "arn:aws:iam::643359132260:role/iot4.app.elastio.com"
+    }
+  },
+  "Conditions": {
+    "blueStackAssumeRoleCondition": {
+      "Fn::Not": [
+        {
+          "Fn::Equals": [
+            {
+              "Ref": "externalBlueStackRoleArn"
+            },
+            ""
+          ]
+        }
+      ]
+    },
+    "elastioInstallerAssumeRoleCondition": {
+      "Fn::Not": [
+        {
+          "Fn::Equals": [
+            {
+              "Ref": "externalBlueStackRoleArn"
+            },
+            ""
+          ]
+        }
+      ]
+    },
+    "CDKMetadataAvailable": {
+      "Fn::Or": [
+        {
+          "Fn::Or": [
+            {
+              "Fn::Equals": [
+                {
+                  "Ref": "AWS::Region"
+                },
+                "ap-east-1"
+              ]
+            },
+            {
+              "Fn::Equals": [
+                {
+                  "Ref": "AWS::Region"
+                },
+                "ap-northeast-1"
+              ]
+            },
+            {
+              "Fn::Equals": [
+                {
+                  "Ref": "AWS::Region"
+                },
+                "ap-northeast-2"
+              ]
+            },
+            {
+              "Fn::Equals": [
+                {
+                  "Ref": "AWS::Region"
+                },
+                "ap-south-1"
+              ]
+            },
+            {
+              "Fn::Equals": [
+                {
+                  "Ref": "AWS::Region"
+                },
+                "ap-southeast-1"
+              ]
+            },
+            {
+              "Fn::Equals": [
+                {
+                  "Ref": "AWS::Region"
+                },
+                "ap-southeast-2"
+              ]
+            },
+            {
+              "Fn::Equals": [
+                {
+                  "Ref": "AWS::Region"
+                },
+                "ca-central-1"
+              ]
+            },
+            {
+              "Fn::Equals": [
+                {
+                  "Ref": "AWS::Region"
+                },
+                "cn-north-1"
+              ]
+            },
+            {
+              "Fn::Equals": [
+                {
+                  "Ref": "AWS::Region"
+                },
+                "cn-northwest-1"
+              ]
+            },
+            {
+              "Fn::Equals": [
+                {
+                  "Ref": "AWS::Region"
+                },
+                "eu-central-1"
+              ]
+            }
+          ]
+        },
+        {
+          "Fn::Or": [
+            {
+              "Fn::Equals": [
+                {
+                  "Ref": "AWS::Region"
+                },
+                "eu-north-1"
+              ]
+            },
+            {
+              "Fn::Equals": [
+                {
+                  "Ref": "AWS::Region"
+                },
+                "eu-west-1"
+              ]
+            },
+            {
+              "Fn::Equals": [
+                {
+                  "Ref": "AWS::Region"
+                },
+                "eu-west-2"
+              ]
+            },
+            {
+              "Fn::Equals": [
+                {
+                  "Ref": "AWS::Region"
+                },
+                "eu-west-3"
+              ]
+            },
+            {
+              "Fn::Equals": [
+                {
+                  "Ref": "AWS::Region"
+                },
+                "me-south-1"
+              ]
+            },
+            {
+              "Fn::Equals": [
+                {
+                  "Ref": "AWS::Region"
+                },
+                "sa-east-1"
+              ]
+            },
+            {
+              "Fn::Equals": [
+                {
+                  "Ref": "AWS::Region"
+                },
+                "us-east-1"
+              ]
+            },
+            {
+              "Fn::Equals": [
+                {
+                  "Ref": "AWS::Region"
+                },
+                "us-east-2"
+              ]
+            },
+            {
+              "Fn::Equals": [
+                {
+                  "Ref": "AWS::Region"
+                },
+                "us-west-1"
+              ]
+            },
+            {
+              "Fn::Equals": [
+                {
+                  "Ref": "AWS::Region"
+                },
+                "us-west-2"
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

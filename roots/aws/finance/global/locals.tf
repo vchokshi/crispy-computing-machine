@@ -3,10 +3,6 @@ locals {
   owner         = "Vihar Chokshi"
   email_address = "vchokshi@vipert491"
 
-  dns_hosted_zone_name = "finance.iot4.net"
-
-  ec2_instance_type = "t3.micro"
-
   cluster_name = local.project
 
   common_tags = {

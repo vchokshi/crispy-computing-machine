@@ -21,10 +21,10 @@ EOF
 
 }
 
-#resource "aws_iam_instance_profile" "f" {
-#name = "finance"
-#role = aws_iam_role.f.name
-#}
+resource "aws_iam_instance_profile" "f" {
+  name = "f"
+  role = aws_iam_role.f.name
+}
 
 
 resource "aws_iam_role_policy" "f" {
