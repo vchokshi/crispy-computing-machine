@@ -1,0 +1,69 @@
+{
+  "plans": {
+    "org-backup-plan": {
+      "regions": {
+        "@@assign": [
+          "eu-west-1",
+          "ap-northeast-3",
+          "ca-central-1",
+          "us-east-1",
+          "us-east-2",
+          "us-west-1",
+          "us-west-2",
+          "eu-central-1"
+        ]
+      },
+      "rules": {
+        "org-backup-rule": {
+          "schedule_expression": {
+            "@@assign": "cron(0 5 ? * * *)"
+          },
+          "lifecycle": {
+            "move_to_cold_storage_after_days": {
+              "@@assign": "1"
+            },
+            "delete_after_days": {
+              "@@assign": "91"
+            }
+          },
+          "target_backup_vault_name": {
+            "@@assign": "account-vault"
+          },
+          "copy_actions": {
+            "arn:aws:backup:us-east-1:$account:backup-vault:account-vault": {
+              "target_backup_vault_arn": {
+                "@@assign": "arn:aws:backup:us-east-1:$account:backup-vault:account-vault"
+              },
+              "lifecycle": {
+                "delete_after_days": {
+                  "@@assign": "91"
+                },
+                "move_to_cold_storage_after_days": {
+                  "@@assign": "1"
+                }
+              }
+            }
+          }
+        }
+      },
+      "backup_plan_tags": {},
+      "selections": {
+        "tags": {
+          "backup-resource-assignment": {
+            "iam_role_arn": {
+              "@@assign": "arn:aws:iam::$account:role/OrganizationAccountAccessRole"
+            },
+            "tag_key": {
+              "@@assign": "Backup"
+            },
+            "tag_value": {
+              "@@assign": [
+                "True"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}

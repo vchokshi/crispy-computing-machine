@@ -1,0 +1,19 @@
+resource "aws_efs_file_system" "f" {
+  creation_token = "finance-share"
+}
+resource "aws_efs_mount_target" "mt" {
+  file_system_id  = aws_efs_file_system.f.id
+  subnet_id       = module.vpc.public_subnets[0]
+  security_groups = [aws_default_security_group.default.id]
+}
+output "efs_target" {
+  value = aws_efs_mount_target.mt.id
+}
+
+resource "aws_efs_backup_policy" "policy" {
+  file_system_id = aws_efs_file_system.f.id
+
+  backup_policy {
+    status = "ENABLED"
+  }
+}

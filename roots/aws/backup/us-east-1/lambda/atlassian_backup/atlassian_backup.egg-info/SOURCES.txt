@@ -1,0 +1,11 @@
+pyproject.toml
+setup.cfg
+setup.py
+atlassian_backup.egg-info/PKG-INFO
+atlassian_backup.egg-info/SOURCES.txt
+atlassian_backup.egg-info/dependency_links.txt
+atlassian_backup.egg-info/entry_points.txt
+atlassian_backup.egg-info/requires.txt
+atlassian_backup.egg-info/top_level.txt
+src/__init__.py
+test/test_lambda.py
