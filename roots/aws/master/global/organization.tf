@@ -24,7 +24,7 @@ output "org_accounts" {
 }
 
 resource "aws_organizations_policy" "policy" {
-  name        = "policy"
+  name        = "organization_policy"
   description = "AWS Service Control Policy"
   type        = "SERVICE_CONTROL_POLICY"
   content     = data.aws_iam_policy_document.policy.json

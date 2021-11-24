@@ -1,1 +1,1 @@
-../../application/phpinfo.php
+<?php phpinfo(); ?>

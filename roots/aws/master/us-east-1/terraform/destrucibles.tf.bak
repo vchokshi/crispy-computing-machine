@@ -1,0 +1,32 @@
+resource "aws_instance" "jumphost" {
+  ami                         = data.aws_ami.amazon-linux-2.id
+  subnet_id                   = module.vpc.public_subnets[0]
+  instance_type               = local.ec2_instance_type
+  associate_public_ip_address = true
+  key_name                    = aws_key_pair.v.key_name
+  tags                        = local.common_tags
+  volume_tags                 = local.common_tags
+  iam_instance_profile        = aws_iam_instance_profile.jumphost.name
+}
+
+resource "aws_route53_record" "ssh" {
+  zone_id = data.aws_route53_zone.public.id
+  name    = "jumphost.${local.dns_hosted_zone_name}"
+  type    = "A"
+  ttl     = "300"
+  records = [aws_instance.jumphost.public_ip]
+}
+
+output "aws_instance_id" {
+  value = aws_instance.jumphost.id
+}
+
+output "ssh_hostname" {
+  value = "ec2-user@${aws_route53_record.ssh.name}"
+}
+
+resource "aws_vpc_endpoint" "s3" {
+  vpc_id          = module.vpc.vpc_id
+  service_name    = "com.amazonaws.${var.region}.s3"
+  route_table_ids = module.vpc.public_route_table_ids
+}

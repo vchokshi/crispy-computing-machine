@@ -21,11 +21,11 @@ resource "aws_default_security_group" "default" {
     to_port     = 443
     cidr_blocks = ["0.0.0.0/0"]
   }
-
   egress {
     from_port   = 0
     to_port     = 0
     protocol    = "-1"
+    #cidr_blocks = [module.vpc.vpc_cidr_block]
     cidr_blocks = ["0.0.0.0/0"]
   }
 

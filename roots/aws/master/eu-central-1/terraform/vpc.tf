@@ -21,7 +21,11 @@ module "vpc" {
 
   tags = merge(
     local.common_tags,
-    map("kubernetes.io/cluster/${local.cluster_name}", "shared")
+    tomap(
+      {
+        "kubernetes.io/cluster/${local.cluster_name}" = "shared"
+      }
+    )
   )
 
   public_subnet_tags = merge(

@@ -1,0 +1,3 @@
+[console_scripts]
+atlassian_backup = src:main
+

@@ -46,7 +46,7 @@ resource "aws_elb" "f" {
 
 resource "aws_route53_record" "w" {
   zone_id = data.aws_route53_zone.public.id
-  name    = "www.${data.aws_route53_zone.public.name}"
+  name    = "internal.${data.aws_route53_zone.public.name}"
   type    = "CNAME"
   ttl     = "300"
   records = [aws_elb.f.dns_name]
@@ -56,5 +56,5 @@ output "aws_instance_id" {
   value = aws_instance.f.id
 }
 output "finance_url" {
-  value = "https://www.${data.aws_route53_zone.public.name}"
+  value = "https://internal.${data.aws_route53_zone.public.name}"
 }
