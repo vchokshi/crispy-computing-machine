@@ -112,3 +112,8 @@ resource "aws_organizations_account" "backup" {
   parent_id = aws_organizations_organizational_unit.grc.id
   #role_name = "origami"
 }
+resource "aws_organizations_account" "sec" {
+  name      = "security"
+  email     = "security@iot4.net"
+  parent_id = aws_organizations_organizational_unit.grc.id
+}

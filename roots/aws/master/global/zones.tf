@@ -28,3 +28,16 @@ resource "aws_route53_record" "backup" {
 
   ]
 }
+
+resource "aws_route53_record" "s" {
+  zone_id = aws_route53_zone.iot.zone_id
+  name    = "security.iot4.net"
+  type    = "NS"
+  ttl     = "300"
+  records = [
+    "ns-1367.awsdns-42.org",
+    "ns-1789.awsdns-31.co.uk",
+    "ns-220.awsdns-27.com",
+    "ns-757.awsdns-30.net",
+  ]
+}
