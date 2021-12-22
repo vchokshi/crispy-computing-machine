@@ -3,11 +3,9 @@ import time
 
 import boto3
 import botocore
+import requests
 
 from vendor import confluence, jira
-
-# import requests
-
 
 REGION = "us-east-1"
 
@@ -20,15 +18,14 @@ def backup_to_elastio(url):
 
     headers = {"Content-Type": "application/json"}
 
-    # s = requests.Session()
-    # g = s.get(url, stream=True, allow_redirects=True)
+    s = requests.Session()
+    g = s.get(url, stream=True, allow_redirects=True)
 
-    # try:
-    # g.raise_for_status()
-    # except requests.exceptions.HTTPError as e:
-    # return {"statusCode": 404, "headers": headers, "body": e}
+    try:
+        g.raise_for_status()
+    except requests.exceptions.HTTPError as e:
+        return {"statusCode": 404, "headers": headers, "body": e}
 
-    print(f"Planning to get {url} and send to elastio")
     # block stream to elastio target
     return {"statusCode": 200, "headers": headers, "body": "OK"}
 

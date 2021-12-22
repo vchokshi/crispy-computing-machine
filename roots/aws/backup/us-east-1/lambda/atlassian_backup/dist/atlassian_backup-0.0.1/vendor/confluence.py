@@ -132,6 +132,8 @@ def conf_backup(account, username, token, attachments, folder):
             + file_name
         )
 
+        return_url= f'{url}/wiki/download/{file_name}'
+        return return_url
 
         date = time.strftime("%Y%m%d_%H%M%S")
 
@@ -146,10 +148,6 @@ def conf_backup(account, username, token, attachments, folder):
                 handle.write(block)
 
         print(filename + " downloaded to " + folder)
-
-        return_url= f'{url}/wiki/download/{file_name}'
-
-        return return_url
 
 
 def main():

@@ -1,0 +1,11 @@
+Metadata-Version: 1.2
+Name: atlassian_backup
+Version: 0.0.1
+Summary: Backs up Atlassian
+Home-page: UNKNOWN
+Author: Vihar Chokshi
+Author-email: vc@iot4.net
+License: UNKNOWN
+Description: UNKNOWN
+Platform: UNKNOWN
+Requires-Python: >=3.8
