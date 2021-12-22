@@ -1,0 +1,55 @@
+- name: Build the lamp stack 
+  become: true
+  hosts: all
+  roles:
+  pre_tasks: 
+  - name: Mount the nfs file system
+    become: yes
+    mount:
+      name: /mnt
+      fstype: nfs4
+      opts: "nfsvers=4.1,rsize=1048576,wsize=1048576,hard,timeo=600,retrans=2"
+      src: '{{efs_target}}:/'
+      state: mounted
+  - name: Enable lamp php and php
+    shell: amazon-linux-extras install -y lamp-mariadb10.2-php7.2 php7.2
+  - name: yum install dependencies
+    yum:
+      name: [httpd, php-mbstring, python-pip, python-wheel]
+      update_cache: yes
+      state: present
+  - name: Enable the httpd service
+    service:
+      name: httpd
+      state: started
+      enabled: true
+  - name: Copy the themeforest zip file over
+    shell: "aws s3 cp {{ s3_target }}/{{theme}} /mnt"
+  - name: Copy the themeforest img zip over
+    shell: "aws s3 cp {{ s3_target }}/{{images}} /mnt"
+
+  - name: Unarchive the theme to the filesystem
+    unarchive:
+      src: "/mnt/{{theme}}"
+      dest: "/mnt"
+      remote_src: true
+
+  - name: Unarchive the images to the filesystem
+    unarchive:
+      src: "/mnt/{{images}}"
+      dest: "/mnt/liquid/dist/"
+      remote_src: true
+
+  - name: Move the files into place
+    copy:
+      remote_src: true
+      src: /mnt/liquid/dist/
+      dest: "{{ html_root }}"
+  #- name: Deploy Application
+    #copy:
+      #src: "{{ item }}"
+      #dest: "{{ html_root }}"
+    #with_items:
+      #- index.html
+      #- phpinfo.php
+

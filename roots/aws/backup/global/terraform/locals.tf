@@ -8,7 +8,7 @@ locals {
   ec2_instance_type = "t3.micro"
 
   common_tags = {
-    Name  = "${var.region}.${local.dns_hosted_zone_name}"
+    Name  = local.project
     Owner = local.owner
     Email = local.email_address
   }

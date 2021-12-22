@@ -93,6 +93,10 @@ def jira_backup(account, username, token, json, folder):
 
         filename = account + "_backup_" + date + ".zip"
 
+        return_url = f'{url}/plugins/servlet/{filename}'
+
+        return return_url
+
         file = session.get(url + "/plugins/servlet/" + download, stream=True)
 
         file.raise_for_status()
@@ -102,10 +106,6 @@ def jira_backup(account, username, token, json, folder):
                 handle.write(block)
 
         print(filename + "downloaded to " + folder)
-
-        return_url = f'{url}/plugins/servlet/{filename}'
-
-        return return_url
 
 
 def main():
