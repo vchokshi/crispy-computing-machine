@@ -1,49 +1,32 @@
 import os
 import time
+from datetime import datetime
 
 import boto3
 import botocore
 
 from vendor import confluence, jira
 
-# import requests
-
+from . import helpers
 
 REGION = "us-east-1"
 
 
 def main():
-    print(lambda_handler())
-
-
-def backup_to_elastio(url):
-
-    headers = {"Content-Type": "application/json"}
-
-    # s = requests.Session()
-    # g = s.get(url, stream=True, allow_redirects=True)
-
-    # try:
-    # g.raise_for_status()
-    # except requests.exceptions.HTTPError as e:
-    # return {"statusCode": 404, "headers": headers, "body": e}
-
-    print(f"Planning to get {url} and send to elastio")
-    # block stream to elastio target
-    return {"statusCode": 200, "headers": headers, "body": "OK"}
+    print(lambda_handler({}, None))
 
 
 def get_secrets(client):
 
-    site = client.get_parameter(Name="/atlassian/site", WithDecryption=True)[
-        "Parameter"
-    ]["Value"]
-    user = client.get_parameter(Name="/atlassian/user", WithDecryption=True)[
-        "Parameter"
-    ]["Value"]
-    token = client.get_parameter(Name="/atlassian/api_token", WithDecryption=True)[
-        "Parameter"
-    ]["Value"]
+    response = client.get_parameter(Name="/atlassian/site", WithDecryption=True)
+    site = response["Parameter"]["Value"]
+
+    response = client.get_parameter(Name="/atlassian/user", WithDecryption=True)
+    user = response["Parameter"]["Value"]
+
+    response = client.get_parameter(Name="/atlassian/api_token", WithDecryption=True)
+    token = response["Parameter"]["Value"]
+
     return site, user, token
 
 
@@ -51,17 +34,34 @@ def whoami(client):
     client.get_caller_identity()
 
 
-def create_atlassian_backup(site, user, token):
+def backup(site, user, token):
+
+    conf_url = ""
+    jira_url = ""
+    day = datetime.today().strftime("%A")
+
     # Since we don't write to disk, we don't care.
-    folder = "."
+    folder = "./"
 
     # We always backup attachments since Atlassian is hosting the backup
-    attachments = "Y"
+    # Or maybe we dont, but the attachments are sooooo important.
+    if day == "Saturday":
+        print("Including Attachments in Backup")
+        attachments = "Y"
+    else:
+        print("Attachments will not be included today!")
+        attachments = "N"
 
     # We pass in default JSON_DATA
-    json_data = b'{"cbAttachments": "true", "exportToCloud": "true"}'
+    if day == "Saturday":
+        json_data = b'{"cbAttachments": "true", "exportToCloud": "true"}'
+    else:
+        json_data = b'{"cbAttachments": "false", "exportToCloud": "true"}'
 
+    print("Backing up Confluence")
     conf_url = confluence.conf_backup(site, user, token, attachments, folder)
+
+    print("Backing up Jira")
     jira_url = jira.jira_backup(site, user, token, json_data, folder)
 
     return conf_url, jira_url
@@ -75,55 +75,56 @@ def send_sns(client, message):
     client.publish(
         TopicArn=sns_topic_arn,
         Message=message,
-        Subject="Atlassian Has Been Successfully Backed Up",
+        Subject="Atlassian Backup Report",
     )
     return True
 
 
-def lambda_handler():
+def lambda_handler(event, context):
+
+    BUCKET = "iot4-backup-biggfiles"
 
     headers = {"Content-Type": "application/json"}
-
+    message = "Starting Atlassian Backup, press CTRL+C to cancel."
     dry_run = os.getenv("DRY_RUN")
+
+    s3_client = boto3.client("s3", region_name=REGION)
 
     try:
         whoami(boto3.client("sts", region_name=REGION))
     except botocore.exceptions.NoCredentialsError as e:
-        return {"statusCode": 403, "headers": headers, "body": e}
-    except botocore.exceptions.ClientError as e:
+        send_sns(boto3.client("sns", region_name=REGION), e)
         return {"statusCode": 403, "headers": headers, "body": e}
 
     try:
         site, user, token = get_secrets(boto3.client("ssm", region_name=REGION))
     except botocore.exceptions.ClientError as e:
+        send_sns(boto3.client("sns", region_name=REGION), e)
         return {"statusCode": 404, "headers": headers, "body": e}
 
     if dry_run == "True":
         message = "Mission Control: All Systems are Go. "
+        send_sns(boto3.client("sns", region_name=REGION), message)
         return {"statusCode": 204, "headers": headers, "body": message}
 
     else:
-
-        print("Starting Atlassian Backup, press CTRL+C to cancel.")
+        print(message)
         time.sleep(10)
 
         try:
-            conf_url, jira_url = create_atlassian_backup(site, user, token)
+            conf_url, jira_url = backup(site, user, token)
+
         except:
-            e = "An unexpected error occured. Please check the logs and try again."
-            return {"statusCode": 503, "headers": headers, "body": e}
+            message = "Failed to Backup. Please Check the Logs and Try Again."
+            send_sns(boto3.client("sns", region_name=REGION), message)
+            return {"statusCode": 503, "headers": headers, "body": message}
 
-        backup_to_elastio(conf_url)
-        backup_to_elastio(jira_url)
+        jira_s3 = helpers.backup_to_s3("jira", BUCKET, jira_url, s3_client)
+        conf_s3 = helpers.backup_to_s3("confluence", BUCKET, conf_url, s3_client)
+        message = conf_s3 + jira_s3
 
-        message = f"Recovery URLs attached.\n {conf_url} \n {jira_url}\n"
-        send_sns(boto3.client("sts", region_name=REGION), message)
-
-        return {"statusCode": 200, "headers": headers, "body": message}
-
-    message = "Please Check the Account and Try Again."
-    return {"statusCode": 404, "headers": headers, "body": message}
+    return message
 
 
-if __name__ == "__main":
-    resp = main()
+if __name__ == "__main__":
+    main()

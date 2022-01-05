@@ -1,21 +1,29 @@
 import os
 
 import boto3
-from moto import mock_sns, mock_ssm
+from moto import mock_s3, mock_sns, mock_ssm
 
-from src import backup_to_elastio, get_secrets, send_sns
+from src import get_secrets, helpers, send_sns
 
 REGION = "us-east-1"
 
 
-def test_backup_to_elastio():
+@mock_s3
+def test_backup_to_s3():
 
-    url = "https://iot4-biggfiles.s3.amazonaws.com/1K"
-    resp = backup_to_elastio(url)
-    assert resp["statusCode"] == 200
-    url = "https://iot4-biggfiles.s3.amazonaws.com/1M"
-    resp = backup_to_elastio(url)
-    assert resp["statusCode"] == 200
+    BUCKET = "derp"
+    client = boto3.client("s3", region_name=REGION)
+
+    r = client.create_bucket(
+        ACL="private",
+        Bucket=BUCKET,
+    )
+
+    url = "https://upload.wikimedia.org/wikipedia/commons/f/ff/Pizigani_1367_Chart_10MB.jpg"
+
+    resp = helpers.backup_to_s3("10MB", BUCKET, url, client)
+    print(resp)
+    assert resp["ResponseMetadata"]["HTTPStatusCode"] == 200
 
 
 @mock_sns
@@ -55,4 +63,4 @@ if __name__ == "__main__":
     test_get_secrets()
     test_send_sns()
 
-    test_backup_to_elastio()
+    # test_backup_to_s3()
