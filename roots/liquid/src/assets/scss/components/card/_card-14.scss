@@ -1,0 +1,32 @@
+.in-card-14 {
+    .uk-card-default {
+        background-color: transparent;
+        img {
+            border-radius: $card-border-radius;
+        }
+        .in-icon-wrap.small {
+            width: 24px;
+            height: 24px;
+            background-color: $card-primary-color;
+        }
+        a {
+            text-decoration: none;
+        }
+        i {
+            top: -3px;
+            font-size: 10px;
+            color: #fff;
+            position: relative;
+        }
+        .uk-card-body {
+            width: 80%;
+            margin: -30px auto 0;
+            padding: 19px 18px 15px;
+            border: $card-border-width solid $card-border-color;
+            background-color: $card-default-color;
+            border-radius: $card-border-radius;
+            position: relative;
+            z-index: 3;
+        }
+    }
+}

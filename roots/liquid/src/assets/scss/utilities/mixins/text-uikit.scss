@@ -1,0 +1,7 @@
+@import "../../base/base-variables.scss";
+
+// uikit text mixins
+// ========================================================================
+@mixin hook-text-lead(){
+    font-weight: $base-text-lead-font-weight;
+}

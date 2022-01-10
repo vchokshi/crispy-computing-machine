@@ -1,0 +1,38 @@
+<!-- slideshow content begin -->
+<div class="uk-section uk-padding-remove-vertical">
+    <div class="uk-light in-slideshow uk-background-cover uk-background-top-center" style="background-image: url({{root}}img/in-liquid-slide-bg.png);" data-uk-slideshow>        
+        <ul class="uk-slideshow-items">
+            {{#ifpage 'index'}}
+            {{> module-slideshow-1}}
+            {{> module-slideshow-2}}
+            {{/ifpage}}
+            {{#ifpage 'homepage2'}}
+            {{> module-slideshow-3}}
+            {{> module-slideshow-4}}
+            {{/ifpage}}
+            {{#ifpage 'homepage3'}}
+            {{> module-slideshow-4}}
+            {{> module-slideshow-3}}
+            {{/ifpage}}
+            {{#ifpage 'homepage4'}}
+            {{> module-slideshow-2}}
+            {{> module-slideshow-1}}
+            {{/ifpage}}
+        </ul>
+        <a class="uk-position-center-left uk-position-small uk-hidden-hover" href="#" data-uk-slidenav-previous data-uk-slideshow-item="previous"></a>
+        <a class="uk-position-center-right uk-position-small uk-hidden-hover" href="#" data-uk-slidenav-next data-uk-slideshow-item="next"></a>
+        {{#ifpage 'index'}}
+        {{> module-slideshow-feature-1}}
+        {{/ifpage}}
+        {{#ifpage 'homepage2'}}
+        {{> module-slideshow-feature-2}}
+        {{/ifpage}}
+        {{#ifpage 'homepage3'}}
+        {{> module-slideshow-feature-3}}
+        {{/ifpage}}
+        {{#ifpage 'homepage4'}}
+        {{> module-slideshow-feature-4}}
+        {{/ifpage}}
+    </div>
+</div>
+<!-- slideshow content end -->

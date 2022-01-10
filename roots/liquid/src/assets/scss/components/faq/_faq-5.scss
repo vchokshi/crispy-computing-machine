@@ -1,0 +1,32 @@
+.in-faq-5 {
+    .uk-accordion-title {
+        padding: 15px 0;
+        &::before {
+            content: "\f053";
+            font-family: 'Font Awesome 5 Free';
+            font-style: normal;
+            font-weight: 900;
+            font-size: 13px;
+            color: inherit;
+            margin: 5px  0;
+            float: right;
+        }           
+    }
+    .uk-open .uk-accordion-title {
+        color: $faq-primary-color;
+        border-bottom: 0;
+    }
+    .uk-open .uk-accordion-title::before {
+        content: "\f078";
+    }
+    .uk-accordion-content {
+        margin-top: 0px;
+        padding-bottom: 10px;
+    }
+    li:last-child {
+        .uk-accordion-title,
+        .uk-accordion-content {
+            border-bottom: 0;
+        }
+    }
+}

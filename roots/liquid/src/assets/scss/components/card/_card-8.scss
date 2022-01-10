@@ -1,0 +1,13 @@
+.in-card-8 {
+    .uk-card {
+        border: $card-border-width solid $card-border-color;
+        border-top: 3px solid $card-primary-color;
+        background-color: $card-default-color;
+        padding-top: 0px;
+        padding-bottom: 0px;
+        .uk-grid > div {
+            padding-top: 30px;
+            padding-bottom: 30px;
+        }
+    }
+}

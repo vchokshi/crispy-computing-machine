@@ -1,0 +1,41 @@
+.in-faq-2 {
+    margin-top: -20px;
+    .uk-accordion-title {
+        margin-top: 20px;
+        .uk-card-default {
+            &::after {
+                content: "\f105";
+                font-family: 'Font Awesome 5 Free';
+                font-style: normal;
+                font-weight: 900;
+                font-size: 14px;
+                top: 25px;
+                right: 22px;
+                position: absolute;
+            }
+        }
+        .uk-card-body {
+            padding: 20px 22px;
+        }
+        i {
+            margin: 6px  12px 7px 0;
+            float: left;
+        }  
+    }
+    .uk-open .uk-accordion-title .uk-card {        
+        background-color: $faq-primary-color;
+        color: $faq-default-color;
+        border-bottom-left-radius: 0px;
+        border-bottom-right-radius: 0px;
+    }
+    .uk-open .uk-accordion-title .uk-card::after {        
+        content: "\f107";
+    }
+    .uk-accordion-content {
+        margin-top: 0px;
+        &.uk-card-default {
+            border-top-left-radius: 0px;
+            border-top-right-radius: 0px;
+        }
+    }
+}

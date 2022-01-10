@@ -1,0 +1,13 @@
+@import "../../base/base-variables.scss";
+
+// uikit text variables
+// ========================================================================
+$text-lead-font-size:                            $base-text-lead-size !default;
+$text-lead-line-height:                          $base-text-lead-line-height;
+$text-lead-color:                                $base-text-lead-color !default;
+
+$text-primary-color:                             $base-text-primary-color !default;
+$text-secondary-color:                           $base-text-secondary-color !default;
+$text-success-color:                             $base-text-success-color !default;
+$text-warning-color:                             $base-text-warning-color !default;
+$text-danger-color:                              $base-text-danger-color !default;

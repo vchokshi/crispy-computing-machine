@@ -1,0 +1,20 @@
+.in-card-12 {
+    .uk-card-default {
+        border: $card-border-width solid $card-border-color;
+        background-color: $card-default-color;
+    }
+    .uk-card-badge {
+        position: absolute;
+        top: -12px;
+        right: -12px;
+        padding-left: 12px;
+        padding-right: 12px;
+    }
+    .uk-position-bottom-right {
+        i {
+            color: rgba(0, 0, 0, .08);
+            position: relative;
+            right: -20px;
+        }
+    }
+}

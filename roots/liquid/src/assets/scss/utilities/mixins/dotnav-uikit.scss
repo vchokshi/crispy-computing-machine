@@ -1,0 +1,11 @@
+@import "../../base/base-variables.scss";
+
+// uikit dotnav mixins
+// ========================================================================
+@mixin hook-dotnav-item-active(){
+    width: 13px;
+    height: 13px;
+    position: relative;
+    top: -3px;
+    border: 2px solid $base-default-color;
+}

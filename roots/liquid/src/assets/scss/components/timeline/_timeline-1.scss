@@ -1,0 +1,33 @@
+.in-timeline-1 {    
+    hr {
+        margin-bottom: 0;
+    }
+    .uk-card-default {
+        border: $timeline-border-width solid $timeline-border-color;
+        background-color: $timeline-default-color;
+    }
+    .uk-label {
+        position: relative;
+        top: -1px;
+        left: 10px;
+    }
+    .in-timeline-branch {
+        .in-icon-wrap {
+            font-weight: 700;
+            position: relative;
+            top: 21px;
+            left: 38px;
+        }
+        .in-timeline-title {
+            height: 105px;
+            border-left: $timeline-border-width solid $timeline-border-color;
+            margin-left: 5px;
+            padding-left: 40px;
+        }
+    }
+}
+@media (max-width: 960px) {
+    .in-timeline-1 > .uk-child-width-1-1 > div {
+        margin-top: 0;
+    }
+}

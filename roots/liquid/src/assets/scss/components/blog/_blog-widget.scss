@@ -1,0 +1,39 @@
+.in-widget-popular {
+    li {
+        margin-bottom: 25px;
+        &:last-child {
+            margin-bottom: 0;
+        }
+    }
+}
+.in-widget-archive {
+    i {
+        font-size: 9.5px;
+        margin-top: 8px;
+    }
+}
+.in-widget-tag {
+    .uk-label {
+        background-color: $base-default-color;
+        border: 0;
+        color: $base-font-color;
+        margin: 3px 1px;
+        padding: 4px 13px;
+    }
+    a:hover .uk-label {
+        transition: all ease .5s;
+        background-color: $base-primary-color;
+        color: $base-default-color;
+    }
+}
+.in-widget-category li a,
+.in-widget-popular li a,
+.in-widget-archive li a {
+    color: inherit;
+}
+.in-widget-category li a:hover,
+.in-widget-popular li a:hover,
+.in-widget-archive li a:hover {
+    color: $base-link-hover;
+    text-decoration: none;
+}

@@ -1,0 +1,17 @@
+.in-card-13 {
+    .uk-card-default {
+        border: $card-border-width solid $card-border-color;
+        background-color: $card-default-color;
+        img {
+            border-top-left-radius: $card-border-radius;
+            border-top-right-radius: $card-border-radius;
+        }
+        .uk-card-body {
+            margin-top: -35px;
+        }
+        .in-icon-wrap {
+            background-color: $card-primary-color;
+            color: #fff;
+        }
+    }
+}

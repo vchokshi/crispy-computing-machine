@@ -1,0 +1,12 @@
+.in-client-logo-2 {
+    .uk-tile {
+        border: $client-logo-border-width solid $client-logo-border-color;
+        img {
+            opacity: 0.8;
+            transition: 0.3s ease-in-out;
+            &:hover {
+                opacity: 1;
+            }
+        }
+    }
+}

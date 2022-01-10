@@ -1,0 +1,10 @@
+.in-testimonial-7 {    
+    .uk-card {
+        padding-top: 20px;
+        padding-bottom: 20px;
+    }
+    .uk-card-default {
+        border: $testimonial-border-width solid $testimonial-border-color;
+        background-color: $testimonial-default-color;
+    }
+}
