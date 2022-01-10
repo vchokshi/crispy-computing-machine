@@ -1,0 +1,21 @@
+.in-totop {    
+    font-size: 15px;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 45px;
+    height: 45px;
+    position: fixed;
+    right: 40px;
+    bottom: 40px;
+    background-color: $utility-primary-color;
+    border-radius: 6px;
+    opacity: 0;
+    &.uk-animation-slide-top {
+        opacity: 1;
+    }
+}
+a.in-totop {
+    color: $utility-default-color;
+    text-decoration: none;
+}

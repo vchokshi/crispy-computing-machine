@@ -1,0 +1,63 @@
+.in-pricing-6 {
+    .uk-card {
+        transition: all ease 600ms;        
+    } 
+    .uk-card-default {
+        background-color: rgba(0, 0, 0, .02);
+        border-bottom-left-radius: $pricing-border-radius;
+        border-bottom-right-radius: $pricing-border-radius;        
+    }
+    .uk-card-header {
+        box-shadow: inset 0px 0px 0px $pricing-border-width $pricing-border-color;
+        border-top: 4px solid $pricing-secondary-color;
+        border-top-left-radius: $pricing-border-radius;
+        border-top-right-radius: $pricing-border-radius;
+        background-color: $pricing-default-color;
+        margin-bottom: -1px;
+        padding-top: 30px;
+        padding-bottom: 35px;
+        h3 {
+            margin: 12px 0 -20px;
+        }
+        .in-pricing-small {
+            font-size: 24px;
+            margin-right: -10px;
+            top: -17px;
+            position: relative;           
+        }
+        .uk-label {
+            background-color: $pricing-secondary-color;
+        }
+    }
+    .uk-card-body {
+        padding-top: 35px;
+        box-shadow: inset 0px 0px 0px $pricing-border-width $pricing-border-color;
+        border-bottom-left-radius: $pricing-border-radius;
+        border-bottom-right-radius: $pricing-border-radius;
+        transition: all ease 600ms;
+        .uk-list-bullet > li::before {
+            background-image: none;
+            font-size: 14px;
+            font-family: 'Font Awesome 5 Free'; 
+            font-weight: 900; 
+            content: "\f00c";
+            color: $pricing-primary-color;
+            top: 1px;
+            left: 4px;
+        }
+    }
+    &.in-pricing-featured {
+        .uk-card-default {
+            &:hover {
+                background-color: lighten($pricing-primary-color, 45%);
+                border-color: $pricing-primary-color;
+            }
+        }
+        .uk-card-header {
+            border-color: $pricing-primary-color;
+            .uk-label {
+                background-color: $pricing-primary-color;
+            }
+        }
+    }
+}

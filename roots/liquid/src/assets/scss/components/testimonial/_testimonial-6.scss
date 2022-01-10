@@ -1,0 +1,21 @@
+.in-testimonial-6 {
+    .uk-card-default {
+        border: $testimonial-border-width solid $testimonial-border-color;
+        background-color: $testimonial-default-color;
+    }
+    .fa-star {
+        color: $testimonial-star-color;
+        font-size: $testimonial-star-size;
+        position: relative;
+        top: 16px;
+    }
+    @media (max-width: 960px) {
+        .uk-float-right {
+            margin-bottom: -22px;
+        }  
+        .fa-star {
+            top: -26px;
+            left: 64px;
+        }
+    }
+}

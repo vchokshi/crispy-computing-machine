@@ -1,0 +1,19 @@
+.in-blog-4 {
+    a {
+        color: inherit;
+        text-decoration: none;
+        &.uk-button-text {
+            color: $blog-primary-color;
+            &:hover {
+                color: darken($blog-primary-color, 10%);
+            }
+        }
+    }
+    .uk-flex {
+        i {
+            color: rgba(0,0,0, 0.28);
+            top: 1px;
+            position: relative;
+        }
+    }
+}

@@ -1,0 +1,21 @@
+.in-card-18 {    
+    .uk-card-default {
+        border: $card-border-width solid $card-border-color;
+        background-color: $card-default-color;
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+    }
+    div:nth-child(2),
+    div:nth-child(5) {
+        position: relative;
+        top: 30px;
+    }
+    @media (max-width: 960px) {
+        div:nth-child(2),
+        div:nth-child(5) {
+            top: 0px;
+        }
+    }
+}

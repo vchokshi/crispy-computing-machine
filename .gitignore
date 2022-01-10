@@ -6,6 +6,11 @@ __pycache__
 *.png
 *.gif
 img*
-liquid*
 .tox
+*.lock
 *.egg-info
+dist
+build
+.build
+.dist
+node_modules

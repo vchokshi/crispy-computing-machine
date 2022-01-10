@@ -1,0 +1,58 @@
+.in-pricing-5 {    
+    .uk-card {
+        overflow: hidden;
+        border-radius: $pricing-border-radius-2;
+        border: $pricing-border-width-2 solid $pricing-border-color;
+        transition: all ease 600ms;        
+    }
+    .uk-card-default {
+        background-color: $pricing-default-color;
+        &:hover {
+            border-color: darken($pricing-border-color, 9%);
+        }
+    }
+    .uk-card-header {
+        h6 {
+            color: $pricing-default-color;
+        }
+        .in-pricing-small {
+            font-size: 24px;
+            margin-right: -15px;            
+            top: -3px;
+            position: relative;
+        }
+        .in-pricing-month {
+            font-size: 24px;
+            margin-left: -10px;
+        }
+        hr {
+            width: 60%;
+            margin: 35px auto -20px auto;
+        }
+        .uk-card-badge {
+            top: -26px;
+            left: 0%;
+            position: relative;
+        }
+        .uk-label {
+            padding: 14px 25px 9px 25px;
+            border-bottom-left-radius: $base-border-radius;
+            border-bottom-right-radius: $base-border-radius;
+            background-color: $pricing-secondary-color;
+        }
+    }
+    &.in-pricing-featured {
+        .uk-card {
+            border-color: $pricing-primary-color;
+            &:hover {
+                background-color: lighten($pricing-primary-color, 45%);
+                border-color: $pricing-primary-color;
+            }
+        }
+        .uk-card-header {
+            .uk-label {
+                background-color: $pricing-primary-color;
+            }
+        }
+    }
+}

@@ -1,0 +1,16 @@
+// content variables
+$content-default-color:                       $base-default-color !default;
+$content-muted-color:                         $base-muted-color !default;
+$content-primary-color:                       $base-primary-color !default;
+$content-secondary-color:                     $base-secondary-color !default;
+$content-border-color:                        $base-border-color !default;
+$content-border-color-2:                      $base-border-color-2 !default;
+$content-border-width:                        $base-border-width !default;
+$content-border-width-2:                      $base-border-width-2 !default;
+$content-border-radius:                       $base-border-radius !default;
+$content-border-radius-2:                     $base-border-radius-2 !default;
+
+
+/* content component */
+@import "content-10.scss";
+@import "content-11.scss";

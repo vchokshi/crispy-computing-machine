@@ -1,0 +1,18 @@
+.in-client-logo-4 {
+    padding: 0 80px;
+    .uk-tile {
+        padding: 10px 35px;
+        img {
+            opacity: 0.8;
+            transition: 0.3s ease-in-out;
+            &:hover {
+                opacity: 1;
+            }
+        }
+    }
+}
+@media (max-width: 960px) {
+    .in-client-logo-4 {
+        padding: 0;
+    }
+}
