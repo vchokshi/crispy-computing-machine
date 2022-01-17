@@ -1,8 +1,2 @@
 html_root: /var/www/html
-rds_host: elastio-rds.internal.iot4.net
-rds_user: "{{lookup('env','TF_VAR_rds_user')}}"
-rds_password: "{{lookup('env','TF_VAR_rds_password')}}"
-efs_host: "10.4.4.213"
-s3_target: "s3://iot4-finance-assets"
-theme: "themeforest.zip"
-images: "img-liquid.zip"
+s3_target: "s3://backup.iot4.net"
