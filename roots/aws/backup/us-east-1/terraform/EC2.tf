@@ -1,4 +1,4 @@
-resource "aws_instance" "test" {
+resource "aws_instance" "east" {
   count                       = length(module.vpc.public_subnets)
   ami                         = data.aws_ami.amazon-linux-2.id
   subnet_id                   = module.vpc.public_subnets[count.index]
@@ -16,11 +16,11 @@ resource "aws_route53_record" "ssh" {
   name    = "${var.region}-${count.index}.${local.dns_hosted_zone_name}"
   type    = "A"
   ttl     = "300"
-  records = [aws_instance.test[count.index].public_ip]
+  records = [aws_instance.east[count.index].public_ip]
 }
 
 output "aws_instance_id" {
-  value = aws_instance.test.*.id
+  value = aws_instance.east.*.id
 }
 #output "ssh" {
 #count   = length(module.vpc.public_subnets)
