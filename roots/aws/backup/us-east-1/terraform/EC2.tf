@@ -7,7 +7,7 @@ resource "aws_instance" "east" {
   key_name                    = aws_key_pair.v.key_name
   #tags                        = local.common_tags
   #volume_tags                 = local.common_tags
-  iam_instance_profile = data.aws_iam_instance_profile.vchokshi.name
+  iam_instance_profile = data.aws_iam_instance_profile.instance_profile.name
 }
 
 resource "aws_route53_record" "ssh" {
