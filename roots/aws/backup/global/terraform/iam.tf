@@ -1,5 +1,5 @@
-resource "aws_iam_role" "vchokshi" {
-  name = "vchokshi"
+resource "aws_iam_role" "backup-admin" {
+  name = "backup-admin"
 
   assume_role_policy = <<EOF
 {
@@ -21,15 +21,15 @@ EOF
 
 }
 
-resource "aws_iam_instance_profile" "vchokshi" {
-  name = "vchokshi"
-  role = aws_iam_role.vchokshi.name
+resource "aws_iam_instance_profile" "backup-admin" {
+  name = "backup-admin"
+  role = aws_iam_role.backup-admin.name
 }
 
 
-resource "aws_iam_role_policy" "vchokshi" {
-  name = "vchokshi"
-  role = aws_iam_role.vchokshi.id
+resource "aws_iam_role_policy" "backup-admin" {
+  name = "backup-admin"
+  role = aws_iam_role.backup-admin.id
 
   policy = <<EOF
 {
@@ -39,23 +39,22 @@ resource "aws_iam_role_policy" "vchokshi" {
       "Action": [
         "s3:*",
         "dynamodb:*",
-	"sqs:*",
-	"ram:*",
-	"ssm:*",
-	"iam:*",
-	"sts:*",
-	"lambda:*",
-	"kms:*",
-	"ec2:*",
-    "cloudformation:*",
-    "events:*",
-    "sns:*",
-    "batch:*",
-"autoscaling:*",
-"application-autoscaling:*",
-"ecs:*",
-
-"cloudwatch:*"
+	    "sqs:*",
+	    "ram:*",
+	    "ssm:*",
+	    "iam:*",
+	    "sts:*",
+	    "lambda:*",
+	    "kms:*",
+	    "ec2:*",
+        "cloudformation:*",
+        "events:*",
+        "sns:*",
+        "batch:*",
+        "autoscaling:*",
+        "application-autoscaling:*",
+        "ecs:*",
+        "cloudwatch:*"
       ],
       "Effect": "Allow",
       "Resource": "*"

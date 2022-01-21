@@ -7,7 +7,7 @@ resource "aws_instance" "west" {
   key_name                    = aws_key_pair.v.key_name
   #tags                        = local.common_tags
   #volume_tags                 = local.common_tags
-  iam_instance_profile = data.aws_iam_instance_profile.vchokshi.name
+  iam_instance_profile = data.aws_iam_instance_profile.instance_profile.name
 }
 
 resource "aws_route53_record" "ssh" {
@@ -26,3 +26,13 @@ output "aws_instance_id" {
 #count   = length(module.vpc.public_subnets)
 #value = "ssh ec2-user@${aws_route53_record.ssh[${count.index}].name}"
 #}
+
+resource "aws_route53_record" "controller" {
+  zone_id = data.aws_route53_zone.public.id
+  name    = "controller.${local.dns_hosted_zone_name}"
+  type    = "A"
+  ttl     = "300"
+  records = [aws_instance.west[0].public_ip]
+}
+
+
