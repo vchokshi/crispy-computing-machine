@@ -1,10 +1,10 @@
 [all]
-us-east-1-0.backup.iot4.net efs_target="fs-0d04f8eda21e10b40.efs.us-east-1.amazonaws.com"
-us-east-1-1.backup.iot4.net efs_target="fs-0d04f8eda21e10b40.efs.us-east-1.amazonaws.com"
-us-east-1-2.backup.iot4.net efs_target="fs-0d04f8eda21e10b40.efs.us-east-1.amazonaws.com"
-us-west-2-0.backup.iot4.net efs_target="fs-0e591811d266d0149.efs.us-west-2.amazonaws.com"
-us-west-2-1.backup.iot4.net efs_target="fs-0e591811d266d0149.efs.us-west-2.amazonaws.com"
-us-west-2-2.backup.iot4.net efs_target="fs-0e591811d266d0149.efs.us-west-2.amazonaws.com"
+us-east-1-0.backup.iot4.net efs_target="fs-0063b65fa781ac28d.efs.us-east-1.amazonaws.com"
+us-east-1-1.backup.iot4.net efs_target="fs-0063b65fa781ac28d.efs.us-east-1.amazonaws.com."
+us-east-1-2.backup.iot4.net efs_target="fs-0063b65fa781ac28d.efs.us-east-1.amazonaws.com"
+#us-west-2-0.backup.iot4.net efs_target="fs-0e591811d266d0149.efs.us-west-2.amazonaws.com"
+#us-west-2-1.backup.iot4.net efs_target="fs-0e591811d266d0149.efs.us-west-2.amazonaws.com"
+#us-west-2-2.backup.iot4.net efs_target="fs-0e591811d266d0149.efs.us-west-2.amazonaws.com"
 
 [all:vars]
 ansible_python_interpreter=/usr/bin/python3
