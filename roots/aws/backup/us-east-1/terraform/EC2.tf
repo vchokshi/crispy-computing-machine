@@ -10,6 +10,14 @@ resource "aws_instance" "east" {
   iam_instance_profile = data.aws_iam_instance_profile.instance_profile.name
 }
 
+resource "aws_route53_record" "east_elastio_controller" {
+  zone_id = data.aws_route53_zone.public.id
+  name    = "ec.${local.dns_hosted_zone_name}"
+  type    = "A"
+  ttl     = "300"
+  records = [aws_instance.east[0].public_ip]
+}
+
 resource "aws_route53_record" "ssh" {
   count   = length(module.vpc.public_subnets)
   zone_id = data.aws_route53_zone.public.id
@@ -22,7 +30,10 @@ resource "aws_route53_record" "ssh" {
 output "aws_instance_id" {
   value = aws_instance.east.*.id
 }
-#output "ssh" {
-#count   = length(module.vpc.public_subnets)
-#value = "ssh ec2-user@${aws_route53_record.ssh[${count.index}].name}"
-#}
+
+output "ssh" {
+  value = "ssh ec2-user@${aws_route53_record.ssh[0].name}"
+}
+output "east_elastio_controller" {
+  value = "ssh ec2-user@${aws_route53_record.east_elastio_controller.name}"
+}

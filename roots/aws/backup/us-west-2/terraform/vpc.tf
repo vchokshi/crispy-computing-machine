@@ -2,10 +2,10 @@ module "vpc" {
   source  = "terraform-aws-modules/vpc/aws"
   version = "2.77.0"
 
-  name                     = "${local.project} - vpc"
-  cidr                     = "10.79.0.0/16"
-  azs                      = data.aws_availability_zones.available.names
-  private_subnets          = ["10.79.1.0/24", "10.79.2.0/24", "10.79.3.0/24"]
+  name = "${local.project} - vpc"
+  cidr = "10.79.0.0/16"
+  azs  = data.aws_availability_zones.available.names
+  #private_subnets          = ["10.79.1.0/24", "10.79.2.0/24", "10.79.3.0/24"]
   public_subnets           = ["10.79.4.0/24", "10.79.5.0/24", "10.79.6.0/24"]
   enable_nat_gateway       = false
   single_nat_gateway       = true
