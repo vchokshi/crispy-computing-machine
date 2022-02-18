@@ -45,8 +45,20 @@ resource "azurerm_linux_virtual_machine" "jumphost" {
   tags = local.common_tags
 }
 
+resource "azurerm_dns_a_record" "jump" {
+  name                = "jump"
+  zone_name           = data.azurerm_dns_zone.iot4.name
+  resource_group_name = data.azurerm_resource_group.global.name
+  ttl                 = 300
+  records             = [azurerm_linux_virtual_machine.jumphost.public_ip_address]
+}
+
+
 output "jumphost_ip" {
   value = azurerm_linux_virtual_machine.jumphost.public_ip_address
+}
+output "jumphost" {
+  value = "jump.${data.azurerm_dns_zone.iot4.name}"
 }
 
 
