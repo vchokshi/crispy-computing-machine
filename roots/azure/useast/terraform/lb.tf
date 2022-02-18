@@ -21,10 +21,24 @@ output "lb-frontend-ip" {
   value = "http://${azurerm_public_ip.lb_public_ip.ip_address}/login.php"
 }
 
+resource "azurerm_dns_a_record" "www" {
+  name                = "www"
+  zone_name           = data.azurerm_dns_zone.iot4.name
+  resource_group_name = data.azurerm_resource_group.global.name
+  ttl                 = 300
+  records             = [azurerm_public_ip.lb_public_ip.ip_address]
+}
+
+output "lb-frontend-dns" {
+  value = "http://www.${data.azurerm_dns_zone.iot4.name}/login.php"
+}
+
+
 resource "azurerm_lb_backend_address_pool" "lb_backend_pool" {
   loadbalancer_id = azurerm_lb.lb.id
   name            = "${local.stack-color}-backend-address-pool"
 }
+
 resource "azurerm_lb_probe" "lb_probe" {
   resource_group_name = azurerm_resource_group.rg.name
   loadbalancer_id     = azurerm_lb.lb.id
