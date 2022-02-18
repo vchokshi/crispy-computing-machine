@@ -41,3 +41,15 @@ resource "aws_route53_record" "s" {
     "ns-757.awsdns-30.net",
   ]
 }
+resource "aws_route53_record" "azure" {
+  zone_id = aws_route53_zone.iot.zone_id
+  name    = "az.iot4.net"
+  type    = "NS"
+  ttl     = "300"
+  records = [
+    "ns1-07.azure-dns.com.",
+    "ns2-07.azure-dns.net.",
+    "ns3-07.azure-dns.org.",
+    "ns4-07.azure-dns.info."
+  ]
+}
