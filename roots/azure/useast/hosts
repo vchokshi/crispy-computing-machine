@@ -1,3 +1,2 @@
 [all]
-# jumphost public ip address
-137.135.109.117 ansible_python_interpreter=/usr/bin/python3
+jump.az.iot4.net ansible_python_interpreter=/usr/bin/python3
