@@ -42,6 +42,7 @@
   },
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.13.0",
+    "node-sass": "^7.0.1",
     "uikit": "^3.5.3"
   }
 }

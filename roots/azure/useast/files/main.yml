@@ -21,6 +21,12 @@
       name: docker
       state: present
 
+  - name: Login to docker for liquid
+    docker_login:
+        username: vchokshi
+        password: derp
+        email: vc@iot4.net
+
   - name: download and launch a docker web container
     docker_container:
       name: dvwa
