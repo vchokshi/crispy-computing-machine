@@ -22,7 +22,8 @@ data "aws_iam_policy_document" "gator" {
       "arn:aws:iam::641684806785:role/OrganizationAccountAccessRole",
       "arn:aws:iam::264981948567:role/OrganizationAccountAccessRole",
       "arn:aws:iam::438513923646:role/OrganizationAccountAccessRole",
-      "arn:aws:iam::389986100965:role/OrganizationAccountAccessRole"
+      "arn:aws:iam::389986100965:role/OrganizationAccountAccessRole",
+      "arn:aws:iam::732349697425:role/OrganizationAccountAccessRole"
     ]
   }
   statement {
