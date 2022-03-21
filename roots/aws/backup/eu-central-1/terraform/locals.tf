@@ -7,12 +7,12 @@ locals {
 
   ec2_instance_type = "t3.micro"
 
-  region_short = "east"
+  region_short = "eu"
 
   common_tags = {
-    Name        = "${var.region}.${local.dns_hosted_zone_name}"
-    Owner       = local.owner
-    Email       = local.email_address
-    Use_Elastio = "True"
+    Name    = "${var.region}.${local.dns_hosted_zone_name}"
+    Owner   = local.owner
+    Email   = local.email_address
+    elastio = "False"
   }
 }
