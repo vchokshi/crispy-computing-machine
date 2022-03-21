@@ -1,8 +1,29 @@
-- name: Build the lamp stack 
+- name: Build the stack for Elastio Demonstraton
   become: true
-  hosts: all
+  hosts: east,west
   roles:
-  pre_tasks: 
+  tasks: 
+
+  - name: Install Amazon Linux Extras
+    shell: amazon-linux-extras install -y lamp-mariadb10.2-php7.2 php7.2
+
+  - name: Install yum dependencies
+    yum:
+      name: [httpd, python-pip, python-wheel]
+      update_cache: yes
+      state: present
+
+  # Check to make sure nvme disks are partitioned and mounted.
+  - name: "Stat the /data dir to see if it exists"
+    stat:
+        path: "/data"
+    register: data
+
+  - name: "Stat the {{ html_root }} to see if its dir or link"
+    stat:
+        path: "{{ html_root }}"
+    register: sym
+
   - name: Mount the nfs file system
     become: yes
     mount:
@@ -11,33 +32,34 @@
       opts: "nfsvers=4.1,rsize=1048576,wsize=1048576,hard,timeo=600,retrans=2"
       src: '{{efs_target}}:/'
       state: mounted
-  - name: Enable a LAMP Stack
-    shell: amazon-linux-extras install -y lamp-mariadb10.2-php7.2 php7.2
-  - name: Install yum dependencies
-    yum:
-      name: [httpd, php-mbstring, python-pip, python-wheel]
-      update_cache: yes
-      state: present
-  - name: Sync the S3 tartet to /mnt
-    shell: "aws s3 sync {{ s3_target }} /mnt"
-  - name: "Stat the {{ html_root }} to see if its dir or link"
-    stat:
-        path: "{{ html_root }}"
-    register: sym
 
-  - name: "Delete the directory if dir"
+  - name: "Sync {{ s3_target }} to /mnt"
+    shell: "aws s3 sync {{ s3_target }} /mnt"
+
+  - name: "Sync {{ s3_target }} to /data"
+    shell: "aws s3 sync {{ s3_target }} /data"
+    when: data.stat.isdir is defined and data.stat.isdir 
+
+  - name: Delete the html_root dir if isdir
     file:
         path: "{{html_root}}"
         state: absent
     when: sym.stat.isdir is defined and sym.stat.isdir 
 
+  - name: Symlink html_root to /data
+    file:
+        dest: "{{ html_root }}"
+        src: "/data"
+        state: link
+    when: data.stat.isdir is defined and data.stat.isdir 
+        
   - name: Symlink html_root to /mnt
     file:
         dest: "{{ html_root }}"
         src: "/mnt"
         state: link
-    when: sym.stat.islink is not defined or syml.stat.islink == False
-
+    when: data.stat.isdir is not defined
+ 
   - name: Enable the httpd service
     service:
       name: httpd

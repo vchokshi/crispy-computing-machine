@@ -1,5 +1,5 @@
 resource "aws_default_security_group" "default" {
-  vpc_id = aws_default_vpc.default.id
+  vpc_id = module.vpc.vpc_id
 
   ingress {
     protocol    = "tcp"

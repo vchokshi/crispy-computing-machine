@@ -3,10 +3,9 @@ module "vpc" {
   version = "2.77.0"
 
   name                     = local.project
-  cidr                     = "10.77.0.0/16"
+  cidr                     = "10.79.0.0/16"
   azs                      = data.aws_availability_zones.available.names
-  private_subnets          = []
-  public_subnets           = ["10.77.4.0/24", "10.77.5.0/24", "10.77.6.0/24"]
+  public_subnets           = ["10.79.8.0/24", "10.79.9.0/24"]
   enable_nat_gateway       = false
   single_nat_gateway       = true
   enable_dns_hostnames     = true

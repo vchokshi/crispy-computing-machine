@@ -1,2 +1,1 @@
 html_root: /var/www/html
-s3_target: "s3://backup.iot4.net"

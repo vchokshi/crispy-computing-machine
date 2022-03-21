@@ -3,6 +3,8 @@
   hosts: all
   become: true
   tasks:
+
+    # The Curriculum Way
     - name: docker.io
       apt:
         force_apt_get: yes
@@ -36,10 +38,13 @@
           repo: ppa:ansible/ansible
           state: present
 
+    # The Instructors Way
     - name: Install ansible
       apt:
           name: ansible
           state: present
+
+    # Why are they different?
 
 - name: Deploy files to home dir
   hosts: all

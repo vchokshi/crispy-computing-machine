@@ -71,7 +71,7 @@ resource "azurerm_network_security_group" "nsg" {
     protocol                   = "Tcp"
     source_port_range          = "*"
     destination_port_range     = "22"
-    source_address_prefix      = azurerm_linux_virtual_machine.jumphost.private_ip_address
+    source_address_prefix      = "10.0.0.0/24"
     destination_address_prefix = "VirtualNetwork"
   }
   security_rule {
