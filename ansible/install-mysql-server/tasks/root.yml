@@ -1,0 +1,19 @@
+- name: Acquire temporary root pass
+  shell: >
+    grep 'temporary password' /var/log/mysqld.log | cut -f 11 -d ' '
+  register: mysql_root_temp_password
+
+- debug:
+    msg: "Temporary root pass: {{mysql_root_temp_password.stdout}}"
+  when: debug
+
+- name: Set temp root pass as root password
+  set_fact:
+    mysql_temp_password: "{{ mysql_root_temp_password.stdout }}"
+  when: mysql_root_temp_password is defined
+  
+- name: Change root password on commandline
+  become: true
+  shell: >
+    mysqladmin -u {{mysql_root_username}} -p'{{mysql_temp_password}}' password '{{mysql_root_password}}'
+- set_fact: pnm_mysql_rooted="true" cacheable="true"

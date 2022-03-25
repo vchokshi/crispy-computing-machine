@@ -1,0 +1,61 @@
+---
+
+  - name: Make /usr/share/nginx/html/videbligo.com directory
+    become: yes
+    file:
+      path: /usr/share/nginx/html/videbligo.com
+      state: directory
+      owner: videbligo
+      group: adm
+      mode: 0775
+
+  - name: Clone into videbligo www repository
+    become: no
+    git:
+      repo: ssh://git@github.com/vchokshi/www.git
+      dest: /usr/share/nginx/html/videbligo.com/www
+      version: 4.1
+      accept_hostkey: true
+      force: yes
+
+  - name: Install npm
+    become: yes
+    apt:
+      name: "npm"
+      state: installed
+      update_cache: yes
+
+  - name: Install bower and gulp with npm
+    become: yes
+    npm:
+      name: "{{item}}"
+      global: yes
+    with_items:
+      - bower
+      - gulp
+
+  - name: Install all www dependencies
+    become: no
+    npm:
+      path: /usr/share/nginx/html/videbligo.com/www
+
+  - name: Use gulp to build site
+    become: no
+    command: gulp
+    args:
+      chdir: /usr/share/nginx/html/videbligo.com/www
+
+  - name: Deploy our www conf file for basic html access
+    become: yes
+    template: src=www.conf.j2 dest=/etc/nginx/sites-available/videbligo.com.conf owner=root group=root mode=0644
+    notify:
+      - restart nginx
+
+  - name: Activate Web Server on port 80
+    become: yes
+    file:
+      src: /etc/nginx/sites-available/videbligo.com.conf
+      dest: /etc/nginx/sites-enabled/videbligo.com.conf
+      state: link
+    notify:
+      - restart nginx

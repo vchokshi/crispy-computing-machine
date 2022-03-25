@@ -1,0 +1,4 @@
+logstash_version: "5.X"
+sincedb: "/var/lib/logstash/"
+logstash_conf_dir: "/etc/logstash/conf.d/"
+ls_heap: 1g

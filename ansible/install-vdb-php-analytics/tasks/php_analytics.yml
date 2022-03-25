@@ -1,0 +1,20 @@
+---
+  - name: Clone into videbligo php-analytics repository
+    become: no
+    git:
+      repo: ssh://git@github.com/vchokshi/php-analytics.git
+    dest: /usr/share/php/videbligo.com/analytics
+      version: master
+      accept_hostkey: true
+      force: yes
+  #
+  # - name: Copy our summarizer script to start on boot
+  #   copy:
+  #     src: summarizer.sh
+  #     dest: /etc/init.d/summarizer
+  #     owner: root
+  #     group: root
+  #     mode: 0755
+  #
+  # - name: Update rc scripts to start summarizer on boot
+  #   command: update-rc.d summarizer defaults

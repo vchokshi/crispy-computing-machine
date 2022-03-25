@@ -1,0 +1,21 @@
+---
+      
+  - name: Clone into videbligo php-rest repository
+    become: no
+    git:
+      repo: ssh://git@github.com/vchokshi/php-rest.git
+      dest: /usr/share/php/videbligo.com/rest
+      version: master
+      accept_hostkey: true
+      force: yes
+
+  - name: Deploy our rest.conf file for html and rest access
+    become: yes
+    template:
+      src: rest.conf.j2
+      dest: /etc/nginx/sites-available/videbligo.com.conf
+      owner: root
+      group: root
+      mode: 0644
+    notify:
+      - restart nginx

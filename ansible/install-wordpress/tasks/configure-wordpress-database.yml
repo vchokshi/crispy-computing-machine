@@ -1,0 +1,28 @@
+---
+  - name: Add new database for each production domain
+    mysql_db:
+      name: "wp_{{item.value.zone}}_{{item.value.tld}}"
+      login_host: '{{rds_host}}'
+      login_user: "{{rds_user}}"
+      login_password: "{{rds_password}}"
+    with_dict: "{{wp_domains}}"
+
+  - name: Create prodcution database user and grant them access to their database.
+    mysql_user:
+      name: "{{item.value.db_user}}"
+      password: "{{item.value.db_pass}}"
+      host: '%'
+      priv: "wp_{{item.value.zone}}_{{item.value.tld}}%.*:ALL"
+      login_host: '{{rds_host}}'
+      login_user: "{{rds_user}}"
+      login_password: "{{rds_password}}"
+    with_dict: "{{wp_domains}}"
+
+  # - name: Add new database for each development domain
+  #   mysql_db:
+  #     name: "wp_{{item.value.zone}}_{{item.value.tld}}_dev"
+  #     login_host: '{{rds_host}}'
+  #     login_user: "{{rds_user}}"
+  #     login_password: "{{rds_password}}"
+  #   with_dict: "{{wp_domains}}"
+  #   when: item.value.dev is defined

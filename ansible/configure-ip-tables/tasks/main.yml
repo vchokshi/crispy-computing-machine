@@ -1,0 +1,41 @@
+- name: Configure IP Tables
+  pause:
+    seconds: 5
+
+#https://www.digitalocean.com/community/tutorials/how-to-set-up-a-firewall-using-iptables-on-ubuntu-14-04
+# Allow all localhost connections
+
+- name: Install iptables-persistent
+  apt:
+    pkg: iptables-persistent
+    state: present
+    environment:
+     DEBIAN_FRONTEND: noninteractive
+
+#Temporarly remove drops so rules go on top of them.
+- shell: 'iptables -D INPUT -j DROP'
+
+##Ensure loopback always works
+- shell: 'iptables -I INPUT 1 -i lo -j ACCEPT'
+- shell: 'iptables -I OUTPUT 1 -o lo -j ACCEPT'
+
+#Allot established connectons to continue
+- shell: 'iptables -A INPUT -m conntrack --ctstate ESTABLISHED,RELATED -j ACCEPT'
+- shell: 'iptables -A OUTPUT -m conntrack --ctstate ESTABLISHED -j ACCEPT'
+
+# Allow ssh in and out.
+- shell: 'iptables -A INPUT -p tcp --dport 22 -m conntrack --ctstate NEW,ESTABLISHED -j ACCEPT'
+- shell: 'iptables -A OUTPUT -p tcp --sport 22 -m conntrack --ctstate NEW,ESTABLISHED -j ACCEPT'
+
+# Allow http/https in and OUTPUT
+- shell: 'iptables -A INPUT -p tcp --dport 80,443 -m conntrack --ctstate NEW,ESTABLISHED -j ACCEPT'
+- shell: 'iptables -A OUTPUT -p tcp --sport 80,443 -m conntrack --ctstate ESTABLISHED -j ACCEPT'
+
+# Drop invalid packets
+- shell: 'iptables -A INPUT -m conntrack --ctstate INVALID -j DROP'
+
+# Drop everything else that does not pass.
+- shell: 'iptables -A INPUT -j DROP'
+
+# Save iptables rules
+- shell: 'invoke-rc.d iptables-persistent save'

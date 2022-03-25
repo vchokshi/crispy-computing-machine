@@ -1,0 +1,43 @@
+- name: Download the latest version of wordpress the system
+  get_url:
+    url: https://wordpress.org/latest.zip
+    dest: /tmp/latest.zip
+    mode: 0440
+
+- name: 'Make the domain for PRODUCTION directory - {{nginx_html_root}}/{{item.key}}'
+  file:
+    path: "{{nginx_html_root}}/{{item.key}}"
+    owner: "{{os_user}}"
+    group: www-data
+    state: directory
+    mode: 0775
+  with_dict: "{{wp_domains}}"
+
+# - name: 'Make the domain for DEVELOPMENT directory - {{nginx_html_root}}/{{item.key}}-dev'
+#   file:
+#     path: "{{nginx_html_root}}/{{item.key}}-dev"
+#     owner: "{{os_user}}"
+#     group: www-data
+#     state: directory
+#     mode: 0775
+#   with_dict: "{{wp_domains}}"
+#   when: item.value.dev is defined
+
+- name: Unarchive the latest version of wordpress for PRODUCTION servers
+  unarchive:
+    src: /tmp/latest.zip
+    dest: "{{nginx_html_root}}/{{item.key}}"
+    remote_src: true
+    owner: "{{os_user}}"
+    group: www-data
+  with_dict: "{{wp_domains}}"
+
+# - name: Unarchive the latest version of wordpress for DEVELOPMENT servers
+#   unarchive:
+#     src: /tmp/latest.zip
+#     dest: "{{nginx_html_root}}/{{item.key}}-dev"
+#     remote_src: true
+#     owner: "{{os_user}}"
+#     group: www-data
+#   with_dict: "{{wp_domains}}"
+#   when: item.value.dev is defined

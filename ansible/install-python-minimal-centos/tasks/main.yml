@@ -1,0 +1,8 @@
+- name: Install python-minimal
+  become: yes
+  raw: test -e /usr/bin/python || (apt update && apt install -y python-minimal)
+
+# - name: Display all variables/facts known for a host
+#   debug:
+#     var: ec2_id
+#     verbosity: 4

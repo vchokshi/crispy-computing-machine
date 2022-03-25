@@ -1,0 +1,62 @@
+- name: Enable PHP 7.1 repository
+  become: yes
+  apt_repository: repo="ppa:ondrej/php" state=present update_cache=yes
+
+- name: Install PHP Framework
+  become: yes
+  apt: pkg={{ item }} update_cache=yes state=present
+  with_items:
+   - php7.1
+   - php7.1-fpm
+   - php7.1-mcrypt
+   - php7.1-curl
+   - php7.1-cli
+   - php7.1-mysql
+   - php7.1-mbstring
+   - php7.1-dev
+   - php7.1-intl
+   - php7.1-zip
+   - php7.1-gd
+   - php-pear
+
+- name: Install Composer for php package management
+  become: yes
+  get_url:
+    url: https://getcomposer.org/installer
+    dest: /tmp/installer
+
+- name: Build composer.phar file
+  become: yes
+  command: /usr/bin/php installer
+  args:
+    chdir: /tmp
+
+- name: Make Composer available globally
+  become: yes
+  command: mv /tmp/composer.phar /usr/local/bin/composer
+
+- name: Set /usr/share/php permissions
+  become: yes
+  file:
+    path: /usr/share/php
+    owner: "{{os_user}}"
+    group: www-data
+    mode: 0775
+    recurse: true
+
+# - name: Update pear packages
+#   become: yes
+#   command: pear channel-update pear.php.net
+#
+# - name: Update pecl packages
+#   become: yes
+#   command: pecl channel-update pecl.php.net
+
+# - name: Make /usr/share/php/vdb directory
+#   become: yes
+#   file:
+#     path: /usr/share/php/vdb
+#     state: directory
+#     owner: "{{os_user}}"
+#     group: www-data
+#     mode: 0775

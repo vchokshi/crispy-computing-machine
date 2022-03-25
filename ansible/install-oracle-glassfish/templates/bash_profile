@@ -1,0 +1,18 @@
+# .bash_profile
+
+# Get the aliases and functions
+if [ -f ~/.bashrc ]; then
+	. ~/.bashrc
+fi
+
+# User specific environment and startup programs
+
+PATH=$PATH:$HOME/.local/bin:$HOME/bin:/usr/lib/oracle/12.1/client64/bin/:/usr/local/glassfish3/bin
+LD_LIBRARY_PATH=/usr/lib/oracle/12.1/client64/lib
+TNS_ADMIN=~/
+GFHOME=/usr/local/glassfish{{version}}
+
+export PATH
+export LD_LIBRARY_PATH
+export TNS_ADMIN
+export GFHOME

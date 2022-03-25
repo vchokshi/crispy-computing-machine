@@ -1,0 +1,9 @@
+html_root: /usr/share/nginx/html/
+sites_enabled: /etc/nginx/sites-enabled/
+sites_available: /etc/nginx/sites-available/
+
+phpMyAdmin_dir: "{{html_root}}/phpmyadmin"
+phpMyAdmin_version: 4.7.4
+
+rds_user: root
+rds_password: root

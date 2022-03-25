@@ -1,0 +1,41 @@
+---
+  - name: Add Ubuntu Repositories for Logstash
+    apt_repository:
+      repo: "{{ item }}"
+      state: present
+    with_items:
+      - "ppa:openjdk-r/ppa"
+      - "deb https://artifacts.elastic.co/packages/5.x/apt stable main"
+    when: ansible_os_family =='Debian'
+
+  - name: Add Logstash Repository Key for Ubuntu
+    apt_key:
+      url: "https://artifacts.elastic.co/GPG-KEY-elasticsearch"
+      state: present
+    when: ansible_os_family =='Debian'
+
+  - name: Install Logstash Dependencies and Software on Ubuntu
+    apt:
+      name: "{{ item }}"
+      update_cache: yes
+      state: present
+    with_items:
+      - logstash
+    when: ansible_os_family == 'Debian'
+
+  - name: Add RedHat Repositories for Logstash
+    yum_repository:
+      name: "logstash-5.x"
+      description: "Elastic repository for 5.x packages"
+      baseurl: https://artifacts.elastic.co/packages/5.x/yum
+      gpgkey: https://artifacts.elastic.co/GPG-KEY-elasticsearch
+      gpgcheck: yes
+    when: ansible_os_family == 'RedHat'
+
+  - name: Install Logstash Dependencies and Software on Ubuntu
+    yum:
+      name: "{{ item }}"
+      state: present
+    with_items:
+      - logstash
+    when: ansible_os_family == 'RedHat'

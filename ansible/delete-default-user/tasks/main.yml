@@ -1,0 +1,21 @@
+- name: Pkill all processes owned by ubuntu
+  command: pkill -u ubuntu
+  when: ansible_os_family == 'Debian'
+  ignore_errors: true
+
+- name: Kill processes being run by ec2-user
+  command: pkill -U ec2-user
+  when: ansible_os_family == 'RedHat'
+  ignore_errors: true
+
+- name: Delete user ubuntu from the system
+  user:
+    name: ubuntu
+    state: absent
+  when: ansible_os_family == 'Debian'
+
+- name: Delete user ec2-user from the system
+  user:
+    name: ec2-user
+    state: absent
+  when: ansible_os_family == 'RedHat'

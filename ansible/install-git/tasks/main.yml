@@ -1,0 +1,63 @@
+- name: Install git for Debian
+  apt:
+    name: "{{ item }}"
+    update_cache: yes
+    state: present
+  with_items:
+   - git
+  when: ansible_os_family == 'Debian'
+
+- name: Install git for RedHat
+  yum:
+    name: "{{ item }}"
+    update_cache: yes
+    state: present
+  with_items:
+   - git
+  when: ansible_os_family == 'RedHat'
+
+- name: Deploy our disposable github private key to each servers
+  become: no
+  copy:
+    src: disposable_key
+    dest: ~/.ssh/id_rsa
+    owner: "{{os_user}}"
+    group: "{{os_user}}"
+    mode: 0600
+
+- name: Deploy our disposable github public key to each servers
+  become: no
+  copy:
+    src: disposable_key.pub
+    dest: ~/.ssh/id_rsa.pub
+    owner: "{{os_user}}"
+    group: "{{os_user}}"
+    mode: 0600
+
+- name: Configure git user name.
+  become: no
+  git_config:
+    name: user.name
+    scope: global
+    value: "Vihar Chokshi"
+
+- name: Configure git user email.
+  become: no
+  git_config:
+    name: user.email
+    scope: global
+    value: "vihar@{{tld}}"
+
+- name: Configure git editor.
+  become: no
+  git_config:
+    name: core.editor
+    scope: global
+    value: "vi"
+
+- name: Configure push default settings.
+  become: no
+  git_config:
+    name: push.default
+    scope: global
+    value: "simple"

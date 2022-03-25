@@ -1,0 +1,19 @@
+---
+  - name: Create a glassfish user
+    user:
+      name: glassfish
+      group: users
+      uid: 2001
+      home: /home/glassfish
+
+  - name: Transfer vchokshis ed25519 ssh key to the Debian host.
+    authorized_key:
+      user: glassfish
+      key: https://github.com/vchokshi.keys
+    ignore_errors: true
+
+  - name: Copy the glassfish bash.profile file over
+    become_user: glassfish
+    copy:
+      src: bash_profile
+      dest: ~/.bash_profile

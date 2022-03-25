@@ -1,0 +1,24 @@
+---
+- name: Enable Oracle PPA repository
+  apt_repository:
+    repo: "ppa:webupd8team/java"
+    state: present
+  when: ansible_os_family == 'Debian'
+
+- name: set licence selected
+  shell: /bin/echo debconf shared/accepted-oracle-license-v1-1 select true | /usr/bin/debconf-set-selections
+  when: ansible_os_family == 'Debian'
+
+- name: set licence seen
+  shell: /bin/echo debconf shared/accepted-oracle-license-v1-1 seen true | /usr/bin/debconf-set-selections
+  when: ansible_os_family == 'Debian'
+  
+- name: Install Oracle JDK
+  apt:
+    pkg: "{{ item }}"
+    update_cache: yes
+    state: present
+    allow_unauthenticated: yes
+  with_items:
+   - oracle-java8-installer
+  when: ansible_os_family == 'Debian'

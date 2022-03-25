@@ -1,0 +1,27 @@
+# - debug:
+#     var: hostvars[inventory_hostname]['ec2_tag_Hostname']
+
+- name: Change the hostname of the instance
+  shell: "/bin/hostname {{hostname}}"
+
+  #- name: Change the hostname of the instance
+  #shell: "/bin/hostname {{hostvars[inventory_hostname]['ec2_tag_Hostname']}}"
+
+- name: Copy the hostname file over
+  template:
+    src: hostname.j2
+    dest: /etc/hostname
+    owner: root
+    group: root
+
+- name: Copy the timezone file over for Ubuntu Systems
+  template: src=timezone.j2 dest=/etc/timezone owner=root group=root
+  when: ansible_os_family == 'Debian'
+
+- name: Reconfigure the timezone for Ubuntu Systems
+  shell: "dpkg-reconfigure --frontend noninteractive tzdata"
+  when: ansible_os_family == 'Debian'
+
+- name: Reconfigure the timezone for CentOS Systems
+  shell: "timedatectl set-timezone {{timezone}}"
+  when: ansible_os_family == 'RedHat'

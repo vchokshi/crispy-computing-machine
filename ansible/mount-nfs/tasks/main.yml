@@ -1,0 +1,8 @@
+- name: Mount the nfs file system
+  become: yes
+  mount:
+    name: /mnt
+    fstype: nfs4
+    opts: "nfsvers=4.1,rsize=1048576,wsize=1048576,hard,timeo=600,retrans=2"
+    src: '{{efs_host}}:/'
+    state: mounted

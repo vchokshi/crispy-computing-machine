@@ -1,0 +1,41 @@
+- name: Install Python Packages
+  apt:
+    pkg: "{{ item }}"
+    update_cache: yes
+    state: present
+  with_items:
+   - python
+   - python-apt
+   - python-mysqldb
+   - python-pip
+   - python-pycurl
+  when: ansible_os_family == 'Debian'
+
+- name: Install Python Packages
+  yum:
+    name: "{{ item }}"
+    update_cache: yes
+    state: present
+  with_items:
+   - python
+  when: ansible_os_family == 'RedHat'
+
+- name: Install Python Packages with easy_install
+  easy_install:
+    name: "{{ item }}"
+    state: present
+  with_items:
+   - pip
+  #  - pycurl
+  #  - awscli
+  #  - boto
+  when: ansible_os_family == 'RedHat'
+
+
+- name: Install pip items
+  pip:
+    name: "{{item}}"
+    state: present
+  with_items:
+    - awscli
+    - boto

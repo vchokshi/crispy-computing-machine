@@ -1,0 +1,53 @@
+# ======================== Elasticsearch Configuration =========================
+#
+# NOTE: Elasticsearch comes with reasonable defaults for most settings.
+#       Before you set out to tweak and tune the configuration, make sure you
+#       understand what are you trying to accomplish and the consequences.
+#
+# The primary way of configuring a node is via this file. This template lists
+# the most important settings you may want to configure for a production cluster.
+#
+# Please see the documentation for further information on configuration options:
+# <http://www.elastic.co/guide/en/elasticsearch/reference/current/setup-configuration.html>
+#
+# ---------------------------------- Cluster -----------------------------------
+cluster.name: elasticsearch-core
+cluster.routing.allocation.node_initial_primaries_recoveries: 4
+cluster.routing.allocation.allow_rebalance: indices_all_active
+cluster.routing.allocation.cluster_concurrent_rebalance: 2
+cluster.routing.allocation.enable: all
+cluster.routing.allocation.node_concurrent_recoveries: 2
+# ------------------------------------ Node ------------------------------------
+node.name: {{hostvars[inventory_hostname]['ec2_tag_Hostname']}}
+node.master: true
+node.data: true
+node.size: small
+# ----------------------------------- Paths ------------------------------------
+path.data: {{data_dir}}
+path.logs: /var/log/elasticsearch
+# ----------------------------------- Memory -----------------------------------
+bootstrap.mlockall: true
+# ---------------------------------- Network -----------------------------------
+network.host: _local_, _site_
+# ---------------------------------- Transport -----------------------------------
+client.transport.sniff: true
+# ---------------------------------- HTTP -----------------------------------
+http.cors.enabled: false
+http.cors.allow-origin: /https?:\/\/.+\.iot4\.net/
+http.cors.allow-credentials: true
+http.enabled: {{http_enabled}}
+# --------------------------------- Discovery ----------------------------------
+discovery.zen.ping.multicast.enabled: false
+discovery.zen.ping.unicast.hosts: ["localhost"]
+# ---------------------------------- Gateway -----------------------------------
+# ---------------------------------- Indices -----------------------------------
+indices.memory.index_buffer_size: 50%
+index.translog.flush_threshold_ops: 50000
+indices.recovery.max_bytes_per_sec: 100mb
+indices.recovery.concurrent_streams: 5
+# ---------------------------------- CLOUD -----------------------------------
+
+# ---------------------------------- SCRIPTING -----------------------------------
+
+script.inline: true
+script.stored: true

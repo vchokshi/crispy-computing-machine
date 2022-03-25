@@ -1,0 +1,7 @@
+---
+  elastic_conf: "/etc/elasticsearch/elasticsearch.yml"
+  es_home: "/usr/share/elasticsearch"
+  heap_size: "{{hostvars[inventory_hostname]['ansible_memory_mb']['real']['total'] // 4}}m"
+  data_dir: /elasticsearch
+  work_dir: /elasticsearch
+  http_enabled: true

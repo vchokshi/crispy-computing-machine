@@ -1,0 +1,61 @@
+---
+
+  - name: Make a directory for installer-archives
+    become_user: "{{os_user}}"
+    file:
+      path: ~/installer-rpms
+      state: directory
+
+  - name: Make a directory for installer-archives
+    become_user: "{{os_user}}"
+    file:
+      path: ~/installer-rpms
+      state: directory
+
+  - name: Transfer rpm files to system
+    become_user: "{{os_user}}"
+    command: 'aws s3 cp s3://installer-archives/{{item}} ~/installer-rpms'
+    with_items:
+      - jdk-7u79-linux-x64.rpm
+    when: ansible_os_family == 'RedHat' and glassfish_version ==3
+
+  - name: install rpms from a local file
+    yum:
+      name: "/home/vchokshi/installer-rpms/{{item}}"
+      state: present
+    with_items:
+      - jdk-7u79-linux-x64.rpm
+    when: ansible_os_family == 'RedHat' and glassfish_version ==3
+
+  - name: Transfer rpm files to system
+    become_user: "{{os_user}}"
+    command: 'aws s3 cp s3://installer-archives/{{item}} ~/installer-rpms'
+    with_items:
+      - jdk-8u144-linux-x64.rpm
+    when: ansible_os_family == 'RedHat' and glassfish_version ==5
+
+  - name: install rpms from a local file
+    yum:
+      name: "/home/vchokshi/installer-rpms/{{item}}"
+      state: present
+    with_items:
+      # - jdk-8u181-linux-x64.rpm
+      - jdk-8u144-linux-x64.rpm
+    when: ansible_os_family == 'RedHat' and glassfish_version ==5
+
+  - name: Transfer rpm files to system
+    become_user: "{{os_user}}"
+    command: 'aws s3 cp s3://installer-archives/{{item}} ~/installer-rpms'
+    with_items:
+      - oracle-instantclient12.1-basic-12.1.0.2.0-1.x86_64.rpm
+      - oracle-instantclient12.1-sqlplus-12.1.0.2.0-1.x86_64.rpm
+    when: ansible_os_family == 'RedHat'
+
+  - name: install rpms from a local file
+    yum:
+      name: "/home/vchokshi/installer-rpms/{{item}}"
+      state: present
+    with_items:
+      - oracle-instantclient12.1-basic-12.1.0.2.0-1.x86_64.rpm
+      - oracle-instantclient12.1-sqlplus-12.1.0.2.0-1.x86_64.rpm
+    when: ansible_os_family == 'RedHat'

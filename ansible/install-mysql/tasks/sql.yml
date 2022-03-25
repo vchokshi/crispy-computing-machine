@@ -1,0 +1,25 @@
+- name: Install mysql server and clients
+  apt:
+    name: ['mysql-server']
+    state: present
+
+- name: Start the MySQL service
+  service:
+    name: mysql
+    state: started
+    enabled: true
+
+- name: update mysql root password for all root accounts
+  mysql_user:
+    name: "{{mysql_user}}"
+    host: localhost
+    password: "{{mysql_password}}"
+    login_user: "{{mysql_user}}"
+    login_password: "{{ mysql_password }}"
+    check_implicit_admin: yes
+    priv: "*.*:ALL,GRANT"
+  with_items:
+    - "{{ ansible_hostname }}"
+    - 127.0.0.1
+    - ::1
+    - localhost

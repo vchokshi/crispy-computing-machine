@@ -1,0 +1,9 @@
+make sure oracle:oinstall has write access to dmpdir
+
+impdp \'/as sysdba\' directory=dmpdir dumpfile=ITRONADM_%U.dmp sqlfile=mdm.sql
+
+grep -i 'tablespace' mdm.sql|grep -v "TEMP"|tr 'a-z' 'A-Z'|sed -e 's/  *TABLESPACE "/TABLESPACE /' -e 's/" .*$//'|sort -u >cts.sql
+
+alter system set db_files = 256 scope = spfile;
+
+then run tablespace.sh

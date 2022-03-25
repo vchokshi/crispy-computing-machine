@@ -1,0 +1,4 @@
+---
+  - include: install-wordpress.yml
+  - include: configure-wordpress-database.yml
+  - include: configure-wordpress-server.yml

@@ -1,0 +1,54 @@
+---
+
+    - name: Stop the default domain in case it is running.
+      become_user: "{{runas}}"
+      command: /usr/local/glassfish5/bin/asadmin stop-domain domain1
+      ignore_errors: true
+      #
+    - name: Delete the default domain
+      become_user: "{{runas}}"
+      command: /usr/local/glassfish5/bin/asadmin delete-domain domain1
+      ignore_errors: true
+
+    - name: Stop the {{env}} domain in case it is running.
+      become_user: "{{runas}}"
+      command: /usr/local/glassfish5/bin/asadmin stop-domain {{env}}
+      ignore_errors: true
+      #
+    - name: Delete the {{env}} domain
+      become_user: "{{runas}}"
+      command: /usr/local/glassfish5/bin/asadmin delete-domain {{env}}
+      ignore_errors: true
+
+    - name: Create the {{env}} domain
+      become_user: "{{runas}}"
+      command: /usr/local/glassfish5/bin/asadmin create-domain --nopassword true {{env}}
+      ignore_errors: true
+
+    - name: Start the {{env}} domain
+      become_user: "{{runas}}"
+      command: /usr/local/glassfish5/bin/asadmin start-domain {{env}}
+      ignore_errors: true
+
+    - name: Deploy the ords.war app
+      become_user: "{{runas}}"
+      command: /usr/local/glassfish5/bin/asadmin deploy --properties implicitCdiEnabled=false /mnt/glassfish-{{env}}/ords.war
+      ignore_errors: true
+
+    - name: Deploy the i.war file
+      become_user: "{{runas}}"
+      command: /usr/local/glassfish5/bin/asadmin deploy --properties implicitCdiEnabled=false /mnt/glassfish-{{env}}/i.war
+      ignore_errors: true
+
+    - name: Copy the glassfish init.d script to the System
+      become: true
+      template:
+        src: glassfish
+        dest: /etc/init.d
+        owner: root
+        group: root
+        mode: 0755
+
+    - name: Register the startup scrupt to run at 345
+      become: true
+      command: chkconfig --level 345 glassfish on

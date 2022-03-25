@@ -1,0 +1,9 @@
+---
+  - name: Clone into videbligo php-security repository
+    become: no
+    git:
+      repo: ssh://git@github.com/vchokshi/php-security.git
+      dest: /usr/share/php/videbligo.com/security
+      version: master
+      accept_hostkey: true
+      force: yes

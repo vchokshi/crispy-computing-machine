@@ -1,0 +1,21 @@
+---
+
+- group: name={{ hadoop_group}} state=present
+- user: name={{ hadoop_user }} comment="Hadoop" group={{ hadoop_group}} shell=/bin/bash
+
+- lineinfile: dest=/home/hadoop/.bashrc regexp="^export JAVA_HOME" line="export JAVA_HOME=/usr/lib/jvm/java-8-oracle"
+
+- lineinfile: dest=/home/hadoop/.bashrc regexp="HADOOP_PREFIX=" line="export HADOOP_PREFIX=/usr/local/hadoop"
+- lineinfile: dest=/home/hadoop/.bashrc regexp="HADOOP_CONF_DIR=" line="export HADOOP_CONF_DIR=/usr/local/hadoop/etc/hadoop"
+
+- lineinfile: dest=/home/hadoop/.bashrc regexp="HADOOP_HOME=" line="export HADOOP_HOME=/usr/local/hadoop"
+
+- lineinfile: dest=/home/hadoop/.bashrc regexp="PATH=" line="export PATH=$PATH:$HADOOP_HOME/bin"
+
+- lineinfile: dest=/home/hadoop/.bashrc regexp="HADOOP_SSH_OPTS=" line="export HADOOP_SSH_OPTS=\"-i /home/{{ hadoop_user }}/.ssh/id_rsa\""
+
+- authorized_key:
+    user: "{{ hadoop_user }}"
+    key: "{{ lookup('file', '../templates/hadoop_rsa.pub') }}"
+    state: present
+    exclusive: true

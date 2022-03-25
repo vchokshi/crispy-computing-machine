@@ -1,0 +1,4 @@
+---
+  - include: user.yml
+  - include: common.yml
+  - include: master.yml

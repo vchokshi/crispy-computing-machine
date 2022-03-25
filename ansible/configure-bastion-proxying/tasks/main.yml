@@ -1,0 +1,33 @@
+---
+  - debug:
+      var: hostvars[inventory_hostname]['ec2_private_ip_address']
+
+  # - name: Deploy nginx templates to sites-available
+  #   template:
+  #     src: "{{item}}"
+  #     dest: /etc/nginx/sites-available
+  #   with_items:
+  #     - es.proxy.conf
+  #   notify:
+  #     - restart nginx
+
+  - name: Deploy nginx listener for phpmyadmin
+    become: yes
+    copy:
+      src: "{{item}}"
+      dest: /etc/nginx/sites-available
+    with_items:
+      - phpmyadmin.conf
+    notify:
+      - restart nginx
+
+  - name: Link files in sites-available for nginx
+    become: yes
+    file:
+      src: /etc/nginx/sites-available/{{item}}
+      dest: /etc/nginx/sites-enabled/{{item}}
+      state: link
+    with_items:
+      - phpmyadmin.conf
+    notify:
+      - restart nginx

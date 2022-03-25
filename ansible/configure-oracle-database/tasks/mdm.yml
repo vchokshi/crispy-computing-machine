@@ -1,0 +1,43 @@
+---
+  - name: Set the db unique name in bashrc
+    become_user: "{{ oracle_user }}"
+    lineinfile: dest='/home/{{ oracle_user }}/.bashrc' line='export DB_UNIQUE_NAME={{ db_unique_name }}'
+
+  - name: Template necessary sql over for database creation
+    become_user: "{{ oracle_user }}"
+    template:
+      src: "{{item}}"
+      dest: "~"
+    with_items:
+      - tablespace.sql
+      - create_db.sh
+
+  - name: Copy necessary files over for database creation
+    become_user: "{{ oracle_user }}"
+    copy:
+      src: "{{item}}"
+      dest: "~"
+    with_items:
+      - mdm.dbt
+      - tablespace.sh
+      - roles.sql
+      - par.ora
+      - roles.sh
+
+  ## RUn create_db.sh with password mdmBlig0!
+  
+  # - name: Create mdm tablespaces
+  #   become_user: "{{ oracle_user }}"
+  #   command: "~/tablespace.sh"
+  #
+  # - name: Create mdm roles
+  #   become_user: "{{ oracle_user }}"
+  #   command: "~/roles.sh"
+  #
+  # - name: change oratab
+  #   become: yes
+  #   lineinfile:
+  #     dest: '/etc/oratab'
+  #     regexp: '^{{ oracle_sid }}:{{ oracle_home }}:.'
+  #     line: '{{ oracle_sid }}:{{ oracle_home }}:Y'
+  #     state: present

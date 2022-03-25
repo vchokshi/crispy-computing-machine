@@ -1,0 +1,15 @@
+
+- name: Add users to the system
+  become: yes
+  user:
+    name: anuswadh
+    groups: users
+    shell: /bin/bash
+
+- name: Transfer each users key over.
+  become: yes
+  authorized_key:
+    user: anuswadh
+    key: "{{item}}"
+  with_file:
+    - files/anuswadh.pub

@@ -1,0 +1,45 @@
+---
+  # - name: Semanage the home directory
+  #   command: semanage fcontext -a -e /home /mnt/home
+  #   when: ansible_os_family == 'RedHat'
+  #   ignore_errors: true
+
+  - name: Make a home directory if it does not exist
+    file:
+      path: /mnt/home
+      owner: root
+      group: root
+      state: directory
+      mode: 0755
+
+  - name: Allow SELinux to use passord file for home directories
+    lineinfile:
+      name: /etc/selinux/semanage.conf
+      state: present
+      regexp: '^usepasswd=False$'
+      line: 'usepasswd=True'
+    when: ansible_os_family == 'RedHat'
+
+  - name: SELinux manage the home ssh keys context
+    command: "semanage fcontext -a -e /home /mnt/home"
+    when: ansible_os_family == 'RedHat'
+
+  - name: SELinux restore configuration for home directories.
+    command: "restorecon –R /mnt/home"
+    when: ansible_os_family == 'RedHat'
+
+# - name: Move all /home directories to /mnt/home
+#   become: true
+#   command: cp -R /home/* /mnt/home/
+
+# - name: Delete the original home directory
+#   file:
+#     path: /home
+#     state: absent
+#
+# - name: Link /home to /mnt/home
+#   file:
+#     src: /mnt/home
+#     path: /home
+#     state: link
+#     force: yes

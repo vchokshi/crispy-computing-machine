@@ -1,0 +1,47 @@
+---
+    - include: glassfish.yml
+    - include: jdk.yml
+
+    - name: Make a glassfish installation directory
+      become_user: glassfish
+      file:
+        path: ~/glassfish-installer
+        state: directory
+
+    - name: Install glassfish version 3
+      block:
+
+      - name: Transfer the glassfish file to system
+        become_user: glassfish
+        command: 'aws s3 cp s3://installer-archives/{{item}} ~/glassfish-installer'
+        with_items:
+          - ogs-3.1.2.2.zip
+
+      - name: Unzip the glassfish zip file
+        unarchive:
+          src: /home/glassfish/glassfish-installer/ogs-3.1.2.2.zip
+          dest: /usr/local/
+          remote_src: true
+          owner: glassfish
+          group: users
+
+      when: glassfish_version == '3'
+
+    - name: Install glassfish version 5
+      block:
+
+      - name: Transfer the glassfish file to system
+        become_user: glassfish
+        command: 'aws s3 cp s3://installer-archives/{{item}} ~/glassfish-installer'
+        with_items:
+          - glassfish-5.0.zip
+
+      - name: Unzip the glassfish zip file
+        unarchive:
+          src: /home/glassfish/glassfish-installer/glassfish-5.0.zip
+          dest: /usr/local/
+          remote_src: true
+          owner: glassfish
+          group: users
+
+      when: glassfish_version == '5'
