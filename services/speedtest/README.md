@@ -1,6 +1,4 @@
-# iot4-speedtest
-
-![Test](https://github.com/vchokshi/iot4_speedtest/workflows/Test/badge.svg)
+# speedtest
 
 ## Setup
 ```sh

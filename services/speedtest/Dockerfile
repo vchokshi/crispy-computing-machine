@@ -34,5 +34,5 @@ USER appuser
 COPY . .
 
 # Run the executable
-ENTRYPOINT ["python", "-m", "iot4_speedtest"]
+ENTRYPOINT ["python", "-m", "speedtest"]
 CMD ["10"]
