@@ -1,9 +1,0 @@
-- name: Hack us-west-1
-  gather_facts: false
-  become: true
-  hosts: west
-  roles:
-  tasks: 
-
-  - name: Sync the S3 target to /data
-    shell: "aws s3 sync {{ s3_hack }} /data"

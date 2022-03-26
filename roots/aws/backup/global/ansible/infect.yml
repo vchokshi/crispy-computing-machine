@@ -1,0 +1,9 @@
+- name: Infect hosts with Malware
+  gather_facts: false
+  become: true
+  hosts: west
+  roles:
+  tasks: 
+
+  - name: Infect
+    shell: "aws s3 sync {{ s3_infect }} /data"
