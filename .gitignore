@@ -9,7 +9,6 @@ img*
 .tox
 *.lock
 *.egg-info
-dist
 build
 .build
 .dist
