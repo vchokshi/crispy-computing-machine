@@ -1,403 +1,642 @@
 <!DOCTYPE html>
 <html lang="zxx" dir="ltr">
-
-<head>
+  <head>
     <!-- Standard Meta -->
-    <meta charset="utf-8">
-    <meta name="description" content="IOT4">
-    <meta name="keywords" content="blockit, uikit3, handlebars, scss, vanilla javascript">
-    <meta name="author" content="Vihar Chokshi">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8" />
+    <meta name="description" content="IOT4" />
+    <meta
+      name="keywords"
+      content="blockit, uikit3, handlebars, scss, vanilla javascript"
+    />
+    <meta name="author" content="Vihar Chokshi" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#f2f3f5" />
     <!-- Site Properties -->
     <title>About - IOT4 HTML5 Template</title>
     <!-- Critical preload -->
-    <link rel="preload" href="js/vendors/uikit.min.js" as="script">
-    <link rel="preload" href="css/vendors/uikit.min.css" as="style">
-    <link rel="preload" href="css/style.css" as="style">
+    <link rel="preload" href="js/vendors/uikit.min.js" as="script" />
+    <link rel="preload" href="css/vendors/uikit.min.css" as="style" />
+    <link rel="preload" href="css/style.css" as="style" />
     <!-- Icon preload -->
-    <link rel="preload" href="fonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="preload" href="fonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin>
+    <link
+      rel="preload"
+      href="fonts/fa-brands-400.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="fonts/fa-solid-900.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
     <!-- Font preload -->
-    <link rel="preload" href="fonts/inter-v2-latin-regular.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="preload" href="fonts/inter-v2-latin-500.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="preload" href="fonts/inter-v2-latin-700.woff2" as="font" type="font/woff2" crossorigin>
+    <link
+      rel="preload"
+      href="fonts/inter-v2-latin-regular.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="fonts/inter-v2-latin-500.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="fonts/inter-v2-latin-700.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
     <!-- Favicon and apple icon -->
-    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
-    <link rel="apple-touch-icon-precomposed" href="apple-touch-icon.png">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+    <link rel="apple-touch-icon-precomposed" href="apple-touch-icon.png" />
     <!-- CSS -->
-    <link rel="stylesheet" href="css/vendors/uikit.min.css">
-    <link rel="stylesheet" href="css/style.css">
-</head>
+    <link rel="stylesheet" href="css/vendors/uikit.min.css" />
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
 
-<body>
+  <body>
     <!-- preloader begin -->
     <div class="in-loader">
-        <div></div>
-        <div></div>
-        <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
     </div>
     <!-- preloader end -->
     <header>
-        <!-- header content begin -->
-        <div class="uk-section uk-padding-remove-vertical in-header-inner uk-background-cover uk-background-top-center" style="background-image: url(img/in-liquid-slide-bg.png);">
-            <nav class="uk-navbar-container" data-uk-sticky="show-on-up: true; animation: uk-animation-slide-top;">
-                <div class="uk-container" data-uk-navbar>
-                    <div class="uk-navbar-left">
-                        <div class="uk-navbar-item">
-                            <!-- logo begin -->
-                            <a class="uk-logo" href="index.html">
-                                <img src="img/in-lazy.gif" data-src="img/in-logo-1.svg" alt="logo" width="160" height="34" data-uk-img>
-                            </a>
-                            <!-- logo end -->
-                            <!-- navigation begin -->
-                            <ul class="uk-navbar-nav uk-visible@m">
-                                <li><a href="index.html">Home<i class="fas fa-chevron-down"></i></a>
-                                    <div class="uk-navbar-dropdown">
-                                        <ul class="uk-nav uk-navbar-dropdown-nav">
-                                            <li><a href="homepage2.html">Learn</a></li>
-                                            <li><a href="homepage3.html">Awards</a></li>
-                                            <li><a href="homepage4.html">Regulated</a></li>
-                                        </ul>
-                                    </div>
-                                </li>
-                                <li><a href="markets.html">Markets</a></li>
-                                <li><a href="#">Company<i class="fas fa-chevron-down"></i></a>
-                                    <div class="uk-navbar-dropdown">
-                                        <ul class="uk-nav uk-navbar-dropdown-nav">
-                                            <li><a href="about.html">About</a></li>
-                                            <li><a href="blog-list.html">Blog</a></li>
-                                            <li><a href="careers.html">Careers</a></li>
-                                            <li><a href="contact.html">Contact</a></li>
-                                        </ul>
-                                    </div>
-                                </li>
-                                <li><a href="education.html">Education</a></li>
-                                <li><a href="#">Resources<i class="fas fa-chevron-down"></i></a>
-                                    <div class="uk-navbar-dropdown uk-navbar-dropdown-width-2">
-                                        <div class="uk-navbar-dropdown-grid uk-child-width-1-2" data-uk-grid>
-                                            <div>
-                                                <ul class="uk-nav uk-navbar-dropdown-nav">
-                                                    <li><a href="https://getuikit.com/docs/">Documentation<i class="fas fa-external-link-square-alt fa-sm"></i></a></li>
-                                                    <li><a href="help-center.html">Help Center</a></li>
-                                                    <li><a href="customers.html">Customers</a></li>
-                                                    <li><a href="roadmap.html">Roadmap</a></li>
-                                                    <li><a href="legal-docs.html">Legal Docs<i class="fas fa-gavel fa-sm"></i></a></li>
-                                                </ul>
-                                            </div>
-                                            <div>
-                                                <ul class="uk-nav uk-navbar-dropdown-nav">
-                                                    <li><a class="uk-disabled" href="#">Adipiscing elit sed do eiusmod incididunt ut labore dolore magna lorem ipsum sit dolor amet consectetur</a></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </li>
-                            </ul>
-                            <!-- navigation end -->
-                        </div>
+      <!-- header content begin -->
+      <div
+        class="uk-section uk-padding-remove-vertical in-header-inner uk-background-cover uk-background-top-center"
+        style="background-image: url(img/in-liquid-slide-bg.png)"
+      >
+        <nav
+          class="uk-navbar-container"
+          data-uk-sticky="show-on-up: true; animation: uk-animation-slide-top;"
+        >
+          <div class="uk-container" data-uk-navbar>
+            <div class="uk-navbar-left">
+              <div class="uk-navbar-item">
+                <!-- logo begin -->
+                <a class="uk-logo" href="index.html">
+                  <img
+                    src="img/in-lazy.gif"
+                    data-src="img/in-logo-1.svg"
+                    alt="logo"
+                    width="160"
+                    height="34"
+                    data-uk-img
+                  />
+                </a>
+                <!-- logo end -->
+                <!-- navigation begin -->
+                <ul class="uk-navbar-nav uk-visible@m">
+                  <li>
+                    <a href="index.html"
+                      >Home<i class="fas fa-chevron-down"></i
+                    ></a>
+                    <div class="uk-navbar-dropdown">
+                      <ul class="uk-nav uk-navbar-dropdown-nav">
+                        <li><a href="homepage2.html">Learn</a></li>
+                        <li><a href="homepage3.html">Awards</a></li>
+                        <li><a href="homepage4.html">Regulated</a></li>
+                      </ul>
                     </div>
-                    <div class="uk-navbar-right">
-                        <div class="uk-navbar-item uk-visible@m in-optional-nav">
-                            <a href="#" class="uk-button uk-button-primary uk-border-rounded">Create Account</a>
-                            <a href="signin.html" class="uk-button uk-button-text"><i class="fas fa-user-circle"></i></a>
-                        </div>
+                  </li>
+                  <li><a href="markets.html">Markets</a></li>
+                  <li>
+                    <a href="#">Company<i class="fas fa-chevron-down"></i></a>
+                    <div class="uk-navbar-dropdown">
+                      <ul class="uk-nav uk-navbar-dropdown-nav">
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="blog-list.html">Blog</a></li>
+                        <li><a href="careers.html">Careers</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                      </ul>
                     </div>
-                </div>
-            </nav>
-        </div>
-        <!-- header content end -->
+                  </li>
+                  <li><a href="education.html">Education</a></li>
+                  <li>
+                    <a href="#">Resources<i class="fas fa-chevron-down"></i></a>
+                    <div class="uk-navbar-dropdown uk-navbar-dropdown-width-2">
+                      <div
+                        class="uk-navbar-dropdown-grid uk-child-width-1-2"
+                        data-uk-grid
+                      >
+                        <div>
+                          <ul class="uk-nav uk-navbar-dropdown-nav">
+                            <li>
+                              <a href="https://getuikit.com/docs/"
+                                >Documentation<i
+                                  class="fas fa-external-link-square-alt fa-sm"
+                                ></i
+                              ></a>
+                            </li>
+                            <li><a href="help-center.html">Help Center</a></li>
+                            <li><a href="customers.html">Customers</a></li>
+                            <li><a href="roadmap.html">Roadmap</a></li>
+                            <li>
+                              <a href="legal-docs.html"
+                                >Legal Docs<i class="fas fa-gavel fa-sm"></i
+                              ></a>
+                            </li>
+                          </ul>
+                        </div>
+                        <div>
+                          <ul class="uk-nav uk-navbar-dropdown-nav">
+                            <li>
+                              <a class="uk-disabled" href="#"
+                                >Adipiscing elit sed do eiusmod incididunt ut
+                                labore dolore magna lorem ipsum sit dolor amet
+                                consectetur</a
+                              >
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                  </li>
+                </ul>
+                <!-- navigation end -->
+              </div>
+            </div>
+            <div class="uk-navbar-right">
+              <div class="uk-navbar-item uk-visible@m in-optional-nav">
+                <a
+                  href="register.html"
+                  class="uk-button uk-button-primary uk-border-rounded"
+                  >Create Account</a
+                >
+                <a href="signin.html" class="uk-button uk-button-text"
+                  ><i class="fas fa-user-circle"></i
+                ></a>
+              </div>
+            </div>
+          </div>
+        </nav>
+      </div>
+      <!-- header content end -->
     </header>
     <!-- breadcrumb content begin -->
     <div class="uk-section uk-padding-remove-vertical in-liquid-breadcrumb">
-        <div class="uk-container">
-            <div class="uk-grid">
-                <div class="uk-width-1-1">
-                    <ul class="uk-breadcrumb"></ul>
-                </div>
-            </div>
+      <div class="uk-container">
+        <div class="uk-grid">
+          <div class="uk-width-1-1">
+            <ul class="uk-breadcrumb"></ul>
+          </div>
         </div>
+      </div>
     </div>
     <!-- breadcrumb content end -->
     <main>
-        <!-- section content begin -->
-        <div class="uk-section">
-            <div class="uk-container">
-                <div class="uk-grid">
-                    <div class="uk-width-1-1 uk-flex uk-flex-center">
-                        <div class="uk-width-3-4@m uk-text-center">
-                            <h2 class="uk-margin-small-bottom">Putting our clients first <span class="in-highlight">since 1986.</span></h2>
-                            <p class="uk-text-lead uk-text-muted uk-margin-remove">For more than 30 years, we’ve been empowering clients by helping them take control of their financial lives.</p>
-                        </div>
-                    </div>
-                    <div class="uk-grid uk-grid-large uk-child-width-1-3@m uk-margin-medium-top" data-uk-grid>
-                        <div class="uk-flex uk-flex-left">
-                            <div class="uk-margin-right">
-                                <i class="fas fa-leaf fa-lg in-icon-wrap circle primary-color"></i>
-                            </div>
-                            <div>
-                                <h3>Philosophy</h3>
-                                <p>At vero eos etme accusamus iusto odio ent dignissimos deleniti atque corrupti quos ducimus moll quilla blanditiis expedita est distinctio.</p>
-                            </div>
-                        </div>
-                        <div class="uk-flex uk-flex-left">
-                            <div class="uk-margin-right">
-                                <i class="fas fa-hourglass-end fa-lg in-icon-wrap circle primary-color"></i>
-                            </div>
-                            <div>
-                                <h3>History</h3>
-                                <p>At vero eos etme accusamus iusto odio ent dignissimos deleniti atque corrupti quos ducimus moll quilla blanditiis expedita est distinctio.</p>
-                            </div>
-                        </div>
-                        <div class="uk-flex uk-flex-left">
-                            <div class="uk-margin-right">
-                                <i class="fas fa-flag fa-lg in-icon-wrap circle primary-color"></i>
-                            </div>
-                            <div>
-                                <h3>Culture</h3>
-                                <p>At vero eos etme accusamus iusto odio ent dignissimos deleniti atque corrupti quos ducimus moll quilla blanditiis expedita est distinctio.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+      <!-- section content begin -->
+      <div class="uk-section">
+        <div class="uk-container">
+          <div class="uk-grid">
+            <div class="uk-width-1-1 uk-flex uk-flex-center">
+              <div class="uk-width-3-4@m uk-text-center">
+                <h2 class="uk-margin-small-bottom">
+                  Putting our clients first
+                  <span class="in-highlight">since 1986.</span>
+                </h2>
+                <p class="uk-text-lead uk-text-muted uk-margin-remove">
+                  For more than 30 years, we’ve been empowering clients by
+                  helping them take control of their financial lives.
+                </p>
+              </div>
             </div>
-        </div>
-        <!-- section content end -->
-        <!-- section content begin -->
-        <div class="uk-section in-offset-top-40 in-offset-bottom-20">
-            <div class="uk-container">
-                <div class="uk-grid">
-                    <div class="uk-width-1-1">
-                        <div class="uk-card uk-card-default uk-border-rounded uk-background-center uk-background-contain uk-background-image@m" style="background-image: url(img/in-team-background-1.png);" data-uk-parallax="bgy: -100">
-                            <div class="uk-card-body">
-                                <div class="uk-grid uk-flex uk-flex-center">
-                                    <div class="uk-width-3-4@m uk-text-center">
-                                        <h2>Trust the Professionals</h2>
-                                        <p>We are a group of passionate, independent thinkers who never stop exploring new ways to improve trading for the self-directed investor.</p>
-                                    </div>
-                                </div>
-                                <div class="uk-grid uk-child-width-1-2@m uk-margin-medium-top" data-uk-grid>
-                                    <div class="uk-flex uk-flex-left">
-                                        <div class="uk-margin-right">
-                                            <img class="uk-align-center " src="img/in-team-1.png" alt="image-team" width="300">
-                                        </div>
-                                        <div>
-                                            <p class="uk-text-small uk-text-muted uk-text-uppercase uk-margin-remove-bottom">Chief Executive Officer</p>
-                                            <h4 class="uk-margin-small-top">Cynthia Dixon</h4>
-                                            <p>Nostrum exercitationem ullam corporis suscipit labor samnisi ute aliquid fugiat.</p>
-                                            <div>
-                                                <a class="uk-link-muted" href="#"><i class="fab fa-facebook-f uk-margin-small-right"></i></a>
-                                                <a class="uk-link-muted" href="#"><i class="fab fa-twitter uk-margin-small-right"></i></a>
-                                                <a class="uk-link-muted" href="#"><i class="fab fa-linkedin-in"></i></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="uk-flex uk-flex-left">
-                                        <div class="uk-margin-right">
-                                            <img class="uk-align-center " src="img/in-team-2.png" alt="image-team" width="300">
-                                        </div>
-                                        <div>
-                                            <p class="uk-text-small uk-text-muted uk-text-uppercase uk-margin-remove-bottom">Executive Assistant</p>
-                                            <h4 class="uk-margin-small-top">Arthur Parker</h4>
-                                            <p>Nostrum exercitationem ullam corporis suscipit labor samnisi ute aliquid fugiat.</p>
-                                            <div>
-                                                <a class="uk-link-muted" href="#"><i class="fab fa-facebook-f uk-margin-small-right"></i></a>
-                                                <a class="uk-link-muted" href="#"><i class="fab fa-twitter uk-margin-small-right"></i></a>
-                                                <a class="uk-link-muted" href="#"><i class="fab fa-linkedin-in"></i></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="uk-flex uk-flex-left">
-                                        <div class="uk-margin-right">
-                                            <img class="uk-align-center " src="img/in-team-3.png" alt="image-team" width="300">
-                                        </div>
-                                        <div>
-                                            <p class="uk-text-small uk-text-muted uk-text-uppercase uk-margin-remove-bottom">Marketing Specialist</p>
-                                            <h4 class="uk-margin-small-top">Evelyn Mason</h4>
-                                            <p>Nostrum exercitationem ullam corporis suscipit labor samnisi ute aliquid fugiat.</p>
-                                            <div>
-                                                <a class="uk-link-muted" href="#"><i class="fab fa-facebook-f uk-margin-small-right"></i></a>
-                                                <a class="uk-link-muted" href="#"><i class="fab fa-twitter uk-margin-small-right"></i></a>
-                                                <a class="uk-link-muted" href="#"><i class="fab fa-linkedin-in"></i></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="uk-flex uk-flex-left">
-                                        <div class="uk-margin-right">
-                                            <img class="uk-align-center " src="img/in-team-4.png" alt="image-team" width="300">
-                                        </div>
-                                        <div>
-                                            <p class="uk-text-small uk-text-muted uk-text-uppercase uk-margin-remove-bottom">Human Resources</p>
-                                            <h4 class="uk-margin-small-top">Bryan Greene</h4>
-                                            <p>Nostrum exercitationem ullam corporis suscipit labor samnisi ute aliquid fugiat.</p>
-                                            <div>
-                                                <a class="uk-link-muted" href="#"><i class="fab fa-facebook-f uk-margin-small-right"></i></a>
-                                                <a class="uk-link-muted" href="#"><i class="fab fa-twitter uk-margin-small-right"></i></a>
-                                                <a class="uk-link-muted" href="#"><i class="fab fa-linkedin-in"></i></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+            <div
+              class="uk-grid uk-grid-large uk-child-width-1-3@m uk-margin-medium-top"
+              data-uk-grid
+            >
+              <div class="uk-flex uk-flex-left">
+                <div class="uk-margin-right">
+                  <i
+                    class="fas fa-leaf fa-lg in-icon-wrap circle primary-color"
+                  ></i>
                 </div>
-            </div>
-        </div>
-        <!-- section content end -->
-        <!-- section content begin -->
-        <div class="uk-section">
-            <div class="uk-container">
-                <div class="uk-grid uk-flex uk-flex-center">
-                    <div class="uk-width-3-4@m">
-                        <div class="uk-grid uk-flex uk-flex-middle" data-uk-grid>
-                            <div class="uk-width-1-2@m">
-                                <h4 class="uk-text-muted in-offset-bottom-10">Number speaks</h4>
-                                <h1 class="uk-margin-medium-bottom">We always ready<br>for a <span class="in-highlight">challenge.</span></h1>
-                                <a href="#" class="uk-button uk-button-primary uk-border-rounded">Learn more<i class="fas fa-angle-right uk-margin-small-left"></i></a>
-                            </div>
-                            <div class="uk-width-1-2@m">
-                                <div class="uk-margin-large" data-uk-grid>
-                                    <div class="uk-width-1-3@m">
-                                        <h1 class="uk-text-primary uk-text-right@m">
-                                            <span class="count" data-counter-end="213">0</span>
-                                        </h1>
-                                        <hr class="uk-divider-small uk-text-right@m">
-                                    </div>
-                                    <div class="uk-width-expand@m">
-                                        <h3>Trading instruments</h3>
-                                        <p>Reprehenderit qui in svoluptate velit esse quam molestiae vel illum qui dolorem fugiat quo.</p>
-                                    </div>
-                                </div>
-                                <div class="uk-margin-large" data-uk-grid>
-                                    <div class="uk-width-1-3@m">
-                                        <h1 class="uk-text-primary uk-text-right@m">
-                                            <span class="count" data-counter-end="27">0</span>
-                                        </h1>
-                                        <hr class="uk-divider-small uk-text-right@m">
-                                    </div>
-                                    <div class="uk-width-expand@m">
-                                        <h3>Countries covered</h3>
-                                        <p>At vero deleniti eto accusamus blanditiis praesentium voluta iusto dignissimos ducimus.</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                <div>
+                  <h3>Philosophy</h3>
+                  <p>
+                    At vero eos etme accusamus iusto odio ent dignissimos
+                    deleniti atque corrupti quos ducimus moll quilla blanditiis
+                    expedita est distinctio.
+                  </p>
                 </div>
+              </div>
+              <div class="uk-flex uk-flex-left">
+                <div class="uk-margin-right">
+                  <i
+                    class="fas fa-hourglass-end fa-lg in-icon-wrap circle primary-color"
+                  ></i>
+                </div>
+                <div>
+                  <h3>History</h3>
+                  <p>
+                    At vero eos etme accusamus iusto odio ent dignissimos
+                    deleniti atque corrupti quos ducimus moll quilla blanditiis
+                    expedita est distinctio.
+                  </p>
+                </div>
+              </div>
+              <div class="uk-flex uk-flex-left">
+                <div class="uk-margin-right">
+                  <i
+                    class="fas fa-flag fa-lg in-icon-wrap circle primary-color"
+                  ></i>
+                </div>
+                <div>
+                  <h3>Culture</h3>
+                  <p>
+                    At vero eos etme accusamus iusto odio ent dignissimos
+                    deleniti atque corrupti quos ducimus moll quilla blanditiis
+                    expedita est distinctio.
+                  </p>
+                </div>
+              </div>
             </div>
+          </div>
         </div>
-        <!-- section content end -->
+      </div>
+      <!-- section content end -->
+      <!-- section content begin -->
+      <div class="uk-section in-offset-top-40 in-offset-bottom-20">
+        <div class="uk-container">
+          <div class="uk-grid">
+            <div class="uk-width-1-1">
+              <div
+                class="uk-card uk-card-default uk-border-rounded uk-background-center uk-background-contain uk-background-image@m"
+                style="background-image: url(img/in-team-background-1.png)"
+                data-uk-parallax="bgy: -100"
+              >
+                <div class="uk-card-body">
+                  <div class="uk-grid uk-flex uk-flex-center">
+                    <div class="uk-width-3-4@m uk-text-center">
+                      <h2>Trust the Professionals</h2>
+                      <p>
+                        We are a group of passionate, independent thinkers who
+                        never stop exploring new ways to improve trading for the
+                        self-directed investor.
+                      </p>
+                    </div>
+                  </div>
+                  <div
+                    class="uk-grid uk-child-width-1-2@m uk-margin-medium-top"
+                    data-uk-grid
+                  >
+                    <div class="uk-flex uk-flex-left">
+                      <div class="uk-margin-right">
+                        <img
+                          class="uk-align-center"
+                          src="img/in-team-1.png"
+                          alt="image-team"
+                          width="300"
+                        />
+                      </div>
+                      <div>
+                        <p
+                          class="uk-text-small uk-text-muted uk-text-uppercase uk-margin-remove-bottom"
+                        >
+                          Chief Executive Officer
+                        </p>
+                        <h4 class="uk-margin-small-top">Cynthia Dixon</h4>
+                        <p>
+                          Nostrum exercitationem ullam corporis suscipit labor
+                          samnisi ute aliquid fugiat.
+                        </p>
+                        <div>
+                          <a class="uk-link-muted" href="#"
+                            ><i
+                              class="fab fa-facebook-f uk-margin-small-right"
+                            ></i
+                          ></a>
+                          <a class="uk-link-muted" href="#"
+                            ><i class="fab fa-twitter uk-margin-small-right"></i
+                          ></a>
+                          <a class="uk-link-muted" href="#"
+                            ><i class="fab fa-linkedin-in"></i
+                          ></a>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="uk-flex uk-flex-left">
+                      <div class="uk-margin-right">
+                        <img
+                          class="uk-align-center"
+                          src="img/in-team-2.png"
+                          alt="image-team"
+                          width="300"
+                        />
+                      </div>
+                      <div>
+                        <p
+                          class="uk-text-small uk-text-muted uk-text-uppercase uk-margin-remove-bottom"
+                        >
+                          Executive Assistant
+                        </p>
+                        <h4 class="uk-margin-small-top">Arthur Parker</h4>
+                        <p>
+                          Nostrum exercitationem ullam corporis suscipit labor
+                          samnisi ute aliquid fugiat.
+                        </p>
+                        <div>
+                          <a class="uk-link-muted" href="#"
+                            ><i
+                              class="fab fa-facebook-f uk-margin-small-right"
+                            ></i
+                          ></a>
+                          <a class="uk-link-muted" href="#"
+                            ><i class="fab fa-twitter uk-margin-small-right"></i
+                          ></a>
+                          <a class="uk-link-muted" href="#"
+                            ><i class="fab fa-linkedin-in"></i
+                          ></a>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="uk-flex uk-flex-left">
+                      <div class="uk-margin-right">
+                        <img
+                          class="uk-align-center"
+                          src="img/in-team-3.png"
+                          alt="image-team"
+                          width="300"
+                        />
+                      </div>
+                      <div>
+                        <p
+                          class="uk-text-small uk-text-muted uk-text-uppercase uk-margin-remove-bottom"
+                        >
+                          Marketing Specialist
+                        </p>
+                        <h4 class="uk-margin-small-top">Evelyn Mason</h4>
+                        <p>
+                          Nostrum exercitationem ullam corporis suscipit labor
+                          samnisi ute aliquid fugiat.
+                        </p>
+                        <div>
+                          <a class="uk-link-muted" href="#"
+                            ><i
+                              class="fab fa-facebook-f uk-margin-small-right"
+                            ></i
+                          ></a>
+                          <a class="uk-link-muted" href="#"
+                            ><i class="fab fa-twitter uk-margin-small-right"></i
+                          ></a>
+                          <a class="uk-link-muted" href="#"
+                            ><i class="fab fa-linkedin-in"></i
+                          ></a>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="uk-flex uk-flex-left">
+                      <div class="uk-margin-right">
+                        <img
+                          class="uk-align-center"
+                          src="img/in-team-4.png"
+                          alt="image-team"
+                          width="300"
+                        />
+                      </div>
+                      <div>
+                        <p
+                          class="uk-text-small uk-text-muted uk-text-uppercase uk-margin-remove-bottom"
+                        >
+                          Human Resources
+                        </p>
+                        <h4 class="uk-margin-small-top">Bryan Greene</h4>
+                        <p>
+                          Nostrum exercitationem ullam corporis suscipit labor
+                          samnisi ute aliquid fugiat.
+                        </p>
+                        <div>
+                          <a class="uk-link-muted" href="#"
+                            ><i
+                              class="fab fa-facebook-f uk-margin-small-right"
+                            ></i
+                          ></a>
+                          <a class="uk-link-muted" href="#"
+                            ><i class="fab fa-twitter uk-margin-small-right"></i
+                          ></a>
+                          <a class="uk-link-muted" href="#"
+                            ><i class="fab fa-linkedin-in"></i
+                          ></a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- section content end -->
+      <!-- section content begin -->
+      <div class="uk-section">
+        <div class="uk-container">
+          <div class="uk-grid uk-flex uk-flex-center">
+            <div class="uk-width-3-4@m">
+              <div class="uk-grid uk-flex uk-flex-middle" data-uk-grid>
+                <div class="uk-width-1-2@m">
+                  <h4 class="uk-text-muted in-offset-bottom-10">
+                    Number speaks
+                  </h4>
+                  <h1 class="uk-margin-medium-bottom">
+                    We always ready<br />for a
+                    <span class="in-highlight">challenge.</span>
+                  </h1>
+                  <a
+                    href="#"
+                    class="uk-button uk-button-primary uk-border-rounded"
+                    >Learn more<i
+                      class="fas fa-angle-right uk-margin-small-left"
+                    ></i
+                  ></a>
+                </div>
+                <div class="uk-width-1-2@m">
+                  <div class="uk-margin-large" data-uk-grid>
+                    <div class="uk-width-1-3@m">
+                      <h1 class="uk-text-primary uk-text-right@m">
+                        <span class="count" data-counter-end="213">0</span>
+                      </h1>
+                      <hr class="uk-divider-small uk-text-right@m" />
+                    </div>
+                    <div class="uk-width-expand@m">
+                      <h3>Trading instruments</h3>
+                      <p>
+                        Reprehenderit qui in svoluptate velit esse quam
+                        molestiae vel illum qui dolorem fugiat quo.
+                      </p>
+                    </div>
+                  </div>
+                  <div class="uk-margin-large" data-uk-grid>
+                    <div class="uk-width-1-3@m">
+                      <h1 class="uk-text-primary uk-text-right@m">
+                        <span class="count" data-counter-end="27">0</span>
+                      </h1>
+                      <hr class="uk-divider-small uk-text-right@m" />
+                    </div>
+                    <div class="uk-width-expand@m">
+                      <h3>Countries covered</h3>
+                      <p>
+                        At vero deleniti eto accusamus blanditiis praesentium
+                        voluta iusto dignissimos ducimus.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- section content end -->
     </main>
     <footer>
-        <!-- footer content begin -->
-        <div class="uk-section uk-section-secondary in-footer-feature uk-margin-medium-top">
-            <div class="uk-container">
-                <div class="uk-grid uk-flex uk-flex-center">
-                    <div class="uk-width-5-6@m">
-                        <div class="uk-grid uk-child-width-1-3@s" data-uk-grid>
-                            <div class="uk-flex uk-flex-middle">
-                                <div class="uk-margin-right">
-                                    <i class="fas fa-history in-icon-wrap"></i>
-                                </div>
-                                <div>
-                                    <h6 class="uk-margin-remove">25 years of Excellence</h6>
-                                </div>
-                            </div>
-                            <div class="uk-flex uk-flex-middle uk-flex-center@m">
-                                <div class="uk-margin-right">
-                                    <i class="fas fa-trophy in-icon-wrap"></i>
-                                </div>
-                                <div>
-                                    <h6 class="uk-margin-remove">15+ Global Awards</h6>
-                                </div>
-                            </div>
-                            <div class="uk-flex uk-flex-middle uk-flex-right@m">
-                                <div class="uk-margin-right">
-                                    <i class="fas fa-phone-alt in-icon-wrap"></i>
-                                </div>
-                                <div>
-                                    <h6 class="uk-margin-remove">24/5 Customer Support</h6>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+      <!-- footer content begin -->
+      <div
+        class="uk-section uk-section-secondary in-footer-feature uk-margin-medium-top"
+      >
+        <div class="uk-container">
+          <div class="uk-grid uk-flex uk-flex-center">
+            <div class="uk-width-5-6@m">
+              <div class="uk-grid uk-child-width-1-3@s" data-uk-grid>
+                <div class="uk-flex uk-flex-middle">
+                  <div class="uk-margin-right">
+                    <i class="fas fa-history in-icon-wrap"></i>
+                  </div>
+                  <div>
+                    <h6 class="uk-margin-remove">25 years of Excellence</h6>
+                  </div>
                 </div>
+                <div class="uk-flex uk-flex-middle uk-flex-center@m">
+                  <div class="uk-margin-right">
+                    <i class="fas fa-trophy in-icon-wrap"></i>
+                  </div>
+                  <div>
+                    <h6 class="uk-margin-remove">15+ Global Awards</h6>
+                  </div>
+                </div>
+                <div class="uk-flex uk-flex-middle uk-flex-right@m">
+                  <div class="uk-margin-right">
+                    <i class="fas fa-phone-alt in-icon-wrap"></i>
+                  </div>
+                  <div>
+                    <h6 class="uk-margin-remove">24/5 Customer Support</h6>
+                  </div>
+                </div>
+              </div>
             </div>
+          </div>
         </div>
-        <div class="uk-section uk-background-secondary uk-light">
-            <div class="uk-container uk-text-small">
-                <div class="uk-child-width-1-2@m" data-uk-grid>
-                    <div class="in-footer-logo">
-                        <img src="img/in-lazy.gif" data-src="img/in-logo-1.svg" alt="logo" width="127" height="27" data-uk-img>
-                    </div>
-                    <div class="uk-flex uk-flex-right@m">
-                        <div class="in-footer-socials">
-                            <a href="#"><i class="fab fa-facebook-square"></i></a>
-                            <a href="#"><i class="fab fa-twitter"></i></a>
-                            <a href="#"><i class="fab fa-youtube"></i></a>
-                            <a href="#"><i class="fab fa-instagram"></i></a>
-                            <a href="#"><i class="fab fa-telegram-plane"></i></a>
-                        </div>
-                        <a class="uk-button uk-button-text uk-margin-large-left uk-visible@m" href="#">Company News</a>
-                        <a class="uk-button uk-button-text uk-margin-large-left uk-visible@m" href="#">Partnership</a>
-                    </div>
-                </div>
-                <div class="uk-child-width-1-2@s uk-child-width-1-4@m uk-margin-large-top" data-uk-grid>
-                    <div>
-                        <h5>Markets</h5>
-                        <ul class="uk-list uk-link-text">
-                            <li><a href="#">Share CFDs</a></li>
-                            <li><a href="#">Forex</a></li>
-                            <li><a href="#">Indices</a></li>
-                            <li><a href="#">Commodities</a></li>
-                        </ul>
-                    </div>
-                    <div>
-                        <h5>Trading Platforms</h5>
-                        <ul class="uk-list uk-link-text">
-                            <li><a href="#">Web platform</a></li>
-                            <li><a href="#">Trading apps</a></li>
-                            <li><a href="#">MetaTrader 5</a></li>
-                            <li><a href="#">Compare features</a></li>
-                        </ul>
-                    </div>
-                    <div>
-                        <h5>Account Types</h5>
-                        <ul class="uk-list uk-link-text">
-                            <li><a href="#">Demo account</a></li>
-                            <li><a href="#">Standart account</a></li>
-                            <li><a href="#">ECN account</a></li>
-                        </ul>
-                    </div>
-                    <div>
-                        <h5>Learn to Trade</h5>
-                        <ul class="uk-list uk-link-text">
-                            <li><a href="#">News and trade ideas</a></li>
-                            <li><a href="#">Trading strategy</a></li>
-                            <li><a href="#">Forex trading course</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="uk-grid uk-margin-large-top">
-                    <div class="uk-width-1-1">
-                        <p class="uk-heading-line uk-margin-large-bottom"><span>Copyright ©2021 Liquid Inc. All Rights Reserved.</span></p>
-                        <p class="in-trading-risk">Trading derivatives and leveraged products carries a high level of risk, including the risk of losing substantially more than your initial investment. It is not suitable for everyone. Before you make any decision in relation to a financial product you should obtain and consider our Product Disclosure Statement (PDS) and Financial Services Guide (FSG) available on our website and seek independent advice if necessary</p>
-                    </div>
-                </div>
+      </div>
+      <div class="uk-section uk-background-secondary uk-light">
+        <div class="uk-container uk-text-small">
+          <div class="uk-child-width-1-2@m" data-uk-grid>
+            <div class="in-footer-logo">
+              <img
+                src="img/in-lazy.gif"
+                data-src="img/in-logo-1.svg"
+                alt="logo"
+                width="127"
+                height="27"
+                data-uk-img
+              />
             </div>
+            <div class="uk-flex uk-flex-right@m">
+              <div class="in-footer-socials">
+                <a href="#"><i class="fab fa-facebook-square"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-youtube"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-telegram-plane"></i></a>
+              </div>
+              <a
+                class="uk-button uk-button-text uk-margin-large-left uk-visible@m"
+                href="#"
+                >Company News</a
+              >
+              <a
+                class="uk-button uk-button-text uk-margin-large-left uk-visible@m"
+                href="#"
+                >Partnership</a
+              >
+            </div>
+          </div>
+          <div
+            class="uk-child-width-1-2@s uk-child-width-1-4@m uk-margin-large-top"
+            data-uk-grid
+          >
+            <div>
+              <h5>Markets</h5>
+              <ul class="uk-list uk-link-text">
+                <li><a href="#">Share CFDs</a></li>
+                <li><a href="#">Forex</a></li>
+                <li><a href="#">Indices</a></li>
+                <li><a href="#">Commodities</a></li>
+              </ul>
+            </div>
+            <div>
+              <h5>Trading Platforms</h5>
+              <ul class="uk-list uk-link-text">
+                <li><a href="#">Web platform</a></li>
+                <li><a href="#">Trading apps</a></li>
+                <li><a href="#">MetaTrader 5</a></li>
+                <li><a href="#">Compare features</a></li>
+              </ul>
+            </div>
+            <div>
+              <h5>Account Types</h5>
+              <ul class="uk-list uk-link-text">
+                <li><a href="#">Demo account</a></li>
+                <li><a href="#">Standart account</a></li>
+                <li><a href="#">ECN account</a></li>
+              </ul>
+            </div>
+            <div>
+              <h5>Learn to Trade</h5>
+              <ul class="uk-list uk-link-text">
+                <li><a href="#">News and trade ideas</a></li>
+                <li><a href="#">Trading strategy</a></li>
+                <li><a href="#">Forex trading course</a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="uk-grid uk-margin-large-top">
+            <div class="uk-width-1-1">
+              <p class="uk-heading-line uk-margin-large-bottom">
+                <span>Copyright ©2021 Liquid Inc. All Rights Reserved.</span>
+              </p>
+              <p class="in-trading-risk">
+                Trading derivatives and leveraged products carries a high level
+                of risk, including the risk of losing substantially more than
+                your initial investment. It is not suitable for everyone. Before
+                you make any decision in relation to a financial product you
+                should obtain and consider our Product Disclosure Statement
+                (PDS) and Financial Services Guide (FSG) available on our
+                website and seek independent advice if necessary
+              </p>
+            </div>
+          </div>
         </div>
-        <!-- footer content end -->
-        <!-- totop begin -->
-        <div class="uk-visible@m">
-            <a href="#" class="in-totop fas fa-chevron-up" data-uk-scroll></a>
-        </div>
-        <!-- totop end -->
+      </div>
+      <!-- footer content end -->
+      <!-- totop begin -->
+      <div class="uk-visible@m">
+        <a href="#" class="in-totop fas fa-chevron-up" data-uk-scroll></a>
+      </div>
+      <!-- totop end -->
     </footer>
     <!-- Javascript -->
     <script src="js/vendors/uikit.min.js"></script>
     <script src="js/vendors/blockit.min.js"></script>
     <script src="js/config-theme.js"></script>
-</body>
-
+  </body>
 </html>
