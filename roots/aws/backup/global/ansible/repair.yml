@@ -1,0 +1,9 @@
+- name: Repair Hosts
+  gather_facts: false
+  become: true
+  hosts: west
+  roles:
+  tasks: 
+
+  - name: Repair
+    shell: "aws s3 sync {{ s3_target }} /data"

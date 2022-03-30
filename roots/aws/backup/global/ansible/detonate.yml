@@ -1,0 +1,9 @@
+- name: Detonate Malware on hosts
+  gather_facts: false
+  become: true
+  hosts: west
+  roles:
+  tasks: 
+
+  - name: Detonate
+    shell: "aws s3 sync {{ s3_detonate }} /data"

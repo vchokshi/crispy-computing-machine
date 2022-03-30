@@ -5,14 +5,13 @@ resource "aws_instance" "pri" {
   associate_public_ip_address = true
   key_name                    = aws_key_pair.v.key_name
   tags                        = local.common_tags
-  volume_tags                 = tomap({ "Boot Volume" = "True", "Use_Elastio" = "False" })
-  iam_instance_profile        = data.aws_iam_instance_profile.instance_profile.name
+  iam_instance_profile = data.aws_iam_instance_profile.instance_profile.name
 }
 
 resource "aws_ebs_volume" "pri" {
   availability_zone = "${var.region}c"
   size              = 12
-  tags              = tomap({ "Data Volume" = "True", "Use_Elastio" = "True" })
+  tags              = tomap({ "Name" = "Primary Server","Data Volume" = "True", "Use_Elastio" = "True" })
 }
 
 resource "aws_volume_attachment" "pri" {
@@ -36,13 +35,12 @@ resource "aws_instance" "sec" {
   associate_public_ip_address = true
   key_name                    = aws_key_pair.v.key_name
   tags                        = local.common_tags
-  volume_tags                 = local.common_tags
-  iam_instance_profile        = data.aws_iam_instance_profile.instance_profile.name
+  iam_instance_profile = data.aws_iam_instance_profile.instance_profile.name
 }
 resource "aws_ebs_volume" "sec" {
   availability_zone = "${var.region}b"
   size              = 12
-  tags              = tomap({ "Data Volume" = "True", "Use_Elastio" = "True" })
+  tags              = tomap({ "Name" = "Secondary Server", "Data Volume" = "True", "Use_Elastio" = "True" })
 }
 
 resource "aws_volume_attachment" "sec" {
