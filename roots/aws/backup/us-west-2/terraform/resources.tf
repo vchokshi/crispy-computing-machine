@@ -5,13 +5,13 @@ resource "aws_instance" "pri" {
   associate_public_ip_address = true
   key_name                    = aws_key_pair.v.key_name
   tags                        = local.common_tags
-  iam_instance_profile = data.aws_iam_instance_profile.instance_profile.name
+  iam_instance_profile        = data.aws_iam_instance_profile.instance_profile.name
 }
 
 resource "aws_ebs_volume" "pri" {
   availability_zone = "${var.region}c"
   size              = 12
-  tags              = tomap({ "Name" = "Primary Server","Data Volume" = "True", "Use_Elastio" = "True" })
+  tags              = tomap({ "Name" = "Primary Server", "Data Volume" = "True", "Use_Elastio" = "True" })
 }
 
 resource "aws_volume_attachment" "pri" {
@@ -35,7 +35,7 @@ resource "aws_instance" "sec" {
   associate_public_ip_address = true
   key_name                    = aws_key_pair.v.key_name
   tags                        = local.common_tags
-  iam_instance_profile = data.aws_iam_instance_profile.instance_profile.name
+  iam_instance_profile        = data.aws_iam_instance_profile.instance_profile.name
 }
 resource "aws_ebs_volume" "sec" {
   availability_zone = "${var.region}b"
@@ -100,32 +100,4 @@ resource "aws_route53_health_check" "w" {
   resource_path     = "/"
   failure_threshold = "5"
   request_interval  = "30"
-}
-
-resource "aws_efs_file_system" "f" {
-  creation_token = "${var.region}-efs"
-}
-
-output "efs_file_system_dns_name" {
-  value = aws_efs_file_system.f.dns_name
-}
-
-resource "aws_efs_mount_target" "pri" {
-  file_system_id  = aws_efs_file_system.f.id
-  subnet_id       = aws_subnet.main.id
-  security_groups = [aws_default_security_group.default.id]
-}
-
-resource "aws_efs_mount_target" "sec" {
-  file_system_id  = aws_efs_file_system.f.id
-  subnet_id       = aws_subnet.second.id
-  security_groups = [aws_default_security_group.default.id]
-}
-
-resource "aws_efs_backup_policy" "policy" {
-  file_system_id = aws_efs_file_system.f.id
-
-  backup_policy {
-    status = "ENABLED"
-  }
 }
