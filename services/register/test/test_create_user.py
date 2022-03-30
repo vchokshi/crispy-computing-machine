@@ -1,2 +1,1 @@
-
-person = createUser("NAME", "SURNAME", "EMAIL", "PASSWORD)")
+# person = createUser("NAME", "SURNAME", "EMAIL", "PASSWORD)")

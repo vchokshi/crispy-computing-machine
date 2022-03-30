@@ -1,12 +1,7 @@
-# Defines an Array that Contains Every Instantiated User Class added
 totalUsers = []
 
-# User Class that Provides the Structure for a User Object
-# This class is what is created on invoking the createUser() function
-class User:
 
-    # User Class Constructor, Defines Variable Names in a Global Reach within the Class Object
-    # Also appends the Object to the __totalUsers array on it's creation
+class User:
     def __init__(self, name, surname, email, password):
         self.name = name
         self.surname = surname
@@ -37,10 +32,16 @@ class User:
     def getPassword(self):
         return self.password
 
+
 # Returns a new instantiation of the User Class for storage in a variable
 # Instantiations can be accessed later by accessing the __totalUsers array
 def createUser(name, surname, email, password):
     return User(name, surname, email, password)
+
+
+def validateInputs(n, s, e, p):
+    pass
+
 
 # Returns a new instantiation of the User Class based off of user inputs
 # Will return the User if the entries are valid, but will return False if they are not
@@ -54,6 +55,7 @@ def inputUser(nameEntry, surnameEntry, emailEntry, passwordEntry):
     else:
         return False
 
+
 # Validates the password of a specific user against a preset password
 # This will return  if the password is valid and False if it is not
 def validateUser(user, password):
@@ -62,12 +64,14 @@ def validateUser(user, password):
     else:
         return False
 
-#Lists all Users inside the totalUsers array without displaying passwords
+
+# Lists all Users inside the totalUsers array without displaying passwords
 def listUsers():
     safeUsers = []
     for user in totalUsers:
         safeUsers.append({user.name, user.surname, user.email})
     return safeUsers
+
 
 # Lists all Users in the totalUsers array while displaying passwords
 def unsafeList():
@@ -85,6 +89,7 @@ def unsafeList():
     else:
         return False
 
+
 # Checks all the Users to see if a password and email match is found
 # This will return True if a match is found, and False if not
 def userExists(email, password):
@@ -94,15 +99,16 @@ def userExists(email, password):
         else:
             return False
 
+
 # Removes a user based on their email as a primary key
 # Uses a list comprehension to reassign the totalUsers array with a filter for the email
 def removeUser(email):
     count = 0
     indexStore = []
     while count < len(totalUsers):
-        if(totalUsers[count].email == email):
+        if totalUsers[count].email == email:
             indexStore.append(count)
         count += 1
     for index in indexStore:
-        del(totalUsers[index])
+        del totalUsers[index]
     return True
