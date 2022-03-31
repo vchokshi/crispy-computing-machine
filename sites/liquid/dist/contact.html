@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="zxx" dir="ltr">
+  <head>
+    <!-- Standard Meta -->
+    <meta charset="utf-8" />
+    <meta name="description" content="IOT4" />
+    <meta
+      name="keywords"
+      content="blockit, uikit3, handlebars, scss, vanilla javascript"
+    />
+    <meta name="author" content="Vihar Chokshi" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#f2f3f5" />
+    <!-- Site Properties -->
+    <title>Contact - IOT4 HTML5 Template</title>
+    <!-- Critical preload -->
+    <link rel="preload" href="js/vendors/uikit.min.js" as="script" />
+    <link rel="preload" href="css/vendors/uikit.min.css" as="style" />
+    <link rel="preload" href="css/style.css" as="style" />
+    <!-- Icon preload -->
+    <link
+      rel="preload"
+      href="fonts/fa-brands-400.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="fonts/fa-solid-900.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <!-- Font preload -->
+    <link
+      rel="preload"
+      href="fonts/inter-v2-latin-regular.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="fonts/inter-v2-latin-500.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="fonts/inter-v2-latin-700.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <!-- Favicon and apple icon -->
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+    <link rel="apple-touch-icon-precomposed" href="apple-touch-icon.png" />
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/vendors/uikit.min.css" />
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+
+  <body>
+    <!-- preloader begin -->
+    <div class="in-loader">
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+    <!-- preloader end -->
+    <header>
+      <!-- header content begin -->
+      <div
+        class="uk-section uk-padding-remove-vertical in-header-inner uk-background-cover uk-background-top-center"
+        style="background-image: url(img/in-liquid-slide-bg.png)"
+      >
+        <nav
+          class="uk-navbar-container"
+          data-uk-sticky="show-on-up: true; animation: uk-animation-slide-top;"
+        >
+          <div class="uk-container" data-uk-navbar>
+            <div class="uk-navbar-left">
+              <div class="uk-navbar-item">
+                <!-- logo begin -->
+                <a class="uk-logo" href="index.html">
+                  <img
+                    src="img/in-lazy.gif"
+                    data-src="img/in-logo-1.svg"
+                    alt="logo"
+                    width="160"
+                    height="34"
+                    data-uk-img
+                  />
+                </a>
+                <!-- logo end -->
+                <!-- navigation begin -->
+                <ul class="uk-navbar-nav uk-visible@m">
+                  <li>
+                    <a href="index.html"
+                      >Home<i class="fas fa-chevron-down"></i
+                    ></a>
+                    <div class="uk-navbar-dropdown">
+                      <ul class="uk-nav uk-navbar-dropdown-nav">
+                        <li><a href="homepage2.html">Learn</a></li>
+                        <li><a href="homepage3.html">Awards</a></li>
+                        <li><a href="homepage4.html">Regulated</a></li>
+                      </ul>
+                    </div>
+                  </li>
+                  <li><a href="markets.html">Markets</a></li>
+                  <li>
+                    <a href="#">Company<i class="fas fa-chevron-down"></i></a>
+                    <div class="uk-navbar-dropdown">
+                      <ul class="uk-nav uk-navbar-dropdown-nav">
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="blog-list.html">Blog</a></li>
+                        <li><a href="careers.html">Careers</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                      </ul>
+                    </div>
+                  </li>
+                  <li><a href="education.html">Education</a></li>
+                  <li>
+                    <a href="#">Resources<i class="fas fa-chevron-down"></i></a>
+                    <div class="uk-navbar-dropdown uk-navbar-dropdown-width-2">
+                      <div
+                        class="uk-navbar-dropdown-grid uk-child-width-1-2"
+                        data-uk-grid
+                      >
+                        <div>
+                          <ul class="uk-nav uk-navbar-dropdown-nav">
+                            <li>
+                              <a href="https://getuikit.com/docs/"
+                                >Documentation<i
+                                  class="fas fa-external-link-square-alt fa-sm"
+                                ></i
+                              ></a>
+                            </li>
+                            <li><a href="help-center.html">Help Center</a></li>
+                            <li><a href="customers.html">Customers</a></li>
+                            <li><a href="roadmap.html">Roadmap</a></li>
+                            <li>
+                              <a href="legal-docs.html"
+                                >Legal Docs<i class="fas fa-gavel fa-sm"></i
+                              ></a>
+                            </li>
+                          </ul>
+                        </div>
+                        <div>
+                          <ul class="uk-nav uk-navbar-dropdown-nav">
+                            <li>
+                              <a class="uk-disabled" href="#"
+                                >Adipiscing elit sed do eiusmod incididunt ut
+                                labore dolore magna lorem ipsum sit dolor amet
+                                consectetur</a
+                              >
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                  </li>
+                </ul>
+                <!-- navigation end -->
+              </div>
+            </div>
+            <div class="uk-navbar-right">
+              <div class="uk-navbar-item uk-visible@m in-optional-nav">
+                <a
+                  href="register.html"
+                  class="uk-button uk-button-primary uk-border-rounded"
+                  >Create Account</a
+                >
+                <a href="signin.html" class="uk-button uk-button-text"
+                  ><i class="fas fa-user-circle"></i
+                ></a>
+              </div>
+            </div>
+          </div>
+        </nav>
+      </div>
+      <!-- header content end -->
+    </header>
+    <!-- breadcrumb content begin -->
+    <div class="uk-section uk-padding-remove-vertical in-liquid-breadcrumb">
+      <div class="uk-container">
+        <div class="uk-grid">
+          <div class="uk-width-1-1">
+            <ul class="uk-breadcrumb"></ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- breadcrumb content end -->
+    <main>
+      <!-- section content begin -->
+      <div class="uk-section">
+        <div class="uk-container">
+          <div class="uk-grid uk-flex uk-flex-center">
+            <div class="uk-width-1-2@m uk-text-center">
+              <h2 class="uk-margin-small-bottom">
+                Do not hesitate to <span class="in-highlight">reach out.</span>
+              </h2>
+              <p class="uk-text-lead uk-text-muted uk-margin-remove">
+                Just fill in the contact form here and we’ll be sure to reply as
+                fast as possible
+              </p>
+            </div>
+            <div class="uk-width-1-1@m uk-margin-large-top">
+              <div
+                class="uk-grid uk-grid-large uk-child-width-1-2@m"
+                data-uk-grid
+              >
+                <div>
+                  <form
+                    id="contact-form"
+                    class="uk-form uk-grid-small"
+                    data-uk-grid
+                  >
+                    <div class="uk-width-1-1">
+                      <input
+                        class="uk-input uk-border-rounded"
+                        id="name"
+                        name="name"
+                        type="text"
+                        placeholder="Full name"
+                      />
+                    </div>
+                    <div class="uk-width-1-1">
+                      <input
+                        class="uk-input uk-border-rounded"
+                        id="email"
+                        name="email"
+                        type="email"
+                        placeholder="Email address"
+                      />
+                    </div>
+                    <div class="uk-width-1-1">
+                      <input
+                        class="uk-input uk-border-rounded"
+                        id="subject"
+                        name="subject"
+                        type="text"
+                        placeholder="Subject"
+                      />
+                    </div>
+                    <div class="uk-width-1-1">
+                      <textarea
+                        class="uk-textarea uk-border-rounded"
+                        id="message"
+                        name="message"
+                        rows="6"
+                        placeholder="Message"
+                      ></textarea>
+                    </div>
+                    <div class="uk-width-1-1">
+                      <button
+                        class="uk-width-1-1 uk-button uk-button-primary uk-border-rounded"
+                        id="sendemail"
+                        type="submit"
+                        name="submit"
+                      >
+                        Send Message
+                      </button>
+                    </div>
+                  </form>
+                </div>
+                <div>
+                  <h4 class="uk-margin-remove-bottom">Business submissions</h4>
+                  <p class="uk-margin-small-top">
+                    For business plan submissions. Please submit using this
+                  </p>
+                  <div class="uk-flex uk-flex-middle uk-margin">
+                    <div class="uk-margin-small-right">
+                      <i
+                        class="fas fa-envelope fa-sm in-icon-wrap circle small primary-color"
+                      ></i>
+                    </div>
+                    <div>
+                      <p class="uk-margin-remove">business@company.com</p>
+                    </div>
+                  </div>
+                  <div class="uk-flex uk-flex-middle uk-margin">
+                    <div class="uk-margin-small-right">
+                      <i
+                        class="fas fa-phone fa-sm in-icon-wrap circle small primary-color"
+                      ></i>
+                    </div>
+                    <div>
+                      <p class="uk-margin-remove">(888)234-5686</p>
+                    </div>
+                  </div>
+                  <hr class="uk-margin-medium" />
+                  <h4 class="uk-margin-bottom">Our socials media</h4>
+                  <a
+                    href="#"
+                    class="fab fa-facebook-square fa-lg uk-margin-right"
+                  ></a>
+                  <a href="#" class="fab fa-twitter fa-lg uk-margin-right"></a>
+                  <a href="#" class="fab fa-youtube fa-lg uk-margin-right"></a>
+                  <a
+                    href="#"
+                    class="fab fa-instagram fa-lg uk-margin-right"
+                  ></a>
+                  <a
+                    href="#"
+                    class="fab fa-telegram-plane fa-lg uk-margin-right"
+                  ></a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- section content end -->
+    </main>
+    <footer>
+      <!-- footer content begin -->
+      <div
+        class="uk-section uk-section-secondary in-footer-feature uk-margin-medium-top"
+      >
+        <div class="uk-container">
+          <div class="uk-grid uk-flex uk-flex-center">
+            <div class="uk-width-5-6@m">
+              <div class="uk-grid uk-child-width-1-3@s" data-uk-grid>
+                <div class="uk-flex uk-flex-middle">
+                  <div class="uk-margin-right">
+                    <i class="fas fa-history in-icon-wrap"></i>
+                  </div>
+                  <div>
+                    <h6 class="uk-margin-remove">25 years of Excellence</h6>
+                  </div>
+                </div>
+                <div class="uk-flex uk-flex-middle uk-flex-center@m">
+                  <div class="uk-margin-right">
+                    <i class="fas fa-trophy in-icon-wrap"></i>
+                  </div>
+                  <div>
+                    <h6 class="uk-margin-remove">15+ Global Awards</h6>
+                  </div>
+                </div>
+                <div class="uk-flex uk-flex-middle uk-flex-right@m">
+                  <div class="uk-margin-right">
+                    <i class="fas fa-phone-alt in-icon-wrap"></i>
+                  </div>
+                  <div>
+                    <h6 class="uk-margin-remove">24/5 Customer Support</h6>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="uk-section uk-background-secondary uk-light">
+        <div class="uk-container uk-text-small">
+          <div class="uk-child-width-1-2@m" data-uk-grid>
+            <div class="in-footer-logo">
+              <img
+                src="img/in-lazy.gif"
+                data-src="img/in-logo-1.svg"
+                alt="logo"
+                width="127"
+                height="27"
+                data-uk-img
+              />
+            </div>
+            <div class="uk-flex uk-flex-right@m">
+              <div class="in-footer-socials">
+                <a href="#"><i class="fab fa-facebook-square"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-youtube"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-telegram-plane"></i></a>
+              </div>
+              <a
+                class="uk-button uk-button-text uk-margin-large-left uk-visible@m"
+                href="#"
+                >Company News</a
+              >
+              <a
+                class="uk-button uk-button-text uk-margin-large-left uk-visible@m"
+                href="#"
+                >Partnership</a
+              >
+            </div>
+          </div>
+          <div
+            class="uk-child-width-1-2@s uk-child-width-1-4@m uk-margin-large-top"
+            data-uk-grid
+          >
+            <div>
+              <h5>Markets</h5>
+              <ul class="uk-list uk-link-text">
+                <li><a href="#">Share CFDs</a></li>
+                <li><a href="#">Forex</a></li>
+                <li><a href="#">Indices</a></li>
+                <li><a href="#">Commodities</a></li>
+              </ul>
+            </div>
+            <div>
+              <h5>Trading Platforms</h5>
+              <ul class="uk-list uk-link-text">
+                <li><a href="#">Web platform</a></li>
+                <li><a href="#">Trading apps</a></li>
+                <li><a href="#">MetaTrader 5</a></li>
+                <li><a href="#">Compare features</a></li>
+              </ul>
+            </div>
+            <div>
+              <h5>Account Types</h5>
+              <ul class="uk-list uk-link-text">
+                <li><a href="#">Demo account</a></li>
+                <li><a href="#">Standart account</a></li>
+                <li><a href="#">ECN account</a></li>
+              </ul>
+            </div>
+            <div>
+              <h5>Learn to Trade</h5>
+              <ul class="uk-list uk-link-text">
+                <li><a href="#">News and trade ideas</a></li>
+                <li><a href="#">Trading strategy</a></li>
+                <li><a href="#">Forex trading course</a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="uk-grid uk-margin-large-top">
+            <div class="uk-width-1-1">
+              <p class="uk-heading-line uk-margin-large-bottom">
+                <span>Copyright ©2021 Liquid Inc. All Rights Reserved.</span>
+              </p>
+              <p class="in-trading-risk">
+                Trading derivatives and leveraged products carries a high level
+                of risk, including the risk of losing substantially more than
+                your initial investment. It is not suitable for everyone. Before
+                you make any decision in relation to a financial product you
+                should obtain and consider our Product Disclosure Statement
+                (PDS) and Financial Services Guide (FSG) available on our
+                website and seek independent advice if necessary
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- footer content end -->
+      <!-- totop begin -->
+      <div class="uk-visible@m">
+        <a href="#" class="in-totop fas fa-chevron-up" data-uk-scroll></a>
+      </div>
+      <!-- totop end -->
+    </footer>
+    <!-- Javascript -->
+    <script src="js/vendors/uikit.min.js"></script>
+    <script src="js/vendors/blockit.min.js"></script>
+    <script src="js/config-theme.js"></script>
+  </body>
+</html>

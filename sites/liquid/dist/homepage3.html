@@ -1,0 +1,946 @@
+<!DOCTYPE html>
+<html lang="zxx" dir="ltr">
+  <head>
+    <!-- Standard Meta -->
+    <meta charset="utf-8" />
+    <meta name="description" content="IOT4" />
+    <meta
+      name="keywords"
+      content="blockit, uikit3, handlebars, scss, vanilla javascript"
+    />
+    <meta name="author" content="Vihar Chokshi" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#f2f3f5" />
+    <!-- Site Properties -->
+    <title>Homepage - IOT4 HTML5 Template</title>
+    <!-- Critical preload -->
+    <link rel="preload" href="js/vendors/uikit.min.js" as="script" />
+    <link rel="preload" href="css/vendors/uikit.min.css" as="style" />
+    <link rel="preload" href="css/style.css" as="style" />
+    <!-- Icon preload -->
+    <link
+      rel="preload"
+      href="fonts/fa-brands-400.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="fonts/fa-solid-900.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <!-- Font preload -->
+    <link
+      rel="preload"
+      href="fonts/inter-v2-latin-regular.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="fonts/inter-v2-latin-500.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="fonts/inter-v2-latin-700.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <!-- Favicon and apple icon -->
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+    <link rel="apple-touch-icon-precomposed" href="apple-touch-icon.png" />
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/vendors/uikit.min.css" />
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+
+  <body>
+    <!-- preloader begin -->
+    <div class="in-loader">
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+    <!-- preloader end -->
+    <header>
+      <!-- header content begin -->
+      <div class="uk-section uk-padding-remove-vertical">
+        <nav
+          class="uk-navbar-container"
+          data-uk-sticky="show-on-up: true; animation: uk-animation-slide-top;"
+        >
+          <div class="uk-container" data-uk-navbar>
+            <div class="uk-navbar-left">
+              <div class="uk-navbar-item">
+                <!-- logo begin -->
+                <a class="uk-logo" href="index.html">
+                  <img
+                    src="img/in-lazy.gif"
+                    data-src="img/in-logo-1.svg"
+                    alt="logo"
+                    width="160"
+                    height="34"
+                    data-uk-img
+                  />
+                </a>
+                <!-- logo end -->
+                <!-- navigation begin -->
+                <ul class="uk-navbar-nav uk-visible@m">
+                  <li>
+                    <a href="index.html"
+                      >Home<i class="fas fa-chevron-down"></i
+                    ></a>
+                    <div class="uk-navbar-dropdown">
+                      <ul class="uk-nav uk-navbar-dropdown-nav">
+                        <li><a href="homepage2.html">Learn</a></li>
+                        <li><a href="homepage3.html">Awards</a></li>
+                        <li><a href="homepage4.html">Regulated</a></li>
+                      </ul>
+                    </div>
+                  </li>
+                  <li><a href="markets.html">Markets</a></li>
+                  <li>
+                    <a href="#">Company<i class="fas fa-chevron-down"></i></a>
+                    <div class="uk-navbar-dropdown">
+                      <ul class="uk-nav uk-navbar-dropdown-nav">
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="blog-list.html">Blog</a></li>
+                        <li><a href="careers.html">Careers</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                      </ul>
+                    </div>
+                  </li>
+                  <li><a href="education.html">Education</a></li>
+                  <li>
+                    <a href="#">Resources<i class="fas fa-chevron-down"></i></a>
+                    <div class="uk-navbar-dropdown uk-navbar-dropdown-width-2">
+                      <div
+                        class="uk-navbar-dropdown-grid uk-child-width-1-2"
+                        data-uk-grid
+                      >
+                        <div>
+                          <ul class="uk-nav uk-navbar-dropdown-nav">
+                            <li>
+                              <a href="https://getuikit.com/docs/"
+                                >Documentation<i
+                                  class="fas fa-external-link-square-alt fa-sm"
+                                ></i
+                              ></a>
+                            </li>
+                            <li><a href="help-center.html">Help Center</a></li>
+                            <li><a href="customers.html">Customers</a></li>
+                            <li><a href="roadmap.html">Roadmap</a></li>
+                            <li>
+                              <a href="legal-docs.html"
+                                >Legal Docs<i class="fas fa-gavel fa-sm"></i
+                              ></a>
+                            </li>
+                          </ul>
+                        </div>
+                        <div>
+                          <ul class="uk-nav uk-navbar-dropdown-nav">
+                            <li>
+                              <a class="uk-disabled" href="#"
+                                >Adipiscing elit sed do eiusmod incididunt ut
+                                labore dolore magna lorem ipsum sit dolor amet
+                                consectetur</a
+                              >
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                  </li>
+                </ul>
+                <!-- navigation end -->
+              </div>
+            </div>
+            <div class="uk-navbar-right">
+              <div class="uk-navbar-item uk-visible@m in-optional-nav">
+                <a
+                  href="register.html"
+                  class="uk-button uk-button-primary uk-border-rounded"
+                  >Create Account</a
+                >
+                <a href="signin.html" class="uk-button uk-button-text"
+                  ><i class="fas fa-user-circle"></i
+                ></a>
+              </div>
+            </div>
+          </div>
+        </nav>
+      </div>
+      <!-- header content end -->
+    </header>
+    <main>
+      <!-- slideshow content begin -->
+      <div class="uk-section uk-padding-remove-vertical">
+        <div
+          class="uk-light in-slideshow uk-background-cover uk-background-top-center"
+          style="background-image: url(img/in-liquid-slide-bg.png)"
+          data-uk-slideshow
+        >
+          <ul class="uk-slideshow-items">
+            <li>
+              <div class="uk-container">
+                <div class="uk-grid-medium" data-uk-grid>
+                  <div class="uk-width-1-2@s">
+                    <div class="uk-overlay">
+                      <h1>Award-winning trading platforms.</h1>
+                      <p class="uk-text-lead uk-visible@m">
+                        Explore endless trading opportunities with tight spreads
+                        and no commission
+                      </p>
+                      <a
+                        href="#"
+                        class="uk-button uk-button-default uk-border-rounded uk-visible@s"
+                        >Discover platform</a
+                      >
+                    </div>
+                  </div>
+                  <div class="uk-width-1-2@s">
+                    <img
+                      class="in-slide-img"
+                      src="img/in-lazy.gif"
+                      data-src="img/in-liquid-slide-4.svg"
+                      alt="image-slide"
+                      width="500"
+                      height="400"
+                      data-uk-img
+                    />
+                  </div>
+                </div>
+              </div>
+            </li>
+            <li>
+              <div class="uk-container">
+                <div class="uk-grid-medium" data-uk-grid>
+                  <div class="uk-width-1-2@s">
+                    <div class="uk-overlay">
+                      <h1>Learn forex with our courses.</h1>
+                      <p class="uk-text-lead uk-visible@m">
+                        Weekly educational workshops are a great resource for
+                        any skill level trader
+                      </p>
+                      <a
+                        href="#"
+                        class="uk-button uk-button-default uk-border-rounded uk-visible@s"
+                        >Discover courses</a
+                      >
+                    </div>
+                  </div>
+                  <div class="uk-width-1-2@s">
+                    <img
+                      class="in-slide-img"
+                      src="img/in-lazy.gif"
+                      data-src="img/in-liquid-slide-3.svg"
+                      alt="image-slide"
+                      width="500"
+                      height="400"
+                      data-uk-img
+                    />
+                  </div>
+                </div>
+              </div>
+            </li>
+          </ul>
+          <a
+            class="uk-position-center-left uk-position-small uk-hidden-hover"
+            href="#"
+            data-uk-slidenav-previous
+            data-uk-slideshow-item="previous"
+          ></a>
+          <a
+            class="uk-position-center-right uk-position-small uk-hidden-hover"
+            href="#"
+            data-uk-slidenav-next
+            data-uk-slideshow-item="next"
+          ></a>
+          <div
+            class="uk-section uk-padding-remove-vertical in-slideshow-features uk-visible@m"
+          >
+            <div class="uk-container">
+              <ul
+                class="uk-grid uk-child-width-1-5@m uk-text-center"
+                data-uk-grid
+              >
+                <li>
+                  <img
+                    src="img/in-lazy.gif"
+                    data-src="img/in-liquid-fxbtc.svg"
+                    alt="ticker-image"
+                    width="63"
+                    height="38"
+                    data-uk-img
+                  />
+                  <span class="uk-label uk-label-danger uk-margin-left"
+                    ><i class="fas fa-caret-down"></i>2901.77</span
+                  >
+                </li>
+                <li>
+                  <img
+                    src="img/in-lazy.gif"
+                    data-src="img/in-liquid-fxeur.svg"
+                    alt="ticker-image"
+                    width="63"
+                    height="38"
+                    data-uk-img
+                  />
+                  <span class="uk-label uk-label-success uk-margin-left"
+                    ><i class="fas fa-caret-up"></i>1.21603</span
+                  >
+                </li>
+                <li>
+                  <img
+                    src="img/in-lazy.gif"
+                    data-src="img/in-liquid-fxaud.svg"
+                    alt="ticker-image"
+                    width="63"
+                    height="38"
+                    data-uk-img
+                  />
+                  <span class="uk-label uk-label-success uk-margin-left"
+                    ><i class="fas fa-caret-up"></i>0.77762</span
+                  >
+                </li>
+                <li>
+                  <img
+                    src="img/in-lazy.gif"
+                    data-src="img/in-liquid-fxjpy.svg"
+                    alt="ticker-image"
+                    width="63"
+                    height="38"
+                    data-uk-img
+                  />
+                  <span class="uk-label uk-label-danger uk-margin-left"
+                    ><i class="fas fa-caret-down"></i>103.440</span
+                  >
+                </li>
+                <li>
+                  <img
+                    src="img/in-lazy.gif"
+                    data-src="img/in-liquid-fxcad.svg"
+                    alt="ticker-image"
+                    width="63"
+                    height="38"
+                    data-uk-img
+                  />
+                  <span class="uk-label uk-label-success uk-margin-left"
+                    ><i class="fas fa-caret-up"></i>1.26175</span
+                  >
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- slideshow content end -->
+      <!-- section content begin -->
+      <div class="uk-section uk-section-secondary in-liquid-10">
+        <div class="uk-container uk-light">
+          <div
+            class="uk-grid-medium uk-child-width-1-4@m uk-flex uk-flex-middle"
+            data-uk-grid
+          >
+            <div>
+              <h2>Trade types</h2>
+              <p class="uk-text-lead">
+                Explore different trade types to trade on your preferred market.
+              </p>
+              <a
+                class="uk-button uk-button-default uk-border-rounded uk-margin-top"
+                href="#"
+                >Start trading<i
+                  class="fas fa-angle-right uk-margin-small-left"
+                ></i
+              ></a>
+            </div>
+            <div>
+              <div
+                class="uk-card uk-card-secondary uk-card-body uk-border-rounded uk-text-center"
+              >
+                <img
+                  class="uk-margin-small-bottom"
+                  src="img/in-lazy.gif"
+                  data-src="img/in-liquid-icon-16.svg"
+                  alt="wave-award"
+                  width="72"
+                  height="72"
+                  data-uk-img
+                />
+                <h3 class="uk-margin-top">Margin trading</h3>
+                <p>
+                  Excepteur sint cupidatat non proident sunt in culpa quina anim
+                  officia
+                </p>
+              </div>
+            </div>
+            <div>
+              <div
+                class="uk-card uk-card-secondary uk-card-body uk-border-rounded uk-text-center"
+              >
+                <img
+                  class="uk-margin-small-bottom"
+                  src="img/in-lazy.gif"
+                  data-src="img/in-liquid-icon-17.svg"
+                  alt="wave-award"
+                  width="72"
+                  height="72"
+                  data-uk-img
+                />
+                <h3 class="uk-margin-top">Options</h3>
+                <p>
+                  Excepteur sint cupidatat non proident sunt in culpa quina anim
+                  officia
+                </p>
+              </div>
+            </div>
+            <div>
+              <div
+                class="uk-card uk-card-secondary uk-card-body uk-border-rounded uk-text-center"
+              >
+                <img
+                  class="uk-margin-small-bottom"
+                  src="img/in-lazy.gif"
+                  data-src="img/in-liquid-icon-18.svg"
+                  alt="wave-award"
+                  width="72"
+                  height="72"
+                  data-uk-img
+                />
+                <h3 class="uk-margin-top">Multipliers</h3>
+                <p>
+                  Excepteur sint cupidatat non proident sunt in culpa quina anim
+                  officia
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- section content end -->
+      <!-- section content begin -->
+      <div class="uk-section in-liquid-11">
+        <div class="uk-container">
+          <div
+            class="uk-grid-large uk-grid-divider uk-child-width-1-2@m"
+            data-uk-grid
+          >
+            <div>
+              <div
+                class="uk-child-width-1-2@m uk-flex uk-flex-bottom"
+                data-uk-grid
+              >
+                <div>
+                  <h2><span class="in-highlight">New</span><br />Traders.</h2>
+                  <p>
+                    Quis autem vel eum iure reprehenderit qui in voluptate veli
+                    esse quam nihil conseqa molestiae ratione
+                  </p>
+                </div>
+                <div>
+                  <ul
+                    class="uk-list uk-list-bullet in-list-check uk-margin-medium-left"
+                  >
+                    <li><a href="#">Webinars</a></li>
+                    <li><a href="#">Seminars</a></li>
+                    <li><a href="#">Financial events</a></li>
+                    <li><a href="#">Forex calendars</a></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div>
+              <div
+                class="uk-child-width-1-2@m uk-flex uk-flex-bottom"
+                data-uk-grid
+              >
+                <div>
+                  <h2>
+                    <span class="in-highlight">Experienced</span><br />Traders.
+                  </h2>
+                  <p>
+                    Quis autem vel eum iure reprehenderit qui in voluptate veli
+                    esse quam nihil conseqa molestiae ratione
+                  </p>
+                </div>
+                <div>
+                  <ul
+                    class="uk-list uk-list-bullet in-list-check uk-margin-medium-left"
+                  >
+                    <li><a href="#">Trading strategis</a></li>
+                    <li><a href="#">Metatrader 5</a></li>
+                    <li><a href="#">Trading Psychology</a></li>
+                    <li><a href="#">Market News</a></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="uk-grid uk-flex uk-flex-center">
+            <div class="uk-width-5-6@m uk-margin-medium-top">
+              <div class="uk-grid-divider" data-uk-grid>
+                <div class="uk-width-1-5@m uk-flex uk-flex-middle">
+                  <h6 class="uk-text-muted">Featured on</h6>
+                </div>
+                <div class="uk-width-expand@m">
+                  <div
+                    class="uk-grid-medium uk-child-width-1-2@s uk-child-width-1-4@m uk-text-center in-client-logo-3"
+                    data-uk-grid
+                  >
+                    <div class="uk-tile uk-tile-default">
+                      <img
+                        class="uk-margin-remove"
+                        src="img/in-lazy.gif"
+                        data-src="img/in-liquid-media-1.svg"
+                        alt="client-logo"
+                        width="167"
+                        height="55"
+                        data-uk-img
+                      />
+                    </div>
+                    <div class="uk-tile uk-tile-default">
+                      <img
+                        class="uk-margin-remove"
+                        src="img/in-lazy.gif"
+                        data-src="img/in-liquid-media-2.svg"
+                        alt="client-logo"
+                        width="167"
+                        height="55"
+                        data-uk-img
+                      />
+                    </div>
+                    <div class="uk-tile uk-tile-default">
+                      <img
+                        class="uk-margin-remove"
+                        src="img/in-lazy.gif"
+                        data-src="img/in-liquid-media-3.svg"
+                        alt="client-logo"
+                        width="167"
+                        height="55"
+                        data-uk-img
+                      />
+                    </div>
+                    <div class="uk-tile uk-tile-default">
+                      <img
+                        class="uk-margin-remove"
+                        src="img/in-lazy.gif"
+                        data-src="img/in-liquid-media-4.svg"
+                        alt="client-logo"
+                        width="167"
+                        height="55"
+                        data-uk-img
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- section content end -->
+      <!-- section content begin -->
+      <div
+        class="uk-section uk-section-muted uk-padding-large in-liquid-12 uk-background-contain uk-background-bottom-center"
+        data-src="img/in-liquid-12-bg.png"
+        data-uk-img
+      >
+        <div class="uk-container">
+          <div class="uk-grid uk-flex uk-flex-center">
+            <div class="uk-width-3-4@m">
+              <div>
+                <div class="uk-flex uk-flex-middle" data-uk-grid>
+                  <div class="uk-width-1-1 uk-width-expand@m">
+                    <blockquote>
+                      <p class="uk-margin-bottom">
+                        Great platform for starting traders, great selection and
+                        transparent fee. Liquid has been making my trading
+                        experience enjoyable and secure.
+                      </p>
+                      <footer><span>Nina van Adrichem</span></footer>
+                      <a class="uk-button uk-button-text" href="#"
+                        >Read other story<i
+                          class="fas fa-angle-right uk-margin-small-left"
+                        ></i
+                      ></a>
+                    </blockquote>
+                  </div>
+                  <div
+                    class="uk-width-1-1 uk-width-auto@m in-margin-remove-left@s uk-flex-first uk-flex-last@m"
+                  >
+                    <img
+                      class="uk-border-pill uk-background-muted uk-align-center uk-margin-remove-bottom"
+                      src="img/in-lazy.gif"
+                      data-src="img/in-team-1.png"
+                      alt="client-testimoni"
+                      width="180"
+                      height="180"
+                      data-uk-img
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- section content end -->
+      <!-- section content begin -->
+      <div class="uk-section in-liquid-13">
+        <div class="uk-container">
+          <div class="uk-grid-large uk-child-width-1-2@m" data-uk-grid>
+            <div>
+              <span class="uk-label in-liquid-label uk-margin-bottom"
+                >Why choose Liquid</span
+              >
+              <h2 class="uk-margin-remove">
+                Low spread on more<br />than 240 instruments.
+              </h2>
+              <p>
+                Sed ut perspiciatis unde omnis iste natus error voluptatem
+                accusantium doloremque laudantium, totam rem aperiam, eaque ipsa
+                quae ab illo inventore veritatis et quasi architecto beatae
+                vitae dicta sunt explicabo quis nostrum exercitationem.
+              </p>
+              <ul
+                class="uk-subnav uk-subnav-divider uk-margin-medium-top uk-text-small"
+                data-uk-margin
+              >
+                <li>
+                  <i class="fas fa-money-bill-wave uk-margin-small-right"></i
+                  >Competitive pricing
+                </li>
+                <li>
+                  <i class="fas fa-shapes uk-margin-small-right"></i>Trading
+                  flexibility
+                </li>
+                <li>
+                  <i class="fas fa-award uk-margin-small-right"></i>Winning
+                  platform
+                </li>
+              </ul>
+            </div>
+            <div>
+              <div
+                class="uk-card uk-card-default uk-border-rounded uk-box-shadow-medium"
+              >
+                <div class="uk-card-body">
+                  <table class="uk-table uk-table-striped">
+                    <thead>
+                      <tr>
+                        <th>Instrument</th>
+                        <th>Bid</th>
+                        <th>Ask</th>
+                        <th class="uk-visible@s">Spread</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>
+                          <img
+                            class="uk-margin-small-right"
+                            src="img/in-lazy.gif"
+                            data-src="img/in-liquid-fxeur.svg"
+                            alt="fx-flag"
+                            width="29"
+                            height="17"
+                            data-uk-img
+                          /><span class="in-pairname">EURUSD</span>
+                        </td>
+                        <td>
+                          <span class="uk-label uk-label-danger uk-border-pill"
+                            >1.09554</span
+                          >
+                        </td>
+                        <td>
+                          <span class="uk-label uk-label-danger uk-border-pill"
+                            >1.09555</span
+                          >
+                        </td>
+                        <td class="uk-visible@s">0.1</td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <img
+                            class="uk-margin-small-right"
+                            src="img/in-lazy.gif"
+                            data-src="img/in-liquid-fxaud.svg"
+                            alt="fx-flag"
+                            width="29"
+                            height="17"
+                            data-uk-img
+                          /><span class="in-pairname">AUDUSD</span>
+                        </td>
+                        <td>
+                          <span class="uk-label uk-label-danger uk-border-pill"
+                            >0.67017</span
+                          >
+                        </td>
+                        <td>
+                          <span class="uk-label uk-label-success uk-border-pill"
+                            >0.67019</span
+                          >
+                        </td>
+                        <td class="uk-visible@s">0.2</td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <img
+                            class="uk-margin-small-right"
+                            src="img/in-lazy.gif"
+                            data-src="img/in-liquid-fxjpy.svg"
+                            alt="fx-flag"
+                            width="29"
+                            height="17"
+                            data-uk-img
+                          /><span class="in-pairname">USDJPY</span>
+                        </td>
+                        <td>
+                          <span class="uk-label uk-label-success uk-border-pill"
+                            >109.792</span
+                          >
+                        </td>
+                        <td>
+                          <span class="uk-label uk-label-danger uk-border-pill"
+                            >109.793</span
+                          >
+                        </td>
+                        <td class="uk-visible@s">0.0</td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <img
+                            class="uk-margin-small-right"
+                            src="img/in-lazy.gif"
+                            data-src="img/in-liquid-fxcad.svg"
+                            alt="fx-flag"
+                            width="29"
+                            height="17"
+                            data-uk-img
+                          /><span class="in-pairname">USDCAD</span>
+                        </td>
+                        <td>
+                          <span class="uk-label uk-label-success uk-border-pill"
+                            >1.32900</span
+                          >
+                        </td>
+                        <td>
+                          <span class="uk-label uk-label-success uk-border-pill"
+                            >1.32909</span
+                          >
+                        </td>
+                        <td class="uk-visible@s">0.3</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <p class="uk-text-small uk-text-center">
+                Check your platform for the most up to date prices.
+              </p>
+            </div>
+          </div>
+          <div class="uk-grid uk-flex uk-flex-center">
+            <div class="uk-width-5-6@m uk-margin-medium-top">
+              <div
+                class="uk-card uk-card-default uk-card-body uk-border-rounded in-app-style"
+              >
+                <div
+                  class="uk-grid-collapse uk-flex uk-flex-middle"
+                  data-uk-grid
+                >
+                  <div class="uk-width-expand@m">
+                    <h4 class="uk-margin-remove">
+                      Enhance your trading experience
+                    </h4>
+                    <p class="uk-text-muted uk-margin-remove">
+                      with Liquid mobile app.
+                    </p>
+                  </div>
+                  <div class="uk-width-1-1 uk-width-3-5@m uk-inline">
+                    <div class="uk-position-bottom">
+                      <img
+                        src="img/in-lazy.gif"
+                        data-src="img/in-liquid-13-mockup.png"
+                        alt="sample-images"
+                        width="226"
+                        height="172"
+                        data-uk-img
+                      />
+                    </div>
+                    <div class="uk-align-right@m">
+                      <a href="#" class="uk-button in-button-app">
+                        <i class="fab fa-google-play"></i>
+                        <span class="wrapper"
+                          >Get it on<span>Play Store</span></span
+                        >
+                      </a>
+                      <a
+                        href="#"
+                        class="uk-button in-button-app uk-margin-small-left"
+                      >
+                        <i class="fab fa-apple"></i>
+                        <span class="wrapper"
+                          >Get it on<span>App Store</span></span
+                        >
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- section content end -->
+    </main>
+    <footer>
+      <!-- footer content begin -->
+      <div
+        class="uk-section uk-section-secondary in-footer-feature uk-margin-medium-top"
+      >
+        <div class="uk-container">
+          <div class="uk-grid uk-flex uk-flex-center">
+            <div class="uk-width-5-6@m">
+              <div class="uk-grid uk-child-width-1-3@s" data-uk-grid>
+                <div class="uk-flex uk-flex-middle">
+                  <div class="uk-margin-right">
+                    <i class="fas fa-history in-icon-wrap"></i>
+                  </div>
+                  <div>
+                    <h6 class="uk-margin-remove">25 years of Excellence</h6>
+                  </div>
+                </div>
+                <div class="uk-flex uk-flex-middle uk-flex-center@m">
+                  <div class="uk-margin-right">
+                    <i class="fas fa-trophy in-icon-wrap"></i>
+                  </div>
+                  <div>
+                    <h6 class="uk-margin-remove">15+ Global Awards</h6>
+                  </div>
+                </div>
+                <div class="uk-flex uk-flex-middle uk-flex-right@m">
+                  <div class="uk-margin-right">
+                    <i class="fas fa-phone-alt in-icon-wrap"></i>
+                  </div>
+                  <div>
+                    <h6 class="uk-margin-remove">24/5 Customer Support</h6>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="uk-section uk-background-secondary uk-light">
+        <div class="uk-container uk-text-small">
+          <div class="uk-child-width-1-2@m" data-uk-grid>
+            <div class="in-footer-logo">
+              <img
+                src="img/in-lazy.gif"
+                data-src="img/in-logo-1.svg"
+                alt="logo"
+                width="127"
+                height="27"
+                data-uk-img
+              />
+            </div>
+            <div class="uk-flex uk-flex-right@m">
+              <div class="in-footer-socials">
+                <a href="#"><i class="fab fa-facebook-square"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-youtube"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-telegram-plane"></i></a>
+              </div>
+              <a
+                class="uk-button uk-button-text uk-margin-large-left uk-visible@m"
+                href="#"
+                >Company News</a
+              >
+              <a
+                class="uk-button uk-button-text uk-margin-large-left uk-visible@m"
+                href="#"
+                >Partnership</a
+              >
+            </div>
+          </div>
+          <div
+            class="uk-child-width-1-2@s uk-child-width-1-4@m uk-margin-large-top"
+            data-uk-grid
+          >
+            <div>
+              <h5>Markets</h5>
+              <ul class="uk-list uk-link-text">
+                <li><a href="#">Share CFDs</a></li>
+                <li><a href="#">Forex</a></li>
+                <li><a href="#">Indices</a></li>
+                <li><a href="#">Commodities</a></li>
+              </ul>
+            </div>
+            <div>
+              <h5>Trading Platforms</h5>
+              <ul class="uk-list uk-link-text">
+                <li><a href="#">Web platform</a></li>
+                <li><a href="#">Trading apps</a></li>
+                <li><a href="#">MetaTrader 5</a></li>
+                <li><a href="#">Compare features</a></li>
+              </ul>
+            </div>
+            <div>
+              <h5>Account Types</h5>
+              <ul class="uk-list uk-link-text">
+                <li><a href="#">Demo account</a></li>
+                <li><a href="#">Standart account</a></li>
+                <li><a href="#">ECN account</a></li>
+              </ul>
+            </div>
+            <div>
+              <h5>Learn to Trade</h5>
+              <ul class="uk-list uk-link-text">
+                <li><a href="#">News and trade ideas</a></li>
+                <li><a href="#">Trading strategy</a></li>
+                <li><a href="#">Forex trading course</a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="uk-grid uk-margin-large-top">
+            <div class="uk-width-1-1">
+              <p class="uk-heading-line uk-margin-large-bottom">
+                <span>Copyright ©2021 Liquid Inc. All Rights Reserved.</span>
+              </p>
+              <p class="in-trading-risk">
+                Trading derivatives and leveraged products carries a high level
+                of risk, including the risk of losing substantially more than
+                your initial investment. It is not suitable for everyone. Before
+                you make any decision in relation to a financial product you
+                should obtain and consider our Product Disclosure Statement
+                (PDS) and Financial Services Guide (FSG) available on our
+                website and seek independent advice if necessary
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- footer content end -->
+      <!-- totop begin -->
+      <div class="uk-visible@m">
+        <a href="#" class="in-totop fas fa-chevron-up" data-uk-scroll></a>
+      </div>
+      <!-- totop end -->
+    </footer>
+    <!-- Javascript -->
+    <script src="js/vendors/uikit.min.js"></script>
+    <script src="js/vendors/blockit.min.js"></script>
+    <script src="js/config-theme.js"></script>
+  </body>
+</html>
