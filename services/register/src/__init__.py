@@ -1,4 +1,8 @@
+import boto3
+
 totalUsers = []
+
+REGION = "us-east-1"
 
 
 class User:
@@ -32,10 +36,14 @@ class User:
     def getPassword(self):
         return self.password
 
+    def insertUser(self):
+        client = boto3.client("dynamodb", region_name=REGION)
+
 
 # Returns a new instantiation of the User Class for storage in a variable
 # Instantiations can be accessed later by accessing the __totalUsers array
 def createUser(name, surname, email, password):
+
     return User(name, surname, email, password)
 
 
