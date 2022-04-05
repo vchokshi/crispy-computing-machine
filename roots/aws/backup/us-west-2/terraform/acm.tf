@@ -8,3 +8,5 @@ resource "aws_acm_certificate" "a" {
     create_before_destroy = true
   }
 }
+
+
