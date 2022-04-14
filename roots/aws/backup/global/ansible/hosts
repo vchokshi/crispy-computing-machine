@@ -18,7 +18,7 @@ eu-central-1-1.backup.iot4.net
 ansible_python_interpreter=/usr/bin/python3
 
 [west:vars]
-efs_target="fs-0162217a275b0a2f4.efs.us-west-2.amazonaws.com"
+efs_target="fs-075d928f0537d3b06.efs.us-west-2.amazonaws.com"
 
 [east:vars]
 efs_target="fs-0063b65fa781ac28d.efs.us-east-1.amazonaws.com"

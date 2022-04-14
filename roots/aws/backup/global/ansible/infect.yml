@@ -1,7 +1,7 @@
 - name: Infect hosts with Malware
   gather_facts: false
   become: true
-  hosts: west
+  hosts: west-0.backup.iot4.net
   roles:
   tasks: 
 

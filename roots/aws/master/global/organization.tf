@@ -19,10 +19,6 @@ resource "aws_organizations_organization" "org" {
   }
 }
 
-output "org_accounts" {
-  value = aws_organizations_organization.org.accounts
-}
-
 resource "aws_organizations_policy" "policy" {
   name        = "organization_policy"
   description = "AWS Service Control Policy"
@@ -89,17 +85,9 @@ resource "aws_organizations_organizational_unit" "main" {
   parent_id = aws_organizations_organization.org.roots[0].id
 }
 
-output "ou_main" {
-  value = aws_organizations_organizational_unit.main.accounts
-}
-
 resource "aws_organizations_organizational_unit" "grc" {
   name      = "grc"
   parent_id = aws_organizations_organizational_unit.main.id
-}
-
-output "ou_grc" {
-  value = aws_organizations_organizational_unit.grc.accounts
 }
 
 resource "aws_organizations_organizational_unit" "fpna" {
@@ -107,17 +95,12 @@ resource "aws_organizations_organizational_unit" "fpna" {
   parent_id = aws_organizations_organizational_unit.main.id
 }
 
-output "ou_fpna" {
-  value = aws_organizations_organizational_unit.fpna.accounts
-}
-
-
 resource "aws_organizations_policy_attachment" "attachment" {
   policy_id = aws_organizations_policy.policy.id
   target_id = aws_organizations_organizational_unit.main.id
 }
 
-resource "aws_organizations_account" "account" {
+resource "aws_organizations_account" "finance" {
   name      = "finance"
   email     = "finance@iot4.net"
   parent_id = aws_organizations_organizational_unit.fpna.id
@@ -143,7 +126,7 @@ resource "aws_organizations_account" "backup" {
   parent_id = aws_organizations_organizational_unit.grc.id
   #role_name = "origami"
 }
-resource "aws_organizations_account" "sec" {
+resource "aws_organizations_account" "security" {
   name      = "security"
   email     = "security@iot4.net"
   parent_id = aws_organizations_organizational_unit.grc.id

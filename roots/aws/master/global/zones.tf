@@ -2,6 +2,23 @@ resource "aws_route53_zone" "iot" {
   name = "iot4.net"
 }
 
+resource "aws_route53_zone" "internal_iot" {
+  name = "internal.iot4.net"
+  vpc {
+    vpc_id     = "vpc-08690b9a9d47c792b"
+    vpc_region = "eu_central-1"
+  }
+}
+
+
+
+resource "aws_route53_zone" "viharc" {
+  name = "viharc.com"
+}
+resource "aws_route53_zone" "vchokshi" {
+  name = "vchokshi.com"
+}
+
 resource "aws_route53_record" "finance" {
   zone_id = aws_route53_zone.iot.zone_id
   name    = "finance.iot4.net"
@@ -29,7 +46,7 @@ resource "aws_route53_record" "backup" {
   ]
 }
 
-resource "aws_route53_record" "s" {
+resource "aws_route53_record" "security" {
   zone_id = aws_route53_zone.iot.zone_id
   name    = "security.iot4.net"
   type    = "NS"

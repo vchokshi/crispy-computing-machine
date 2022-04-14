@@ -1,6 +1,6 @@
 - name: Build the stack for Elastio Demonstraton
   become: true
-  hosts: east,west
+  hosts: west
   roles:
   tasks: 
 

@@ -1,6 +1,5 @@
-.terraform*
+.terraform/
 id_rsa.pub
-terraform.tfstate*
 __pycache__
 *.jpg
 *.png
