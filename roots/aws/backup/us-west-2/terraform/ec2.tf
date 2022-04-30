@@ -1,11 +1,13 @@
 resource "aws_instance" "pri" {
-  ami                         = data.aws_ami.amazon-linux-2.id
+  ami                         = "ami-012363a297a261d65"
   subnet_id                   = aws_subnet.main.id
   instance_type               = local.ec2_instance_type
   associate_public_ip_address = true
   key_name                    = aws_key_pair.v.key_name
   tags                        = local.common_tags
   iam_instance_profile        = data.aws_iam_instance_profile.instance_profile.name
+  security_groups             = ["default"]
+  vpc_security_group_ids      = ["sg-047cb8e277272022a"]
 }
 
 resource "aws_ebs_volume" "pri" {
@@ -29,13 +31,15 @@ resource "aws_route53_record" "pri" {
 }
 
 resource "aws_instance" "sec" {
-  ami                         = data.aws_ami.amazon-linux-2.id
+  ami                         = "ami-012363a297a261d65"
   subnet_id                   = aws_subnet.second.id
   instance_type               = local.ec2_instance_type
   associate_public_ip_address = true
   key_name                    = aws_key_pair.v.key_name
   tags                        = local.common_tags
   iam_instance_profile        = data.aws_iam_instance_profile.instance_profile.name
+  security_groups             = ["default"]
+  vpc_security_group_ids      = ["sg-047cb8e277272022a"]
 }
 resource "aws_ebs_volume" "sec" {
   availability_zone = "${var.region}b"
