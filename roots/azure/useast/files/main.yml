@@ -21,18 +21,24 @@
       name: docker
       state: present
 
-  - name: Login to docker for liquid
-    docker_login:
-        username: vchokshi
-        password: derp
-        email: vc@iot4.net
+  - name: apache2 - PORT 80
+    apt:
+      name: apache2
+      state: present
 
-  - name: download and launch a docker web container
+  - name: DOCKER - DWVA - PORT 808
     docker_container:
       name: dvwa
       image: cyberxsecurity/dvwa
       state: started
-      published_ports: 80:80
+      published_ports: 808:80
+
+  - name: DOCKER - PROJECT1 - PORT 8080
+    docker_container:
+      name: resume
+      image: cyberxsecurity/project1-apachewebserver
+      state: started
+      published_ports: 8080:80
 
   - name: Enable docker service
     systemd:

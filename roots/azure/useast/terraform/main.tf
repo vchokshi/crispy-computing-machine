@@ -1,11 +1,13 @@
 resource "azurerm_resource_group" "rg" {
   name     = "${local.stack-color}-rg"
+  provider = azurerm.asu
   location = "eastus"
 
   tags = local.common_tags
 }
 
 resource "azurerm_virtual_network" "vn" {
+  provider            = azurerm.asu
   name                = "${local.stack-color}-vnet"
   address_space       = ["10.0.0.0/16"]
   location            = azurerm_resource_group.rg.location
@@ -34,6 +36,7 @@ resource "azurerm_virtual_network" "vn" {
 #remote_virtual_network_id = azurerm_virtual_network.vn.id
 #}
 resource "azurerm_subnet" "s" {
+  provider             = azurerm.asu
   name                 = "${local.stack-color}-subnet"
   resource_group_name  = azurerm_resource_group.rg.name
   virtual_network_name = azurerm_virtual_network.vn.name
@@ -48,6 +51,7 @@ resource "azurerm_subnet" "s" {
 
 
 resource "azurerm_network_security_group" "nsg" {
+  provider            = azurerm.asu
   name                = "${local.stack-color}-nsg"
   location            = azurerm_resource_group.rg.location
   resource_group_name = azurerm_resource_group.rg.name
@@ -75,7 +79,7 @@ resource "azurerm_network_security_group" "nsg" {
     destination_address_prefix = "VirtualNetwork"
   }
   security_rule {
-    name                       = "HTTP"
+    name                       = "HTTP_80"
     priority                   = 1003
     direction                  = "Inbound"
     access                     = "Allow"
@@ -85,6 +89,29 @@ resource "azurerm_network_security_group" "nsg" {
     source_address_prefix      = chomp(data.http.myip.body)
     destination_address_prefix = "AzureLoadBalancer"
   }
+  security_rule {
+    name                       = "HTTP_808"
+    priority                   = 1004
+    direction                  = "Inbound"
+    access                     = "Allow"
+    protocol                   = "Tcp"
+    source_port_range          = "*"
+    destination_port_range     = "808"
+    source_address_prefix      = chomp(data.http.myip.body)
+    destination_address_prefix = "AzureLoadBalancer"
+  }
+  security_rule {
+    name                       = "HTTP_8080"
+    priority                   = 1005
+    direction                  = "Inbound"
+    access                     = "Allow"
+    protocol                   = "Tcp"
+    source_port_range          = "*"
+    destination_port_range     = "8080"
+    source_address_prefix      = chomp(data.http.myip.body)
+    destination_address_prefix = "AzureLoadBalancer"
+  }
+
   #security_rule {
   #name                   = "HTTPKIB"
   #priority               = 1004
@@ -101,6 +128,7 @@ resource "azurerm_network_security_group" "nsg" {
 }
 
 resource "azurerm_availability_set" "azaz" {
+  provider                     = azurerm.asu
   name                         = "${local.stack-color}-availability-set"
   location                     = azurerm_resource_group.rg.location
   resource_group_name          = azurerm_resource_group.rg.name

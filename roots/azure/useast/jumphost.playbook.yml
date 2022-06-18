@@ -5,33 +5,33 @@
   tasks:
 
     # The Curriculum Way
-    - name: docker.io
-      apt:
-        force_apt_get: yes
-        update_cache: yes
-        name: docker.io
-        state: present
-    - name: Install pip3
-      apt:
-        force_apt_get: yes
-        name: python3-pip
-        state: present
+    #- name: docker.io
+    #apt:
+    #force_apt_get: yes
+    #update_cache: yes
+    #name: docker.io
+    #state: present
+    #- name: Install pip3
+    #apt:
+    #force_apt_get: yes
+    #name: python3-pip
+    #state: present
 
-    - name: Install Docker python module
-      pip:
-        name: docker
-        state: present
+          #- name: Install Docker python module
+          #pip:
+          #name: docker
+          #state: present
 
-    - name: download and launch a docker ANSIBLE container
-      docker_container:
-        name: dvwa
-        image: cyberxsecurity/ansible
-        state: started
-
-    - name: Enable docker service
-      systemd:
-        name: docker
-        enabled: yes
+    #- name: download and launch a docker ANSIBLE container
+    #docker_container:
+    #name: dvwa
+    #image: cyberxsecurity/ansible
+    #state: started
+    #
+    #- name: Enable docker service
+    #systemd:
+    #name: docker
+    #enabled: yes
 
     - name: Enable ansible repository
       ansible.builtin.apt_repository:

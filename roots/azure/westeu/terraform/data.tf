@@ -1,7 +1,3 @@
-data "http" "myip" {
-  url = "http://ipv4.icanhazip.com"
-}
-
 data "azurerm_resource_group" "global" {
   provider = azurerm.iot4
   name     = "globals-rg"
@@ -14,7 +10,4 @@ data "azurerm_dns_zone" "iot4" {
 
 }
 
-output "dns_zone_id" {
-  value = data.azurerm_dns_zone.iot4.id
 
-}

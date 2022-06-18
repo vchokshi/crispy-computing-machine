@@ -1,11 +1,9 @@
-provider "aws" {}
-
 terraform {
   required_providers {
   }
   backend "s3" {
     bucket = "iot4-tfstate"
-    key    = "roots/azure/useast.tfstate"
+    key    = "roots/azure/westeu.tfstate"
     region = "us-east-1"
   }
 }
@@ -21,3 +19,4 @@ provider "azurerm" {
   alias           = "asu"
 }
 
+provider "aws" {}
