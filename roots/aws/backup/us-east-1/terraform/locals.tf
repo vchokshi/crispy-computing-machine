@@ -10,7 +10,6 @@ locals {
   region_short = "east"
 
   common_tags = {
-    Name        = "${var.region}.${local.dns_hosted_zone_name}"
     Owner       = local.owner
     Email       = local.email_address
     Use_Elastio = "True"

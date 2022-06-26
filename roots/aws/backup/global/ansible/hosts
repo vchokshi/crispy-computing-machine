@@ -1,10 +1,10 @@
 [all:children]
 west
+east
 
 [east]
 east-0.backup.iot4.net 
 east-1.backup.iot4.net
-east-2.backup.iot4.net
 
 [west]
 west-0.backup.iot4.net
@@ -15,13 +15,10 @@ eu-central-1-0.backup.iot4.net
 eu-central-1-1.backup.iot4.net
 
 [all:vars]
-ansible_python_interpreter=/usr/bin/python3
+#ansible_python_interpreter=/usr/bin/python2
 
 [west:vars]
-efs_target="fs-075d928f0537d3b06.efs.us-west-2.amazonaws.com"
 
 [east:vars]
-efs_target="fs-0063b65fa781ac28d.efs.us-east-1.amazonaws.com"
 
 [eu:vars]
-efs_target="fs-0ff6fac2d37361629.efs.eu-central-1.amazonaws.com"

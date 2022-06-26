@@ -1,17 +1,12 @@
-data "aws_ami" "amazon-linux-2" {
-  most_recent = true
-  owners      = ["amazon"]
+#data "aws_ami" "amazon-linux-2" {
+  #most_recent = true
+  #owners      = ["self"]
 
-  filter {
-    name   = "owner-alias"
-    values = ["amazon"]
-  }
-
-  filter {
-    name   = "name"
-    values = ["amzn2-ami-hvm*"]
-  }
-}
+  #filter {
+    #name   = "name"
+    #values = ["base-iot4-amazon-linux-*"]
+  #}
+#}
 
 data "aws_availability_zones" "available" {
   state = "available"

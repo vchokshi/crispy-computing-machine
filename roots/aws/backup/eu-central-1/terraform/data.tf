@@ -25,10 +25,6 @@ data "aws_route53_zone" "public" {
   name = local.dns_hosted_zone_name
 }
 
-output "aws_availablity_zones_available" {
-  value = data.aws_availability_zones.available.names
-}
-
 data "aws_iam_instance_profile" "instance_profile" {
   name = "backup-admin"
 }

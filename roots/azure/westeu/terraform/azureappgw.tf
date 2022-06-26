@@ -44,10 +44,6 @@ resource "azurerm_app_service_custom_hostname_binding" "cv" {
   resource_group_name = azurerm_resource_group.rg.name
 }
 
-output "virtual_ip" {
-  value = azurerm_app_service_custom_hostname_binding.cv.id
-}
-
 resource "azurerm_dns_txt_record" "cv" {
   provider            = azurerm.iot4
   name                = "asuid.cv"
@@ -60,12 +56,11 @@ resource "azurerm_dns_txt_record" "cv" {
 }
 
 locals {
-  possible_addresses = length(azurerm_linux_web_app.resume.outbound_ip_address_list)
-  target_ip          = azurerm_linux_web_app.resume.outbound_ip_address_list[6]
+  target_ip = element(azurerm_linux_web_app.resume.outbound_ip_address_list, length(azurerm_linux_web_app.resume.outbound_ip_address_list) - 1)
 }
 
-output "outbound_ip_addresses" {
-  value = length(azurerm_linux_web_app.resume.outbound_ip_address_list)
+output "url" {
+  value = "http://cv.az.iot4.net"
 }
 output "target" {
   value = local.target_ip
@@ -79,4 +74,61 @@ resource "azurerm_dns_a_record" "cv" {
   records             = [local.target_ip]
 }
 
+resource "azurerm_key_vault" "kv" {
+  provider                    = azurerm.asu
+  name                        = "azure-webapp-key-vault"
+  location                    = azurerm_resource_group.rg.location
+  resource_group_name         = azurerm_resource_group.rg.name
+  enabled_for_disk_encryption = true
+  tenant_id                   = data.azurerm_client_config.current.tenant_id
+  soft_delete_retention_days  = 7
+  purge_protection_enabled    = false
 
+  sku_name = "standard"
+
+  access_policy {
+    tenant_id = data.azurerm_client_config.current.tenant_id
+    object_id = data.azurerm_client_config.current.object_id
+
+    certificate_permissions = ["Get", "Import", "List"]
+  }
+}
+
+
+#resource "azurerm_key_vault_certificate" "kvc" {
+#provider     = azurerm.asu
+#name         = "azure-webapp-vault-cert"
+#key_vault_id = azurerm_key_vault.kv.id
+#
+#certificate {
+#contents = filebase64("certificate.pfx")
+#password = "derp"
+#}
+#
+#certificate_policy {
+#issuer_parameters {
+#name = "Unknown"
+#}
+#
+#key_properties {
+#exportable = true
+#key_size   = 2048
+#key_type   = "RSA"
+#reuse_key  = false
+#}
+#
+#secret_properties {
+#content_type = "application/x-pkcs12"
+#}
+#}
+#
+#}
+
+
+#resource "azurerm_app_service_certificate" "cv" {
+#provider            = azurerm.asu
+#name                = "cv-cert"
+#resource_group_name = azurerm_resource_group.rg.name
+#location            = azurerm_resource_group.rg.location
+#key_vault_secret_id = azurerm_key_vault_certificate.kvc.secret_id
+#}

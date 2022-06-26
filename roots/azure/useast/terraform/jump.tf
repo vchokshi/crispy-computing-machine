@@ -1,5 +1,5 @@
 resource "azurerm_public_ip" "jump_ip" {
-  provider            = azurerm.asu
+  provider            = azurerm.iot4
   name                = "${local.stack-color}-jump-ip"
   location            = azurerm_resource_group.rg.location
   resource_group_name = azurerm_resource_group.rg.name
@@ -8,7 +8,7 @@ resource "azurerm_public_ip" "jump_ip" {
 }
 
 resource "azurerm_network_interface" "nic" {
-  provider            = azurerm.asu
+  provider            = azurerm.iot4
   name                = "${local.stack-color}-nic"
   location            = azurerm_resource_group.rg.location
   resource_group_name = azurerm_resource_group.rg.name
@@ -22,7 +22,7 @@ resource "azurerm_network_interface" "nic" {
 }
 
 resource "azurerm_linux_virtual_machine" "jumphost" {
-  provider            = azurerm.asu
+  provider            = azurerm.iot4
   name                = "${local.stack-color}-jump-box"
   location            = azurerm_resource_group.rg.location
   resource_group_name = azurerm_resource_group.rg.name

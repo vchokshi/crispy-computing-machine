@@ -13,8 +13,3 @@ data "azurerm_dns_zone" "iot4" {
   resource_group_name = data.azurerm_resource_group.global.name
 
 }
-
-output "dns_zone_id" {
-  value = data.azurerm_dns_zone.iot4.id
-
-}

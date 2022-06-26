@@ -1,25 +1,13 @@
 resource "aws_instance" "pri" {
-  ami                         = "ami-012363a297a261d65"
+  ami                         = data.aws_ami.amazon-linux-2.id
   subnet_id                   = aws_subnet.main.id
   instance_type               = local.ec2_instance_type
   associate_public_ip_address = true
   key_name                    = aws_key_pair.v.key_name
   tags                        = local.common_tags
   iam_instance_profile        = data.aws_iam_instance_profile.instance_profile.name
-  security_groups             = ["default"]
-  vpc_security_group_ids      = ["sg-047cb8e277272022a"]
-}
-
-resource "aws_ebs_volume" "pri" {
-  availability_zone = "${var.region}a"
-  size              = 12
-  tags              = tomap({ "Name" = "Primary Server", "Data Volume" = "True", "Use_Elastio" = "True" })
-}
-
-resource "aws_volume_attachment" "pri" {
-  device_name = "/dev/xvdb"
-  volume_id   = aws_ebs_volume.pri.id
-  instance_id = aws_instance.pri.id
+  #security_groups             = ["default"]
+  vpc_security_group_ids = [aws_default_security_group.default.id]
 }
 
 resource "aws_route53_record" "pri" {
@@ -31,26 +19,15 @@ resource "aws_route53_record" "pri" {
 }
 
 resource "aws_instance" "sec" {
-  ami                         = "ami-012363a297a261d65"
+  ami                         = data.aws_ami.amazon-linux-2.id
   subnet_id                   = aws_subnet.second.id
   instance_type               = local.ec2_instance_type
   associate_public_ip_address = true
   key_name                    = aws_key_pair.v.key_name
   tags                        = local.common_tags
   iam_instance_profile        = data.aws_iam_instance_profile.instance_profile.name
-  security_groups             = ["default"]
-  vpc_security_group_ids      = ["sg-047cb8e277272022a"]
-}
-resource "aws_ebs_volume" "sec" {
-  availability_zone = "${var.region}b"
-  size              = 12
-  tags              = tomap({ "Name" = "Secondary Server", "Data Volume" = "True", "Use_Elastio" = "True" })
-}
-
-resource "aws_volume_attachment" "sec" {
-  device_name = "/dev/xvdb"
-  volume_id   = aws_ebs_volume.sec.id
-  instance_id = aws_instance.sec.id
+  #security_groups             = ["default"]
+  vpc_security_group_ids = [aws_default_security_group.default.id]
 }
 
 

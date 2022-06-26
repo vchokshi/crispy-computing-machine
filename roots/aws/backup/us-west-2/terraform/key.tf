@@ -1,4 +1,4 @@
 resource "aws_key_pair" "v" {
   key_name   = local.email_address
-  public_key = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCSFnaI8Xks1m/O/Ey3pIlEo0W+mcpCV/kKyWj7eRJGI1NTdlRY8svNEixqtHTQX6IQgtNHA3CtOGPNTLE3qrg7ByCzux9ZHvhSvB2gLTGdFgZodYTtBOUQ4jeoRCK/dzxmJUMLPDRiIoun/DXu1sJG5ST9tvv9O8Cb5dEtzng8i/1x9zxVLQBiTuYdKkYuAjm0CXkmc+p32PgrsTDCSx8fZWQYkqY4TS9sqxx0lBT1jRL0Rdg3+mxAeB1U58S5gzNIOHAOcb4wXsAo+yv/rljJEVcTcrJUqmhKehrTzD2Dqg2qLhX1WsTOMjJaotdH8gm4+0TO3VyM4pPR6IzJQGPW2lQ3JdjzYjgEbenFD6rtlDgqsYT0ZVPU8+pYBD5uRVGF3UnstWVowDBoQ35s2fHhy1uBMzIhJgnJEB9DZlqrYPTtINnfCTb4JMckfY4tMS/w1juaG+bHviJ6l1VhFv9QFaIXgLqTyyR90utZL3PTC4M3EIBTCIlRwJotQfdshz8= vchokshi@carbon"
+  public_key = file("/home/vchokshi/.ssh/id_rsa.pub")
 }

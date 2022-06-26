@@ -11,3 +11,6 @@ data "azurerm_dns_zone" "iot4" {
 }
 
 
+data "azurerm_client_config" "current" {
+  provider = azurerm.iot4
+}

@@ -32,6 +32,7 @@ resource "azurerm_management_group" "elastio" {
   display_name               = "elastio"
   parent_management_group_id = azurerm_management_group.iot4.id
   subscription_ids = [
+    data.azurerm_subscriptions.available.subscriptions[1].subscription_id
   ]
 }
 

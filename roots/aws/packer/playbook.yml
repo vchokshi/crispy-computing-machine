@@ -1,0 +1,24 @@
+---
+- name: 'Provision image'
+  hosts: all
+  become: true 
+  tasks:
+  - name: 'Install yum dependencies'
+    ansible.builtin.package:
+      name: [httpd, python-pip, python-wheel]
+      update_cache: yes
+      state: present
+
+  - name: 'Mount the second disk'
+    ansible.posix.mount:
+      name: /mnt
+      fstype: ext4
+      src: /dev/nvme2n1
+      state: mounted
+
+  - name: 'Enable the httpd service'
+    ansible.builtin.service:
+      name: httpd
+      state: started
+      enabled: true
+

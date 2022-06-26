@@ -1,15 +1,10 @@
 data "aws_ami" "amazon-linux-2" {
   most_recent = true
-  owners      = ["amazon"]
-
-  filter {
-    name   = "owner-alias"
-    values = ["amazon"]
-  }
+  owners      = ["self"]
 
   filter {
     name   = "name"
-    values = ["amzn2-ami-hvm*"]
+    values = ["base-iot4*"]
   }
 }
 
@@ -23,10 +18,6 @@ data "http" "myip" {
 
 data "aws_route53_zone" "public" {
   name = local.dns_hosted_zone_name
-}
-
-output "aws_availablity_zones_available" {
-  value = data.aws_availability_zones.available.names
 }
 
 data "aws_iam_instance_profile" "instance_profile" {
