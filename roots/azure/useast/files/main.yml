@@ -2,6 +2,8 @@
 - name: Config Web VM with Docker
   hosts: webservers
   become: true
+  vars:
+    html_root: /var/www/html
   tasks:
   - name: docker.io
     apt:
@@ -16,15 +18,24 @@
       name: python3-pip
       state: present
 
+  - name: Install apache
+    apt:
+      force_apt_get: yes
+      name: apache2
+      state: present
+
   - name: Install Docker python module
     pip:
       name: docker
       state: present
 
-  - name: apache2 - PORT 80
-    apt:
-      name: apache2
-      state: present
+  - name: Bootstrap the box
+    copy:
+      src: bootstrap.sh
+      dest: bootstrap.sh
+      mode: 0644
+  - name: Run the bootstrap script
+    shell: /tmp/bootstrap.sh
 
   - name: DOCKER - DWVA - PORT 808
     docker_container:
@@ -44,6 +55,44 @@
     systemd:
       name: docker
       enabled: yes
+# Check to make sure nvme disks are partitioned and mounted.
+  - name: "Stat the /data dir to see if it exists"
+    stat:
+        path: "/data"
+    register: data
+
+  - name: "Stat the {{ html_root }} to see if its dir or link"
+    stat:
+        path: "{{ html_root }}"
+    register: sym
+
+  - name: "Copy index.html to /data"
+    copy:
+      src: index.html
+      dest: /data/index.html
+      owner: www-data
+      group: www-data
+      mode: 0644
+    when: data.stat.isdir is defined and data.stat.isdir 
+
+  - name: Delete the html_root dir if isdir
+    file:
+        path: "{{html_root}}"
+        state: absent
+    when: sym.stat.isdir is defined and sym.stat.isdir 
+
+  - name: Symlink html_root to /data
+    file:
+        dest: "{{ html_root }}"
+        src: "/data"
+        state: link
+    when: data.stat.isdir is defined and data.stat.isdir 
+        
+  - name: Enable the httpd service
+    service:
+      name: apache2
+      state: started
+      enabled: true
 
 - name: Configure Elk VM with Docker
   hosts: elkservers

@@ -1,5 +1,5 @@
 resource "azurerm_public_ip" "lb_public_ip" {
-  provider            = azurerm.iot4
+  provider            = azurerm.elastio
   name                = "${local.stack-color}-lb-ip"
   location            = azurerm_resource_group.rg.location
   resource_group_name = azurerm_resource_group.rg.name
@@ -12,7 +12,7 @@ output "lb-public-ip" {
 }
 
 resource "azurerm_lb" "lb" {
-  provider            = azurerm.iot4
+  provider            = azurerm.elastio
   name                = "${local.stack-color}-lb"
   location            = azurerm_resource_group.rg.location
   resource_group_name = azurerm_resource_group.rg.name
@@ -62,20 +62,20 @@ output "resume" {
 
 
 resource "azurerm_lb_backend_address_pool" "lb_backend_pool" {
-  provider        = azurerm.iot4
+  provider        = azurerm.elastio
   loadbalancer_id = azurerm_lb.lb.id
   name            = "${local.stack-color}-backend-address-pool"
 }
 
 resource "azurerm_lb_probe" "lb_probe" {
-  provider        = azurerm.iot4
+  provider        = azurerm.elastio
   loadbalancer_id = azurerm_lb.lb.id
   name            = "${local.stack-color}-lb-probe"
   port            = 80
 }
 
 resource "azurerm_lb_rule" "lb_rule" {
-  provider                       = azurerm.iot4
+  provider                       = azurerm.elastio
   loadbalancer_id                = azurerm_lb.lb.id
   name                           = "${local.stack-color}-lb-rule"
   protocol                       = "Tcp"
@@ -86,7 +86,7 @@ resource "azurerm_lb_rule" "lb_rule" {
   backend_address_pool_ids       = [azurerm_lb_backend_address_pool.lb_backend_pool.id]
 }
 resource "azurerm_lb_rule" "lb_rule_808" {
-  provider                       = azurerm.iot4
+  provider                       = azurerm.elastio
   loadbalancer_id                = azurerm_lb.lb.id
   name                           = "${local.stack-color}-lb-rule-808"
   protocol                       = "Tcp"
@@ -97,7 +97,7 @@ resource "azurerm_lb_rule" "lb_rule_808" {
   backend_address_pool_ids       = [azurerm_lb_backend_address_pool.lb_backend_pool.id]
 }
 resource "azurerm_lb_rule" "lb_rule_8080" {
-  provider                       = azurerm.iot4
+  provider                       = azurerm.elastio
   loadbalancer_id                = azurerm_lb.lb.id
   name                           = "${local.stack-color}-lb-rule-8080"
   protocol                       = "Tcp"
