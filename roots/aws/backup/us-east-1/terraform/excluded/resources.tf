@@ -1,5 +1,5 @@
 resource "aws_instance" "east" {
-  count                       = length(module.vpc.public_subnets)-1
+  count                       = length(module.vpc.public_subnets) - 1
   ami                         = data.aws_ami.amazon-linux-2.id
   subnet_id                   = module.vpc.public_subnets[count.index]
   instance_type               = local.ec2_instance_type
@@ -18,7 +18,7 @@ output "ec2_instances" {
 }
 
 resource "aws_route53_record" "ssh" {
-  count   = length(module.vpc.public_subnets)-1
+  count   = length(module.vpc.public_subnets) - 1
   zone_id = data.aws_route53_zone.public.id
   name    = "${local.region_short}-${count.index}.${local.dns_hosted_zone_name}"
   type    = "A"

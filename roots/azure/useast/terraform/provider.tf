@@ -21,3 +21,8 @@ provider "azurerm" {
   alias           = "asu"
 }
 
+provider "azurerm" {
+  features {}
+  alias           = "elastio"
+  subscription_id = "8af8c8f4-64de-43c8-9866-cab37692a0a5"
+}

@@ -67,3 +67,5 @@
       with_items:
           - { src: 'filebeat-config.yml', dest: '~/files/filebeat-config.yml'  }
           - { src: 'metricbeat-config.yml', dest: '~/files/metricbeat-config.yml'  }
+          - { src: 'bootstrap.sh', dest: '~/files/bootstrap.sh'  }
+          - { src: 'index.html', dest: '~/files/index.html'  }

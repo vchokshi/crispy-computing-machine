@@ -58,7 +58,8 @@ source "amazon-ebs" "ami" {
 
   source_ami_filter {
     filters = {
-      name         = "AmazonInspector-*-AL2_x86_64-gp2"
+      #name         = "AmazonInspector-*-AL2_x86_64-gp2"
+      name         = "amzn2-ami-hvm*"
       architecture = "x86_64"
     }
     owners      = ["amazon"]
