@@ -1,0 +1,15 @@
+name: PR Title Check
+
+on:
+  push:
+
+  pull_request:
+    types: [opened, reopened, closed]
+
+jobs:
+  print_title:
+    name: Print the title of the PR
+    runs-on: ubuntu-latest
+    steps:
+      - name: Load PR Details
+        run: echo The title of your PR is ${{ github.event.pull_request.title }}
