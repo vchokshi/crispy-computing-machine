@@ -1,0 +1,14 @@
+name: PR Title Check
+
+on:
+  pull_request:
+    types: [opened, reopened, closed, synchronize]
+
+jobs:
+  check_title:
+    name: Check that the PR Title Follows Convention
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check the PR Title Follows Convention
+        run: expr match "${{github.event.pull_request.title}}" '^\[DEV-[0-9][0-9][0-9]\] - [0-9a-zA-Z].*$'
+
