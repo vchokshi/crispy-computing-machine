@@ -11,8 +11,9 @@ jobs:
     name: Print the title of the PR
     runs-on: ubuntu-latest
     steps:
-      - name: Load PR Details
+      - name: Print PR TItle
         run: echo The title of your PR is ${{ github.event.pull_request.title }}
+
           #- name: Check the PR Title Follows Convention
           #run: expr match ${{github.event.pull_request.title}} '^\[DEV-[0-9][0-9][0-9]\] - [0-9a-zA-Z].*$'
 
