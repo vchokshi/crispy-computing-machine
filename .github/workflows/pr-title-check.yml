@@ -7,6 +7,13 @@ on:
     types: [opened, reopened, closed]
 
 jobs:
+  dump:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Dump the github context
+        env:
+          GITHUB_CONTEXT: ${{ toJSON(github) }}
+        run: echo "$GITHUB_CONTEXT"
   print_title:
     name: Print the title of the PR
     runs-on: ubuntu-latest
