@@ -1,11 +1,16 @@
 terraform {
   required_providers {
+    azurerm = {
+      source  = "hashicorp/azurerm"
+      version = ">= 3.0.2"
+    }
   }
   backend "s3" {
     bucket = "iot4-tfstate"
     key    = "roots/azure/global.tfstate"
     region = "us-east-1"
   }
+
 }
 
 provider "azurerm" {
