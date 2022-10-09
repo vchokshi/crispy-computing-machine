@@ -1,7 +1,7 @@
 resource "azurerm_resource_group" "rg" {
   provider = azurerm.asu
   name     = "azure-webapp-resources"
-  location = "West Europe"
+  location = "eastus2"
 }
 
 resource "azurerm_virtual_network" "vn" {

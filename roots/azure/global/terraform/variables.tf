@@ -1,11 +1,11 @@
 variable "root_id" {
   type    = string
-  default = "CAFIOT4"
+  default = "CAF"
 }
 
 variable "root_name" {
   type    = string
-  default = "CAFIOT4-Enterprise-Scale"
+  default = "CAF-ES"
 }
 
 

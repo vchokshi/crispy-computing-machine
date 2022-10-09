@@ -3,6 +3,10 @@ terraform {
     azurerm = {
       source  = "hashicorp/azurerm"
       version = ">= 3.0.2"
+      configuration_aliases = [
+        azurerm.connectivity,
+        azurerm.management
+      ]
     }
   }
   backend "s3" {
@@ -14,6 +18,22 @@ terraform {
 }
 
 provider "azurerm" {
+  alias           = "identity"
+  subscription_id = "031e77c5-ae17-4124-ae68-d85cf9849112"
+  features {}
+}
+provider "azurerm" {
+  alias           = "management"
+  subscription_id = "ba600cd7-0d5d-488c-99fd-59eb5ac00da7"
+  features {}
+}
+provider "azurerm" {
+  alias           = "connectivity"
+  subscription_id = "0b008a7a-8d40-4b4e-a4bd-23cc5c8e2a9a"
+  features {}
+}
+provider "azurerm" {
+  subscription_id = "91b21a5a-e370-45ba-9bf5-5ac16e47c937"
   features {
     api_management {
       purge_soft_delete_on_destroy = true
@@ -57,8 +77,6 @@ provider "azurerm" {
     }
 
   }
-
-  subscription_id = "91b21a5a-e370-45ba-9bf5-5ac16e47c937"
 }
 
 provider "aws" {}
