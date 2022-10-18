@@ -1,0 +1,37 @@
+{
+    "description": "Virtual Machine Extensions Installed",
+    "rationale": "Azure virtual machine extensions are small applications that provide post-deployment configuration and automation tasks on Azure virtual machines. These extensions run with administrative privileges and could potentially access anything on a virtual machine. The Azure Portal and community provide several such extensions.",
+    "remediation": "From Azure console: <ol> <li>Go to <samp>Virtual machines</samp></li><li>For each virtual machine, go to <samp>Settings</samp></li><li>Click on <samp>Extensions</samp></li><li>If there are unapproved extensions, uninstall them.</li></ol>",
+    "compliance": [
+        {
+            "name": "CIS Microsoft Azure Foundations",
+            "version": "1.0.0",
+            "reference": "7.4"
+        },
+        {
+            "name": "CIS Microsoft Azure Foundations",
+            "version": "1.1.0",
+            "reference": "7.4"
+        },
+        {
+            "name": "CIS Microsoft Azure Foundations",
+            "version": "1.2.0",
+            "reference": "7.4"
+        }
+    ],
+    "references": [
+        "https://learn.microsoft.com/en-us/azure/virtual-machines/windows/extensions-features",
+        "https://learn.microsoft.com/en-us/azure/security/benchmarks/security-controls-v2-endpoint-security"
+    ],
+    "dashboard_name": "Instances",
+    "path": "virtualmachines.subscriptions.id.instances.id",
+    "conditions": [
+        "and",
+        [
+            "virtualmachines.subscriptions.id.instances.id.extensions",
+            "notEmpty",
+            ""
+        ]
+    ],
+    "id_suffix": "extensions"
+}
