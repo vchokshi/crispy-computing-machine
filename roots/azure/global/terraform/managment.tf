@@ -17,7 +17,7 @@ resource "azurerm_subscription" "mfs" {
 }
 
 resource "azurerm_management_group" "iot4" {
-  display_name = "iot4"
+  display_name = "Proper"
   subscription_ids = [
     data.azurerm_subscription.current.subscription_id,
   ]
@@ -26,13 +26,13 @@ resource "azurerm_management_group" "iot4" {
 resource "azurerm_management_group" "elastio" {
   display_name               = "elastio"
   parent_management_group_id = azurerm_management_group.iot4.id
-  subscription_ids           = ["8af8c8f4-64de-43c8-9866-cab37692a0a5"]
+  #subscription_ids           = ["8af8c8f4-64de-43c8-9866-cab37692a0a5"]
 }
 
 resource "azurerm_management_group" "asu" {
   display_name               = "asu"
   parent_management_group_id = azurerm_management_group.iot4.id
-  subscription_ids           = ["52c3bf69-8878-40ca-9e80-7358298b2f30"]
+  #subscription_ids           = ["52c3bf69-8878-40ca-9e80-7358298b2f30"]
 }
 
 resource "azurerm_consumption_budget_subscription" "asu" {
