@@ -1,0 +1,216 @@
+{
+  "storage": {
+    "storageaccounts": {
+      "resources": {
+        "storage_accounts": {
+          "cols": 2,
+          "path": "services.storageaccounts.subscriptions.id.storage_accounts"
+        }
+      }
+    }
+  },
+  "compute": {
+    "virtualmachines": {
+      "resources": {
+        "instances": {
+          "cols": 2,
+          "path": "services.virtualmachines.subscriptions.id.instances"
+        },
+        "disks": {
+          "cols": 2,
+          "path": "services.virtualmachines.subscriptions.id.disks"
+        },
+        "snapshots": {
+          "cols": 2,
+          "path": "services.virtualmachines.subscriptions.id.snapshots"
+        },
+        "images": {
+          "cols": 2,
+          "path": "services.virtualmachines.subscriptions.id.images"
+        }
+      }
+    }
+  },
+  "database": {
+    "sqldatabase": {
+      "resources": {
+        "servers": {
+          "cols": 2,
+          "path": "services.sqldatabase.subscriptions.id.servers"
+        }
+      }
+    },
+    "rediscache": {
+      "resources": {
+        "caches": {
+          "cols": 2,
+          "path": "services.rediscache.subscriptions.id.caches"
+        }
+      }
+    }
+  },
+  "security": {
+    "aad": {
+      "resources": {
+        "users": {
+          "cols": 2,
+          "path": "services.aad.users"
+        },
+        "groups": {
+          "cols": 2,
+          "path": "services.aad.groups"
+        },
+        "service_principals": {
+          "cols": 2,
+          "path": "services.aad.service_principals"
+        },
+        "applications": {
+          "cols": 2,
+          "path": "services.aad.applications"
+        },
+        "policies": {
+          "cols": 2,
+          "path": "services.aad.policies"
+        }
+      }
+    },
+    "rbac": {
+      "resources": {
+        "roles": {
+          "cols": 2,
+          "path": "services.rbac.subscriptions.id.roles"
+        },
+        "custom_roles_report": {
+          "cols": 2,
+          "path": "services.rbac.subscriptions.id.custom_roles_report"
+        }
+      }
+    },
+    "keyvault": {
+      "resources": {
+        "vaults": {
+          "cols": 2,
+          "path": "services.keyvault.subscriptions.id.vaults"
+        }
+      }
+    },
+    "securitycenter": {
+      "resources": {
+        "pricings": {
+          "cols": 2,
+          "path": "services.securitycenter.subscriptions.id.pricings"
+        },
+        "security_contacts": {
+          "cols": 2,
+          "path": "services.securitycenter.subscriptions.id.security_contacts"
+        },
+        "auto_provisioning_settings": {
+          "cols": 2,
+          "path": "services.securitycenter.subscriptions.id.auto_provisioning_settings"
+        },
+        "compliance_results": {
+          "cols": 2,
+          "path": "services.securitycenter.subscriptions.id.compliance_results"
+        },
+        "regulatory_compliance_results": {
+          "cols": 2,
+          "path": "services.securitycenter.subscriptions.id.regulatory_compliance_results"
+        },
+        "settings": {
+          "cols": 2,
+          "path": "services.securitycenter.subscriptions.id.settings"
+        }
+      }
+    }
+  },
+  "networking": {
+    "appgateway": {
+      "resources": {
+        "app_gateways": {
+          "cols": 2,
+          "path": "services.appgateway.subscriptions.id.app_gateways"
+        }
+      }
+    },
+    "network": {
+      "resources": {
+        "virtual_networks": {
+          "cols": 2,
+          "path": "services.network.subscriptions.id.virtual_networks"
+        },
+        "security_groups": {
+          "cols": 2,
+          "path": "services.network.subscriptions.id.security_groups"
+        },
+        "application_security_groups": {
+          "cols": 2,
+          "path": "services.network.subscriptions.id.application_security_groups"
+        },
+        "watchers": {
+          "cols": 2,
+          "path": "services.network.subscriptions.id.watchers"
+        }
+      }
+    },
+    "loadbalancer": {
+      "resources": {
+        "load_balancers": {
+          "cols": 2,
+          "path": "services.loadbalancer.subscriptions.id.load_balancers"
+        }
+      }
+    }
+  },
+  "applications": {
+    "appservice": {
+      "resources": {
+        "web_apps": {
+          "cols": 2,
+          "path": "services.appservice.subscriptions.id.web_apps"
+        }
+      }
+    }
+  },
+  "mysql": {
+    "mysqldatabase": {
+      "resources": {
+        "servers": {
+          "cols": 2,
+          "path": "services.mysqldatabase.subscriptions.id.servers"
+        }
+      }
+    }
+  },
+  "postgres": {
+    "postgresqldatabase": {
+      "resources": {
+        "servers": {
+          "cols": 2,
+          "path": "services.postgresqldatabase.subscriptions.id.servers"
+        }
+      }
+    }
+  },
+ "logging": {
+    "loggingmonitoring": {
+      "resources": {
+        "resources_logging": {
+          "cols": 2,
+          "path": "services.loggingmonitoring.subscriptions.id.resources_logging"
+        },
+        "log_alerts": {
+          "cols": 2,
+          "path": "services.loggingmonitoring.subscriptions.id.log_alerts"
+        },
+        "diagnostic_settings": {
+          "cols": 2,
+          "path": "services.loggingmonitoring.subscriptions.id.diagnostic_settings"
+        },
+        "log_profiles": {
+          "cols": 2,
+          "path": "services.loggingmonitoring.subscriptions.id.log_profiles"
+        }
+      }
+    }
+  }
+}
