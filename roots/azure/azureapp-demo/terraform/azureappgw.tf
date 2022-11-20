@@ -1,11 +1,11 @@
 resource "azurerm_resource_group" "rg" {
-  provider = azurerm.asu
+  provider = azurerm.iot4
   name     = "azure-webapp-resources"
-  location = "eastus2"
+  location = "West Europe"
 }
 
 resource "azurerm_virtual_network" "vn" {
-  provider            = azurerm.asu
+  provider            = azurerm.iot4
   name                = "azure-webapp-network"
   resource_group_name = azurerm_resource_group.rg.name
   location            = azurerm_resource_group.rg.location
@@ -13,7 +13,7 @@ resource "azurerm_virtual_network" "vn" {
 }
 
 resource "azurerm_service_plan" "sp" {
-  provider            = azurerm.asu
+  provider            = azurerm.iot4
   name                = "azure-webapp-service-plan"
   resource_group_name = azurerm_resource_group.rg.name
   location            = azurerm_resource_group.rg.location
@@ -23,7 +23,7 @@ resource "azurerm_service_plan" "sp" {
 }
 
 resource "azurerm_linux_web_app" "resume" {
-  provider            = azurerm.asu
+  provider            = azurerm.iot4
   name                = "week-13-app-stack"
   resource_group_name = azurerm_resource_group.rg.name
   location            = azurerm_service_plan.sp.location
@@ -39,7 +39,7 @@ resource "azurerm_linux_web_app" "resume" {
 }
 
 resource "azurerm_app_service_custom_hostname_binding" "cv" {
-  provider            = azurerm.asu
+  provider            = azurerm.iot4
   hostname            = "cv.az.iot4.net"
   app_service_name    = azurerm_linux_web_app.resume.name
   resource_group_name = azurerm_resource_group.rg.name
