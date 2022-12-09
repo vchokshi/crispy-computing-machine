@@ -32,8 +32,9 @@
   - name: Bootstrap the box
     copy:
       src: bootstrap.sh
-      dest: bootstrap.sh
-      mode: 0644
+      dest: /tmp/bootstrap.sh
+      mode: 0755
+
   - name: Run the bootstrap script
     shell: /tmp/bootstrap.sh
 

@@ -8,6 +8,11 @@ terraform {
         azurerm.management
       ]
     }
+    azuread = {
+      source  = "hashicorp/azuread"
+      version = "~> 2.7.0"
+
+    }
   }
   backend "s3" {
     bucket = "iot4-tfstate"
