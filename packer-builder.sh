@@ -1,6 +1,7 @@
 #!/bin/sh
 
-# Super Script
+# Packer Builder Script
+# This code needs AWS credentials setup for the AWS Backup Account in IOT4
 
 . ~/.bash_helpers.sh
 
