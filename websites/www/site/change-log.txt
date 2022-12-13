@@ -1,0 +1,15 @@
+
+
+CHANGE-LOG
+
+
+v1.0.1 - 28 Agu 2020
+- fixed self-hosted video not working issue
+
+Changed Files
+- js/main.js
+
+------
+
+v1.0 - 20 May 2017
+- initial release
