@@ -1,0 +1,1080 @@
+/* --------------------------------------------
+	
+	main.css : this is the main style file of the theme.
+	
+	Project 	: LazyGuy
+	Author 		: pixelwars 
+	Url			: pixelwars.org
+	
+	---
+	
+	CONTEXT:
+	
+	1. BASE (@base)
+	2. TYPOGRAPHY (@typo)
+	3. HELPERS (@helpers)
+	4. LAYOUT (@layout)
+	5. ELEMENTS (@elements)
+	5. MEDIA QUERIES (@media)
+	
+ -------------------------------------------- */
+ 
+ 
+ 
+
+/*  --------------------------------------------
+
+	1. BASE (@base) - base html elements
+	
+    -------------------------------------------- */ 
+html,
+body {
+	width: 100%; height: 100%; padding: 0; margin: 0; box-sizing: border-box;
+	}
+* {
+	box-sizing: border-box;
+	}
+body {
+	font-family: 'HK Grotesk', sans-serif; color: #222; background-color: #fff; font-size: 14px; line-height: 1.7; display: flex; align-items: center;
+	}
+img {
+	max-width: 100%; height: auto;
+	}
+::selection {
+ 	text-shadow: none; color: #000; background: #FFF9CD;
+	}
+::-moz-selection {
+ 	text-shadow: none; color: #000; background: #FFF9CD;
+	}
+/* Loader */
+html {
+	overflow: hidden;
+	}
+html.loaded {
+	overflow: auto;
+	}
+html:after {
+	content: ""; position: fixed; z-index: 1000; top: 0; left: 0; right: 0; bottom: 0; background: white; background-image: url(../images/preloader.gif); background-position: center center; background-repeat: no-repeat; background-size: 48px 48px;
+	}
+html.loaded:after {
+	display: none;
+	}
+body {
+	transition: all .6s cubic-bezier(0.77, 0, 0.175, 1); opacity: 0;
+	}
+html.loaded body {
+	opacity: 1;
+	}
+
+/*  --------------------------------------------
+
+	2. TYPOGRAPHY (@typo) - typographic styles
+	
+    -------------------------------------------- */ 
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	font-family: 'HK Grotesk', sans-serif; font-weight: 700; font-style: normal; margin: 1em 0 .66em 0; 
+	}
+h1:first-child,
+h2:first-child,
+h3:first-child,
+h4:first-child,
+h5:first-child,
+h6:first-child {
+	margin-top: 0;
+	}
+h1 { 
+	font-size: 6vw; line-height: 1.1; margin-top: 0;
+	}
+h2 { 
+	font-size: 1.8em; line-height: 1.3;
+	}
+h3 { 
+	font-size: 1.25em; line-height: 1.3;
+	}
+.profile-image + h1 {
+	margin-top: 28px;
+	}
+h4 {
+	font-size: 12px; text-transform: uppercase; letter-spacing: 5px;
+	}
+p:last-child {
+	margin-bottom: 0;
+	}
+/* LIGHT TEXT */
+.is-text-light {
+	color: #fff;
+	}
+.is-text-light a {
+	color: #fff;
+	}
+	
+
+
+/*  --------------------------------------------
+
+	3. HELPERS (@helpers) - shorthand helper styles
+	
+    -------------------------------------------- */ 
+.rounded {
+	border-radius: 50%;
+	}
+.soft-rounded {
+	border-radius: 8px;
+	}
+.is-text-align-center {
+	text-align: center;
+	}
+.is-text-align-right {
+	text-align: right;
+	}
+.uppercase {
+	text-transform: uppercase;
+	}
+.bold {
+	font-weight: bold;
+	}
+
+/* SMALL TYPO */
+.is-small-typo h1 {
+	font-size: 24px; line-height: 1.3;
+	}
+.is-small-typo {
+	font-size: 14px;
+	}
+
+/* MEDIUM TYPO */
+.is-medium-typo h1 {
+	font-size: 36px; line-height: 1.2;
+	}
+.is-medium-typo {
+	font-size: 15px;
+	}
+	
+	
+	
+/*  --------------------------------------------
+
+	2. LAYOUT (@layout) - layout styles
+	
+    -------------------------------------------- */ 
+
+/* CONTENT */
+.content-wrap {
+	width: 80%; margin: 0 auto; max-height: 100%; position: relative; z-index: 20;
+	}
+.content {
+	padding: 3em 0;
+	}
+
+/* MEDIA */
+.media {
+	position: fixed; width: 100%; height: 100%; background-position: center center; background-size: cover; background-repeat: no-repeat; 
+	}
+	
+/* MASKED */
+.is-masked-light .media:after,
+.is-masked-dark .media:after {
+	content: ""; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: rgba(255, 255, 255, 0.79); z-index:1;
+	}
+/* MASKED DARK */
+.is-masked-dark .media:after {
+	background: rgba(35, 35, 35, 0.4);
+	}
+/* MASKED GRADIENT BLUE */
+.is-masked-gradient-blue .media:after {
+	background-image: linear-gradient(60deg, #3d3393 0%, #2b76b9 37%, #2cacd1 65%, #35eb93 100%); opacity: .9;
+	}
+/* MASKED GRADIENT PINK */
+.is-masked-gradient-pink .media:after {
+	background-image: linear-gradient(to right, #b8cbb8 0%, #b8cbb8 0%, #b465da 0%, #cf6cc9 33%, #ee609c 66%, #ee609c 100%); opacity: .9;
+	}
+/* MASKED GRADIENT PURPLE */
+.is-masked-gradient-purple .media:after {
+	background-image: linear-gradient(to top, #9795f0 0%, #fbc8d4 100%); opacity: .9;
+	}
+/* MASKED GRADIENT RED */
+.is-masked-gradient-red .media:after {
+	background-image: linear-gradient(to top, #ff0844 0%, #ffb199 100%); opacity: .9;
+	}
+/* MASKED GRADIENT GREEN */
+.is-masked-gradient-green .media:after {
+	background-image: linear-gradient(180deg, #2af598 0%, #009efd 100%); opacity: .9;
+	}
+
+	
+/* PROFILE IMAGE */
+.profile-image {
+	max-height: 92px;
+	}
+.profile-image.is-outside {
+	margin-top: -50%; margin-bottom: 0;
+	}
+
+/* LOGO */
+.logo {
+	margin-bottom: 24px;
+	}
+	
+	
+	
+	
+/*  --------------------------------------------
+
+	5. ELEMENTS (@elements) - common used elements
+	
+    -------------------------------------------- */ 	
+
+/* SOCIAL LINKS */
+.social-link {
+	display: inline-block; margin: 8px 2px 8px 0; text-decoration: none; user-select: none;
+	}
+.social-link:active {
+	transform: scale(0.8);
+	}
+.social-link:before {
+	display: inline-block; padding: 0; text-align: center; font-size: 14px; font-family: "fontello"; width: 32px; line-height: 32px; color: #555; border: 1px solid #eee; border-radius: 50%; text-decoration: none; transition: all 0.3s;
+	}
+html a.social-link:hover:before {
+	color: #fff; background: #444; border-color: transparent;
+	}
+.social-link.facebook:before {
+	content: '\e825'; color: #3c5fac; border-color: #3c5fac;
+	}
+.social-link.twitter:before {
+	content: '\e826'; color: #5ec3df; border-color: #5ec3df;
+	}
+.social-link.flickr:before {
+	content: '\e835'; color: #FF0084; border-color: #FF0084;
+	}
+.social-link.rss:before {
+	content: '\e82f'; color: #ff9900; border-color: #ff9900;
+	}
+.social-link.dribbble:before {
+	content: '\e82c'; color: #EA4C89; border-color: #EA4C89;
+	}
+.social-link.lastfm:before {
+	content: '\e82e'; color: #D51007; border-color: #D51007;
+	}
+.social-link.linkedin:before {
+	content: '\e827'; color: #2089b5; border-color: #2089b5;
+	}
+.social-link.vimeo:before {
+	content: '\e830'; color: #0dadd6; border-color: #0dadd6;
+	}
+.social-link.google-plus:before {
+	content: '\e801'; color: #db4437; border-color: #db4437;
+	}
+.social-link.forrst:before {
+	content: '\e831'; color: #5b9a68; border-color: #5b9a68;
+	}
+.social-link.skype:before {
+	content: '\e832'; color: #00aff0; border-color: #00aff0;
+	}
+.social-link.tumblr:before {
+	content: '\e836'; color: #2C4762; border-color: #2C4762;
+	}
+.social-link.behance:before {
+	content: '\e82b'; color: #3878F6; border-color: #3878F6;
+	}
+.social-link.blogger:before {
+	content: '\e837'; color: #fc9947; border-color: #fc9947;
+	}
+.social-link.delicious:before {
+	content: '\e838'; color: #3274d1; border-color: #3274d1;
+	}
+.social-link.digg:before {
+	content: '\e839'; color: #205891; border-color: #205891;
+	}
+.social-link.github:before {
+	content: '\e82a'; color: #222; border-color: #222;
+	}
+.social-link.wordpress:before {
+	content: '\e83b'; color: #0083b3; border-color: #0083b3;
+	}
+.social-link.youtube:before {
+	content: "\e834"; color: #c8312b; border-color: #c8312b;
+	}
+.social-link.pinterest:before {
+	content: "\e829"; color: #cb2027; border-color: #cb2027;
+	}
+.social-link.instagram:before {
+	content: "\e8cc"; color: #e1306c; border-color: #e1306c;
+	}
+.social-link.stack-overflow:before {
+	content: "\e83c"; color: #F90; border-color: #F90;
+	}
+.social-link.foursquare:before {
+	content: "\e83d"; color: #009FE0; border-color: #009FE0;
+	}
+.social-link.xing:before {
+	content: "\e83e"; color: #006567; border-color: #006567;
+	}
+.social-link.weibo:before {
+	content: "\e83f"; color: #E64141; border-color: #E64141;
+	}
+.social-link.soundcloud:before {
+	content: "\e840"; color: #FA3219; border-color: #FA3219;
+	}
+.social-link.fivehundredpx:before {
+	content: "\e841"; color: #111; border-color: #111;
+	}
+.social-link.slideshare:before {
+	content: "\e842"; color: #ED9D2C; border-color: #ED9D2C;
+	}
+.social-link.vine:before {
+	content: "\e863"; color: #00BF8F; border-color: #00BF8F;
+	}
+.social-link.vkontakte:before {
+	content: "\e846"; color: #6383A8; border-color: #6383A8;
+	}
+.social-link.paypal:before {
+	content: "\e8b9"; color: #013791; border-color: #013791;
+	}
+.social-link.spotify:before {
+	content: "\e803"; color: #85BB24; border-color: #85BB24;
+	}
+.social-link.snapchat:before {
+	content: "\f2ac"; color: #fffc00; border-color: #fffc00;
+	}
+.social-link.imdb:before {
+	content: "\f2d8"; color: #E6B91E; border-color: #E6B91E;
+	}
+.social-link.email:before {
+	content: "\e87e"; color: #222; border-color: #222;
+	}
+.social-link.facebook:hover:before {
+	background-color: #3c5fac;
+	}
+.social-link.twitter:hover:before {
+	background-color: #5ec3df;
+	}
+.social-link.flickr:hover:before {
+	background-color: #FF0084;
+	}
+.social-link.rss:hover:before {
+	background-color: #ff9900;
+	}
+.social-link.dribbble:hover:before {
+	background-color: #EA4C89;
+	}
+.social-link.lastfm:hover:before {
+	background-color: #D51007;
+	}
+.social-link.linkedin:hover:before {
+	background-color: #2089b5;
+	}
+.social-link.vimeo:hover:before {
+	background-color: #0dadd6;
+	}
+.social-link.google-plus:hover:before {
+	background-color: #db4437;
+	}
+.social-link.forrst:hover:before {
+	background-color: #5b9a68;
+	}
+.social-link.skype:hover:before {
+	background-color: #00aff0;
+	}
+.social-link.picassa:hover:before {
+	background-color: #ffd34e;
+	}
+.social-link.youtube:hover:before {
+	background-color: #c8312b;
+	}
+.social-link.pinterest:hover:before {
+	background-color: #cb2027;
+	}
+.social-link.tumblr:hover:before {
+	background-color: #2C4762;
+	}
+.social-link.behance:hover:before {
+	background-color: #3878F6;
+	}
+.social-link.blogger:hover:before {
+	background-color: #fc9947;
+	}
+.social-link.delicious:hover:before {
+	background-color: #3274d1;
+	}
+.social-link.digg:hover:before {
+	background-color: #205891;
+	}
+.social-link.friendfeed:hover:before {
+	background-color: #2f72c4;
+	}
+.social-link.github:hover:before {
+	background-color: #222;
+	}
+.social-link.wordpress:hover:before {
+	background-color: #0083b3;
+	}
+.social-link.instagram:hover:before {
+	background-color: #e1306c;
+	}
+.social-link.stack-overflow:hover:before {
+	background-color: #F90;
+	}
+.social-link.foursquare:hover:before {
+	background-color: #009FE0;
+	}
+.social-link.xing:hover:before {
+	background-color: #006567;
+	}
+.social-link.weibo:hover:before {
+	background-color: #E64141;
+	}
+.social-link.soundcloud:hover:before {
+	background-color: #FA3219;
+	}
+.social-link.fivehundredpx:hover:before {
+	background-color: #222;
+	}
+.social-link.slideshare:hover:before {
+	background-color: #ED9D2C;
+	}
+.social-link.vine:hover:before {
+	background-color: #00BF8F;
+	}
+.social-link.vkontakte:hover:before {
+	background-color: #6383A8;
+	}
+.social-link.paypal:hover:before {
+	background-color: #013791;
+	}
+.social-link.spotify:hover:before {
+	background-color: #85BB24;
+	}
+.social-link.snapchat:hover:before {
+	background-color: #fffc00;
+	}
+.social-link.imdb:hover:before {
+	background-color: #E6B91E;
+	}
+.social-link.email:hover:before {
+	background-color: #222;
+	}
+	
+/* Big Social Icons */
+.is-social-big .social-link:before {
+	font-size: 16px; width: 42px; line-height: 42px;
+	}
+/* Minmal Social Icons */
+.is-social-minimal .social-link:before {
+	border: none !important;
+	}
+/* Minmal Social Icons */
+.is-social-minimal-dark .social-link,
+.is-social-minimal-light .social-link,
+.is-social-light-borders .social-link,
+.is-social-dark-borders .social-link,
+.is-social-solid .social-link {
+	color: inherit;
+	}
+/* Minimal Dark Social Icons */
+.is-social-minimal-dark .social-link:before {
+	border: none !important; color: inherit;
+	}
+/* Minimal Light Social Icons */
+.is-social-minimal-light .social-link:before {
+	border: none !important; color: rgba(0, 0, 0, 0.25);
+	}
+.is-text-light .is-social-minimal-light .social-link:not(:hover):before {
+	color: rgba(255, 255, 255, 0.3);
+	}
+/* Solid Social Icons */
+.is-social-solid .social-link:before {
+	border: none !important; color: inherit;
+	}
+.is-social-solid .social-link:not(:hover):before {
+	background: rgba(0, 0, 0, 0.04);
+	}
+.is-text-light .is-social-solid .social-link:not(:hover):before {
+	background: rgba(255, 255, 255, 0.08);
+	}
+/* Light Borders Social Icons */
+.is-social-light-borders .social-link:before {
+	border-color: rgba(0, 0, 0, 0.09) !important; color: inherit;
+	}
+.is-text-light .is-social-light-borders .social-link:before {
+	border-color: rgba(255, 255, 255, 0.13) !important;
+	}
+/* Dark Borders Social Icons */
+.is-social-dark-borders .social-link:before {
+	border-color: rgba(0, 0, 0, 0.75) !important; color: inherit;
+	}
+.is-text-light .is-social-dark-borders .social-link:before {
+	border-color: rgba(255, 255, 255, 0.8) !important;
+	}
+.is-social-dark-borders .social-link:hover:before {
+	border-color: transparent !important;
+	}
+
+
+
+
+/* LINK HOVER EFFECTS */
+
+/* LINK 1 */
+.link-1 {
+  position: relative; text-decoration: none; display: inline-block; color: inherit; padding: 0 1px; transition: color ease 0.3s;
+	}
+.link-1:after {
+  content: ''; position: absolute; z-index: -1; width: 100%; height: 6%; min-height: 2px; left: 0; bottom: 0; background-color: #222; transition: all ease 0.3s;
+	}
+.link-1:hover {
+  	color: #fff;
+	}
+.link-1:hover:after {
+  	height: 100%;
+	}
+/* light links */
+.link-1.light:after {
+	background: #fff;
+	}
+.link-1.light:hover {
+	color: #111;
+	}
+/* blue links */
+.link-1.blue:after {
+	background: #0100ff;
+	}
+/* green links */
+.link-1.green:after {
+	background: #00b388;
+	}
+/* red links */
+.link-1.red:after {
+	background: #ff322e;
+	}
+/* yellow links */
+.link-1.yellow:after {
+	background: #ffcc2f;
+	}
+/* pink links */
+.link-1.pink:after {
+	background: #f94877;
+	}
+/* purple links */
+.link-1.purple:after {
+	background: #554488;
+	}
+/* tango links */
+.link-1.tango:after {
+	background: #E1523D;
+	}
+/* aqua links */
+.link-1.aqua:after {
+	background: #0099ff;
+	}
+/* navy links */
+.link-1.navy:after {
+	background: #414f5a;
+	}
+/* leather links */
+.link-1.leather:after {
+	background: #AB9878;
+	}
+/* azure links */
+.link-1.azure:after {
+	background: #02ACAB;
+	}
+/* peach links */
+.link-1.peach:after {
+	background: #FEA680;
+	}
+/* hot-pink links */
+.link-1.hot-pink:after {
+	background: #FE65B7;
+	}
+/* coral links */
+.link-1.coral:after {
+	background: #F63341;
+	}
+/* grey links */
+.link-1.grey:after {
+	background: #AAB8C1;
+	}
+
+/* LINK 2 */
+.link-2 {
+  position: relative; text-decoration: none; display: inline-block; color: inherit; padding: 0 1px; transition: color ease 0.3s;
+	}
+.link-2:before, 
+.link-2:after {
+ 	content: ''; position: absolute; background-color: #222; z-index: -1; height: 2px;
+	}
+.link-2:before {
+ 	width: 0%; left: 0; bottom: 0; transition: width ease 0.4s;
+	}
+.link-2:after {
+  	width: 100%; left: 0; bottom: 0; transition: all ease 0.6s;
+	}
+.link-2:hover:before {
+  	width: 100%;
+	}
+.link-2:hover:after {
+  	left: 100%; width: 0%; transition: all ease 0.2s;
+	}	
+/* light links */
+.link-2.light:before,
+.link-2.light:after {
+	background: #fff; color: #111;
+	}
+/* blue links */
+.link-2.blue:before,
+.link-2.blue:after {
+	background: #0100ff;
+	}
+/* green links */
+.link-2.green:before,
+.link-2.green:after {
+	background: #00b388;
+	}
+/* red links */
+.link-2.red:before,
+.link-2.red:after {
+	background: #ff322e;
+	}
+/* yellow links */
+.link-2.yellow:before,
+.link-2.yellow:after {
+	background: #ffcc2f;
+	}
+/* pink links */
+.link-2.pink:before,
+.link-2.pink:after {
+	background: #f94877;
+	}
+/* purple links */
+.link-2.purple:before,
+.link-2.purple:after {
+	background: #554488;
+	}
+/* tango links */
+.link-2.tango:before,
+.link-2.tango:after {
+	background: #E1523D;
+	}
+/* aqua links */
+.link-2.aqua:before,
+.link-2.aqua:after {
+	background: #0099ff;
+	}
+/* navy links */
+.link-2.navy:before,
+.link-2.navy:after {
+	background: #414f5a;
+	}
+/* leather links */
+.link-2.leather:before,
+.link-2.leather:after {
+	background: #AB9878;
+	}
+/* azure links */
+.link-2.azure:before,
+.link-2.azure:after {
+	background: #02ACAB;
+	}
+/* peach links */
+.link-2.peach:before,
+.link-2.peach:after {
+	background: #FEA680;
+	}
+/* hot-pink links */
+.link-2.hot-pink:before,
+.link-2.hot-pink:after {
+	background: #FE65B7;
+	}
+/* coral links */
+.link-2.coral:before,
+.link-2.coral:after {
+	background: #F63341;
+	}
+/* grey links */
+.link-2.grey:before,
+.link-2.grey:after {
+	background: #AAB8C1;
+	}
+
+
+
+/* BUTTONS */
+.button {
+	border: 2px solid #222; font-family: inherit; font-size: 16px; line-height: 1; color: #222; text-decoration: none; background: none; cursor: pointer; padding: 16px 32px; margin: 10px 20px 0 0; display: inline-block; outline: none; position: relative; transition: all 0.3s; overflow: hidden;
+	}
+.button:only-child {
+	margin-right: 0px;
+	}
+.button.small {
+	font-size: 13px; padding: 8px 20px;
+	}
+.button.rounded {
+	border-radius: 50px;
+	}
+.button.soft-rounded {
+	border-radius: 5px;
+	}
+.button.rounded-soft {
+	border-radius: 4px;
+	}
+.button:after {
+	width: 0%; height: 100%; top: 0; left: 0; background: #222; content: ''; position: absolute; z-index: -1; transition: all 0.3s;
+	}
+.button:hover,
+.button:active {
+	color: #fff !important;
+	}
+.button:active {
+	transition: all 0.1s; transform: scale(0.9); outline: 0;
+	}
+.button:hover:after,
+.button:active:after {
+	width: 100%;
+	}
+/* light buttons */
+.button.light {
+	border-color: #fff;
+	}
+.button.light:after {
+	background: #fff;
+	}
+.button.light:hover,
+.button.light:active {
+	color: #111 !important;
+	}
+/* blue buttons */
+.button.blue {
+	border-color: #0100ff; color: #0100ff;
+	}
+.button.blue:after {
+	background: #0100ff;
+	}
+/* green buttons */
+.button.green {
+	border-color: #00b388; color: #00b388;
+	}
+.button.green:after {
+	background: #00b388;
+	}
+/* red buttons */
+.button.red {
+	border-color: #ff322e; color: #ff322e;
+	}
+.button.red:after {
+	background: #ff322e;
+	}
+/* yellow buttons */
+.button.yellow {
+	border-color: #ffcc2f; color: #ffcc2f;
+	}
+.button.yellow:after {
+	background: #ffcc2f;
+	}
+/* pink buttons */
+.button.pink {
+	border-color: #f94877; color: #f94877;
+	}
+.button.pink:after {
+	background: #f94877;
+	}
+/* purple buttons */
+.button.purple {
+	border-color: #554488; color: #554488;
+	}
+.button.purple:after {
+	background: #554488;
+	}
+/* tango buttons */
+.button.tango {
+	border-color: #E1523D; color: #E1523D;
+	}
+.button.tango:after {
+	background: #E1523D;
+	}
+/* aqua buttons */
+.button.aqua {
+	border-color: #0099ff; color: #0099ff;
+	}
+.button.aqua:after {
+	background: #0099ff;
+	}
+/* navy buttons */
+.button.navy {
+	border-color: #414f5a; color: #414f5a;
+	}
+.button.navy:after {
+	background: #414f5a;
+	}
+/* leather buttons */
+.button.leather {
+	border-color: #AB9878; color: #AB9878;
+	}
+.button.leather:after {
+	background: #AB9878;
+	}
+/* azure buttons */
+.button.azure {
+	border-color: #02ACAB; color: #02ACAB;
+	}
+.button.azure:after {
+	background: #02ACAB;
+	}
+/* peach buttons */
+.button.peach {
+	border-color: #FEA680; color: #FEA680;
+	}
+.button.peach:after {
+	background: #FEA680;
+	}
+/* hot-pink buttons */
+.button.hot-pink {
+	border-color: #FE65B7; color: #FE65B7;
+	}
+.button.hot-pink:after {
+	background: #FE65B7;
+	}
+/* coral buttons */
+.button.coral {
+	border-color: #F63341; color: #F63341;
+	}
+.button.coral:after {
+	background: #F63341;
+	}
+/* grey buttons */
+.button.grey {
+	border-color: #AAB8C1; color: #AAB8C1;
+	}
+.button.grey:after {
+	background: #AAB8C1;
+	}
+/* icons in buttons */
+.button i {
+	display: inline-block; margin-right: 5px;
+	}
+.button i.right {
+	margin-right: 0; margin-left: 5px;
+	}
+.button i:before {
+	font-size: 120%;
+	}
+
+
+/* HIGHLIGHT TEXT */
+.highlight {
+	display: inline-block; padding: 0 10px; color: #fff; background: #111;
+	}
+/* light highlights */
+.highlight.light {
+	background: #fff; color: #111;
+	}
+/* blue highlights */
+.highlight.blue {
+	background: #0100ff;
+	}
+/* green highlights */
+.highlight.green {
+	background: #00b388;
+	}
+/* red highlights */
+.highlight.red {
+	background: #ff322e;
+	}
+/* yellow highlights */
+.highlight.yellow {
+	background: #ffcc2f;
+	}
+/* pink highlights */
+.highlight.pink {
+	background: #f94877;
+	}
+/* purple highlights */
+.highlight.purple {
+	background: #554488;
+	}
+/* tango highlights */
+.highlight.tango {
+	background: #E1523D;
+	}
+/* aqua highlights */
+.highlight.aqua {
+	background: #0099ff;
+	}
+/* navy highlights */
+.highlight.navy {
+	background: #414f5a;
+	}
+/* leather highlights */
+.highlight.leather {
+	background: #AB9878;
+	}
+/* azure highlights */
+.highlight.azure {
+	background: #02ACAB;
+	}
+/* peach highlights */
+.highlight.peach {
+	background: #FEA680;
+	}
+/* hot-pink highlights */
+.highlight.hot-pink {
+	background: #FE65B7;
+	}
+/* coral highlights */
+.highlight.coral {
+	background: #F63341;
+	}
+/* grey highlights */
+.highlight.grey {
+	background: #AAB8C1;
+	}
+	
+	
+/* COLORED TEXT */
+/* blue text */
+.text.blue {
+	color: #0100ff;
+	}
+/* green text */
+.text.green {
+	color: #00b388;
+	}
+/* red text */
+.text.red {
+	color: #ff322e;
+	}
+/* yellow text */
+.text.yellow {
+	color: #ffcc2f;
+	}
+/* pink text */
+.text.pink {
+	color: #f94877;
+	}
+/* purple text */
+.text.purple {
+	color: #554488;
+	}
+/* tango text */
+.text.tango {
+	color: #E1523D;
+	}
+/* aqua text */
+.text.aqua {
+	color: #0099ff;
+	}
+/* navy text */
+.text.navy {
+	color: #414f5a;
+	}
+/* leather text */
+.text.leather {
+	color: #AB9878;
+	}
+/* azure text */
+.text.azure {
+	color: #02ACAB;
+	}
+/* peach text */
+.text.peach {
+	color: #FEA680;
+	}
+/* hot-pink text */
+.text.hot-pink {
+	color: #FE65B7;
+	}
+/* coral text */
+.text.coral {
+	color: #F63341;
+	}
+/* grey text */
+.text.grey {
+	color: #AAB8C1;
+	}
+
+/* TYPED TEXT */
+#typed-strings {
+	display: none;
+	}
+.typed-cursor{
+    opacity: 1; -webkit-animation: blink 0.7s infinite; animation: blink 0.7s infinite;
+	}
+@-webkit-keyframes blink{ 
+    0% { opacity:1; } 
+    50% { opacity:0; }
+    100% { opacity:1; }
+	}
+@keyframes blink{
+    0% { opacity:1; }
+    50% { opacity:0; }
+    100% { opacity:1; }
+	}
+
+
+/*  --------------------------------------------
+
+	6. MEDIA QUERIES (@media) - base html elements
+	
+    -------------------------------------------- */ 
+
+/* TABLETS */
+@media screen and (min-width: 768px) {
+	
+	body {
+		font-size: 19px;
+		}
+		
+	.profile-image {
+		max-height: 128px;
+		}	
+	.profile-image.small {
+		max-height: 92px;
+		}
+	.profile-image.big {
+		max-height: 192px;
+		}
+	
+	h1 { 
+		font-size: 4vw; line-height: 1;
+		}
+		
+	
+	/* MEDIA */
+	.media {
+		position: fixed; top: 0; left: 0; width: 100%; height: 100%; bottom: 0;
+		}
+		
+}
+
+/* DESKTOPS */
+@media screen and (min-width: 1200px) {
+	
+	.content-wrap {
+		width: 50%;
+		}
+	.content {
+		padding: 4em 0;
+		}
+	
+	/* BUTTONS */
+	.button.huge {
+		font-size: 20px; padding: 22px 40px;
+		}
+		
+}
+
+/* DESKTOPS HIGH RES */
+@media screen and (min-width: 1600px) {
+	
+	.content-wrap {
+		width: 50%;
+		}
+	.content {
+		padding: 6em 0;
+		}
+	
+}
