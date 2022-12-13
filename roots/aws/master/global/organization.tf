@@ -131,11 +131,11 @@ resource "aws_organizations_account" "security" {
   email     = "security@iot4.net"
   parent_id = aws_organizations_organizational_unit.grc.id
 }
-resource "aws_organizations_account" "monitron" {
-  name      = "monitron"
-  email     = "monitron@iot4.net"
-  parent_id = aws_organizations_organizational_unit.main.id
-}
+#resource "aws_organizations_account" "monitron" {
+#name      = "monitron"
+#email     = "monitron@iot4.net"
+#parent_id = aws_organizations_organizational_unit.main.id
+#}
 
 
 resource "aws_organizations_organizational_unit" "restricted" {
