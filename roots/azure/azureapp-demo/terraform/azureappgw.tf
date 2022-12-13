@@ -32,7 +32,7 @@ resource "azurerm_linux_web_app" "resume" {
 
   site_config {
     application_stack {
-      docker_image     = "cyberxsecurity/project1-apachewebserver"
+      docker_image     = "vchokshi/www"
       docker_image_tag = "latest"
     }
   }
