@@ -37,7 +37,7 @@ This project follows the [Trunk Based Development Model](https://trunkbaseddevel
 
 When filing an issue, make sure to answer these five questions:
 
- 1. What version of Python are you using?
+ 1. What version of Python/Ansible/Terraform/Docker/Node are you using?
  2. What operating system and processor architecture are you using?
  3. What did you do?
  4. What did you expect to see?
