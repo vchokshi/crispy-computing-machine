@@ -109,4 +109,4 @@ def format_service_name(service):
 
 
 def get_user_agent():
-    return 'AHEAD/{} (https://github.com/vchokshi/ScoutSuite)'.format(__version__)
+    return 'IOT4/{} (https://github.com/vchokshi/ScoutSuite)'.format(__version__)
