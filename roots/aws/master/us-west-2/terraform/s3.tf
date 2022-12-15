@@ -1,5 +1,5 @@
 resource "aws_s3_bucket" "iot4_www" {
-  bucket        = "iot4-www"
+  bucket        = "www.iot4.net"
   force_destroy = false
 }
 
@@ -42,9 +42,9 @@ resource "aws_route53_record" "www-a" {
   name    = "www.${var.domain}"
   type    = "A"
   alias {
-    name                   = aws_s3_bucket.iot4_www.website_endpoint
+    name                   = aws_s3_bucket.iot4_www.website_domain
     zone_id                = aws_s3_bucket.iot4_www.hosted_zone_id
-    evaluate_target_health = true
+    evaluate_target_health = false
 
   }
 
