@@ -6,6 +6,8 @@ iot() {
   export ELASTIO_API_KEY=$(pass elastio)
   export TWILIO_TOKEN=$(pass twillio)
   export OPENAI_API_KEY=$(pass openai_api_key)
+  export DO_PAT=$(pass DO_API_TOKEN)
+  export TF_VAR_do_token = $DO_PAT
 }
 
 assume() {
