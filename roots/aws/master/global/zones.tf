@@ -70,3 +70,15 @@ resource "aws_route53_record" "azure" {
     "ns4-07.azure-dns.info."
   ]
 }
+
+# Delegate a subzone to digital ocean
+
+resource "aws_route53_record" "do" {
+  zone_id = aws_route53_zone.iot.zone_id
+  name    = "do.iot4.net"
+  type    = "NS"
+  ttl     = "300"
+  records = [
+    "ns1.digitalocean.com.",
+  ]
+}
