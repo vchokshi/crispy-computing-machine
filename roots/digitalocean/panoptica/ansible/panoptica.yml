@@ -1,0 +1,19 @@
+---
+- hosts: control_plane
+  become: yes
+  become_user: ubuntu
+  gather_facts: false
+  tasks:
+    - name: Enable Secure/Applcation-protected label on the default namespace
+      shell: kubectl label namespace default SecureApplication-protected=deployment-only --overwrite
+
+    # Since the downloaded package contains a shared secret, we keep it out of source control
+    - name: Copy the panoptica config file to the controller
+      unarchive:
+        src: ~/do.tar.gz
+        dest: /tmp
+
+    - name: Install Panoptica
+      shell: ./install_bundle.sh
+      args:
+        chdir: /tmp

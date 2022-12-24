@@ -1,0 +1,16 @@
+---
+- hosts: control_plane
+  become: yes
+  become_user: ubuntu
+  gather_facts: false
+  tasks:
+    - name: Copy the DOCCM template v0.1.33
+      copy:
+        src: do_ccm.yml
+        dest: $HOME/do_ccm.yml
+     
+    - name: Use kubectl to deploy DOCCM
+      shell: kubectl apply -f do_ccm.yml
+      args:
+        chdir: $HOME
+        creates: doccm.txt 

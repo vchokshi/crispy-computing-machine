@@ -1,0 +1,17 @@
+---
+- hosts: control_plane
+  become: yes
+  become_user: ubuntu
+  gather_facts: false
+  tasks:
+    - name: Start a basic nginx service
+      shell: kubectl create deployment nginx-test --image=nginx
+      args:
+        chdir: $HOME
+        creates: nginx-test_setup.txt
+
+    - name: Expose the basic nginx service to a NodePort
+      shell: kubectl expose deploy nginx-test --port 80 --target-port 80 --type NodePort
+      args:
+        chdir: $HOME
+        creates: nginx-text_exposed.txt

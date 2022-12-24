@@ -1,0 +1,17 @@
+---
+- hosts: control_plane
+  become: yes
+  become_user: ubuntu
+  gather_facts: false
+  tasks:
+    - name: Deploy the bookinfo app
+      shell: kubectl apply -f samples/bookinfo/platform/kube/bookinfo.yaml
+      args:
+        chdir: $HOME/istio-1.16.1
+        creates: bookinfo_deployed.txt
+
+    - name: Associate the bookinfo app with an Istio Gateway
+      shell: kubectl apply -f samples/bookinfo/networking/bookinfo-gateway.yaml
+      args:
+        chdir: $HOME/istio-1.16.1
+        creates: bookinfo_gateway.txt

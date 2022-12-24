@@ -1,0 +1,26 @@
+---
+- hosts: control_plane
+  become: yes
+  become_user: ubuntu
+  gather_facts: false
+  tasks:
+    - name: Download Istio
+      unarchive: 
+        src: https://github.com/istio/istio/releases/download/1.16.1/istio-1.16.1-linux-amd64.tar.gz
+        dest: $HOME
+        remote_src: true
+
+    - name: Copy our istio config file over
+      copy:
+        src: istio-config.yml
+        dest: $HOME/istio-1.16.1/
+
+    - name: Install Istio
+      shell: bin/istioctl install -f istio-config.yml -y
+      args:
+        chdir: $HOME/istio-1.16.1
+
+    - name: Inject into default namespace
+      shell: kubectl label namespace default istio-injection=enabled --overwrite
+    - name: Inject into kube-flannel namespace
+      shell: kubectl label namespace kube-flannel istio-injection=enabled --overwrite

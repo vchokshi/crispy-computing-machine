@@ -1,0 +1,24 @@
+---
+- name: Import and execute the Digital Ocean Prequesitues playbook
+  ansible.builtin.import_playbook: digital_ocean_prereqs.yml
+
+- name: Import and execute kubernetes playbook
+  ansible.builtin.import_playbook: kubernetes.yml
+
+- name: Import and execute the secrets playbook
+  ansible.builtin.import_playbook: secrets.yml
+
+- name: Import and execute the doccm playbook
+  ansible.builtin.import_playbook: do_ccm.yml
+
+- name: Import and execute the www playbook
+  ansible.builtin.import_playbook: www.yml
+
+- name: Import and execute the istio playbook
+  ansible.builtin.import_playbook: istio.yml
+
+- name: Import and execute the bookinfo_apps playbook
+  ansible.builtin.import_playbook: bookinfo_apps.yml
+
+- name: Import and execute the panoptica playbook
+  ansible.builtin.import_playbook: panoptica.yml

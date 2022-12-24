@@ -1,0 +1,16 @@
+---
+- hosts: control_plane
+  become: yes
+  become_user: ubuntu
+  gather_facts: false
+  tasks:
+    - name: Copy the www template 
+      copy:
+        src: www.yml
+        dest: $HOME/www.yml
+
+    - name: Use kubectl to deploy the www service
+      shell: kubectl apply -f www.yml
+      args:
+        chdir: $HOME
+        creates: www.txt 
