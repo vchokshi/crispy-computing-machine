@@ -9,3 +9,11 @@ resource "digitalocean_droplet" "controller" {
 output "controller_ip" {
   value = digitalocean_droplet.controller.ipv4_address
 }
+
+resource "digitalocean_record" "c" {
+  domain = "do.iot4.net"
+  type   = "A"
+  name   = "controller"
+  value  = digitalocean_droplet.controller.ipv4_address
+}
+
