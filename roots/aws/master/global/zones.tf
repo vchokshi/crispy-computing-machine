@@ -10,8 +10,6 @@ resource "aws_route53_zone" "internal_iot" {
   }
 }
 
-
-
 resource "aws_route53_zone" "viharc" {
   name = "viharc.com"
 }
@@ -70,3 +68,27 @@ resource "aws_route53_record" "azure" {
     "ns4-07.azure-dns.info."
   ]
 }
+
+# Delegate a subzone to digital ocean
+
+resource "aws_route53_record" "do" {
+  zone_id = aws_route53_zone.iot.zone_id
+  name    = "do.iot4.net"
+  type    = "NS"
+  ttl     = "300"
+  records = [
+    "ns1.digitalocean.com.",
+  ]
+}
+
+# Add a zone for Atlassian
+resource "aws_route53_record" "atlassian" {
+  zone_id = aws_route53_zone.iot.zone_id
+  name    = "theonlyiot4.iot4.net"
+  type    = "TXT"
+  ttl     = "3600"
+  records = [
+    "atlassian-domain-verification=cYRoMJIyin6DySwpBF/DrX2r97AM4QYCFAO2TtIS2aST33S4OX2cUKSRUrZrVOVu",
+  ]
+}
+
