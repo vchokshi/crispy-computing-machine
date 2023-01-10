@@ -3,15 +3,15 @@
 kind: Service
 apiVersion: v1
 metadata:
-  name: http-lb
+  name: nginx-lb
   annotations:
     service.beta.kubernetes.io/do-loadbalancer-protocol: "http"
-    service.beta.kubernetes.io/do-loadbalancer-hostname: "www.do.iot4.net"
+    service.beta.kubernetes.io/do-loadbalancer-hostname: "www-nginx.do.iot4.net"
 
 spec:
   type: LoadBalancer
   selector:
-    app: www-example
+    app: www-nginx
   ports:
     - name: http
       protocol: TCP
@@ -22,20 +22,20 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: www-example
+  name: www-nginx
 spec:
   replicas: 2
   selector:
     matchLabels:
-      app: www-example
+      app: www-nginx
   template:
     metadata:
       labels:
-        app: www-example
+        app: www-nginx
     spec:
       containers:
       - name: www
-        image: vchokshi/www
+        image: vchokshi/www-nginx
         ports:
         - containerPort: 80
           protocol: TCP
