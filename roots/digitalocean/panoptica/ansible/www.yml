@@ -4,13 +4,24 @@
   become_user: ubuntu
   gather_facts: false
   tasks:
-    - name: Copy the www template 
+    - name: Copy the www-nginx template 
       copy:
-        src: www.yml
-        dest: $HOME/www.yml
+        src: www-nginx.yml
+        dest: $HOME/www-nginx.yml
 
     - name: Use kubectl to deploy the www service
-      shell: kubectl apply -f www.yml
+      shell: kubectl apply -f www-nginx.yml
       args:
         chdir: $HOME
-        creates: www.txt 
+        creates: www-nginx.txt 
+
+    - name: Copy the www-apache template 
+      copy:
+        src: www-apache.yml
+        dest: $HOME/www-apache.yml
+
+    - name: Use kubectl to deploy the www service
+      shell: kubectl apply -f www-apache.yml
+      args:
+        chdir: $HOME
+        creates: www-apache.txt 
