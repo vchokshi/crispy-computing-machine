@@ -14,6 +14,7 @@ resource "digitalocean_record" "c" {
   domain = "do.iot4.net"
   type   = "A"
   name   = "controller"
+  ttl    = 30
   value  = digitalocean_droplet.controller.ipv4_address
 }
 resource "digitalocean_droplet" "worker_1" {
@@ -44,12 +45,14 @@ resource "digitalocean_record" "worker_1" {
   domain = "do.iot4.net"
   type   = "A"
   name   = "worker-1"
+  ttl    = 30
   value  = digitalocean_droplet.worker_1.ipv4_address
 }
 resource "digitalocean_record" "worker_2" {
   domain = "do.iot4.net"
   type   = "A"
   name   = "worker-2"
+  ttl    = 30
   value  = digitalocean_droplet.worker_2.ipv4_address
 }
 

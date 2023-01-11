@@ -1,0 +1,16 @@
+---
+- hosts: control_plane
+  become: yes
+  become_user: ubuntu
+  gather_facts: false
+  tasks:
+    - name: Copy the openai template 
+      copy:
+        src: openai.yml
+        dest: $HOME/openai.yml
+
+    - name: Use kubectl to deploy the openai service
+      shell: kubectl apply -f openai.yml >> openai.txt
+      args:
+        chdir: $HOME
+        creates: openai.txt 

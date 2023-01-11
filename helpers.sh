@@ -3,6 +3,7 @@ load_environment_variables() {
   export DO_PAT=$(pass DO_API_TOKEN)
   export ELASTIO_API_KEY=$(pass elastio)
   export GITHUB_TOKEN=$(pass github)
+  export HONEYCOMB_TOKEN=$(pass honeycomb.io)
   export TWILIO_TOKEN=$(pass twillio)
   export OPENAI_API_KEY=$(pass openai_api_key)
   export TF_VAR_atlassian_api_token=$(pass atlassian)
@@ -12,10 +13,11 @@ load_environment_variables() {
 
 clear_environment_variables() {
 	unset $(compgen -v | grep AWS)
-	unset $(compgen -v | grep TF_VAR)
-	unset $(compgen -v | grep TWILIO_TOKEN)
-	unset $(compgen -v | grep GITHUB_TOKEN)
 	unset $(compgen -v | grep ELASTIO)
+	unset $(compgen -v | grep GITHUB_TOKEN)
+	unset $(compgen -v | grep HONEYCOMB_TOKEN)
+	unset $(compgen -v | grep TWILIO_TOKEN)
+	unset $(compgen -v | grep TF_VAR)
 	unset $(compgen -v | grep OPENAI)
 }
 aws_assume_role() {

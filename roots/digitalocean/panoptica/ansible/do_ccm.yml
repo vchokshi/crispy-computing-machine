@@ -14,3 +14,15 @@
       args:
         chdir: $HOME
         creates: doccm.txt 
+
+- hosts: control_plane
+  become: yes
+  gather_facts: false
+  tasks:
+     - name: install doctl
+       snap:
+         name: 
+           - doctl
+         state: present
+
+
