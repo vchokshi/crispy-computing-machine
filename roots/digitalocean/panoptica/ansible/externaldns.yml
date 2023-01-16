@@ -1,0 +1,22 @@
+---
+- hosts: control_plane
+  become: yes
+  become_user: ubuntu
+  vars:
+    helm_version: '3.10.2'
+  tasks:
+    - name: Template the helm dns values file over
+      template:
+        src: externaldns-values.yaml.j2
+        dest: $HOME/externaldns-values.yaml
+
+    - name: Add the bitnami repo for external dns and update helm
+      shell: helm repo add bitnami https://charts.bitnami.com/bitnami && helm repo update
+      args:
+        chdir: $HOME
+
+    - name: Install external dns via helm
+      shell: helm install external-dns bitnami/external-dns -f externaldns-values.yaml >> external-dns.txt
+      args:
+        chdir: $HOME
+        creates: external-dns.txt

@@ -5,14 +5,23 @@
 - name: Import and execute kubernetes playbook
   ansible.builtin.import_playbook: kubernetes.yml
 
+- name: Install helm as a package manager for k8s
+  ansible.builtin.import_playbook: helm.yml
+
 - name: Import and execute the secrets playbook
   ansible.builtin.import_playbook: secrets.yml
+
+- name: Use helm to install externaldns
+  ansible.builtin.import_playbook: externaldns.yml
 
 - name: Import and execute the doccm playbook
   ansible.builtin.import_playbook: do_ccm.yml
 
-- name: Import and execute the www playbook
+- name: Import and execute the www playbook for nginx and apache
   ansible.builtin.import_playbook: www.yml
+
+- name: Import and execute the openai playbook for flask 
+  ansible.builtin.import_playbook: openai.yml
 
 - name: Import and execute the istio playbook
   ansible.builtin.import_playbook: istio.yml

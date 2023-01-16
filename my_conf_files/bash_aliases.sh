@@ -1,3 +1,8 @@
+alias grep='grep --color=auto'
+alias l='ls -CF'
+alias la='ls -A'
+alias ll='ls -l'
+alias ls='ls --color=auto'
 alias asgci="aws sts get-caller-identity"
 alias tfi="terraform init"
 alias tff="terraform fmt"

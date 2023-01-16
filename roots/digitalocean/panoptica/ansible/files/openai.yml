@@ -1,0 +1,66 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: openai
+  annotations:
+    external-dns.alpha.kubernetes.io/hostname: flask.do.iot4.net
+spec:
+  type: LoadBalancer
+  selector:
+    app: openai
+  ports:
+    - name: http
+      protocol: TCP
+      port: 80
+      targetPort: 5000
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: openai
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: openai
+  template:
+    metadata:
+      labels:
+        app: openai
+    spec:
+      containers:
+      - name: openai
+        image: vchokshi/openai
+        ports:
+        - containerPort: 5000
+          protocol: TCP
+        env:
+          - name: OPENAI_API_KEY
+            valueFrom:
+              secretKeyRef:
+                name: openaiapikey
+                key: access-token
+                optional: false 
+          - name: HONEYCOMB_API_KEY
+            valueFrom:
+              secretKeyRef:
+                name: honeycombapikey
+                key: access-token
+                optional: false 
+          - name: FLASK_APP
+            value: "app"
+          - name: FLASK_ENV
+            value: "production"
+          - name: HONEYCOMB_DATASET
+            value: "flask"
+          - name: SERVICE_NAME
+            value: "flask"
+          - name: OTEL_EXPORTER_OTLP_HEADERS
+            value: "x-honeycomb-team=$(HONEYCOMB_API_KEY)"
+          - name: OTEL_EXPORTER_OTLP_ENDPOINT
+            value: "https://api.honeycomb.io"
+          - name: OTEL_SERVICE_NAME
+            value: "flask"
+
+

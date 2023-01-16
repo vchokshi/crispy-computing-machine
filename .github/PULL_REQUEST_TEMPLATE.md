@@ -1,6 +1,6 @@
 # Description
 
-**Make sure the PR is against the `main` branch (see [Contributing](https://github.com/vchokshi/blob/master/CONTRIBUTING.md)).**
+**Make sure the PR is against the `master` branch (see [Contributing](https://github.com/vchokshi/blob/master/CONTRIBUTING.md)).**
 
 **Make sure to set the corresponding milestone in the PR.**
 

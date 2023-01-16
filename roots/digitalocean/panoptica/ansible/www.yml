@@ -10,7 +10,7 @@
         dest: $HOME/www-nginx.yml
 
     - name: Use kubectl to deploy the www service
-      shell: kubectl apply -f www-nginx.yml
+      shell: kubectl apply -f www-nginx.yml >> www-nginx.txt
       args:
         chdir: $HOME
         creates: www-nginx.txt 
@@ -21,7 +21,7 @@
         dest: $HOME/www-apache.yml
 
     - name: Use kubectl to deploy the www service
-      shell: kubectl apply -f www-apache.yml
+      shell: kubectl apply -f www-apache.yml >> www-apache.txt
       args:
         chdir: $HOME
         creates: www-apache.txt 
