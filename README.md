@@ -1,3 +1,3 @@
 # Crispy Computing Machine
 
-[![Packer Builder](https://github.com/vchokshi/crispy-computing-machine/actions/workflows/packer-builder.yml/badge.svg)](https://github.com/vchokshi/crispy-computing-machine/actions/workflows/packer-builder.yml)
+[![Prohibited Files](https://github.com/vchokshi/crispy-computing-machine/actions/workflows/prohibit_files.yml/badge.svg)](https://github.com/vchokshi/crispy-computing-machine/actions/workflows/prohibit_files.yml)

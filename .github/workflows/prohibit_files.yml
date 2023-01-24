@@ -1,0 +1,16 @@
+name: Prohibited Files Check
+
+on:
+  push:
+    branches:
+      - master
+jobs:
+  prohibit_files:
+    name: Check for prohibited files
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Check for prohibited files
+        run: ${GITHUB_WORKSPACE}/.github/workflows/prohibit_files.sh
+        shell: sh
