@@ -15,6 +15,8 @@
         state: directory
         mode: 'u=rwx,go=rx'
         dest: '{{ helm_download_dir }}'
+      tags:
+        - build
 
     - name: download sha256sum
       get_url:
@@ -23,11 +25,15 @@
         force: no
         validate_certs: yes
         mode: 'u=rw,go=r'
+      tags:
+        - build
 
     - name: read sha256sum
       slurp:
         src: '{{ helm_download_dir }}/{{ helm_redis_filename }}.sha256'
       register: helm_sha256sum
+      tags:
+        - build
   
     - name: download Helm
       get_url:
@@ -37,6 +43,8 @@
         force: no
         validate_certs: yes
         mode: 'u=rw,go=r'
+      tags:
+        - build
   
     - name: check current version
       command: >
@@ -44,11 +52,15 @@
       register: helm_current_version
       failed_when: no
       changed_when: no
+      tags:
+        - build
     
     - name: current version
       debug:
         msg: '{{ helm_current_version.stdout }}'
       when: helm_current_version.rc == 0
+      tags:
+        - build
   
     - name: remove existing installation
       become: yes
@@ -58,6 +70,8 @@
       when:
         - helm_current_version.rc == 0
         - helm_current_version.stdout != ('v' + helm_version)
+      tags:
+        - build
   
     - name: create the Helm installation dir
       become: yes
@@ -67,6 +81,8 @@
         group: root
         mode: 'u=rwx,go=rx'
         dest: '{{ helm_install_dir }}'
+      tags:
+        - build
   
     - name: install unarchive module dependencies (apt, yum, dnf, zypper)
       become: yes
@@ -77,6 +93,8 @@
           - gzip
         state: present
       when: ansible_pkg_mgr in ('apt', 'yum', 'dnf', 'zypper')
+      tags:
+        - build
   
     - name: install Helm
       become: yes
@@ -90,6 +108,8 @@
         group: root
         mode: 'o-w'
         creates: '{{ helm_install_dir }}/helm'
+      tags:
+        - build
     
     - name: create helm link
       become: yes
@@ -100,3 +120,5 @@
         owner: root
         group: root
         mode: 'u=rwx,go=rx'
+      tags:
+        - build

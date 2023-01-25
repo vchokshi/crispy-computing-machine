@@ -8,12 +8,16 @@
       copy:
         src: do_ccm.yml
         dest: $HOME/do_ccm.yml
+      tags:
+        - build
      
     - name: Use kubectl to deploy DOCCM
       shell: kubectl apply -f do_ccm.yml
       args:
         chdir: $HOME
         creates: doccm.txt 
+      tags:
+        - build
 
 - hosts: control_plane
   become: yes
@@ -24,5 +28,5 @@
          name: 
            - doctl
          state: present
-
-
+      tags:
+        - build

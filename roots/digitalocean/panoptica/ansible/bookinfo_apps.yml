@@ -11,15 +11,53 @@
       with_items:
         - bookinfo.yaml
         - bookinfo-gateway.yaml
+      tags:
+        - build
 
     - name: Deploy the bookinfo app
       shell: kubectl apply -f bookinfo.yaml >> bookinfo.txt
       args:
         chdir: $HOME
         creates: bookinfo.txt
+      tags:
+        - build
 
     - name: Associate the bookinfo app with an Istio Gateway
       shell: kubectl apply -f bookinfo-gateway.yaml >> bookinfo-gateway.txt
       args:
         chdir: $HOME
         creates: bookinfo-gateway.txt
+      tags:
+        - build
+
+    - name: Use kubectl to delete services bookinfo-gateway
+      shell: kubectl delete -f bookinfo-gateway.yaml
+      args:
+        chdir: $HOME
+        removes: bookinfo-gateway.txt
+      tags:
+        - destroy
+
+    - name: Delete the lock file
+      file:
+        path: $HOME/bookinfo-gateway.txt
+        state: absent
+      tags:
+        - destroy
+
+    - name: Use kubectl to delete services bookinfo
+      shell: kubectl delete -f bookinfo.yaml
+      args:
+        chdir: $HOME
+        removes: bookinfo.txt
+      tags:
+        - destroy
+
+    - name: Delete the lock file
+      file:
+        path: $HOME/bookinfo.txt
+        state: absent
+      tags:
+        - destroy
+
+

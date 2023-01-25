@@ -8,9 +8,30 @@
       copy:
         src: openai.yml
         dest: $HOME/openai.yml
+      tags:
+        - build
 
     - name: Use kubectl to deploy the openai service
       shell: kubectl apply -f openai.yml >> openai.txt
       args:
         chdir: $HOME
         creates: openai.txt 
+      tags:
+        - build
+
+    - name: Use kubectl to delete the flask services
+      shell: kubectl delete -f openai.yml
+      args:
+        chdir: $HOME
+        removes: openai.txt
+      tags:
+        - destroy
+
+    - name: Delete the flask lock file
+      file:
+        path: $HOME/openai.txt
+        state: absent
+      tags:
+        - destroy
+
+

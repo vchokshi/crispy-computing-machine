@@ -4,6 +4,8 @@
   tasks:
    - name: create Docker config directory
      file: path=/etc/docker state=directory
+     tags:
+       - build
 
    - name: changing Docker to systemd driver
      copy:
@@ -12,39 +14,53 @@
         {
         "exec-opts": ["native.cgroupdriver=systemd"]
         }
+     tags:
+       - build
 
    - name: install Docker
      apt:
        name: docker.io
        state: present
        update_cache: true
+     tags:
+       - build
 
    - name: install APT Transport HTTPS
      apt:
        name: apt-transport-https
        state: present
+     tags:
+       - build
 
    - name: add Kubernetes apt-key
      apt_key:
        url: https://packages.cloud.google.com/apt/doc/apt-key.gpg
        state: present
+     tags:
+       - build
 
    - name: add Kubernetes' APT repository
      apt_repository:
       repo: deb http://apt.kubernetes.io/ kubernetes-xenial main
       state: present
       filename: 'kubernetes'
+     tags:
+       - build
 
    - name: install kubelet
      apt:
        name: kubelet=1.22.4-00
        state: present
        update_cache: true
+     tags:
+       - build
 
    - name: install kubeadm
      apt:
        name: kubeadm=1.22.4-00
        state: present
+     tags:
+       - build
 
 - hosts: control_plane
   become: yes
@@ -54,6 +70,8 @@
        name: kubectl=1.22.4-00
        state: present
        force: yes
+     tags:
+       - build
 
 - hosts: control_plane
   become: yes
@@ -63,6 +81,8 @@
       args:
         chdir: $HOME
         creates: cluster_initialized.txt
+     tags:
+       - build
 
     - name: create .kube directory
       become: yes
@@ -71,6 +91,8 @@
         path: $HOME/.kube
         state: directory
         mode: 0755
+     tags:
+       - build
 
     - name: copy admin.conf to user's kube config
       copy:
@@ -79,6 +101,8 @@
         remote_src: yes
         owner: ubuntu
         mode: 0400
+     tags:
+       - build
 
     - name: install Pod network
       become: yes
@@ -87,6 +111,8 @@
       args:
         chdir: $HOME
         creates: pod_network_setup.txt
+     tags:
+       - build
 
 - hosts: control_plane
   become: yes
@@ -95,10 +121,14 @@
     - name: get join command
       shell: kubeadm token create --print-join-command
       register: join_command_raw
+     tags:
+       - build
 
     - name: set join command
       set_fact:
         join_command: "{{ join_command_raw.stdout_lines[0] }}"
+     tags:
+       - build
 
 
 - hosts: workers
@@ -109,3 +139,5 @@
       args:
         chdir: $HOME
         creates: node_joined.txt
+     tags:
+       - build

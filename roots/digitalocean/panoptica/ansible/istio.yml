@@ -9,18 +9,37 @@
         src: https://github.com/istio/istio/releases/download/1.16.1/istio-1.16.1-linux-amd64.tar.gz
         dest: $HOME
         remote_src: true
+      tags:
+        - build
 
     - name: Copy our istio config file over
       copy:
         src: istio-config.yml
         dest: $HOME/istio-1.16.1/
+      tags:
+        - build
 
     - name: Install Istio
       shell: bin/istioctl install -f istio-config.yml -y
       args:
         chdir: $HOME/istio-1.16.1
+      tags:
+        - build
 
-    - name: Inject into default namespace
+    - name: Inject istio into default namespace
       shell: kubectl label namespace default istio-injection=enabled --overwrite
+      tags:
+        - build
+
     - name: Inject into kube-flannel namespace
       shell: kubectl label namespace kube-flannel istio-injection=enabled --overwrite
+      tags:
+        - build
+
+    - name: Unintall istio
+      shell: bin/istioctl uninstall --purge -y
+      args:
+        chdir: $HOME/istio-1.16.1
+      tags:
+        - destroy
+
