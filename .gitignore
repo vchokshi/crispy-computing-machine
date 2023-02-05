@@ -1,9 +1,6 @@
 .terraform/
 id_rsa.pub
 __pycache__
-*.jpg
-*.png
-*.gif
 img*
 .tox
 *.lock
