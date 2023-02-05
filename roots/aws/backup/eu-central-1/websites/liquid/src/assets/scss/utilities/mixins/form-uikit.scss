@@ -1,0 +1,34 @@
+// uikit form mixins
+// ========================================================================
+@mixin hook-form(){
+    font-size: 0.941rem;
+    border: $form-border-width solid $form-border;
+    transition: 0.2s ease-in-out;
+    transition-property: color, background-color, border;
+}
+@mixin hook-form-focus(){ border-color: $form-focus-border; }
+@mixin hook-form-disabled(){ border-color: $form-disabled-border; }
+@mixin hook-form-danger(){ border-color: $form-danger-border; }
+@mixin hook-form-success(){ border-color: $form-success-border; }
+@mixin hook-form-blank(){ border-color: transparent; }
+@mixin hook-form-blank-focus(){
+    border-color: $form-blank-focus-border;
+    border-style: $form-blank-focus-border-style;
+}
+@mixin hook-form-radio(){
+    border: $form-radio-border-width solid $form-radio-border;
+    transition: 0.2s ease-in-out;
+    transition-property: background-color, border;
+}
+@mixin hook-form-radio-focus(){ border-color: $form-radio-focus-border; }
+@mixin hook-form-radio-checked(){ border-color: $form-radio-checked-border; }
+@mixin hook-form-radio-disabled(){ border-color: $form-radio-disabled-border; }
+@mixin hook-form-label(){
+    color: $form-label-color;
+    font-size: $form-label-font-size;
+}
+@mixin hook-form-misc(){ 
+    .uk-select:not([multiple]):not([size]) {background-position: 98.7% 50%;} 
+    .uk-form-icon {left: 15px;}
+    .uk-form-icon-flip {left: auto !important;}
+}

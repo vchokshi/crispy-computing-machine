@@ -1,0 +1,57 @@
+.in-card-9 {    
+    .uk-card-default {
+        border: $card-border-width solid $card-border-color;
+        background-color: $card-default-color;
+        .uk-tile {
+            border: $card-border-width solid $card-border-color;
+            border-right: 0;
+            border-top: 0;
+            padding: 25px 20px;
+            &:first-child,
+            &:nth-child(3) {
+                border-left: 0;
+            }
+            &:nth-child(n+3) {
+                border-bottom: 0;
+            }
+        }
+    }
+    .uk-card-primary {
+        border-top-right-radius: $card-border-radius;
+        border-bottom-right-radius: $card-border-radius;
+        .in-icon-wrap.small {
+            width: 30px;
+            height: 30px;
+            background-color: rgba(255, 255, 255, .12);
+        }
+        i {
+            font-size: 12px;
+            color: #fff;
+        }
+        hr {
+            margin: 25px 0 30px 0;
+        }
+    }
+    @media (max-width: 960px) {
+        .uk-card-default {
+            border-bottom-right-radius: 0;
+            border-bottom-left-radius: 0;
+            .uk-tile {
+                &:nth-child(2) {
+                    border-left: 0;
+                }
+                &:nth-child(n+2) {
+                    border-bottom: $card-border-width solid $card-border-color;
+                }
+                &:last-child {
+                    border-left: 0;
+                    border-bottom: 0;
+                }
+            }
+        }
+        .uk-card-primary {
+            border-top-right-radius: 0;
+            border-bottom-left-radius: $card-border-radius;
+        }
+    }
+}

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="zxx" dir="ltr">
+<head>    
+    <!-- Standard Meta -->
+    <meta charset="utf-8">
+    <meta name="description" content="{{content.head.description}}">
+    <meta name="keywords" content="{{content.head.keywords}}">
+    <meta name="author" content="{{content.head.author}}">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="{{content.head.theme-color}}"/>
+    <!-- Site Properties -->
+    <title>{{title}} - {{content.head.title}} HTML5 Template</title>
+    {{> module-critical }}
+    <!-- Favicon and apple icon -->
+    <link rel="shortcut icon" href="{{root}}favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon-precomposed" href="{{root}}apple-touch-icon.png">
+    {{!-- Stylesheet area --}}
+    {{> module-styles }}
+</head>
+
+<body>
+    {{> module-loader}}
+    {{> body}}
+    {{> module-scripts }}    
+</body>
+</html>

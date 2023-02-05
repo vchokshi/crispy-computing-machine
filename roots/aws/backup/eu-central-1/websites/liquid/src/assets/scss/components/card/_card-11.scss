@@ -1,0 +1,16 @@
+.in-card-11 {
+    .uk-card-default {
+        border: $card-border-width solid $card-border-color;
+        background-color: $card-default-color;
+        .in-icon-wrap {
+            background-color: rgba(30, 135, 240, .12);
+        }
+    }
+    .uk-card-primary,
+    .uk-card-secondary {
+        .in-icon-wrap {
+            background-color: rgba(255, 255, 255, .15);
+            color: #fff;
+        }
+    }
+}

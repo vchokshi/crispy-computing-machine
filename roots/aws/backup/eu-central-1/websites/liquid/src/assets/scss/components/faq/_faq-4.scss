@@ -1,0 +1,32 @@
+.in-faq-4 {
+    margin-top: -20px;
+    .uk-card-default {
+        margin-top: 20px;
+        border: $faq-border-width solid $faq-border-color;
+        background-color: $faq-default-color;
+    }
+    .uk-card-body {
+        padding: 20px 22px;
+    }
+    .uk-accordion-title {
+        &::after {
+            content: "\f067";
+            font-family: 'Font Awesome 5 Free';
+            font-style: normal;
+            font-weight: 900;
+            font-size: 14px;
+            top: 25px;
+            right: 22px;
+            position: absolute;
+        }        
+    }
+    .uk-open .uk-accordion-title::after {        
+        content: "\f068";
+    }
+    .uk-open .uk-accordion-title {        
+        color: $faq-primary-color;
+    }
+    .uk-accordion-content {
+        padding: 0px 14px 8px 0px;
+    }
+}

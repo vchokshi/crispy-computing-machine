@@ -1,0 +1,49 @@
+// base variables
+@import "base/base-variables.scss";
+@charset "UTF-8";
+
+/* ------------------------------------------------------------------
+ * File         : style.css
+ * Author       : indonez
+ * Author URI   : http://www.indonez.com
+ *
+ * Indonez Copyright 2020 All Rights Reserved.
+ * ------------------------------------------------------------------
+[Table of contents]
+    1. global
+    2. header
+    3. navigation
+    4. slideshow
+    5. footer
+    6. components
+    7. utility
+    8. vendors
+    9. custom
+------------------------------------------------------------------ */
+
+/* [ 1. global ] */
+@import "base/global.scss";
+
+/* [ 2. header ] */
+@import "layouts/header.scss";
+
+/* [ 3. navigation ] */
+@import "layouts/navigation.scss";
+
+/* [ 4. slideshow ] */
+@import "components/slideshow/blockit-slideshow.scss";
+
+/* [ 5. footer ] */
+@import "layouts/footer.scss";
+
+/* [ 6. components ] */
+@import "components/blockit-components.scss";
+
+/* [ 7. utility ] */
+@import "utilities/blockit-utility.scss";
+
+/* [ 8. vendors ] */
+@import "vendors/blockit-vendors.scss";
+
+/* [ 9. custom ] */
+@import "layouts/custom.scss";
