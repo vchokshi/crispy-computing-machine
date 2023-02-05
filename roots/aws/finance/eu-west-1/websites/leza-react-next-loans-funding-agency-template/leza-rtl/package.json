@@ -1,0 +1,29 @@
+{
+    "name": "leza",
+    "version": "1.5.0",
+    "description": "Leza - React Next.js Loans & Funding Agency Template",
+    "main": "index.js",
+    "scripts": {
+        "dev": "next dev",
+        "start": "next start",
+        "build": "next build",
+        "export": "next export"
+    },
+    "author": "EnvyTheme.com",
+    "license": "ISC",
+    "dependencies": {
+        "axios": "^0.22.0",
+        "next": "^12.0.4",
+        "nodemailer": "^6.7.2",
+        "nodemailer-sendgrid-transport": "^0.2.0",
+        "react": "^17.0.2",
+        "react-accessible-accordion": "^3.3.5",
+        "react-dom": "^17.0.2",
+        "react-image-lightbox": "^5.1.4",
+        "react-modal-video": "^1.2.8",
+        "react-owl-carousel3": "^2.2.5",
+        "sass": "^1.44.0",
+        "sweetalert2": "^11.2.1",
+        "sweetalert2-react-content": "^4.2.0"
+    }
+}
