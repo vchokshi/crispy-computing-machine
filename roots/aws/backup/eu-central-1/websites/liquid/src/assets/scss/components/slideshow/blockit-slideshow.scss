@@ -1,0 +1,72 @@
+// slideshow variable
+$slideshow-default-color:                          $base-default-color !default;
+$slideshow-muted-color:                            $base-muted-color !default;
+$slideshow-primary-color:                          $base-primary-color !default;
+$slideshow-secondary-color:                        $base-secondary-color !default;
+$slideshow-border-color:                           $base-border-color !default;
+$slideshow-border-color-2:                         $base-border-color-2 !default;
+$slideshow-border-width:                           $base-border-width !default;
+$slideshow-border-width-2:                         $base-border-width-2 !default;
+$slideshow-border-radius:                          $base-border-radius !default;
+$slideshow-border-radius-2:                        $base-border-radius-2 !default;
+
+
+// slideshow component
+@import "slideshow-1.scss";
+
+.in-slideshow {
+    background-color: #212224;
+    .uk-slidenav {
+        bottom: 175px;
+        color: $slideshow-default-color;
+    }
+    .in-slideshow-features {
+        height: 220px;
+        background: linear-gradient(0deg, rgba(33,34,36,1) 65%, rgba(33,34,36,0.3) 100%);
+        margin-top: -190px;
+        .uk-container {
+            position: relative;
+            top: 124px;
+        }
+        .uk-label {
+            font-weight: 500;
+            padding: 2px 9px 2px 8px;
+            border-radius: 3px;
+            font-size: 12px;
+            i {
+                margin-right: 5px;
+            }
+        }
+        .uk-label-success {
+            color: #176639;
+            background-color: #2ecc71;
+        }
+        .uk-label-danger {
+            color: #772838;
+            background-color: #ee4f6f;
+        }
+        .uk-text-lead {
+            color: $base-default-color;
+            margin-top: -80px;
+        }
+        .slide-icons-1 {
+            margin-top: -25px;
+            i {
+                color: $base-primary-color;
+            }
+        }
+        .slide-icons-2 {
+            margin-top: -32px;
+            img {
+                margin-top: 5px;
+            }
+        }
+    }
+}
+@media (max-width: 960px) {
+    .in-slideshow {
+        .uk-slidenav {
+            display: none;
+        }
+    }
+}

@@ -1,0 +1,49 @@
+.in-pricing-3 {    
+    .uk-card {
+        overflow: hidden;
+        border-radius: $pricing-border-radius;
+        border: $pricing-border-width solid $pricing-border-color;
+        border-top: 0;
+        transition: all ease 600ms;        
+    }
+    .uk-card-default {
+        background-color: $pricing-default-color;
+        &:hover {
+            border-color: darken($pricing-border-color, 9%);
+        }
+    }
+    .uk-card-header {
+        border-top: 4px solid $pricing-secondary-color;
+        border-radius: $pricing-border-radius;        
+        h6 {
+            letter-spacing: 2px;
+        }
+        .in-pricing-small {
+            font-size: 24px;
+            margin-right: -15px;            
+            top: -26px;
+            position: relative;
+        }
+        .uk-label {
+            background: transparent;
+            color: $pricing-secondary-color;
+        }
+    }
+    &.in-pricing-featured {
+        .uk-card {
+            border-color: $pricing-primary-color;
+            &:hover {
+                background-color: lighten($pricing-primary-color, 45%);
+                border-color: $pricing-primary-color;
+            }
+        }
+        .uk-card-header {
+            border-color: $pricing-primary-color;
+        }
+        .uk-card-body {
+            .uk-list-divider > li:nth-child(n+2) {
+                border-color: lighten($pricing-primary-color, 15%);
+            }
+        }
+    }
+}

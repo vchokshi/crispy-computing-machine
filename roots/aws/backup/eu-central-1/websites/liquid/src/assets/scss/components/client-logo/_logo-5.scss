@@ -1,0 +1,37 @@
+.in-client-logo-5 {
+    .uk-tile {
+        border: $client-logo-border-width solid $client-logo-border-color;
+        border-right: 0;
+        border-top: 0;
+        padding: 50px;
+        &:first-child,
+        &:nth-child(4) {
+            border-left: 0;
+        }
+        &:nth-child(n+4) {
+            border-bottom: 0;
+        }
+        img {
+            opacity: 0.8;
+            transition: 0.3s ease-in-out;
+            &:hover {
+                opacity: 1;
+            }
+        }
+    }    
+}
+@media (max-width: 960px) {
+    .in-client-logo-5 {
+        .uk-tile {
+            padding: 28px 0;
+            border-left: 0;
+            border-right: 0;        
+            &:nth-child(n+4) {
+                border-bottom: $client-logo-border-width solid $client-logo-border-color;
+            }
+            &:last-child {
+                border-bottom: 0;
+            }
+        }
+    }
+}

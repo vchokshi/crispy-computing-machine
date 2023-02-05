@@ -1,0 +1,25 @@
+@import "../../base/base-variables.scss";
+
+// uikit button variables
+// ========================================================================
+$button-line-height:                             42px !default;
+$button-small-line-height:                       32px !default;
+$button-large-line-height:                       57px !default;
+
+$button-font-size:                               11.5px !default;
+$button-small-font-size:                         10px !default;
+
+$button-padding-horizontal:                      21px !default;
+
+$button-default-background:                      transparent !default;
+$button-default-color:                           #999 !default;
+$button-default-hover-color:                     darken($button-default-color, 5%) !default;
+
+$button-primary-background:                      $base-primary-color !default;
+$button-secondary-background:                    $base-secondary-color !default;
+
+$button-border-width:                            2px !default;
+$button-default-border:                          #ccc !default;
+
+$button-text-border-width:                       $button-border-width !default;
+$button-text-border:                             lighten($button-default-color, 15%) !default;

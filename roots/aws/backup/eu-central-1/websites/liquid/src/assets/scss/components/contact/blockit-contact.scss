@@ -1,0 +1,15 @@
+// contact variables
+$contact-default-color:                       $base-default-color !default;
+$contact-muted-color:                         $base-muted-color !default;
+$contact-primary-color:                       $base-primary-color !default;
+$contact-secondary-color:                     $base-secondary-color !default;
+$contact-border-color:                        $base-border-color !default;
+$contact-border-color-2:                      $base-border-color-2 !default;
+$contact-border-width:                        $base-border-width !default;
+$contact-border-width-2:                      $base-border-width-2 !default;
+$contact-border-radius:                       $base-border-radius !default;
+$contact-border-radius-2:                     $base-border-radius-2 !default;
+
+/* contact component */
+@import "contact-1.scss";
+@import "contact-6.scss";

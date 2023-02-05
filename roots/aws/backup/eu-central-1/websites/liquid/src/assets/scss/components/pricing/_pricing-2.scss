@@ -1,0 +1,46 @@
+.in-pricing-2 {
+    .uk-card {
+        transition: all ease 600ms;        
+    } 
+    .uk-card-default {
+        background-color: $pricing-default-color;
+        border-bottom-left-radius: $pricing-border-radius-2;
+        border-bottom-right-radius: $pricing-border-radius-2;
+    }
+    .uk-card-header {
+        border-top-left-radius: $pricing-border-radius-2;
+        border-top-right-radius: $pricing-border-radius-2;
+        border-top: 0;
+        background-color: $pricing-secondary-color;
+        h3 {
+            color: $pricing-default-color;
+        }
+        h4 {
+            color: $pricing-default-color;
+        }
+        .in-pricing-small {
+            font-size: 24px;
+            margin-right: -10px;
+            top: -3px;
+            position: relative;            
+        }        
+    }
+    .uk-card-body {
+        padding-top: 25px;
+        box-shadow: inset 0px 0px 0px $pricing-border-width $pricing-border-color;
+        border-bottom-left-radius: $pricing-border-radius-2;
+        border-bottom-right-radius: $pricing-border-radius-2;
+        transition: all ease 600ms;
+    }
+    &.in-pricing-featured {
+        .uk-card {
+            &:hover {
+                background-color: lighten($pricing-primary-color, 45%);
+                border-color: $pricing-primary-color;
+            }
+        }
+        .uk-card-header {
+            background-color: $pricing-primary-color;
+        }
+    }
+}
