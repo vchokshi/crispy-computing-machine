@@ -64,3 +64,14 @@ rmenv() {
 makeenv() {
 	python3 -m venv ~/.venvs/$1 && activate $1
 }
+
+cherrypick() {
+    # This needs a help file and a usage instructions.
+    if [ -z "$1" ] && [ -z "$2" ]
+    then
+        echo "Usage cherry-pick [GIT_AUTHOR_DATE] [GIT_COMMITER_DATE] [GIT_HASH]. Uses git lgc output"
+        return
+    fi
+
+    GIT_AUTHOR_DATE='$1' GIT_COMMITTER_DATE='$2' git cherry-pick $3
+}
