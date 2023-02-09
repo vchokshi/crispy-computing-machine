@@ -1,0 +1,10 @@
+<header>
+    <!-- header content begin -->
+    <div class="uk-section uk-padding-remove-vertical{{#unlesspage 'index' 'homepage2' 'homepage3' 'homepage4'}} in-header-inner uk-background-cover uk-background-top-center" style="background-image: url({{root}}img/in-liquid-slide-bg.png);{{/unlesspage}}">        
+        {{> module-navigation }}
+    </div>    
+    <!-- header content end -->
+</header>
+{{#unlesspage 'index' 'homepage2' 'homepage3' 'homepage4'}}
+{{> component-breadcrumb }}
+{{/unlesspage}}

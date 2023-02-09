@@ -1,0 +1,29 @@
+.in-content-11 {
+    .uk-card-default {
+        transition: all ease .5s;
+        border: $content-border-width solid $content-border-color;
+        background-color: $content-default-color;
+        h4 {
+            color: #4f4f4f;
+        }
+        .in-icon-wrap {
+            background-color: #4f4f4f;
+            color: #fff;
+        }
+        .uk-text-small {
+            color: #666;
+        }
+        &:hover {          
+            border-color: $content-primary-color;
+            text-decoration: none;
+            h4 {
+                color: $content-primary-color;
+                transition: all ease .5s;
+            }
+            .in-icon-wrap {
+                background-color: $content-primary-color;
+                transition: all ease .5s;
+            }            
+        }
+    }
+}

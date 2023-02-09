@@ -1,0 +1,101 @@
+{
+    "nav": [
+        {
+            "title": "Home",
+            "link": "index.html",
+            "dropdown": [
+                {
+                    "standard": [ 
+                        {
+                            "title": "Homepage 2",
+                            "link": "homepage2.html"
+                        },
+                        {
+                            "title": "Homepage 3",
+                            "link": "homepage3.html"
+                        },
+                        {
+                            "title": "Homepage 4",
+                            "link": "homepage4.html"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "title": "Markets",
+            "link": "markets.html"
+        },
+        {
+            "title": "Company",
+            "link": "#",
+            "dropdown": [
+                {
+                    "standard": [ 
+                        {
+                            "title": "About",
+                            "link": "about.html"
+                        },
+                        {
+                            "title": "Blog",
+                            "link": "blog-list.html"
+                        },
+                        {
+                            "title": "Careers",
+                            "link": "careers.html"
+                        },
+                        {
+                            "title": "Contact",
+                            "link": "contact.html"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "title": "Education",
+            "link": "education.html"
+        },
+        {
+            "title": "Resources",
+            "link": "#",
+            "dropdown": [
+                {
+                    "multiple": [
+                        {
+                            "title": "Documentation",
+                            "link": "https://getuikit.com/docs/",
+                            "icon": {
+                                "name": "fa-external-link-square-alt"
+                            }
+                        },
+                        {
+                            "title": "Help Center",
+                            "link": "help-center.html"
+                        },
+                        {
+                            "title": "Customers",
+                            "link": "customers.html"
+                        },
+                        {
+                            "title": "Roadmap",
+                            "link": "roadmap.html"
+                        },
+                        {
+                            "title": "Legal Docs",
+                            "link": "legal-docs.html",
+                            "icon": {
+                                "name": "fa-gavel"
+                            }
+                        }
+                    ],
+                    "multiple-text": [
+                        {
+                            "text": "Adipiscing elit sed do eiusmod incididunt ut labore dolore magna lorem ipsum sit dolor amet consectetur"
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

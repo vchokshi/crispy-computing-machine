@@ -1,0 +1,16 @@
+@import "../../base/base-variables.scss";
+
+// uikit comment mixins
+// ========================================================================
+@mixin hook-comment-body(){
+    padding-bottom: 35px;
+    border-bottom: $base-border-width solid $base-border-color;
+    .uk-hidden-hover a:hover {
+        text-decoration: none;
+    }
+}
+@mixin hook-comment-list-sub(){
+    @media (max-width: 960px) {
+        padding-left: 0;
+    }
+}

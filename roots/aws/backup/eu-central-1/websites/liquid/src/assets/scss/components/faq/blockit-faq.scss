@@ -1,0 +1,19 @@
+// faq variables
+$faq-default-color:                           $base-default-color !default;
+$faq-muted-color:                             $base-muted-color !default;
+$faq-primary-color:                           $base-primary-color !default;
+$faq-secondary-color:                         $base-secondary-color !default;
+$faq-border-color:                            $base-border-color !default;
+$faq-border-color-2:                          $base-border-color-2 !default;
+$faq-border-width:                            $base-border-width !default;
+$faq-border-width-2:                          $base-border-width-2 !default;
+$faq-border-radius:                           $base-border-radius !default;
+$faq-border-radius-2:                         $base-border-radius-2 !default;
+
+
+/* faq component */
+@import "faq-1.scss";
+@import "faq-2.scss";
+@import "faq-3.scss";
+@import "faq-4.scss";
+@import "faq-5.scss";

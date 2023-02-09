@@ -1,0 +1,9 @@
+@import "../../base/base-variables.scss";
+
+// uikit notification variables
+// ========================================================================
+$notification-position:                                20px !default;
+$notification-width:                                   470px !default;
+$notification-message-background:                      $base-default-color !default;
+$notification-message-color:                           $base-font-color !default;
+$notification-message-font-size:                       16px !default;

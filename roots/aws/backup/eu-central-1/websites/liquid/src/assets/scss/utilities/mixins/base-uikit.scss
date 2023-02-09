@@ -1,0 +1,29 @@
+// uikit base mixins
+// ========================================================================
+@mixin hook-base-blockquote(){
+    font-family: Georgia, serif;
+    color: #8f8f8f;
+    p:first-of-type::before {
+        content: "“";
+        font-family: $base-body-font-family;
+        font-size: 164px;
+        font-style: normal;
+        color: rgba(0, 0, 0, 0.06);
+        position: absolute;
+        margin: -80px 0 0 -20px;
+    }
+}
+@mixin hook-base-blockquote-footer(){ 
+    font-family: $base-body-font-family;
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 500;
+    color: #333;
+    cite {
+        font-size: 0.735rem;
+        font-style: normal;
+        font-weight: 400;
+        text-transform: uppercase;
+        color: #999;
+    }
+}

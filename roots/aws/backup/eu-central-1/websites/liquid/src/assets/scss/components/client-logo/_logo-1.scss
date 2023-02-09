@@ -1,0 +1,39 @@
+.in-client-logo-1 {
+    padding: 0 50px;
+    .uk-tile {
+        border: $client-logo-border-width solid $client-logo-border-color;
+        border-right: 0;
+        border-top: 0;
+        padding-top: 28px;
+        padding-bottom: 28px;
+        &:first-child,
+        &:nth-child(6) {
+            border-left: 0;
+        }
+        &:nth-child(n+6) {
+            border-bottom: 0;
+        }
+        img {
+            opacity: 0.8;
+            transition: 0.3s ease-in-out;
+            &:hover {
+                opacity: 1;
+            }
+        }
+    }    
+}
+@media (max-width: 960px) {
+    .in-client-logo-1 {
+        padding: 0;
+        .uk-tile {
+            border-left: 0;
+            border-right: 0;
+            &:nth-child(n+6) {
+                border-bottom: $client-logo-border-width solid $client-logo-border-color;
+            }
+            &:last-child {
+                border-bottom: 0;
+            }
+        }
+    }
+}

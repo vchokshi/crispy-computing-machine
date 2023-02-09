@@ -1,0 +1,25 @@
+// uikit navigation mixins
+// ========================================================================
+@mixin hook-navbar-nav-item(){
+    font-weight: 500;
+}
+@mixin hook-navbar-dropdown(){
+    font-size: $navbar-nav-item-font-size;
+    box-shadow: $navbar-dropdown-box-shadow;
+}
+@mixin hook-navbar-misc(){
+    .uk-navbar-container > .uk-container .uk-navbar-left {
+        margin-left: (-$navbar-nav-item-padding-horizontal);
+        margin-right: (-$navbar-nav-item-padding-horizontal);
+    }
+    .uk-navbar-container > .uk-container .uk-navbar-right { margin-right: (-$navbar-nav-item-padding-horizontal); }
+    .uk-navbar-dropdown-grid > * { position: relative; }
+    .uk-navbar-dropdown-grid > :not(.uk-first-column)::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: ($navbar-dropdown-grid-gutter-horizontal / 2);
+        border-left: $navbar-dropdown-grid-divider-border-width solid $navbar-dropdown-grid-divider-border;
+    }
+}

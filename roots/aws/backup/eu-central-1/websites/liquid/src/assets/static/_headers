@@ -1,0 +1,32 @@
+/img/*
+Cache-Control: public, max-age=604800, immutable
+
+/*.svg
+Cache-Control: public, max-age=604800, immutable
+
+/*.ico
+Cache-Control: public, max-age=604800, immutable
+
+/*.flv
+Cache-Control: public, max-age=604800, immutable
+
+/*.jpg
+Cache-Control: public, max-age=604800, immutable
+
+/*.jpeg
+Cache-Control: public, max-age=604800, immutable
+
+/*.png
+Cache-Control: public, max-age=604800, immutable
+
+/*.css
+Cache-Control: public, max-age=604800, immutable
+
+/*.js
+Cache-Control: public, max-age=604800, immutable
+
+/*sw.js
+Cache-Control: public, max-age=604800, immutable
+
+/*.html
+Cache-Control: public, max-age=0, must-revalidate
