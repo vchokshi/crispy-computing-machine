@@ -19,17 +19,17 @@ fullnameOverride: ""
 
 # If you want to expose the kubeview service using an ingress
 ingress:
-  enabled: false
+  enabled: true
   annotations: {}
   hosts:
-    - host: chart-example.local
+    - host: "kubeview.do.iot4.net"
   tls: []
-  className: ""
+  className: "nginx"
 
 # If you want to expose the kubeview service directly
 loadBalancer:
   IP: ""
-  enabled: true
+  enabled: false
 
 # Note.
 # If both ingress and loadbalancer are disabled, a ClusterIP service will be created

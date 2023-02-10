@@ -132,5 +132,8 @@
       shell: helm repo add bitnami https://charts.bitnami.com/bitnami && helm repo update
       args:
         chdir: $HOME
-      tags:
-        - build
+
+    - name: Add the ingress-nginx repo and update helm
+      shell: helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx && helm repo update
+      args:
+        chdir: $HOME

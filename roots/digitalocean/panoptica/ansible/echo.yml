@@ -1,0 +1,16 @@
+---
+- hosts: control_plane
+  become: yes
+  become_user: ubuntu
+  gather_facts: false
+  tasks:
+    - name: Copy the echo template 
+      copy:
+        src: echo.yml
+        dest: $HOME/
+
+    - name: Use kubectl to deploy the echo service
+      shell: kubectl apply -f echo.yml >> echo.txt
+      args:
+        chdir: $HOME
+        creates: echo.txt 
