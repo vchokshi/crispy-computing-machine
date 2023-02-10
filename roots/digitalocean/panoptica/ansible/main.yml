@@ -17,6 +17,8 @@
 - name: Import and execute the doccm playbook
   ansible.builtin.import_playbook: do_ccm.yml
 
+# Does not generate an externalDNS name. 
+# Please list load balancers for IP Address of Kubeview
 - name: Import and execute the kubeview playbook
   ansible.builtin.import_playbook: kubeview.yml
 
@@ -32,5 +34,8 @@
 - name: Import and execute the bookinfo_apps playbook
   ansible.builtin.import_playbook: bookinfo_apps.yml
 
-    #- name: Import and execute the panoptica playbook
-    #ansible.builtin.import_playbook: panoptica.yml
+# Do not use this unless you are specifcally testing Panoptica.
+# The code is dependenant on an updated tzr.gz file provided by Cisco
+# The file should be named do.tar.gz
+#- name: Import and execute the panoptica playbook
+  #ansible.builtin.import_playbook: panoptica.yml
