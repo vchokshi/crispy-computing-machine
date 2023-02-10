@@ -122,3 +122,15 @@
         mode: 'u=rwx,go=rx'
       tags:
         - build
+
+- hosts: control_plane
+  become: yes
+  become_user: ubuntu
+  vars:
+  tasks:
+    - name: Add the bitnami repo for external dns and update helm
+      shell: helm repo add bitnami https://charts.bitnami.com/bitnami && helm repo update
+      args:
+        chdir: $HOME
+      tags:
+        - build

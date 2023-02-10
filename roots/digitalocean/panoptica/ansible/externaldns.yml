@@ -12,13 +12,6 @@
       tags:
         - build
 
-    - name: Add the bitnami repo for external dns and update helm
-      shell: helm repo add bitnami https://charts.bitnami.com/bitnami && helm repo update
-      args:
-        chdir: $HOME
-      tags:
-        - build
-
     - name: Install external dns via helm
       shell: helm install external-dns bitnami/external-dns -f externaldns-values.yaml >> external-dns.txt
       args:
