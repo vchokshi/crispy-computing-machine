@@ -17,6 +17,9 @@
 - name: Import and execute the doccm playbook
   ansible.builtin.import_playbook: do_ccm.yml
 
+- name: Import and execute the kubeview playbook
+  ansible.builtin.import_playbook: kubeview.yml
+
 - name: Import and execute the www playbook for nginx and apache
   ansible.builtin.import_playbook: www.yml
 
