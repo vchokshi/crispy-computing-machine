@@ -32,5 +32,5 @@
 - name: Import and execute the bookinfo_apps playbook
   ansible.builtin.import_playbook: bookinfo_apps.yml
 
-- name: Import and execute the panoptica playbook
-  ansible.builtin.import_playbook: panoptica.yml
+    #- name: Import and execute the panoptica playbook
+    #ansible.builtin.import_playbook: panoptica.yml

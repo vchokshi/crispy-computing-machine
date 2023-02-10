@@ -81,8 +81,8 @@
       args:
         chdir: $HOME
         creates: cluster_initialized.txt
-     tags:
-       - build
+      tags:
+        - build
 
     - name: create .kube directory
       become: yes
@@ -91,8 +91,8 @@
         path: $HOME/.kube
         state: directory
         mode: 0755
-     tags:
-       - build
+      tags:
+        - build
 
     - name: copy admin.conf to user's kube config
       copy:
@@ -101,8 +101,8 @@
         remote_src: yes
         owner: ubuntu
         mode: 0400
-     tags:
-       - build
+      tags:
+        - build
 
     - name: install Pod network
       become: yes
@@ -111,8 +111,8 @@
       args:
         chdir: $HOME
         creates: pod_network_setup.txt
-     tags:
-       - build
+      tags:
+        - build
 
 - hosts: control_plane
   become: yes
@@ -121,14 +121,14 @@
     - name: get join command
       shell: kubeadm token create --print-join-command
       register: join_command_raw
-     tags:
-       - build
+      tags:
+        - build
 
     - name: set join command
       set_fact:
         join_command: "{{ join_command_raw.stdout_lines[0] }}"
-     tags:
-       - build
+      tags:
+        - build
 
 
 - hosts: workers
@@ -139,5 +139,5 @@
       args:
         chdir: $HOME
         creates: node_joined.txt
-     tags:
-       - build
+      tags:
+        - build
