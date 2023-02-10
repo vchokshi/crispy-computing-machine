@@ -14,7 +14,7 @@
 
     - name: Copy our values file over
       copy:
-        src: kubeview-values.yml
+        src: kubeview-values.yaml
         dest: $HOME/kubeview/values.yml
       tags:
         - build
