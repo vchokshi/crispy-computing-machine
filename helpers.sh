@@ -13,6 +13,7 @@ load_secrets() {
   export ELASTIO_API_KEY=$(pass elastio)
   export GITHUB_TOKEN=$(pass github)
   export HONEYCOMB_TOKEN=$(pass honeycomb.io)
+  export NEWRELIC_TOKEN=$(pass newrelic_ingest)
   export TWILIO_TOKEN=$(pass twillio)
   export OPENAI_API_KEY=$(pass openai_api_key)
   export TF_VAR_atlassian_api_token=$(pass atlassian)
@@ -58,6 +59,10 @@ alias gpf="git push --force"
 alias gcan!="git commit -v -a --no-edit --amend"
 alias ghprc="gbuu && gh pr create"
 alias rr="source ~/.bashrc"
+
+alias dodns="doctl compute domain records list do.iot4.net"
+alias dodrops="doctl compute droplet list"
+alias dolbs="doctl compute load-balancer list"
 
 gbsu() {
 	git branch --set-upstream-to=origin/$1

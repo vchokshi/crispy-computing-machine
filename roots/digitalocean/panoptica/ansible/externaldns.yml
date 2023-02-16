@@ -9,35 +9,9 @@
       template:
         src: externaldns-values.yaml.j2
         dest: $HOME/externaldns-values.yaml
-      tags:
-        - build
-
-    - name: Add the bitnami repo for external dns and update helm
-      shell: helm repo add bitnami https://charts.bitnami.com/bitnami && helm repo update
-      args:
-        chdir: $HOME
-      tags:
-        - build
 
     - name: Install external dns via helm
-      shell: helm install external-dns bitnami/external-dns -f externaldns-values.yaml >> external-dns.txt
+      shell: helm upgrade --install external-dns bitnami/external-dns -f externaldns-values.yaml >> externaldns.txt
       args:
         chdir: $HOME
         creates: external-dns.txt
-      tags:
-        - build
-
-    - name: Use helm to delete external-dns
-      shell: helm uninstall external-dns 
-      args:
-        chdir: $HOME
-        removes: external-dns.txt
-      tags:
-        - destroy
-
-    - name: Delete the lock file
-      file:
-        path: $HOME/external-dns.txt
-        state: absent
-      tags:
-        - destroy

@@ -28,5 +28,5 @@
          name: 
            - doctl
          state: present
-      tags:
-        - build
+       tags:
+         - build

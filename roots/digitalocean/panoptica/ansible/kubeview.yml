@@ -9,26 +9,13 @@
         src: https://github.com/benc-uk/kubeview/releases/download/0.1.31/kubeview-0.1.31.tgz
         dest: $HOME
         remote_src: true
-      tags:
-        - build
 
     - name: Copy our values file over
       copy:
         src: kubeview-values.yml
         dest: $HOME/kubeview/values.yml
-      tags:
-        - build
 
     - name: Install Kubeview
-      shell: helm install kubeview ./kubeview/ -f kubeview/values.yaml
+      shell: helm upgrade --install kubeview ./kubeview/ -f kubeview/values.yml
       args:
         chdir: $HOME
-      tags:
-        - build
-
-    - name: Delete kubevirw
-      shell: helm uninstall kubeview
-      args:
-        chdir: $HOME
-      tags:
-        - destroy

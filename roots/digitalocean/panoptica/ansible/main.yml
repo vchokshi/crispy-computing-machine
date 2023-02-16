@@ -17,20 +17,30 @@
 - name: Import and execute the doccm playbook
   ansible.builtin.import_playbook: do_ccm.yml
 
+- name: Import and execute the ingress controller playbook
+  ansible.builtin.import_playbook: ingress.yml
+
 - name: Import and execute the kubeview playbook
   ansible.builtin.import_playbook: kubeview.yml
+
+- name: Import and execute the echo playbook
+  ansible.builtin.import_playbook: echo.yml
+
+- name: Import and execute the hello kubernetes playbook
+  ansible.builtin.import_playbook: hello-kubernetes.yml
 
 - name: Import and execute the www playbook for nginx and apache
   ansible.builtin.import_playbook: www.yml
 
-- name: Import and execute the openai playbook for flask 
-  ansible.builtin.import_playbook: openai.yml
+- name: Import and execute the playbook for flask 
+  ansible.builtin.import_playbook: flask.yml
 
-- name: Import and execute the istio playbook
-  ansible.builtin.import_playbook: istio.yml
+# @bug: externaldns fails when source: ingress is used at the same time as source: istio-gateway 
+#- name: Import and execute the istio playbook
+  #ansible.builtin.import_playbook: istio.yml
 
-- name: Import and execute the bookinfo_apps playbook
-  ansible.builtin.import_playbook: bookinfo_apps.yml
+#- name: Import and execute the bookinfo_apps playbook
+  #ansible.builtin.import_playbook: bookinfo_apps.yml
 
-- name: Import and execute the panoptica playbook
-  ansible.builtin.import_playbook: panoptica.yml
+#- name: Import and execute the panoptica playbook
+  #ansible.builtin.import_playbook: panoptica.yml

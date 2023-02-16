@@ -8,58 +8,20 @@
       copy:
         src: www-nginx.yml
         dest: $HOME/www-nginx.yml
-      tags:
-        - build
 
     - name: Use kubectl to deploy the www service
       shell: kubectl apply -f www-nginx.yml >> www-nginx.txt
       args:
         chdir: $HOME
         creates: www-nginx.txt 
-      tags:
-        - build
 
     - name: Copy the www-apache template 
       copy:
         src: www-apache.yml
         dest: $HOME/www-apache.yml
-      tags:
-        - build
 
     - name: Use kubectl to deploy the www service
       shell: kubectl apply -f www-apache.yml >> www-apache.txt
       args:
         chdir: $HOME
         creates: www-apache.txt 
-      tags:
-        - build
-
-    - name: Use kubectl to delete the www-nginx service
-      shell: kubectl delete -f www-nginx.yml
-      args:
-        chdir: $HOME
-        removes: www-nginx.txt
-      tags:
-        - destroy
-
-    - name: Delete the www-nginx lock file
-      file:
-        path: $HOME/www-nginx.txt
-        state: absent
-      tags:
-        - destroy
-
-    - name: Use kubectl to delete www-apache services
-      shell: kubectl delete -f www-apache.yml
-      args:
-        chdir: $HOME
-        removes: www-apache.txt
-      tags:
-        - destroy
-
-    - name: Delete the www-apache lock file
-      file:
-        path: $HOME/www-apache.txt
-        state: absent
-      tags:
-        - destroy
