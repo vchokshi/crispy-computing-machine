@@ -1,0 +1,14 @@
+---
+- hosts: control_plane
+  become: yes
+  become_user: ubuntu
+  tasks:
+    - name: Copy the prometheus values file for helm
+      copy:
+        src: prometheus-values.yml
+        dest: $HOME/prometheus-values.yml
+
+    - name: Install prometheus
+      shell: helm upgrade --install prometheus -f prometheus-values.yml  prometheus-community/kube-prometheus-stack
+      args:
+        chdir: $HOME

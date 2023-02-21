@@ -56,7 +56,7 @@ spec:
                 name: openaiapikey
                 key: access-token
                 optional: false 
-          - name: NEWRELIC_LICENSE_KEY
+          - name: NEW_RELIC_LICENSE_KEY
             valueFrom:
               secretKeyRef:
                 name: newrelicapikey
@@ -67,8 +67,12 @@ spec:
           - name: FLASK_ENV
             value: "production"
           - name: OTEL_EXPORTER_OTLP_HEADERS
-            value: "api-key=$(NEWRELIC_LICENSE_KEY)"
+            value: "api-key=$(NEW_RELIC_LICENSE_KEY)"
           - name: OTEL_EXPORTER_OTLP_ENDPOINT
             value: "https://otlp.nr-data.net:4317"
           - name: OTEL_SERVICE_NAME
             value: "flask-newrelic"
+          - name: SERVICE_NAME
+            value: "flask-newrelic"
+          - name: NEWRELIC_TOKEN
+            value: "$(NEW_RELIC_LICENSE_KEY)"

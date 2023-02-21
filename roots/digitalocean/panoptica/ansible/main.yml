@@ -35,6 +35,9 @@
 - name: Import and execute the playbook for flask 
   ansible.builtin.import_playbook: flask.yml
 
+- name: Import and execute the prometheus playbook
+  ansible.builtin.import_playbook: prometheus.yml
+
 # @bug: externaldns fails when source: ingress is used at the same time as source: istio-gateway 
 #- name: Import and execute the istio playbook
   #ansible.builtin.import_playbook: istio.yml
