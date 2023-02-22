@@ -3,7 +3,13 @@ import socket
 
 MAX_BUFFER_SIZE=65535
 
-def tcp_head( raw_data):
+
+def icmp_head(raw_data):
+ icmp_type = raw_data[0]
+ code = raw_data[1]
+ return icmp_type, code
+
+def tcp_head(raw_data):
  (src_port, dest_port, sequence, acknowledgment, offset_reserved_flags) = unpack('! H H L L H', raw_data[:14])
  offset = (offset_reserved_flags >> 12) * 4
  flag_urg = (offset_reserved_flags & 32) >> 5
@@ -14,6 +20,10 @@ def tcp_head( raw_data):
  flag_fin = offset_reserved_flags & 1
  data = raw_data[offset:]
  return src_port, dest_port, sequence, acknowledgment, flag_urg, flag_ack, flag_psh, flag_rst, flag_syn, flag_fin, data
+
+def udp_head(raw_data):
+ src_port, dest_port = unpack('!HH', raw_data[:4])
+ return src_port, dest_port
 
 def get_ip(addr):
  return '.'.join(map(str, addr))
@@ -41,19 +51,23 @@ def main():
  s = socket.socket(socket.AF_PACKET, socket.SOCK_RAW, socket.ntohs(3))
  while True:
   raw_data, addr = s.recvfrom(MAX_BUFFER_SIZE)
-  #print(raw_data)
   eth = ethernet_head(raw_data)
-  #print('D: {}, S: {}, P: {}'.format(eth[0], eth[1],eth[2]))
   if eth[2] == 8:
    ipv4 = ipv4_head(eth[3])
    if ipv4[3] == 6:
     tcp = tcp_head(ipv4[6])
    elif ipv4[3] == 1:
-    print("Ping")
-    #icmp = icmp_head(ipv4[7])
-   #elif ipv4[3] == 17:
-    #print("UDP")
-    #udp = udp_head(ipv4[7])
+    icmp = icmp_head(ipv4[6])
+    if icmp[0] == 8:
+     print("Echo")
+    elif icmp[0] == 0:
+     print("Echo Reply")
+   elif ipv4[3] == 17:
+    udp = udp_head(ipv4[6])
+    if udp[0] == 53:
+     print("DNS Reply")
+    if udp[1] == 53:
+     print("DNS Request")
 
 
 main()
