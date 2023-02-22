@@ -18,6 +18,7 @@ load_secrets() {
   export OPENAI_API_KEY=$(pass openai_api_key)
   export TF_VAR_atlassian_api_token=$(pass atlassian)
   export TF_VAR_GITHUB_TERRAFORM_CLOUD_OAUTH_TOKEN_ID=$(pass github/terraform_cloud_oauth)
+  export TF_VAR_newrelic_token=$NEWRELIC_TOKEN
   export TF_VAR_do_token=$DO_PAT
 }
 
