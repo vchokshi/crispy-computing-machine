@@ -58,16 +58,12 @@ def main():
     tcp = tcp_head(ipv4[6])
    elif ipv4[3] == 1:
     icmp = icmp_head(ipv4[6])
-    if icmp[0] == 8:
-     print("Echo")
-    elif icmp[0] == 0:
-     print("Echo Reply")
+    print("Echo") if icmp[0]==8 else print("")
+    print("EchoReply") if icmp[0] == 0 else print("")
    elif ipv4[3] == 17:
     udp = udp_head(ipv4[6])
-    if udp[0] == 53:
-     print("DNS Reply")
-    if udp[1] == 53:
-     print("DNS Request")
+    print("DNS Reply") if udp[0] == 53 else print("")
+    print("DNS Request") if udp[1] == 53 else print("")
 
 
 main()
