@@ -1,0 +1,3 @@
+[submodule "log4j-transitive-example"]
+	path = log4j-transitive-example
+	url = https://github.com/mergebase/log4j-transitive-example.git
