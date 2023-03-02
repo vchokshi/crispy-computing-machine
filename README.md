@@ -2,10 +2,9 @@
 
 [![Prohibited Files](https://github.com/vchokshi/crispy-computing-machine/actions/workflows/prohibit_files.yml/badge.svg)](https://github.com/vchokshi/crispy-computing-machine/actions/workflows/prohibit_files.yml)
 
-
 ## Introduction
 
-Welcome to my code repository. The contents of this repositiry are varied but single in purpose. Contents are varied becasue this repository of code contains mostly prototypes, minimial viable products (MVP), demonstrations, and proof of concepts. Single purpose in that this is my lab, and its evolving. 
+Welcome to my code repository. The contents of this repositiry are varied but single in purpose. Contents are varied becasue this repository of code contains mostly prototypes, minimial viable products (MVP), demonstrations, and proof of concepts. Single purpose in that this is my lab, and its evolving.
 
 I affectionaly named this repository my *Crispy Computing Machine*, becasue its my digital playground.
 
@@ -25,5 +24,9 @@ If you're interested in contributing to this repository, checkout out the [CONTR
 ## Enjoying
 
 If you're enjoying following along, I'm glad you are. Thanks for joining me.
+
+## Testing
+
+Install pre-commit from pip and run `pre-commit`
 
 Vihar
