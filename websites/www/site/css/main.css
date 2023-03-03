@@ -1,32 +1,32 @@
 /* --------------------------------------------
-	
+
 	main.css : this is the main style file of the theme.
-	
+
 	Project 	: LazyGuy
-	Author 		: pixelwars 
+	Author 		: pixelwars
 	Url			: pixelwars.org
-	
+
 	---
-	
+
 	CONTEXT:
-	
+
 	1. BASE (@base)
 	2. TYPOGRAPHY (@typo)
 	3. HELPERS (@helpers)
 	4. LAYOUT (@layout)
 	5. ELEMENTS (@elements)
 	5. MEDIA QUERIES (@media)
-	
+
  -------------------------------------------- */
- 
- 
- 
+
+
+
 
 /*  --------------------------------------------
 
 	1. BASE (@base) - base html elements
-	
-    -------------------------------------------- */ 
+
+    -------------------------------------------- */
 html,
 body {
 	width: 100%; height: 100%; padding: 0; margin: 0; box-sizing: border-box;
@@ -69,15 +69,15 @@ html.loaded body {
 /*  --------------------------------------------
 
 	2. TYPOGRAPHY (@typo) - typographic styles
-	
-    -------------------------------------------- */ 
+
+    -------------------------------------------- */
 h1,
 h2,
 h3,
 h4,
 h5,
 h6 {
-	font-family: 'HK Grotesk', sans-serif; font-weight: 700; font-style: normal; margin: 1em 0 .66em 0; 
+	font-family: 'HK Grotesk', sans-serif; font-weight: 700; font-style: normal; margin: 1em 0 .66em 0;
 	}
 h1:first-child,
 h2:first-child,
@@ -87,13 +87,13 @@ h5:first-child,
 h6:first-child {
 	margin-top: 0;
 	}
-h1 { 
+h1 {
 	font-size: 6vw; line-height: 1.1; margin-top: 0;
 	}
-h2 { 
+h2 {
 	font-size: 1.8em; line-height: 1.3;
 	}
-h3 { 
+h3 {
 	font-size: 1.25em; line-height: 1.3;
 	}
 .profile-image + h1 {
@@ -112,14 +112,14 @@ p:last-child {
 .is-text-light a {
 	color: #fff;
 	}
-	
+
 
 
 /*  --------------------------------------------
 
 	3. HELPERS (@helpers) - shorthand helper styles
-	
-    -------------------------------------------- */ 
+
+    -------------------------------------------- */
 .rounded {
 	border-radius: 50%;
 	}
@@ -154,14 +154,14 @@ p:last-child {
 .is-medium-typo {
 	font-size: 15px;
 	}
-	
-	
-	
+
+
+
 /*  --------------------------------------------
 
 	2. LAYOUT (@layout) - layout styles
-	
-    -------------------------------------------- */ 
+
+    -------------------------------------------- */
 
 /* CONTENT */
 .content-wrap {
@@ -173,9 +173,9 @@ p:last-child {
 
 /* MEDIA */
 .media {
-	position: fixed; width: 100%; height: 100%; background-position: center center; background-size: cover; background-repeat: no-repeat; 
+	position: fixed; width: 100%; height: 100%; background-position: center center; background-size: cover; background-repeat: no-repeat;
 	}
-	
+
 /* MASKED */
 .is-masked-light .media:after,
 .is-masked-dark .media:after {
@@ -206,7 +206,7 @@ p:last-child {
 	background-image: linear-gradient(180deg, #2af598 0%, #009efd 100%); opacity: .9;
 	}
 
-	
+
 /* PROFILE IMAGE */
 .profile-image {
 	max-height: 92px;
@@ -219,15 +219,15 @@ p:last-child {
 .logo {
 	margin-bottom: 24px;
 	}
-	
-	
-	
-	
+
+
+
+
 /*  --------------------------------------------
 
 	5. ELEMENTS (@elements) - common used elements
-	
-    -------------------------------------------- */ 	
+
+    -------------------------------------------- */
 
 /* SOCIAL LINKS */
 .social-link {
@@ -458,7 +458,7 @@ html a.social-link:hover:before {
 .social-link.email:hover:before {
 	background-color: #222;
 	}
-	
+
 /* Big Social Icons */
 .is-social-big .social-link:before {
 	font-size: 16px; width: 42px; line-height: 42px;
@@ -604,7 +604,7 @@ html a.social-link:hover:before {
 .link-2 {
   position: relative; text-decoration: none; display: inline-block; color: inherit; padding: 0 1px; transition: color ease 0.3s;
 	}
-.link-2:before, 
+.link-2:before,
 .link-2:after {
  	content: ''; position: absolute; background-color: #222; z-index: -1; height: 2px;
 	}
@@ -619,7 +619,7 @@ html a.social-link:hover:before {
 	}
 .link-2:hover:after {
   	left: 100%; width: 0%; transition: all ease 0.2s;
-	}	
+	}
 /* light links */
 .link-2.light:before,
 .link-2.light:after {
@@ -932,8 +932,8 @@ html a.social-link:hover:before {
 .highlight.grey {
 	background: #AAB8C1;
 	}
-	
-	
+
+
 /* COLORED TEXT */
 /* blue text */
 .text.blue {
@@ -1003,8 +1003,8 @@ html a.social-link:hover:before {
 .typed-cursor{
     opacity: 1; -webkit-animation: blink 0.7s infinite; animation: blink 0.7s infinite;
 	}
-@-webkit-keyframes blink{ 
-    0% { opacity:1; } 
+@-webkit-keyframes blink{
+    0% { opacity:1; }
     50% { opacity:0; }
     100% { opacity:1; }
 	}
@@ -1018,63 +1018,63 @@ html a.social-link:hover:before {
 /*  --------------------------------------------
 
 	6. MEDIA QUERIES (@media) - base html elements
-	
-    -------------------------------------------- */ 
+
+    -------------------------------------------- */
 
 /* TABLETS */
 @media screen and (min-width: 768px) {
-	
+
 	body {
 		font-size: 19px;
 		}
-		
+
 	.profile-image {
 		max-height: 128px;
-		}	
+		}
 	.profile-image.small {
 		max-height: 92px;
 		}
 	.profile-image.big {
 		max-height: 192px;
 		}
-	
-	h1 { 
+
+	h1 {
 		font-size: 4vw; line-height: 1;
 		}
-		
-	
+
+
 	/* MEDIA */
 	.media {
 		position: fixed; top: 0; left: 0; width: 100%; height: 100%; bottom: 0;
 		}
-		
+
 }
 
 /* DESKTOPS */
 @media screen and (min-width: 1200px) {
-	
+
 	.content-wrap {
 		width: 60%;
 		}
 	.content {
 		padding: 4em 0;
 		}
-	
+
 	/* BUTTONS */
 	.button.huge {
 		font-size: 20px; padding: 22px 40px;
 		}
-		
+
 }
 
 /* DESKTOPS HIGH RES */
 @media screen and (min-width: 1600px) {
-	
+
 	.content-wrap {
 		width: 50%;
 		}
 	.content {
 		padding: 6em 0;
 		}
-	
+
 }

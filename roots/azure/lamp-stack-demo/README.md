@@ -2,7 +2,7 @@
 
 This is azure code for cybersecurity class.
 
-Requires azure login (`az login`) 
+Requires azure login (`az login`)
 
 Once logged in, run `terraform apply` for everything except for the web and elk servers.
 

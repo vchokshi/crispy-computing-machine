@@ -14,7 +14,7 @@ const GoTop = ({scrollStepInPx, delayInMs}) => {
             }
         });
     }, [])
-    
+
     const onScrollStep = () => {
         if (window.pageYOffset === 0){
             clearInterval(timeoutRef.current);

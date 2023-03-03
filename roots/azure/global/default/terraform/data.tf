@@ -23,4 +23,3 @@ data "azurerm_subscriptions" "conn" {
 }
 data "azuread_domains" "all" {
 }
-

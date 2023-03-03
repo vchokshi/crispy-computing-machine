@@ -55,13 +55,13 @@ spec:
               secretKeyRef:
                 name: openaiapikey
                 key: access-token
-                optional: false 
+                optional: false
           - name: HONEYCOMB_API_KEY
             valueFrom:
               secretKeyRef:
                 name: honeycombapikey
                 key: access-token
-                optional: false 
+                optional: false
           - name: FLASK_APP
             value: "app"
           - name: FLASK_ENV

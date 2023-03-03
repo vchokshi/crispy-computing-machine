@@ -15,8 +15,8 @@ APM tools tested are:
 Kubview does not create an external DNS name. Use doctl or kubectl to get the IP Address of the Load Balancer
 
 ### Panoptica
-Panoptica needs a fresh download of a gzip tar that contains a shared secret. 
-Please generate one if you're testing Panoptica. 
+Panoptica needs a fresh download of a gzip tar that contains a shared secret.
+Please generate one if you're testing Panoptica.
 The code looks for a file called `do.tar.gz` in `~` to work properly.
 
 ## Destroy

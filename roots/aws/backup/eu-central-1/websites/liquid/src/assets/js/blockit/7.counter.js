@@ -84,7 +84,7 @@ counterUp.prototype.update = function() {
 	var alldone = true;
 	var self = this;
 	this.elems.forEach( function(el) {
-		el.val += el.step;		
+		el.val += el.step;
 		if(el.val < el.end) {
 
 			if(el.intvalues == true)

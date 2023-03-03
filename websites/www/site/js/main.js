@@ -7,22 +7,22 @@
 
 (function () {
    'use strict';
-   
-   
+
+
    // WAIT FOR DOM TO BE LOADED
    document.addEventListener("DOMContentLoaded", function() {
-	   
+
 	   // VIDEO BACKGROUND
 		jarallax(document.querySelectorAll('.media'), {
 			speed: 0,
 			zIndex: 1
 		});
-		
+
 	}); // dom loaded
-	
+
 	// WAIT FOR ALL TO BE LOADED
 	window.onload = function() {
-		
+
 		// add loaded class to html
 		var root = document.documentElement;
 		root.className += ' loaded';
@@ -37,8 +37,8 @@
 			backDelay: 1200
         });
 	}; // all loaded
-	
-	  
+
+
 }());
 
 

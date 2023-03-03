@@ -1,3 +1,4 @@
+---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
@@ -55,13 +56,13 @@ spec:
               secretKeyRef:
                 name: openaiapikey
                 key: access-token
-                optional: false 
+                optional: false
           - name: NEWRELIC_LICENSE_KEY
             valueFrom:
               secretKeyRef:
                 name: newrelicapikey
                 key: access-token
-                optional: false 
+                optional: false
           - name: FLASK_APP
             value: "app"
           - name: FLASK_ENV

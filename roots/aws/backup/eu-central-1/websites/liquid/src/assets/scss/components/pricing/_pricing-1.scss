@@ -1,9 +1,9 @@
-.in-pricing-1 {    
+.in-pricing-1 {
     .uk-card {
         overflow: hidden;
         border-radius: $pricing-border-radius-2;
         border: $pricing-border-width-2 solid $pricing-border-color;
-        transition: all ease 600ms;        
+        transition: all ease 600ms;
     }
     .uk-card-default {
         background-color: $pricing-default-color;
@@ -14,7 +14,7 @@
     .uk-card-header {
         .in-pricing-small {
             font-size: 24px;
-            margin-right: -15px;            
+            margin-right: -15px;
             top: -3px;
             position: relative;
         }
@@ -36,8 +36,8 @@
         .uk-list-bullet > li::before {
             background-image: none;
             font-size: 14px;
-            font-family: 'Font Awesome 5 Free'; 
-            font-weight: 900; 
+            font-family: 'Font Awesome 5 Free';
+            font-weight: 900;
             content: "\f00c";
             color: $pricing-primary-color;
             top: 1px;

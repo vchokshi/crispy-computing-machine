@@ -16,17 +16,17 @@ const Layout = ({ children }) => {
             <Head>
                 <title>Leza - React Next.js Loans & Funding Agency Template</title>
                 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-                <meta 
-                    name="description" 
-                    content="Leza - React Next.js Loans & Funding Agency Template" 
+                <meta
+                    name="description"
+                    content="Leza - React Next.js Loans & Funding Agency Template"
                 />
-                <meta 
-                    name="og:title" 
-                    property="og:title" 
+                <meta
+                    name="og:title"
+                    property="og:title"
                     content="Leza - React Next.js Loans & Funding Agency Template"
                 ></meta>
-                <meta 
-                    name="twitter:card" 
+                <meta
+                    name="twitter:card"
                     content="Leza - React Next.js Loans & Funding Agency Template"
                 ></meta>
                 <link rel="canonical" href="https://leza-react.envytheme.com/"></link>
@@ -35,7 +35,7 @@ const Layout = ({ children }) => {
             {children}
 
             {loader ? <Preloader /> : null}
-        
+
             <GoTop scrollStepInPx="100" delayInMs="10.50" />
         </>
     );

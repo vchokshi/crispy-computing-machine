@@ -16,7 +16,7 @@ const LoanTable = () => {
                             <th>Principle</th>
                           </tr>
                         </thead>
-    
+
                         <tbody>
                             <tr>
                                 <td>07/07/2020</td>

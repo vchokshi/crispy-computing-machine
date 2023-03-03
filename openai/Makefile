@@ -10,5 +10,4 @@ push:
 run:
 	docker run -i -t --rm --name ${APPLICATION_NAME} -p 5888:5000 ${DOCKER_USERNAME}/${APPLICATION_NAME}
 
-up: build run 
-
+up: build run

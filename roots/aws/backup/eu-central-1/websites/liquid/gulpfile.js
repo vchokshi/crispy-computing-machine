@@ -76,7 +76,7 @@ function compileJs() {
         // config-theme.js
         src(['src/assets/js/*.js', '!src/assets/js/blockit/*.js'])
         .pipe(newer('dist/js/config-theme.js'))
-        .pipe(beautify({js: {file_types: ['.js']} }))        
+        .pipe(beautify({js: {file_types: ['.js']} }))
         .pipe(dest('dist/js')),
 
         // blockit.min.js

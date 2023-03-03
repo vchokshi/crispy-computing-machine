@@ -8,4 +8,3 @@ build:
 push:
 	docker push ${DOCKER_USERNAME}/${APPLICATION_NAME}-nginx
 	docker push ${DOCKER_USERNAME}/${APPLICATION_NAME}-apache
-

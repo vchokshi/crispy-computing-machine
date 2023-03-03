@@ -5,5 +5,3 @@ resource "aws_route53_record" "home" {
   ttl     = "300"
   records = ["${chomp(data.http.myip.body)}"]
 }
-
-

@@ -206,7 +206,7 @@ Default CSS
         border-radius: 50%;
         background-color: $black-color;
         color: $white-color;
-        transition: width 0.5s ease-in-out, 
+        transition: width 0.5s ease-in-out,
         height 0.5s ease-in-out;
         transform: translate(-50%, -50%);
         z-index: -1;
@@ -316,7 +316,7 @@ Navbar Area CSS
                         color: $main-color;
                     }
                 }
-      
+
                 &:hover, &.active {
                     a {
                         color: $main-color;
@@ -341,7 +341,7 @@ Navbar Area CSS
 
                     li {
                         margin: 0;
-                        
+
                         a {
                             padding: 8px 20px;
                             position: relative;
@@ -371,11 +371,11 @@ Navbar Area CSS
                             left: 100%;
                             margin-top: 15px;
                             visibility: hidden;
-                            
+
                             li {
                                 a {
                                     color: $black-color;
-                                    
+
                                     &:hover, &:focus, &.active {
                                         color: $main-color;
                                     }
@@ -385,11 +385,11 @@ Navbar Area CSS
                                     opacity: 0;
                                     left: 100%;
                                     visibility: hidden;
-        
+
                                     li {
                                         a {
                                             color: $black-color;
-        
+
                                             &:hover, &:focus, &.active {
                                                 color: $main-color;
                                             }
@@ -399,11 +399,11 @@ Navbar Area CSS
                                             opacity: 0;
                                             left: 100%;
                                             visibility: hidden;
-                
+
                                             li {
                                                 a {
                                                     color: $black-color;
-                
+
                                                     &:hover, &:focus, &.active {
                                                         color: $main-color;
                                                     }
@@ -413,11 +413,11 @@ Navbar Area CSS
                                                     opacity: 0;
                                                     left: 100%;
                                                     visibility: hidden;
-                        
+
                                                     li {
                                                         a {
                                                             color: $black-color;
-                        
+
                                                             &:hover, &:focus, &.active {
                                                                 color: $main-color;
                                                             }
@@ -427,11 +427,11 @@ Navbar Area CSS
                                                             opacity: 0;
                                                             left: 100%;
                                                             visibility: hidden;
-                                
+
                                                             li {
                                                                 a {
                                                                     color: $black-color;
-                                
+
                                                                     &:hover, &:focus, &.active {
                                                                         color: $main-color;
                                                                     }
@@ -441,11 +441,11 @@ Navbar Area CSS
                                                                     opacity: 0;
                                                                     left: 100%;
                                                                     visibility: hidden;
-                                        
+
                                                                     li {
                                                                         a {
                                                                             color: $black-color;
-                                        
+
                                                                             &:hover, &:focus, &.active {
                                                                                 color: $main-color;
                                                                             }
@@ -664,7 +664,7 @@ Navbar Area CSS
     }
     &.collapsed {
         .top-bar {
-            transform: rotate(0);      
+            transform: rotate(0);
             left: 0;
         }
         .middle-bar {
@@ -832,7 +832,7 @@ Search Overlay CSS
 				border: none;
 				font-size: 20px;
 				line-height: 50px;
-				 
+
 				&:hover {
 					background-color: $black-color;
 					color: $white-color;
@@ -1744,7 +1744,7 @@ Clients Area CSS
 .clients-area {
     &.bg-color {
         background-color: $main-color;
-        
+
         .clients-item {
             background-color: unset;
             margin-bottom: 0;
@@ -1798,7 +1798,7 @@ Clients Area CSS
                         span {
                             border: 1px solid $white-color;
                             background-color: transparent !important;
-        
+
                             &::before {
                                 background-color: $white-color;
                             }
@@ -1813,7 +1813,7 @@ Clients Area CSS
             }
         }
     }
-} 
+}
 
 .clients-item {
     background-color: $white-color;
@@ -1856,7 +1856,7 @@ Clients Area CSS
         top: 20px;
         right: 25px;
         i {
-           color: #fdebeb; 
+           color: #fdebeb;
            font-size: 100px;
         }
     }
@@ -2198,7 +2198,7 @@ Choose Area CSS
             transform: scale(2);
         }
     }
-      
+
     @keyframes ripple {
         0%, 35% {
             transform: scale(0);
@@ -2300,7 +2300,7 @@ Best Services Area CSS
 .tab {
     .tabs_item {
         display: none;
-        
+
         &:first-child {
             display: block;
         }
@@ -2373,7 +2373,7 @@ Best Services Area CSS
                 margin-bottom: 20px;
                 h3 {
                     font-size: 25px;
-                    margin-bottom: 20px; 
+                    margin-bottom: 20px;
                 }
                 li {
                     color: $paragraph-color;
@@ -2458,7 +2458,7 @@ Best Services Area CSS
             }
         }
     }
-   
+
     .services-tabs-item {
         .services-tab-content {
             h3 {
@@ -2910,14 +2910,14 @@ FAQ Area CSS
             border-radius: 50px;
             cursor: pointer;
             margin-bottom: 10px;
-           
+
             &.current {
                 color: $white-color;
                 background-color: $main-color;
             }
         }
     }
-    
+
     .tab_content {
         .tabs_item {
             .question-list {
@@ -2931,7 +2931,7 @@ FAQ Area CSS
                     margin-bottom: 20px;
                     border: 1px solid #e7e7e7;
                     padding: 20px;
-        
+
                     &:last-child {
                         margin-bottom: 0;
                     }
@@ -3068,10 +3068,10 @@ Loan Calculator Area CSS
             font: {
                 size: 16px;
             }
-            &::-webkit-input-placeholder { 
+            &::-webkit-input-placeholder {
                 color: #ffffff;
             }
-            &:-ms-input-placeholder { 
+            &:-ms-input-placeholder {
                 color: #ffffff;
             }
             &::placeholder {
@@ -3134,7 +3134,7 @@ Table Area CSS
             font-family: $heading-font-family;
             font-weight: 600;
             font-size: $font-size;
-        }    
+        }
     }
 }
 
@@ -3194,7 +3194,7 @@ Apply Area CSS
             box-shadow: unset;
             height: 50px !important;
             border-radius: 0;
-        
+
             font: {
                 size: 16px;
             }
@@ -3312,7 +3312,7 @@ Sign In CSS
     border-radius: 5px;
     max-width: 600px;
     margin: auto;
-    
+
     .sign-in-title {
         text-align: center;
         margin-bottom: 30px;
@@ -3327,7 +3327,7 @@ Sign In CSS
             margin-bottom: 30px;
         }
     }
-    
+
     form {
         .form-group {
             margin-bottom: 20px;
@@ -3401,7 +3401,7 @@ Sign Up CSS
     border-radius: 5px;
     max-width: 600px;
     margin: auto;
-    
+
     h3 {
         font-size: 30px;
         font-family: $main-font-family;
@@ -3620,7 +3620,7 @@ Contact Area CSS
             box-shadow: unset;
             height: 50px;
             border-radius: 0;
-          
+
             font-size: $font-size;
         }
         textarea {
@@ -4047,8 +4047,8 @@ Services Details Area CSS
     .deserve-item {
         h3 {
             font-size: 30px;
-        }   
-    } 
+        }
+    }
 }
 
 .services-details-features {
@@ -4408,12 +4408,12 @@ Loan Area CSS
         position: absolute;
         bottom: 0;
         right: 60px;
-    
+
         .text {
             text-align: center;
             margin-top: 50px;
             padding: 0 20px;
-            
+
             img {
                 display: block;
                 margin: auto;
@@ -5162,7 +5162,7 @@ Go Top CSS
     top: 0;
     z-index: 9999999;
     text-align: center;
-} 
+}
 .lds-spinner {
     color: official;
     display: inline-block;
@@ -5244,4 +5244,3 @@ Go Top CSS
         opacity: 0;
     }
 }
-  

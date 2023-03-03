@@ -64,5 +64,3 @@ output "jumphost_ip" {
 output "jumphost" {
   value = "jump.${data.azurerm_dns_zone.iot4.name}"
 }
-
-

@@ -11,7 +11,7 @@
   set_fact:
     mysql_temp_password: "{{ mysql_root_temp_password.stdout }}"
   when: mysql_root_temp_password is defined
-  
+
 - name: Change root password on commandline
   become: true
   shell: >

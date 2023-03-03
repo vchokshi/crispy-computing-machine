@@ -11,4 +11,3 @@ resource "aws_internet_gateway" "igw" {
     Name = var.project_name
   }
 }
-

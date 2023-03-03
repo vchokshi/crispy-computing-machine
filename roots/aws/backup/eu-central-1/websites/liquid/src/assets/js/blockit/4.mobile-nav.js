@@ -79,7 +79,7 @@ function mobileNav(options) {
                     </div>
                 </div>`
 
-                // Clean previous mobile button if exist and insert after that 
+                // Clean previous mobile button if exist and insert after that
                 navbar.parentElement.removeChild(navbar.parentElement.lastChild);
                 navbar.parentElement.appendChild(mobileBtn).appendChild(modalFull);
             },

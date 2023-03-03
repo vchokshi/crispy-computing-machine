@@ -3,7 +3,7 @@
 // uikit sticky mixins
 // ========================================================================
 @mixin hook-sticky-misc(){
-    .uk-sticky {    
+    .uk-sticky {
         &.uk-active {
             background: rgba(22, 22, 26, 0.7);
             box-shadow: 0px 1px 0px 0px rgba(255,255,255,0.1);

@@ -3,7 +3,7 @@ provider: digitalocean
 digitalocean:
   apiToken: {{ lookup('env', 'DO_PAT')}}
 
-policy: sync 
+policy: sync
 interval: "15s"
 replicas: 1
 domainFilters: [ 'do.iot4.net'  ]

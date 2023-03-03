@@ -8,9 +8,9 @@ from botocore.exceptions import ClientError
 def delete_target_group(event):
     client = boto3.client('elbv2')
     details = event['domain'].split(".")
-    
+
     tg_name = details[0] + "-" + details[1] + "-target-group"
-    
+
     try:
         response = client.describe_target_groups(
             Names=[
@@ -20,28 +20,28 @@ def delete_target_group(event):
         if response.get('TargetGroups'):
             for tg in response['TargetGroups']:
                 tg_arn = tg['TargetGroupArn']
-            
+
             response = client.delete_target_group(
                 TargetGroupArn=tg_arn
             )
-            
+
         return True
-        
+
     except ClientError as e:
         return False
 
 def delete_route53_record(event):
-    
+
     client = boto3.client('route53')
-    
+
     details = event['domain'].split(".")
-    
+
     ##getelb name
     client = boto3.client('elbv2')
-    
+
     details = event['domain'].split(".")
     key = 'LoadBalancers'
-    
+
     try:
         response = client.describe_load_balancers(
             Names=[
@@ -50,17 +50,17 @@ def delete_route53_record(event):
         )
     except ClientError as e:
         return None
-    
+
 
     if(response.get(key)) is not None:
         for lb in response.get(key):
             dns_name = lb['DNSName']
 
-    if details[0] == 'iot4': 
+    if details[0] == 'iot4':
         Name = 'www.iot4.net'
     else:
         Name = details[0] + "_" + details[1] + ".iot4.net"
-    
+
     client = boto3.client('route53')
     try:
         response = client.change_resource_record_sets(
@@ -90,12 +90,12 @@ def delete_route53_record(event):
         return 'FAILED'
 
 def delete_elb(event):
-    
+
     client = boto3.client('elbv2')
 
     details = event['domain'].split(".")
     key = 'LoadBalancers'
-    
+
     try:
         response = client.describe_load_balancers(
             Names=[
@@ -104,7 +104,7 @@ def delete_elb(event):
         )
     except ClientError as e:
         return None
-    
+
 
     if(response.get(key)) is not None:
         for lb in response.get(key):
@@ -113,10 +113,10 @@ def delete_elb(event):
     response = client.delete_load_balancer(
         LoadBalancerArn=arn
     )
-    
+
 def delete_ssl_certificate(event):
     client = boto3.client('acm')
-    
+
     domain = 'www.' + event['domain']
 
     response = client.list_certificates(
@@ -135,7 +135,7 @@ def delete_ssl_certificate(event):
 )
 
 def lambda_handler(event, context):
-    
+
     required_input = ['domain']
 
     for val in required_input:
@@ -147,4 +147,3 @@ def lambda_handler(event, context):
     delete_elb(event)
     delete_target_group(event)
     delete_ssl_certificate(event)
-

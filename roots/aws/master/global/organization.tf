@@ -152,6 +152,3 @@ resource "aws_organizations_account" "reiblock" {
   email     = "reiblock@iot4.net"
   parent_id = aws_organizations_organizational_unit.restricted.id
 }
-
-
-

@@ -5,7 +5,7 @@
   gather_facts: false
   tasks:
     - name: Download Kubeview
-      unarchive: 
+      unarchive:
         src: https://github.com/benc-uk/kubeview/releases/download/0.1.31/kubeview-0.1.31.tgz
         dest: $HOME
         remote_src: true

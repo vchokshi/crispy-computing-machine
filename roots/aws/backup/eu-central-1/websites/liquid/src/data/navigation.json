@@ -5,7 +5,7 @@
             "link": "index.html",
             "dropdown": [
                 {
-                    "standard": [ 
+                    "standard": [
                         {
                             "title": "Homepage 2",
                             "link": "homepage2.html"
@@ -31,7 +31,7 @@
             "link": "#",
             "dropdown": [
                 {
-                    "standard": [ 
+                    "standard": [
                         {
                             "title": "About",
                             "link": "about.html"

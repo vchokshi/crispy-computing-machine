@@ -13,13 +13,13 @@ Please provide:
 
 - A clear and concise description of what the bug is.
 - Console output using the `--debug` argument.
-- If possible, the errors JSON file generated at the end of execution (the CLI output will provide the path to this file). 
+- If possible, the errors JSON file generated at the end of execution (the CLI output will provide the path to this file).
 
 **To Reproduce**
 
 Please provide:
 
-- The **exact** CLI parameters used 
+- The **exact** CLI parameters used
 - Any specific configuration within the cloud account which might have lead to the issue.
 
 **Additional context**

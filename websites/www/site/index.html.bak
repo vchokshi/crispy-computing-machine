@@ -6,41 +6,41 @@
     <meta name="description" content="Vihar's Landing Page" />
     <meta name="author" content="Pixelwars">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    
+
     <title>Vihar - The DevOps CI/CD and Cybersecurity Guy</title>
-    
+
     <!-- FAV and TOUCH ICONS -->
     <link rel="shortcut icon" href="images/ico/favicon.ico">
     <link rel="apple-touch-icon" href="images/ico/apple-touch-icon.png"/>
-    
+
     <!-- FONTS -->
     <link rel="stylesheet" type="text/css" href="css/fonts/hk-grotesk/style.css">
     <link rel="stylesheet" type="text/css" href="css/fonts/fontello/css/fontello.css">
-    
+
     <!-- STYLES -->
     <link rel="stylesheet" type="text/css" href="css/main.css">
-    
+
 </head>
 
 <body class="is-text-align-center is-masked-dark is-text-light">
 
-	
+
     <!-- BG IMAGE / VIDEO -->
     <div class="media" style="background-image:url(images/in-liquid-3-mockup.png)"></div>
-	
-    
+
+
     <!-- CONTENT-WRAP -->
     <div class="content-wrap">
-    
-    
+
+
         <!-- CONTENT -->
         <div class="content">
-            
+
             <!-- TITLE -->
             <h1>
-                Hi, I am Vihar. I am a 
+                Hi, I am Vihar. I am a
                 <br>
-                
+
                 <!-- TEXTS TO BE TYPED -->
                 <span id="typed"></span>
                 <div id="typed-strings">
@@ -50,18 +50,18 @@
                     <p><span class="text green">Multi-cloud Architect</span></p>
                 </div>
                 <!-- TEXTS TO BE TYPED -->
-                
+
                 <br>based in Scottsdale, Arizona.
             </h1>
             <!-- TITLE -->
-            
-            
-            
+
+
+
             <!-- DESCRIPTION -->
             <p>I build solutions to complex problems with relentless amounts of automation.</p>
-        
+
             <!-- DESCRIPTION -->
-            
+
         </div>
         <span class="highlight">highlighted text</span>
 <span class="highlight blue">blue highlighted text</span>
@@ -99,12 +99,12 @@
 
     </div>
 	<!-- CONTENT-WRAP -->
-    
-    
+
+
     <!-- SCRIPTS -->
 	<script src="js/main.js"></script>
-	
-    
-    
+
+
+
 </body>
 </html>

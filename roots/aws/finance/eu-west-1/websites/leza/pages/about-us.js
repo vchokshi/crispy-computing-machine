@@ -14,13 +14,13 @@ const AboutUs = () => {
         <>
             <Navbar />
 
-            <PageBanner 
-                pageTitle="About Us" 
-                homePageUrl="/" 
-                homePageText="Home" 
-                activePageText="About Us" 
-                imgClass="item-bg-1" 
-            /> 
+            <PageBanner
+                pageTitle="About Us"
+                homePageUrl="/"
+                homePageText="Home"
+                activePageText="About Us"
+                imgClass="item-bg-1"
+            />
 
             <AboutUsContent />
 
@@ -33,7 +33,7 @@ const AboutUs = () => {
             <PartnerStyleTwo />
 
             <CallUsStyleTwo />
-            
+
             <Footer />
         </>
     )

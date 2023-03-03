@@ -83,4 +83,3 @@ function stop() {
   stopRequested = true;
 }
 stopButton.addEventListener("click", stop);
-

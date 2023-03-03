@@ -1,8 +1,8 @@
-- name: Build the stack 
+- name: Build the stack
   become: true
   hosts: east
   roles:
-  tasks: 
+  tasks:
 
   - name: Install yum dependencies
     yum:
@@ -23,24 +23,23 @@
 
   - name: "Sync {{ s3_target }} to /data"
     shell: "aws s3 sync {{ s3_target }} /data"
-    when: data.stat.isdir is defined and data.stat.isdir 
+    when: data.stat.isdir is defined and data.stat.isdir
 
   - name: Delete the html_root dir if isdir
     file:
         path: "{{html_root}}"
         state: absent
-    when: sym.stat.isdir is defined and sym.stat.isdir 
+    when: sym.stat.isdir is defined and sym.stat.isdir
 
   - name: Symlink html_root to /data
     file:
         dest: "{{ html_root }}"
         src: "/data"
         state: link
-    when: data.stat.isdir is defined and data.stat.isdir 
-        
+    when: data.stat.isdir is defined and data.stat.isdir
+
   - name: Enable the httpd service
     service:
       name: httpd
       state: started
       enabled: true
-

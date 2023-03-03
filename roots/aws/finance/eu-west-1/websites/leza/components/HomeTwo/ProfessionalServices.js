@@ -97,7 +97,7 @@ export default class ProfessionalServices extends Component {
                                                     <li>Revolving credit facilities</li>
                                                     <li>Business cash advances</li>
                                                 </ul>
-                                           
+
                                                 <h3>Eligibility and criteria for Agricultural loan</h3>
                                                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
 
@@ -133,7 +133,7 @@ export default class ProfessionalServices extends Component {
                                                     <li>Revolving credit facilities</li>
                                                     <li>Business cash advances</li>
                                                 </ul>
-                                           
+
                                                 <h3>Eligibility and criteria for Personal loan</h3>
                                                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
 
@@ -169,7 +169,7 @@ export default class ProfessionalServices extends Component {
                                                     <li>Revolving credit facilities</li>
                                                     <li>Business cash advances</li>
                                                 </ul>
-                                           
+
                                                 <h3>Eligibility and criteria for Business loan</h3>
                                                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
 
@@ -205,7 +205,7 @@ export default class ProfessionalServices extends Component {
                                                     <li>Revolving credit facilities</li>
                                                     <li>Business cash advances</li>
                                                 </ul>
-                                           
+
                                                 <h3>Eligibility and criteria for Education loan</h3>
                                                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
 
@@ -220,7 +220,7 @@ export default class ProfessionalServices extends Component {
                                     </div>
                                 </div>
                             </div>
-                            
+
                             <div id="tab5" className="tabs_item">
                                 <div className="services-tabs-item">
                                     <div className="row align-items-center">
@@ -241,7 +241,7 @@ export default class ProfessionalServices extends Component {
                                                     <li>Revolving credit facilities</li>
                                                     <li>Business cash advances</li>
                                                 </ul>
-                                           
+
                                                 <h3>Eligibility and criteria for House loan</h3>
                                                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
 
@@ -277,7 +277,7 @@ export default class ProfessionalServices extends Component {
                                                     <li>Revolving credit facilities</li>
                                                     <li>Business cash advances</li>
                                                 </ul>
-                                           
+
                                                 <h3>Eligibility and criteria for Payday loan</h3>
                                                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
 

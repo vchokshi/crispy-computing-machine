@@ -45,8 +45,8 @@ const Feedback = () => {
                     <h2>What our clients say</h2>
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
                 </div>
-             
-                {display ? <OwlCarousel 
+
+                {display ? <OwlCarousel
                     className="feedback-slider owl-carousel owl-theme"
                     {...options}
                 >
@@ -61,7 +61,7 @@ const Feedback = () => {
                             <i className="flaticon-right-quote"></i>
                         </div>
                     </div>
-                    
+
                     <div className="clients-item">
                         <div className="info">
                             <img src="/images/clients/client2.png" alt="image" />

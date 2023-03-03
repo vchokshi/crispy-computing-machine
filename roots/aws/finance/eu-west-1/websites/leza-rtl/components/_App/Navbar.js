@@ -23,7 +23,7 @@ const Navbar = () => {
         });
         window.scrollTo(0, 0);
     })
- 
+
     const classOne = menu ? 'collapse navbar-collapse' : 'collapse navbar-collapse show';
     const classTwo = menu ? 'navbar-toggler navbar-toggler-right collapsed' : 'navbar-toggler navbar-toggler-right';
 
@@ -39,13 +39,13 @@ const Navbar = () => {
                                 </a>
                             </Link>
 
-                            <button 
-                                onClick={toggleNavbar} 
+                            <button
+                                onClick={toggleNavbar}
                                 className={classTwo}
-                                type="button" 
-                                data-toggle="collapse" 
-                                data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" 
-                                aria-expanded="false" 
+                                type="button"
+                                data-toggle="collapse"
+                                data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                                aria-expanded="false"
                                 aria-label="Toggle navigation"
                             >
                                 <span className="icon-bar top-bar"></span>
@@ -82,7 +82,7 @@ const Navbar = () => {
                                             </li>
                                         </ul>
                                     </li>
-  
+
                                     <li className="nav-item">
                                         <Link href="#">
                                             <a onClick={e => e.preventDefault()} className="nav-link">
@@ -126,13 +126,13 @@ const Navbar = () => {
                                                     <a onClick={toggleNavbar} className="nav-link">FAQ</a>
                                                 </Link>
                                             </li>
- 
+
                                             <li className="nav-item">
                                                 <Link href="/testimonials" activeClassName="active">
                                                     <a onClick={toggleNavbar} className="nav-link">Testimonials</a>
                                                 </Link>
                                             </li>
- 
+
                                             <li className="nav-item">
                                                 <Link href="#">
                                                     <a onClick={e => e.preventDefault()} className="nav-link">
@@ -145,8 +145,8 @@ const Navbar = () => {
                                                         <Link href="/projects" activeClassName="active">
                                                             <a onClick={toggleNavbar} className="nav-link">Projects</a>
                                                         </Link>
-                                                    </li> 
- 
+                                                    </li>
+
                                                     <li className="nav-item">
                                                         <Link href="/project-details" activeClassName="active">
                                                             <a onClick={toggleNavbar} className="nav-link">Project Details</a>
@@ -154,7 +154,7 @@ const Navbar = () => {
                                                     </li>
                                                 </ul>
                                             </li>
-  
+
                                             <li className="nav-item">
                                                 <Link href="#">
                                                     <a onClick={e => e.preventDefault()} className="nav-link">
@@ -167,13 +167,13 @@ const Navbar = () => {
                                                         <Link href="/sign-in" activeClassName="active">
                                                             <a onClick={toggleNavbar} className="nav-link">Sign In</a>
                                                         </Link>
-                                                    </li> 
+                                                    </li>
 
                                                     <li className="nav-item">
                                                         <Link href="/sign-up" activeClassName="active">
                                                             <a onClick={toggleNavbar} className="nav-link">Sign Up</a>
                                                         </Link>
-                                                    </li> 
+                                                    </li>
                                                 </ul>
                                             </li>
 
@@ -196,7 +196,7 @@ const Navbar = () => {
                                             </li>
                                         </ul>
                                     </li>
-  
+
                                     <li className="nav-item">
                                         <Link href="#">
                                             <a onClick={e => e.preventDefault()} className="nav-link">
@@ -230,7 +230,7 @@ const Navbar = () => {
                                             <a onClick={toggleNavbar} className="nav-link">Loans</a>
                                         </Link>
                                     </li>
-                             
+
                                     <li className="nav-item">
                                         <Link href="#">
                                             <a onClick={e => e.preventDefault()} className="nav-link">
@@ -259,15 +259,15 @@ const Navbar = () => {
                                         </Link>
                                     </li>
                                 </ul>
- 
+
                                 <div className="others-options d-flex align-items-center">
                                     <div className="option-item">
                                         <i className="search-btn flaticon-magnifying-glass" onClick={e => {
-                                            e.preventDefault(); 
+                                            e.preventDefault();
                                             toggleSearchModal()
                                         }}></i>
                                     </div>
-                                    
+
                                     <div className="option-item">
                                         <div className="info">
                                             <i className="flaticon-telephone"></i>
@@ -291,15 +291,15 @@ const Navbar = () => {
                     </div>
                 </div>
             </div>
-            
+
             {/* Search Overlay */}
-            <div className={`search-overlay ${searchModal ? 'search-overlay-active' : null}`}>  
+            <div className={`search-overlay ${searchModal ? 'search-overlay-active' : null}`}>
                 <div className="d-table">
                     <div className="d-table-cell">
                         <div className="search-overlay-layer"></div>
                         <div className="search-overlay-layer"></div>
                         <div className="search-overlay-layer"></div>
-                        
+
                         <div className="search-overlay-close" onClick={e => {e.preventDefault(); toggleSearchModal()}}>
                             <span className="search-overlay-close-line"></span>
                             <span className="search-overlay-close-line"></span>

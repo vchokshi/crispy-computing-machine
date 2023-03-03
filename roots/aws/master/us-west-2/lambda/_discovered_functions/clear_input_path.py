@@ -4,12 +4,11 @@ def lambda_handler(event, context):
 
     import json
     import urllib
-    
+
     res = {}
 
     for dict in event:
         for i in dict:
-            res[i] = dict[i] 
-    
+            res[i] = dict[i]
+
     return res
-    

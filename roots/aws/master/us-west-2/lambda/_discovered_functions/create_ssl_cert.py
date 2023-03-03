@@ -24,7 +24,7 @@ def get_ssl_cert(domain):
 
 def create_ssl_certificate(event):
     client = boto3.client('acm')
-    
+
     response = client.request_certificate(
         DomainName='www.' + event['domain'],
         DomainValidationOptions=[
@@ -44,13 +44,12 @@ def lambda_handler(event, context):
     for val in required_input:
         if event.get(val) is None:
             return 'FAILED'
-    
+
     domain = 'www.' + event['domain']
-    
+
     arn = get_ssl_cert(domain)
-    
+
     if arn is not True:
         arn = create_ssl_certificate(event)
-        
-    return arn
 
+    return arn

@@ -7,7 +7,7 @@ a.in-brand-google {
     }
 }
 .in-brand-facebook,
-a.in-brand-facebook {            
+a.in-brand-facebook {
     background-color: #3B5999;
     color: $base-default-color;
     &:hover {
@@ -47,7 +47,7 @@ a.in-generic-email {
     }
 }
 
-/* download app button */ 
+/* download app button */
 .in-button-app {
     font-size: 12px;
     text-transform: capitalize;
@@ -55,11 +55,11 @@ a.in-generic-email {
     line-height: 15px;
     padding: 6px 12px 7px;
     letter-spacing: 0;
-    span.wrapper {        
+    span.wrapper {
         float: right;
-        span {  
+        span {
             font-weight: $base-heading-weight;
-            font-size: 12px;          
+            font-size: 12px;
             &::before {
                 content: "\A";
                 white-space: pre;

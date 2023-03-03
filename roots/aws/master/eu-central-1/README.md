@@ -68,5 +68,3 @@ Pretend to be a Wordpress Developer. Change the Codex.
 5.2 Run pipeline to deploy the change. Click to see at e.iot4.net
 5.3 Go back to terraform and get the instance_id. Use save() from .helpers to save the ENV VAR
 5.4 In the python directory, pip install -r requirements.txt and python elastio.py -b -i=$AWS_INSTANCE_ID
-
-

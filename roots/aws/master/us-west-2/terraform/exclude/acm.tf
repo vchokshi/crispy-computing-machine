@@ -15,4 +15,3 @@ resource "aws_acm_certificate" "api" {
     create_before_destroy = true
   }
 }
-

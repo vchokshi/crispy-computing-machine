@@ -1,7 +1,7 @@
 ---
 - name: 'Provision image'
   hosts: all
-  become: true 
+  become: true
   tasks:
   - name: 'Install yum dependencies'
     ansible.builtin.package:
@@ -21,4 +21,3 @@
       name: httpd
       state: started
       enabled: true
-

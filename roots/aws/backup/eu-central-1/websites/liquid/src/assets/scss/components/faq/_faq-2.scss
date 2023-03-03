@@ -20,15 +20,15 @@
         i {
             margin: 6px  12px 7px 0;
             float: left;
-        }  
+        }
     }
-    .uk-open .uk-accordion-title .uk-card {        
+    .uk-open .uk-accordion-title .uk-card {
         background-color: $faq-primary-color;
         color: $faq-default-color;
         border-bottom-left-radius: 0px;
         border-bottom-right-radius: 0px;
     }
-    .uk-open .uk-accordion-title .uk-card::after {        
+    .uk-open .uk-accordion-title .uk-card::after {
         content: "\f107";
     }
     .uk-accordion-content {

@@ -9,13 +9,13 @@ const Testimonials = () => {
         <>
             <Navbar />
 
-            <PageBanner 
-                pageTitle="Testimonials" 
-                homePageUrl="/" 
-                homePageText="Home" 
-                activePageText="Testimonials" 
-                imgClass="item-bg-1" 
-            /> 
+            <PageBanner
+                pageTitle="Testimonials"
+                homePageUrl="/"
+                homePageText="Home"
+                activePageText="Testimonials"
+                imgClass="item-bg-1"
+            />
 
             <div className="pt-100 pb-70">
                 <div className="container">
@@ -33,7 +33,7 @@ const Testimonials = () => {
                                 </div>
                             </div>
                         </div>
-                        
+
                         <div className="col-lg-6">
                             <div className="clients-item">
                                 <div className="info">
@@ -108,7 +108,7 @@ const Testimonials = () => {
             </div>
 
             <Partner />
-            
+
             <Footer />
         </>
     )

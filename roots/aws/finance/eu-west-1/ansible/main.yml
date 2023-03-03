@@ -1,8 +1,8 @@
-- name: Build the lamp stack 
+- name: Build the lamp stack
   become: true
   hosts: all
   roles:
-  pre_tasks: 
+  pre_tasks:
   - name: Mount the nfs file system
     become: yes
     mount:
@@ -52,4 +52,3 @@
     #with_items:
       #- index.html
       #- phpinfo.php
-
