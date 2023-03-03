@@ -1,7 +1,7 @@
 - name: Deploy Elastio Backup as Code
   become: true
   hosts: all
-  tasks: 
+  tasks:
     - name: Download the Elastio CLI for Linux
       get_url:
         url: https://raw.githubusercontent.com/elastio/elastio-stack/master/scripts/install-elastio.sh

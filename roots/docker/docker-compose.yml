@@ -4,7 +4,7 @@ version: "3.8"
 ## docker-compose down && docker-compose up --remove-orphans --force-recreate --renew-anon-volumes
 ## This will remove all anonymous volumes (databases, etc.).
 ############################################################
-services: 
+services:
   kali:
     container_name: kali
     image: kalilinux/kali-rolling
@@ -157,7 +157,7 @@ services:
         ipv4_address: 192.168.13.34
 
 ############################################################
-networks: 
+networks:
   vuln-net:
     name: vuln-net
     ipam:
@@ -165,7 +165,7 @@ networks:
       config:
         - subnet: "192.168.13.0/24"
 ############################################################
-volumes: 
+volumes:
   juiceshop:
   dvwa:
   mutillidae:

@@ -29,7 +29,7 @@ const Index3 = () => {
 
             <FunFacts />
 
-            <ProfessionalServices /> 
+            <ProfessionalServices />
 
             <CallUs />
 
@@ -42,7 +42,7 @@ const Index3 = () => {
             <PartnerStyleThree />
 
             <RecentNews />
-            
+
             <Footer />
         </>
     )

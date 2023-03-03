@@ -262,4 +262,3 @@ resource "aws_security_group" "HTTPS-SG" {
     Name = var.project_name
   }
 }
-

@@ -48,4 +48,3 @@ resource "aws_iam_group_policy_attachment" "gator" {
   group      = aws_iam_group.admins.name
   policy_arn = aws_iam_policy.gator.arn
 }
-

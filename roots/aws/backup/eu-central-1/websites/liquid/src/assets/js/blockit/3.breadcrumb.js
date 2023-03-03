@@ -35,7 +35,7 @@ function breadcrumb(options) {
                     createLiElement.innerHTML =`<a href="${e.querySelector('a').attributes[0].textContent}">${e.querySelector('a').innerText}</a>`;
                     breadcrumb.appendChild(createLiElement);
                 })
-                
+
             },
             createBreadcrumbLast: function () {
                 const lastLiElement = breadcrumb.children[breadcrumb.childNodes.length-1];
@@ -43,7 +43,7 @@ function breadcrumb(options) {
 
                 if (lastLiElement) {
                     lastLiElement.remove();
-                    createLiElement.innerHTML = `<span>${lastLiElement.innerText}</span>`; 
+                    createLiElement.innerHTML = `<span>${lastLiElement.innerText}</span>`;
                     breadcrumb.appendChild(createLiElement);
                 }
             },

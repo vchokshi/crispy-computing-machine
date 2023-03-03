@@ -21,11 +21,11 @@ export default async (req, res) => {
         subject: 'Hi there',
         text: text,
         html: `
-            <b>From:</b> ${name} <br /> 
-            <b>Number:</b> ${number} <br /> 
-            <b>Subject:</b> ${subject} <br /> 
-            <b>Message:</b> ${text} 
-        ` 
+            <b>From:</b> ${name} <br />
+            <b>Number:</b> ${number} <br />
+            <b>Subject:</b> ${subject} <br />
+            <b>Message:</b> ${text}
+        `
     };
     try {
         const response = await mailer.sendMail(data);

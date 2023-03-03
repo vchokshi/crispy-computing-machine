@@ -2,7 +2,7 @@
   - name: Debug phpmyadmin directory
     debug:
       var: phpMyAdmin_dir
-      
+
   - name: Stat the phpmyadmin directory to see if it exists
     stat:
       path: "{{phpMyAdmin_dir}}"

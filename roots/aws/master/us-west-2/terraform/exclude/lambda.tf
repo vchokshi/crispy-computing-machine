@@ -196,4 +196,3 @@ resource "aws_route53_record" "api" {
     zone_id                = aws_api_gateway_domain_name.api.regional_zone_id
   }
 }
-

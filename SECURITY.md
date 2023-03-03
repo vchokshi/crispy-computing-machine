@@ -1,6 +1,6 @@
 # Security Policy
 
-There are no released versions of this software. All code in here is sandbox code. 
+There are no released versions of this software. All code in here is sandbox code.
 
 No secrets should be stored in this file.
 

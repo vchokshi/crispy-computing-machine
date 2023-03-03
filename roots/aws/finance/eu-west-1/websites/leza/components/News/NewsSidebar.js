@@ -116,7 +116,7 @@ const NewsSidebar = () => {
                     </li>
                 </ul>
             </div>
- 
+
             <div className="widget widget_tag_cloud">
                 <h3 className="widget-title">Tags</h3>
                 <div className="tagcloud section-bottom">

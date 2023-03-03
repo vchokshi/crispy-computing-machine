@@ -27,8 +27,8 @@
     color: $form-label-color;
     font-size: $form-label-font-size;
 }
-@mixin hook-form-misc(){ 
-    .uk-select:not([multiple]):not([size]) {background-position: 98.7% 50%;} 
+@mixin hook-form-misc(){
+    .uk-select:not([multiple]):not([size]) {background-position: 98.7% 50%;}
     .uk-form-icon {left: 15px;}
     .uk-form-icon-flip {left: auto !important;}
 }

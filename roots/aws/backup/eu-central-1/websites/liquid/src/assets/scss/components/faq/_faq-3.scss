@@ -3,7 +3,7 @@
     .uk-card-default {
         margin-top: 20px;
         border: $faq-border-width solid $faq-border-color;
-        background-color: $faq-default-color;        
+        background-color: $faq-default-color;
     }
     .uk-card-body {
         padding: 20px 22px;
@@ -18,12 +18,12 @@
             top: 25px;
             right: 22px;
             position: absolute;
-        }        
+        }
     }
-    .uk-open .uk-accordion-title::after {        
+    .uk-open .uk-accordion-title::after {
         content: "\f0d7";
     }
-    .uk-open .uk-accordion-title {        
+    .uk-open .uk-accordion-title {
         color: $faq-primary-color;
     }
     .uk-accordion-content {

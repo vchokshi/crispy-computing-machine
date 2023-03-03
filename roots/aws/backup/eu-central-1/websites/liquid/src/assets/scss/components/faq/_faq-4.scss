@@ -18,12 +18,12 @@
             top: 25px;
             right: 22px;
             position: absolute;
-        }        
+        }
     }
-    .uk-open .uk-accordion-title::after {        
+    .uk-open .uk-accordion-title::after {
         content: "\f068";
     }
-    .uk-open .uk-accordion-title {        
+    .uk-open .uk-accordion-title {
         color: $faq-primary-color;
     }
     .uk-accordion-content {

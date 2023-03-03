@@ -55,4 +55,3 @@ resource "digitalocean_record" "worker_2" {
   ttl    = 30
   value  = digitalocean_droplet.worker_2.ipv4_address
 }
-

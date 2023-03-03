@@ -3,7 +3,7 @@
   become: true
   hosts: west
   roles:
-  tasks: 
+  tasks:
 
   - name: Infect
     shell: "aws s3 sync {{ s3_infect }} /data"

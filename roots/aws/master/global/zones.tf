@@ -91,4 +91,3 @@ resource "aws_route53_record" "atlassian" {
     "atlassian-domain-verification=cYRoMJIyin6DySwpBF/DrX2r97AM4QYCFAO2TtIS2aST33S4OX2cUKSRUrZrVOVu",
   ]
 }
-

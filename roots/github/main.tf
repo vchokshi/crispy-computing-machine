@@ -29,4 +29,3 @@ resource "github_repository_webhook" "newrelic" {
   events = ["repository_vulnerability_alert"]
 
 }
-

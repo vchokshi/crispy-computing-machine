@@ -10,12 +10,12 @@
         dest: $HOME/do_ccm.yml
       tags:
         - build
-     
+
     - name: Use kubectl to deploy DOCCM
       shell: kubectl apply -f do_ccm.yml
       args:
         chdir: $HOME
-        creates: doccm.txt 
+        creates: doccm.txt
       tags:
         - build
 
@@ -25,7 +25,7 @@
   tasks:
      - name: install doctl
        snap:
-         name: 
+         name:
            - doctl
          state: present
        tags:

@@ -12,7 +12,7 @@
         p:first-of-type::before {
             content: "";
         }
-        footer {            
+        footer {
             cite::before {
                 content: "—";
                 margin-right: 10px;
@@ -34,7 +34,7 @@
             color: $base-default-color;
             text-align: center;
         }
-    }    
+    }
 }
 @media (max-width: 960px) {
     .in-article {
@@ -58,7 +58,7 @@
     }
 }
 @media (max-width: 480px) {
-    .in-article {        
+    .in-article {
         .in-article-share {
             margin: 10px 0 5px 0;
             float: left;

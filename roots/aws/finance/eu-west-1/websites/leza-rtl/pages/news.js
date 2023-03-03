@@ -9,14 +9,14 @@ const News = () => {
     return (
         <>
             <Navbar />
-            
-            <PageBanner 
-                pageTitle="News" 
-                homePageUrl="/" 
-                homePageText="Home" 
-                activePageText="News" 
-                imgClass="item-bg-9" 
-            /> 
+
+            <PageBanner
+                pageTitle="News"
+                homePageUrl="/"
+                homePageText="Home"
+                activePageText="News"
+                imgClass="item-bg-9"
+            />
 
             <div className="blog-area ptb-100">
                 <div className="container">
@@ -99,7 +99,7 @@ const News = () => {
                                                 </Link>
                                             </h3>
                                             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore dolore magna aliqua. Quis ipsum suspendisse ultrices gravida. Risus commodo viverra maecenas accumsan lacus vel facilisis.  At vero eos et accusam et justo duo dolores et ea rebum.</p>
-                                            
+
                                             <div className="blog-btn">
                                                 <Link href="/news-details">
                                                     <a className="default-btn">
@@ -143,7 +143,7 @@ const News = () => {
                                                 </Link>
                                             </h3>
                                             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore dolore magna aliqua. Quis ipsum suspendisse ultrices gravida. Risus commodo viverra maecenas accumsan lacus vel facilisis.  At vero eos et accusam et justo duo dolores et ea rebum.</p>
-                                            
+
                                             <div className="blog-btn">
                                                 <Link href="/news-details">
                                                     <a className="default-btn">
@@ -187,7 +187,7 @@ const News = () => {
                                                 </Link>
                                             </h3>
                                             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore dolore magna aliqua. Quis ipsum suspendisse ultrices gravida. Risus commodo viverra maecenas accumsan lacus vel facilisis.  At vero eos et accusam et justo duo dolores et ea rebum.</p>
-                                            
+
                                             <div className="blog-btn">
                                                 <Link href="/news-details">
                                                     <a className="default-btn">
@@ -240,7 +240,7 @@ const News = () => {
                     </div>
                 </div>
             </div>
-          
+
             <Footer />
         </>
     )

@@ -13,7 +13,7 @@
         .uk-text-small {
             color: #666;
         }
-        &:hover {          
+        &:hover {
             border-color: $content-primary-color;
             text-decoration: none;
             h4 {
@@ -23,7 +23,7 @@
             .in-icon-wrap {
                 background-color: $content-primary-color;
                 transition: all ease .5s;
-            }            
+            }
         }
     }
 }

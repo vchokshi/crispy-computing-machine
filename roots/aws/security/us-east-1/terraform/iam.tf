@@ -64,4 +64,3 @@ resource "aws_iam_role_policy" "log4j" {
 }
 EOF
 }
-

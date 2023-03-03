@@ -7,10 +7,10 @@ from botocore.exceptions import ClientError
 
 def lambda_handler(event, context):
     client = boto3.client('sqs')
-    
+
     res = {}
     queue_url = 'https://sqs.us-west-2.amazonaws.com/308948682972/Create_New_WP_Domain'
-    
+
     response = client.receive_message(
         QueueUrl=queue_url,
         MaxNumberOfMessages=10,

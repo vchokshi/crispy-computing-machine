@@ -14,11 +14,11 @@ const WhyPeopleChooseUsTwo = () => {
     return (
         <div className="choose-area pt-100 pb-70">
             {/* If you want to change the video need to update videoID */}
-            <ModalVideo 
-                channel='youtube' 
-                isOpen={!isOpen} 
-                videoId='bk7McNUjWgw' 
-                onClose={() => setIsOpen(!isOpen)} 
+            <ModalVideo
+                channel='youtube'
+                isOpen={!isOpen}
+                videoId='bk7McNUjWgw'
+                onClose={() => setIsOpen(!isOpen)}
             />
 
             <div className="container">
@@ -37,7 +37,7 @@ const WhyPeopleChooseUsTwo = () => {
                                 <a
                                     onClick={e => {e.preventDefault(); openModal()}}
                                     className="video-btn popup-youtube"
-                                > 
+                                >
                                     <i className="flaticon-play-button"></i>
                                 </a>
                             </Link>
@@ -55,7 +55,7 @@ const WhyPeopleChooseUsTwo = () => {
                                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt</p>
                                 </div>
                             </div>
-        
+
                             <div className="col-lg-6 col-md-6">
                                 <div className="process-item bg-top2">
                                     <div className="icon">
@@ -65,7 +65,7 @@ const WhyPeopleChooseUsTwo = () => {
                                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt</p>
                                 </div>
                             </div>
-        
+
                             <div className="col-lg-6 col-md-6">
                                 <div className="process-item bg-top3">
                                     <div className="icon">
@@ -75,7 +75,7 @@ const WhyPeopleChooseUsTwo = () => {
                                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt</p>
                                 </div>
                             </div>
-        
+
                             <div className="col-lg-6 col-md-6">
                                 <div className="process-item bg-top4">
                                     <div className="icon">

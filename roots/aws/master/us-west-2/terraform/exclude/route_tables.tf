@@ -70,4 +70,3 @@ resource "aws_route_table_association" "ad" {
   subnet_id      = aws_subnet.ad.id
   route_table_id = aws_vpc.main.main_route_table_id
 }
-

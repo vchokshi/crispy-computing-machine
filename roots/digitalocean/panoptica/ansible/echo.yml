@@ -4,7 +4,7 @@
   become_user: ubuntu
   gather_facts: false
   tasks:
-    - name: Copy the echo template 
+    - name: Copy the echo template
       copy:
         src: echo.yml
         dest: $HOME/
@@ -13,4 +13,4 @@
       shell: kubectl apply -f echo.yml >> echo.txt
       args:
         chdir: $HOME
-        creates: echo.txt 
+        creates: echo.txt

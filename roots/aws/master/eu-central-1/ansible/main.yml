@@ -2,12 +2,12 @@
 # a block-commented Haiku
 # you'll need three pound signs
 
-- name: Build the lamp stack 
+- name: Build the lamp stack
   become: true
   hosts: all
   roles:
           #- role: install-phpmyadmin
-  pre_tasks: 
+  pre_tasks:
     - name: Enable lamp php and php
       shell: amazon-linux-extras install -y lamp-mariadb10.2-php7.2 php7.2
     - name: yum install dependencies
@@ -85,10 +85,3 @@
           #src: /usr/local/bin/aws_completer
           #dest: /usr/bin/aws_completer
           #state: link
-
-
-
-
-
-
-

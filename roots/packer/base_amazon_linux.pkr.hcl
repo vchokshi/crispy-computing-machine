@@ -71,7 +71,7 @@ source "amazon-ebs" "ami" {
   aws_polling {
     delay_seconds = 60
     max_attempts  = 5
-  } 
+  }
   #region_kms_key_ids = {
     #"ap-northeast-1" : "alias/packer"
     #"ap-southeast-2" : "alias/packer"

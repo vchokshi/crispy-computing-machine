@@ -50,4 +50,3 @@
  #aws s3 sync $PROD/yeoman/dist s3://iot4-group/
 
 }
-

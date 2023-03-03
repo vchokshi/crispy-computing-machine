@@ -60,4 +60,3 @@ resource "azurerm_consumption_budget_subscription" "iot" {
     ]
   }
 }
-

@@ -23,5 +23,3 @@
         chdir: $HOME
       tags:
         - destroy
-
-

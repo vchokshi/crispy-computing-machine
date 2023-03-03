@@ -47,4 +47,3 @@ then
 else
   echo "Please use the backup account."
 fi
-

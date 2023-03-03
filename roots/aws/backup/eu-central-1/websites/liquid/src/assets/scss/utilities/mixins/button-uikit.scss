@@ -2,7 +2,7 @@
 
 // uikit button mixins
 // ========================================================================
-@mixin hook-button(){ 
+@mixin hook-button(){
     font-weight: 500;
     text-transform: uppercase;
     letter-spacing: 1px;
@@ -13,8 +13,8 @@
     padding-left: 23px;
     padding-right: 23px;
 }
-@mixin hook-button-default-hover(){ 
-    border-color: darken($button-default-border, 5%); 
+@mixin hook-button-default-hover(){
+    border-color: darken($button-default-border, 5%);
 }
 @mixin hook-inverse-button-default(){
     box-shadow: inset 0px 0px 0px 2px $base-primary-color;

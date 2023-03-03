@@ -4,7 +4,7 @@
   become_user: ubuntu
   gather_facts: false
   tasks:
-    - name: Copy the flask template instrumented using honeycomb 
+    - name: Copy the flask template instrumented using honeycomb
       copy:
         src: flask-honeycomb.yml
         dest: $HOME/
@@ -13,7 +13,7 @@
       shell: kubectl apply -f flask-honeycomb.yml >> flask-honeycomb.txt
       args:
         chdir: $HOME
-        creates: flask-honeycomb.txt 
+        creates: flask-honeycomb.txt
 
     - name: Copy the flask template instrumented with new relic
       copy:
@@ -24,4 +24,4 @@
       shell: kubectl apply -f flask-newrelic.yml >> flask-newrelic.txt
       args:
         chdir: $HOME
-        creates: flask-newrelic.txt 
+        creates: flask-newrelic.txt

@@ -14,13 +14,13 @@ def get_ssl_cert_status(event, context):
             )
     except ClientError as e:
         return 'FAILED'
-            
+
     print(response)
     return response['Certificate']['Status']
 
-    
+
 def lambda_handler(event, context):
-    
+
     # sub_dict = 'launch'
     # event = event.get('launch')
 
@@ -28,8 +28,5 @@ def lambda_handler(event, context):
     for val in required_input:
         if event.get(val) is None:
             return 'FAILED'
-   
+
     return get_ssl_cert_status(event, context)
-   
-        
-        

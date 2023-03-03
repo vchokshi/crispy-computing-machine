@@ -24,14 +24,14 @@ const Gallery = () => {
     return (
         <>
             <Navbar />
-            
-            <PageBanner 
-                pageTitle="Gallery" 
-                homePageUrl="/" 
-                homePageText="Home" 
-                activePageText="Gallery" 
-                imgClass="item-bg-6" 
-            /> 
+
+            <PageBanner
+                pageTitle="Gallery"
+                homePageUrl="/"
+                homePageText="Home"
+                activePageText="Gallery"
+                imgClass="item-bg-6"
+            />
 
             <div className="gallery-area pt-100 pb-100">
                 {/* Lightbox */}
@@ -49,18 +49,18 @@ const Gallery = () => {
                         }
                     />
                 )}
-                
+
                 <div className="container">
                     <div className="row">
                         <div className="col-lg-4 col-md-6">
                             <div className="gallery-item">
                                 <div className="image">
-                                    <div 
+                                    <div
                                         className="link-btn popup-btn"
                                         onClick={e => {e.preventDefault(); setIsOpenImage(true); setPhotoIndex(0);}}
                                     >
                                         <img src="/images/gallery/gallery1.jpg" alt="image" />
-                                    </div> 
+                                    </div>
                                 </div>
                                 <div className="content">
                                     <h3>Financial Planning</h3>
@@ -71,7 +71,7 @@ const Gallery = () => {
                         <div className="col-lg-4 col-md-6">
                             <div className="gallery-item">
                                 <div className="image">
-                                    <div 
+                                    <div
                                         className="link-btn popup-btn"
                                         onClick={e => {e.preventDefault(); setIsOpenImage(true); setPhotoIndex(1);}}
                                     >
@@ -87,7 +87,7 @@ const Gallery = () => {
                         <div className="col-lg-4 col-md-6">
                             <div className="gallery-item">
                                 <div className="image">
-                                    <div 
+                                    <div
                                         className="link-btn popup-btn"
                                         onClick={e => {e.preventDefault(); setIsOpenImage(true); setPhotoIndex(2);}}
                                     >
@@ -103,7 +103,7 @@ const Gallery = () => {
                         <div className="col-lg-4 col-md-6">
                             <div className="gallery-item">
                                 <div className="image">
-                                    <div 
+                                    <div
                                         className="link-btn popup-btn"
                                         onClick={e => {e.preventDefault(); setIsOpenImage(true); setPhotoIndex(3);}}
                                     >
@@ -119,7 +119,7 @@ const Gallery = () => {
                         <div className="col-lg-4 col-md-6">
                             <div className="gallery-item">
                                 <div className="image">
-                                    <div 
+                                    <div
                                         className="link-btn popup-btn"
                                         onClick={e => {e.preventDefault(); setIsOpenImage(true); setPhotoIndex(4);}}
                                     >
@@ -135,7 +135,7 @@ const Gallery = () => {
                         <div className="col-lg-4 col-md-6">
                             <div className="gallery-item">
                                 <div className="image">
-                                    <div 
+                                    <div
                                         className="link-btn popup-btn"
                                         onClick={e => {e.preventDefault(); setIsOpenImage(true); setPhotoIndex(5);}}
                                     >
@@ -151,7 +151,7 @@ const Gallery = () => {
                         <div className="col-lg-4 col-md-6">
                             <div className="gallery-item">
                                 <div className="image">
-                                    <div 
+                                    <div
                                         className="link-btn popup-btn"
                                         onClick={e => {e.preventDefault(); setIsOpenImage(true); setPhotoIndex(6);}}
                                     >
@@ -167,7 +167,7 @@ const Gallery = () => {
                         <div className="col-lg-4 col-md-6">
                             <div className="gallery-item">
                                 <div className="image">
-                                    <div 
+                                    <div
                                         className="link-btn popup-btn"
                                         onClick={e => {e.preventDefault(); setIsOpenImage(true); setPhotoIndex(7);}}
                                     >
@@ -183,7 +183,7 @@ const Gallery = () => {
                         <div className="col-lg-4 col-md-6">
                             <div className="gallery-item">
                                 <div className="image">
-                                    <div 
+                                    <div
                                         className="link-btn popup-btn"
                                         onClick={e => {e.preventDefault(); setIsOpenImage(true); setPhotoIndex(8);}}
                                     >

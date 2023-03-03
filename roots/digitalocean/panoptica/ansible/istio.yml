@@ -5,7 +5,7 @@
   gather_facts: false
   tasks:
     - name: Download Istio
-      unarchive: 
+      unarchive:
         src: https://github.com/istio/istio/releases/download/1.16.1/istio-1.16.1-linux-amd64.tar.gz
         dest: $HOME
         remote_src: true
@@ -42,4 +42,3 @@
         chdir: $HOME/istio-1.16.1
       tags:
         - destroy
-

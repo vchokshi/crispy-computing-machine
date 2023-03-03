@@ -1,10 +1,10 @@
-.in-pricing-3 {    
+.in-pricing-3 {
     .uk-card {
         overflow: hidden;
         border-radius: $pricing-border-radius;
         border: $pricing-border-width solid $pricing-border-color;
         border-top: 0;
-        transition: all ease 600ms;        
+        transition: all ease 600ms;
     }
     .uk-card-default {
         background-color: $pricing-default-color;
@@ -14,13 +14,13 @@
     }
     .uk-card-header {
         border-top: 4px solid $pricing-secondary-color;
-        border-radius: $pricing-border-radius;        
+        border-radius: $pricing-border-radius;
         h6 {
             letter-spacing: 2px;
         }
         .in-pricing-small {
             font-size: 24px;
-            margin-right: -15px;            
+            margin-right: -15px;
             top: -26px;
             position: relative;
         }

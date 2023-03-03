@@ -11,13 +11,13 @@ const ServicesDetails = () => {
         <>
             <Navbar />
 
-            <PageBanner 
-                pageTitle="Services Details" 
-                homePageUrl="/" 
-                homePageText="Home" 
-                activePageText="Services Details" 
-                imgClass="item-bg-6" 
-            /> 
+            <PageBanner
+                pageTitle="Services Details"
+                homePageUrl="/"
+                homePageText="Home"
+                activePageText="Services Details"
+                imgClass="item-bg-6"
+            />
 
             <div className="services-details-area ptb-100">
                 <div className="container">
@@ -147,7 +147,7 @@ const ServicesDetails = () => {
             </div>
 
             <CallUsStyleTwo />
-            
+
             <Footer />
         </>
     )

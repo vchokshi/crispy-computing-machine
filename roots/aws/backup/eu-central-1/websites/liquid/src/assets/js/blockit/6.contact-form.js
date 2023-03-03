@@ -47,7 +47,7 @@ document.addEventListener("DOMContentLoaded", () => {
 						});
 						contactForm.reset();
 					} else {
-						if (result.nameError) 
+						if (result.nameError)
 						document.getElementById('name').classList.add('uk-form-danger');
 						document.getElementById('name').addEventListener('click', function () {
 							document.getElementById('name').classList.remove('uk-form-danger')

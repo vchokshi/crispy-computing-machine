@@ -12,7 +12,7 @@
 - name: set licence seen
   shell: /bin/echo debconf shared/accepted-oracle-license-v1-1 seen true | /usr/bin/debconf-set-selections
   when: ansible_os_family == 'Debian'
-  
+
 - name: Install Oracle JDK
   apt:
     pkg: "{{ item }}"

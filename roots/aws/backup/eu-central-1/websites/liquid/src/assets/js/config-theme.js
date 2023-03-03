@@ -4,7 +4,7 @@
  * Author URI  : http://www.indonez.com
  *
  * Indonez Copyright 2020 All Rights Reserved.
- * -------------------------------------------------------------------------- 
+ * --------------------------------------------------------------------------
  * javascript handle initialization
     1. Slideshow
     2. Counter

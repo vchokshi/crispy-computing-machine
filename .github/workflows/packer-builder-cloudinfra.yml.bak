@@ -34,7 +34,7 @@ jobs:
     if: |
       github.event_name == 'pull_request'
     runs-on: ubuntu-latest
-    container: 
+    container:
       ##Using packer light which is tied to latest, currently at 1.7.2
       image: hashicorp/packer@sha256:523457b5371562c4d9c21621ee85c71c31e7ff53d5ec303a5daf07c55531b84e
     steps:
@@ -52,7 +52,7 @@ jobs:
           packer validate --syntax-only ./packer
     outputs:
       r: ${{ steps.lint.outputs.result }}
-  
+
   dev_builder:
     name: Development Builder
     if: |
@@ -129,7 +129,7 @@ jobs:
         run: |
           echo "::set-output name=report_status::$(
             file_hash="${{ hashFiles('./base_test_results.json') }}"
-            if [ -z "$file_hash" ] || [ "$file_hash" = "5df6e0e2761359d30a8275058e299fcc0381534545f55cf43e41983f5d4c9456" ]; then 
+            if [ -z "$file_hash" ] || [ "$file_hash" = "5df6e0e2761359d30a8275058e299fcc0381534545f55cf43e41983f5d4c9456" ]; then
               printf "failure"
             else
               printf "success"
@@ -195,7 +195,7 @@ jobs:
         id: packer_upload
         # Note: The string here is the hashFiles() hash of a single empty file
         if: |
-          failure() && 
+          failure() &&
           (hashFiles('./base_test_results.json') == '' ||
           hashFiles('./base_test_results.json') == '5df6e0e2761359d30a8275058e299fcc0381534545f55cf43e41983f5d4c9456')
         uses: actions/upload-artifact@v2
@@ -214,7 +214,7 @@ jobs:
         run: |
           echo "::set-output name=report_status::$(
             file_hash="${{ hashFiles('./base_test_results.json') }}"
-            if [ -z "$file_hash" ] || [ "$file_hash" = "5df6e0e2761359d30a8275058e299fcc0381534545f55cf43e41983f5d4c9456" ]; then 
+            if [ -z "$file_hash" ] || [ "$file_hash" = "5df6e0e2761359d30a8275058e299fcc0381534545f55cf43e41983f5d4c9456" ]; then
               printf "failure"
             else
               printf "success"
@@ -234,9 +234,9 @@ jobs:
       - name: Run Packer Build -h
         id: helper_build
         run: |
-          cd $GITHUB_WORKSPACE && 
+          cd $GITHUB_WORKSPACE &&
           sh scripts/packer-builder.sh packer build -h > help.txt
-      - name: Artifact upload 
+      - name: Artifact upload
         uses: actions/upload-artifact@v2
         with:
           name: help
@@ -274,10 +274,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Dump Context
-        env: 
+        env:
           GHC: ${{ toJSON(github)}}
         run: echo "$GHC"
-      - name: Successful Build Artifact download 
+      - name: Successful Build Artifact download
         id: artifact_file
         uses: actions/download-artifact@v2
         with:
@@ -323,13 +323,13 @@ jobs:
     needs: [helper_builder]
     runs-on: ubuntu-latest
     steps:
-      - name: Successful Help Text download 
+      - name: Successful Help Text download
         uses: actions/download-artifact@v2
         with:
           name: help
       - name: Read in the help file
         id: sanitized_help
-        run: | 
+        run: |
           HELP=$(cat ./help.txt)
           HELP="${HELP//$'\n'/'\n'}"
           HELP="${HELP//$'\r'/'\r'}"
@@ -352,8 +352,8 @@ jobs:
   output_failure:
     name: Report Failure
     if: >
-      always() && 
-      (needs.dev_builder.outputs.build_status == 'failure' || 
+      always() &&
+      (needs.dev_builder.outputs.build_status == 'failure' ||
       needs.prod_builder.outputs.build_status == 'failure')
     needs: [dev_builder, prod_builder]
     runs-on: ubuntu-latest
@@ -404,7 +404,7 @@ jobs:
           steps.packer_out.outcome != 'skipped' &&
           steps.packer_out.outcome != 'cancelled'
         run: >
-          echo "::set-output name=contents::$(sed 's/\x1b\[[0-9;]*m//g' ./packer_out.txt | 
+          echo "::set-output name=contents::$(sed 's/\x1b\[[0-9;]*m//g' ./packer_out.txt |
           ruby -e 'puts STDIN.read.gsub("%", "%25").gsub("\r", "%0D").gsub("\n", "%0A")')"
       - name: Add comment on test failure
         uses: peter-evans/create-or-update-comment@v1.4.5
@@ -433,7 +433,7 @@ jobs:
     name: AMI Image Approval
     runs-on: ubuntu-latest
     if: |
-      github.event_name == 'pull_request' && 
+      github.event_name == 'pull_request' &&
       github.event.action == 'closed' &&
       github.event.merged == 'true'
     steps:
@@ -465,7 +465,7 @@ jobs:
               )
             fi
           done
-          
+
   exit:
     name: Complete the Workflow
     needs: approve

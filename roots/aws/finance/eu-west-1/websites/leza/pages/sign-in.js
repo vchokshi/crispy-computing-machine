@@ -8,14 +8,14 @@ const SignIn = () => {
     return (
         <>
             <Navbar />
-            
-            <PageBanner 
-                pageTitle="Sign In" 
-                homePageUrl="/" 
-                homePageText="Home" 
-                activePageText="Sign In" 
-                imgClass="item-bg-7" 
-            /> 
+
+            <PageBanner
+                pageTitle="Sign In"
+                homePageUrl="/"
+                homePageText="Home"
+                activePageText="Sign In"
+                imgClass="item-bg-7"
+            />
 
             <div className="sign-in-area ptb-100">
                 <div className="container">
@@ -24,12 +24,12 @@ const SignIn = () => {
                             <h3>Welcome Back!</h3>
                             <p>Please Sign In to your account.</p>
                         </div>
-                            
+
                         <form>
                             <div className="form-group">
                                 <input type="email" className="form-control" placeholder="Email" />
                             </div>
-                        
+
                             <div className="form-group">
                                 <input type="password" className="form-control" placeholder="Password" />
                             </div>

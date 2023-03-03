@@ -14,4 +14,3 @@ output "caller_user" {
 data "aws_route53_zone" "public" {
   name = local.dns_hosted_zone_name
 }
-
