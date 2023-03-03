@@ -1,6 +1,6 @@
 from twilio.rest import Client
 
-account_sid = 'ACc2d32d72d064b84dcc3d2e65b232df78'
+account_sid = ''
 auth_token = derp
 client = Client(account_sid, auth_token)
 
