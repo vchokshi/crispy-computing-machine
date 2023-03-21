@@ -1,23 +1,25 @@
 ---
 - hosts: all
   become: yes
+  vars:
+    version: "1.26.3-00"
   tasks:
-   - name: create Docker config directory
-     file: path=/etc/docker state=directory
+       #- name: create Docker config directory
+       #file: path=/etc/docker state=directory
 
-   - name: changing Docker to systemd driver
-     copy:
-      dest: "/etc/docker/daemon.json"
-      content: |
-        {
-        "exec-opts": ["native.cgroupdriver=systemd"]
-        }
+       #- name: changing Docker to systemd driver
+       #copy:
+       #dest: "/etc/docker/daemon.json"
+       #content: |
+       #{
+       #"exec-opts": ["native.cgroupdriver=systemd"]
+       #}
 
-   - name: install Docker
-     apt:
-       name: docker.io
-       state: present
-       update_cache: true
+       #- name: install Docker
+       #apt:
+       #name: docker.io
+       #state: present
+       #update_cache: true
 
    - name: install APT Transport HTTPS
      apt:
@@ -37,13 +39,13 @@
 
    - name: install kubelet
      apt:
-       name: kubelet=1.22.4-00
+       name: "kubelet={{version}}"
        state: present
        update_cache: true
 
    - name: install kubeadm
      apt:
-       name: kubeadm=1.22.4-00
+       name: "kubeadm={{version}}"
        state: present
 
 - hosts: control_plane
@@ -51,7 +53,7 @@
   tasks:
    - name: install kubectl
      apt:
-       name: kubectl=1.22.4-00
+       name: "kubectl={{version}}"
        state: present
        force: yes
 
