@@ -33,9 +33,9 @@ resource "github_repository_webhook" "newrelic" {
 resource "github_repository_webhook" "atlantis" {
   repository = data.github_repository.ccm.name
   configuration {
-    url          = "http://atlantis.do.iot4.net/events"
+    url          = "https://atlantis.gcp.iot4.net/events"
     content_type = "json"
-    insecure_ssl = true
+    insecure_ssl = false
     secret       = var.atlantis_webhook_secret
   }
   active = true
