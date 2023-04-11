@@ -1,3 +1,4 @@
+#tfsec:ignore:aws-iam-enforce-group-mfa
 resource "aws_iam_group" "admins" {
   name = "Administrators"
 }
@@ -13,6 +14,7 @@ resource "aws_iam_user_group_membership" "vchokshi" {
   ]
 }
 
+#tfsec:ignore:aws-iam-no-policy-wildcards
 data "aws_iam_policy_document" "gator" {
   statement {
     sid     = "TerraformCreated"

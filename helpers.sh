@@ -21,10 +21,15 @@ load_secrets() {
   check_deps
   export AWS_PROFILE=iot4
   export DO_PAT=$(pass DO_API_TOKEN)
+  export ATLANTIS_WEBHOOK_SECRET=$(pass atlantis_webhook_secret)
+  export CCM_ROBOT_PAT=$(pass ccm-robot-pat)
+  export TF_VAR_atlantis_webhook_secret=$ATLANTIS_WEBHOOK_SECRET
   export ELASTIO_API_KEY=$(pass elastio)
   export GITHUB_TOKEN=$(pass github)
   export HONEYCOMB_TOKEN=$(pass honeycomb.io)
   export NEWRELIC_TOKEN=$(pass newrelic_ingest)
+  export NEWRELIC_API_KEY=$(pass newrelic_api_key)
+  export NEWRELIC_ACCOUNT_NUMBER=$(pass new_relic_account_number)
   export TWILIO_TOKEN=$(pass twillio)
   export OPENAI_API_KEY=$(pass openai_api_key)
   export TF_VAR_atlassian_api_token=$(pass atlassian)
@@ -35,9 +40,12 @@ load_secrets() {
 
 clear_secrets() {
 	unset $(compgen -v | grep AWS)
+	unset $(compgen -v | grep ATLANTIS)
+	unset $(compgen -v | grep CCM_ROBOT)
 	unset $(compgen -v | grep ELASTIO)
 	unset $(compgen -v | grep GITHUB_TOKEN)
 	unset $(compgen -v | grep HONEYCOMB_TOKEN)
+	unset $(compgen -v | grep NEWRELIC)
 	unset $(compgen -v | grep TWILIO_TOKEN)
 	unset $(compgen -v | grep TF_VAR)
 	unset $(compgen -v | grep OPENAI)

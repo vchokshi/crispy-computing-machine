@@ -16,6 +16,6 @@ terraform {
     resource_group_name  = "gcpTFResourceGroup"
     storage_account_name = "gcptfstoracct"
     container_name       = "tfstateblob"
-    key                  = "roots/gcp/global.tfstate"
+    key                  = "roots/gcp/regional.tfstate"
   }
 }

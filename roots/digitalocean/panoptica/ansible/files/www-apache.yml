@@ -10,7 +10,7 @@ spec:
     http:
       paths:
       - pathType: Prefix
-        path: "/apache"
+        path: "/"
         backend:
           service:
             name: www-apache

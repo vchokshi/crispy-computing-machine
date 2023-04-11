@@ -2,6 +2,9 @@
 - name: Import and execute the Digital Ocean Prequesitues playbook
   ansible.builtin.import_playbook: digital_ocean_prereqs.yml
 
+- name: Import and execute the playbook for new relic
+  ansible.builtin.import_playbook: new_relic.yml
+
 - name: Import and execute kubernetes playbook
   ansible.builtin.import_playbook: kubernetes.yml
 
@@ -34,6 +37,9 @@
 
 - name: Import and execute the playbook for flask
   ansible.builtin.import_playbook: flask.yml
+
+- name: Import and execute the playbook for atlantis
+  ansible.builtin.import_playbook: atlantis.yml
 
 # @bug: externaldns fails when source: ingress is used at the same time as source: istio-gateway
 #- name: Import and execute the istio playbook
