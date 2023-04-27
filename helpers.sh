@@ -7,7 +7,18 @@ fi
 alias ll='ls -l'
 alias l='ls -CF'
 
+check_deps() {
+  command -v pass >/dev/null 2>&1 || { echo >&2 "Error: pass not found"; }
+  command -v python3 >/dev/null 2>&1 || { echo >&2 "Error: python3 not found"; }
+  command -v gcloud >/dev/null 2>&1 || { echo >&2 "Error: gcloud not found"; }
+  command -v aws >/dev/null 2>&1 || { echo >&2 "Error: aws not found"; }
+  command -v azure-cli >/dev/null 2>&1 || { echo >&2 "Error: azure-cli not found"; }
+  command -v terraform >/dev/null 2>&1 || { echo >&2 "Error: terraform not found"; }
+}
+check_deps
+
 load_secrets() {
+  check_deps
   export AWS_PROFILE=iot4
   export DO_PAT=$(pass DO_API_TOKEN)
   export ELASTIO_API_KEY=$(pass elastio)

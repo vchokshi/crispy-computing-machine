@@ -42,6 +42,10 @@ When filing an issue, make sure to answer these five questions:
  4. What did you expect to see?
  5. What did you see instead?
 
+## Setup
+
+1. Source the file `helpers.sh` in the root directory. All dependencies will be checked. 
+
 ## Code review process
 
 I'll review PRs as they come in.
