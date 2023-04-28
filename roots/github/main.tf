@@ -29,3 +29,15 @@ resource "github_repository_webhook" "newrelic" {
   events = ["repository_vulnerability_alert"]
 
 }
+
+resource "github_repository_webhook" "atlantis" {
+  repository = data.github_repository.ccm.name
+  configuration {
+    url          = "http://atlantis.do.iot4.net/events"
+    content_type = "json"
+    insecure_ssl = true
+    secret       = var.atlantis_webhook_secret
+  }
+  active = true
+  events = ["issue_comment", "pull_request", "pull_request_review", "push"]
+}

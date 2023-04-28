@@ -1,0 +1,36 @@
+---
+- hosts: control_plane
+  become: yes
+  become_user: ubuntu
+  tasks:
+    - name: Use kubectl to destroy services
+      shell: "kubectl delete -f {{ item }}"
+      args:
+        chdir: $HOME
+      with_items:
+        - atlantis.yml
+        - flask-honeycomb.yml
+        - flask-newrelic.yml
+        - leza.yml
+        - www-apache.yml
+        - www-nginx.yml
+        - hello-kubernetes.yml
+        - echo.yml
+      ignore_errors: true
+
+    - name: Use helm to destroy services
+      shell: "helm uninstall {{ item }}"
+      args:
+        chdir: $HOME
+      with_items:
+        - kubeview
+      ignore_errors: true
+
+    - name: Use kubectl to destroy services
+      shell: "kubectl delete -f {{ item }}"
+      args:
+        chdir: $HOME
+      with_items:
+        - hello-kubernetes-ingress.yml
+        - do_ccm.yml
+      ignore_errors: true

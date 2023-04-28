@@ -91,3 +91,17 @@ resource "aws_route53_record" "atlassian" {
     "atlassian-domain-verification=cYRoMJIyin6DySwpBF/DrX2r97AM4QYCFAO2TtIS2aST33S4OX2cUKSRUrZrVOVu",
   ]
 }
+
+# delegate a subzone to gcp
+resource "aws_route53_record" "gcp" {
+  zone_id = aws_route53_zone.iot.zone_id
+  name    = "gcp.iot4.net"
+  type    = "NS"
+  ttl     = "300"
+  records = [
+    "ns-cloud-e1.googledomains.com",
+    "ns-cloud-e2.googledomains.com",
+    "ns-cloud-e3.googledomains.com",
+    "ns-cloud-e4.googledomains.com",
+  ]
+}
