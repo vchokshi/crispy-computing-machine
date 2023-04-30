@@ -30,3 +30,7 @@ If you're enjoying following along, I'm glad you are. Thanks for joining me.
 Install pre-commit from pip and run `pre-commit`
 
 Vihar
+
+## Sponsorship
+
+Sponsorship can be sent to the following BTC address: bc1q6ytsxxluzq3v3dgdwhkurml5tprva9wz8h6cpd
