@@ -9,6 +9,6 @@ locals {
 
   github_repo_allow_list = "github.com/vchokshi/*"
   github_user            = "crispy-computing-robot"
-  github_token           = github_token
-  github_webhook_secret  = github_webhoom_secret
+  github_token           = var.ccm_robot_pat
+  github_webhook_secret  = var.atlantis_webhook_secret
 }

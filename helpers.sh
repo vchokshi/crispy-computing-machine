@@ -24,6 +24,7 @@ load_secrets() {
   export ATLANTIS_WEBHOOK_SECRET=$(pass atlantis_webhook_secret)
   export CCM_ROBOT_PAT=$(pass ccm-robot-pat)
   export TF_VAR_atlantis_webhook_secret=$ATLANTIS_WEBHOOK_SECRET
+  export TF_VAR_ccm_robot_pat=$CCM_ROBOT_PAT
   export ELASTIO_API_KEY=$(pass elastio)
   export GITHUB_TOKEN=$(pass github)
   export HONEYCOMB_TOKEN=$(pass honeycomb.io)
