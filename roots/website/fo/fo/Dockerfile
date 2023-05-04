@@ -1,7 +1,8 @@
-FROM node:alpine
-RUN mkdir /app
+FROM --platform=linux/amd64 node:16
 WORKDIR /app
-COPY package*.json /app
+COPY package*.json /
 RUN npm install
-COPY . /app
-CMD ["npm", "run", "build"]
+COPY . .
+RUN npm run build
+EXPOSE 3000
+CMD ["npm", "start"]

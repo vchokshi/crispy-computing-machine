@@ -6,43 +6,43 @@ const menus = [
         namesub: [
             {
                 id: 1,
-                sub: 'Home 01',
+                sub: 'DevOps',
                 links: '/',
                 submenu: undefined
             },
             {
                 id: 2,
-                sub: 'Home 02',
+                sub: 'Cybersecurity',
                 links: '/index-v2',
                 submenu: undefined
             },
             {
                 id: 3,
-                sub: 'Home 03',
+                sub: 'CI/CD',
                 links: '/index-v3',
                 submenu: undefined
             },
             {
                 id: 4,
-                sub: 'Home 04',
+                sub: 'CSPM',
                 links: '/index-v4',
                 submenu: undefined
             },
             {
                 id: 5,
-                sub: 'Home 05',
+                sub: 'CNAPP',
                 links: 'index-v5',
                 submenu: undefined
             },
             {
                 id: 6,
-                sub: 'Home 06',
+                sub: 'Scaled Agile Framework',
                 links: '/index-v6',
                 submenu: undefined
             },
             {
                 id: 7,
-                sub: 'Home 07',
+                sub: 'Penetration Testing',
                 links: '/index-v7',
                 submenu: undefined
             }
@@ -126,7 +126,7 @@ const menus = [
                 links: '/blog-single',
                 submenu: undefined
             },
-            
+
 
         ],
     },
