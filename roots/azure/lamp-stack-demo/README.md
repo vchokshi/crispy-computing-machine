@@ -1,5 +1,7 @@
 # Azure Sandbox
 
+Type: MVP
+
 This is azure code for cybersecurity class.
 
 Requires azure login (`az login`)

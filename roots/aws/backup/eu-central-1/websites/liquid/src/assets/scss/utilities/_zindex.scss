@@ -1,9 +1,0 @@
-.in-z-index {
-    position: relative;
-    &.top {
-        z-index: 1;
-    }
-    &.bottom {
-        z-index: -1;
-    }
-}

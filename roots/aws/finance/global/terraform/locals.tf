@@ -1,7 +1,7 @@
 locals {
   project       = "finance"
   owner         = "Vihar Chokshi"
-  email_address = "vchokshi@vipert491"
+  email_address = "vchokshi23@gmail.com"
 
   dns_hosted_zone_name = "finance.iot4.net"
   cluster_name         = local.project

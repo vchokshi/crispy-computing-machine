@@ -1,0 +1,46 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd" >
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1">
+<metadata>
+Created by FontForge 20160407 at Wed Jun  1 03:52:22 2016
+ By Jimmy Wärting
+</metadata>
+<defs>
+<font id="flexslider-icon" horiz-adv-x="288" >
+  <font-face 
+    font-family="flexslider-icon"
+    font-weight="400"
+    font-stretch="normal"
+    units-per-em="448"
+    panose-1="2 0 5 3 0 0 0 0 0 0"
+    ascent="384"
+    descent="-64"
+    bbox="0 -64 448 384"
+    underline-thickness="0"
+    underline-position="0"
+    unicode-range="U+F000-F005"
+  />
+<missing-glyph horiz-adv-x="448" 
+ />
+    <glyph glyph-name=".notdef" horiz-adv-x="448" 
+ />
+    <glyph glyph-name=".notdef" horiz-adv-x="448" 
+ />
+    <glyph glyph-name=".null" horiz-adv-x="0" 
+ />
+    <glyph glyph-name="nonmarkingreturn" horiz-adv-x="149" 
+ />
+    <glyph glyph-name="uniF001" unicode="&#xf001;" 
+d="M186 -9l-164 163q-9 9 -9 22.5t9 22.5l164 163q9 9 22.5 9t22.5 -9l19 -19q9 -9 9 -22.5t-9 -22.5l-122 -122l122 -121q9 -10 9 -23t-9 -22l-19 -19q-9 -9 -22.5 -9t-22.5 9z" />
+    <glyph glyph-name="uniF002" unicode="&#xf002;" 
+d="M275 176q0 -13 -9 -23l-164 -163q-9 -9 -22 -9t-22 9l-20 19q-9 10 -9 23t9 22l122 122l-122 121q-9 10 -9 23t9 22l20 19q8 10 22 10t22 -10l164 -163q9 -9 9 -22z" />
+    <glyph glyph-name="uniF003" unicode="&#xf003;" horiz-adv-x="352" 
+d="M346 152l-332 -184q-6 -4 -10 -1t-4 9v368q0 6 4 9t10 -1l332 -184q6 -4 6 -8t-6 -8z" />
+    <glyph glyph-name="uniF004" unicode="&#xf004;" horiz-adv-x="384" 
+d="M384 336v-352q0 -6 -5 -11t-11 -5h-128q-6 0 -11 5t-5 11v352q0 6 5 11t11 5h128q6 0 11 -5t5 -11zM160 336v-352q0 -6 -5 -11t-11 -5h-128q-6 0 -11 5t-5 11v352q0 6 5 11t11 5h128q6 0 11 -5t5 -11z" />
+    <glyph glyph-name="uniF005" unicode="&#xf005;" horiz-adv-x="416" 
+d="M403 208q0 -13 -9 -22l-163 -163q-10 -10 -23 -10q-14 0 -22 10l-163 163q-10 8 -10 22q0 13 10 23l18 19q10 9 23 9t22 -9l122 -122l122 122q9 9 22 9t23 -9l19 -19q9 -10 9 -23z" />
+    <glyph glyph-name="uniF000" unicode="&#xf000;" horiz-adv-x="0" 
+d="M0 384l448 -448h-448v448z" />
+  </font>
+</defs></svg>
