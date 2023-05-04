@@ -2,10 +2,11 @@ resource "aws_default_security_group" "default" {
   vpc_id = module.vpc.vpc_id
 
   ingress {
-    protocol    = "tcp"
-    from_port   = 22
-    to_port     = 22
-    cidr_blocks = ["${chomp(data.http.myip.body)}/32"]
+    protocol  = "tcp"
+    from_port = 22
+    to_port   = 22
+    #cidr_blocks = ["${chomp(data.http.myip.body)}/32"]
+    cidr_blocks = ["0.0.0.0/0"]
   }
 
   ingress {
