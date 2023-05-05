@@ -20,3 +20,10 @@ output "cluster_name" {
   description = "Kubernetes Cluster Name"
   value       = module.eks.cluster_name
 }
+output "irsa_ebs_csi_arn" {
+  value = module.irsa-ebs-csi.iam_role_arn
+}
+
+output "irsa_lb_controller_arn" {
+  value = module.load_balancer_controller_irsa_role.iam_role_arn
+}

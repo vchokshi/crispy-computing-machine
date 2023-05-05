@@ -83,14 +83,18 @@ data "aws_iam_policy" "ebs_csi_policy" {
   arn = "arn:aws:iam::aws:policy/service-role/AmazonEBSCSIDriverPolicy"
 }
 
+
 module "irsa-ebs-csi" {
   source  = "terraform-aws-modules/iam/aws//modules/iam-assumable-role-with-oidc"
   version = "4.7.0"
 
-  create_role                   = true
-  role_name                     = "eks-demo-role"
-  provider_url                  = module.eks.oidc_provider
-  role_policy_arns              = [data.aws_iam_policy.ebs_csi_policy.arn]
+  create_role  = true
+  role_name    = "eks-demo-role"
+  provider_url = module.eks.oidc_provider
+  role_policy_arns = [
+    data.aws_iam_policy.ebs_csi_policy.arn,
+    #data.aws_iam_policy.eks_cni_policy.arn,
+  ]
   oidc_fully_qualified_subjects = ["system:serviceaccount:kube-system:ebs-csi-controller-sa"]
 }
 
@@ -104,4 +108,27 @@ resource "aws_eks_addon" "ebs-csi" {
     "terraform" = "true"
   }
 }
+
+# End Hashi
+
+data "aws_iam_policy" "eks_cni_policy" {
+  arn = "arn:aws:iam::aws:policy/AmazonEKS_CNI_Policy"
+}
+
+module "load_balancer_controller_irsa_role" {
+  source = "terraform-aws-modules/iam/aws//modules/iam-role-for-service-accounts-eks"
+
+  create_role                            = true
+  role_name                              = "eks-demo-load-balancer-controller"
+  attach_load_balancer_controller_policy = true
+  attach_vpc_cni_policy                  = true
+  vpc_cni_enable_ipv4                    = true
+  oidc_providers = {
+    ex = {
+      provider_arn               = module.eks.oidc_provider_arn
+      namespace_service_accounts = ["kube-system:aws-load-balancer-controller"]
+    }
+  }
+}
+
 
