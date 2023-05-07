@@ -23,3 +23,6 @@
 
     - name: Deploy the 2048 game
       shell: kubectl apply -f ./files/2048_full.yaml
+
+    - name: Deploy the echo server
+      shell: kubectl apply -f ./files/echoserver.yml
