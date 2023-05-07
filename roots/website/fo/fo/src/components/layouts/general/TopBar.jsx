@@ -10,10 +10,10 @@ class TopBar extends Component {
                             <div className="col-md-12">
                                 <ul className="flat-information">
                                     <li className="phone">
-                                        <Link to="#" title="Phone number"><i>Call us: 290 986 1386</i></Link>
+                                        <Link to="#" title="Phone number"><i>Call us: 480 236 5525</i></Link>
                                     </li>
                                     <li className="email">
-                                        <Link to="#" title="Email address"><i>Email: support24-7@gmail.com</i></Link>
+                                        <Link to="#" title="Email address"><i>Email: vchokshi23@gmail.com</i></Link>
                                     </li>
                                 </ul>
                                 <div className="style-box text-right">

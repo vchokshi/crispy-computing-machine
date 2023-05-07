@@ -16,6 +16,7 @@
         - www-nginx.yml
         - hello-kubernetes.yml
         - echo.yml
+        - fo.yml
       ignore_errors: true
 
     - name: Use helm to destroy services
@@ -34,3 +35,27 @@
         - hello-kubernetes-ingress.yml
         - do_ccm.yml
       ignore_errors: true
+
+    - name: delete all old files
+      file:
+        path: "$HOME/{{ item }}"
+        state: absent
+      with_items:
+        - atlantis.yml
+        - flask-honeycomb.yml
+        - flask-newrelic.yml
+        - leza.yml
+        - www-apache.yml
+        - www-nginx.yml
+        - hello-kubernetes.yml
+        - echo.yml
+        - fo.yml
+        - atlantis.txt
+        - flask-honeycomb.txt
+        - flask-newrelic.txt
+        - leza.txt
+        - www-apache.txt
+        - www-nginx.txt
+        - hello-kubernetes.txt
+        - echo.txt
+        - fo.txt

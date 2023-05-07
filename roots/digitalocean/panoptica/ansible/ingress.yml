@@ -13,3 +13,6 @@
       shell: helm upgrade --install ingress-nginx ingress-nginx/ingress-nginx -f ingress-values.yml
       args:
         chdir: $HOME
+    - name: Pause for 30 seconds becasue ingress sometimes needs some time.
+      ansible.builtin.pause:
+        seconds: 30

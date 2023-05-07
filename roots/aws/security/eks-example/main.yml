@@ -1,0 +1,28 @@
+---
+- hosts: localhost
+  become: no
+  gather_facts: false
+  tasks:
+    - name: Get the kubeconfing
+      shell: aws eks update-kubeconfig --region us-east-2 --name eks-demo
+
+    - name: Create the aws load balancer service account
+      shell: kubectl apply -f ./files/aws-load-balancer-controller-service-account.yaml
+
+    - name: Install cert-manager
+      shell: kubectl apply --validate=false -f ./files/cert-manager.yaml
+
+    - name: Install the network controller
+      shell: kubectl apply -f ./files/v2_4_7_full.yaml
+
+    - name: Install the ingress class
+      shell: kubectl apply -f ./files/v2_4_7_ingclass.yaml
+
+    - name: Install Metrics Server
+      shell: kubectl apply -f ./files/components.yaml
+
+    - name: Deploy the 2048 game
+      shell: kubectl apply -f ./files/2048_full.yaml
+
+    - name: Deploy the echo server
+      shell: kubectl apply -f ./files/echoserver.yml
