@@ -2,7 +2,7 @@ resource "digitalocean_droplet" "controller" {
   image    = "ubuntu-20-04-x64"
   name     = "controller"
   region   = "SFO3"
-  size     = "s-4vcpu-8gb"
+  size     = "s-8vcpu-16gb"
   ssh_keys = [digitalocean_ssh_key.vchokshi.fingerprint]
 }
 
@@ -21,7 +21,7 @@ resource "digitalocean_droplet" "worker_1" {
   image    = "ubuntu-20-04-x64"
   name     = "worker-1"
   region   = "SFO3"
-  size     = "s-4vcpu-8gb"
+  size     = "s-8vcpu-16gb"
   ssh_keys = [digitalocean_ssh_key.vchokshi.fingerprint]
 }
 
@@ -33,7 +33,7 @@ resource "digitalocean_droplet" "worker_2" {
   image    = "ubuntu-20-04-x64"
   name     = "worker-2"
   region   = "SFO3"
-  size     = "s-4vcpu-8gb"
+  size     = "s-8vcpu-16gb"
   ssh_keys = [digitalocean_ssh_key.vchokshi.fingerprint]
 }
 
