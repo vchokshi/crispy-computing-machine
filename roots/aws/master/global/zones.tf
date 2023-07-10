@@ -44,6 +44,18 @@ resource "aws_route53_record" "backup" {
   ]
 }
 
+resource "aws_route53_zone" "aws" {
+  name = "aws.iot4.net"
+}
+resource "aws_route53_record" "aws" {
+  zone_id = aws_route53_zone.iot.zone_id
+  name    = "aws.iot4.net"
+  type    = "NS"
+  ttl     = "300"
+  records = aws_route53_zone.aws.name_servers
+}
+
+
 resource "aws_route53_record" "security" {
   zone_id = aws_route53_zone.iot.zone_id
   name    = "security.iot4.net"
