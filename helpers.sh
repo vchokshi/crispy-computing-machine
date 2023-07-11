@@ -111,3 +111,7 @@ cherrypick() {
 
     GIT_AUTHOR_DATE='$1' GIT_COMMITTER_DATE='$2' git cherry-pick $3
 }
+cleanup() {
+    find ~ -type d -name .terraform -exec rm -r {} \;
+    docker system prune -a -f
+}
