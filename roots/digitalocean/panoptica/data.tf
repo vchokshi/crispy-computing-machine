@@ -51,3 +51,7 @@ data "aws_route53_zone" "public" {
   name = "aws.iot4.net"
 
 }
+
+data "http" "myip" {
+  url = "http://ipv4.icanhazip.com"
+}

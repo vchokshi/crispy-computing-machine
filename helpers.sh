@@ -79,7 +79,16 @@ alias gp="git push"
 alias gpf="git push --force"
 alias gcan!="git commit -v -a --no-edit --amend"
 alias ghprc="gbuu && gh pr create"
-alias rr="source ~/.bashrc"
+case $SHELL in
+*/zsh)
+  alias rr="source ~/.zshrc"
+  ;;
+*/bash)
+  alias rr="source ~/.bashrc"
+  ;;
+*)
+   # assume something else
+esac
 
 alias dodns="doctl compute domain records list do.iot4.net"
 alias dodrops="doctl compute droplet list"
@@ -114,4 +123,5 @@ cherrypick() {
 cleanup() {
     find ~ -type d -name .terraform -exec rm -r {} \;
     docker system prune -a -f
+    rm -rf ~/.venvs
 }
