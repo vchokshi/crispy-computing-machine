@@ -15,3 +15,17 @@
       authorized_key: user=ubuntu key="{{item}}"
       with_file:
         - ~/.ssh/id_rsa.pub
+
+    - name: install APT Transport HTTPS
+      apt:
+        name: apt-transport-https
+        state: present
+
+- hosts: aws
+  become: yes
+  tasks:
+    - name: Add gpg using apt
+      apt:
+        name: gnupg
+        update_cache: yes
+        state: present

@@ -1,9 +1,12 @@
 ---
-- name: Import and execute the Digital Ocean Prequesitues playbook
-  ansible.builtin.import_playbook: digital_ocean_prereqs.yml
+- name: Import and execute the Prequesitues playbook
+  ansible.builtin.import_playbook: prereqs.yml
 
-#- name: Import and execute the playbook for new relic
-  #ansible.builtin.import_playbook: new_relic.yml
+- name: Import and execute the playbook for new relic
+  ansible.builtin.import_playbook: new_relic.yml
+
+- name: Import and execute container runtime interface playbook
+  ansible.builtin.import_playbook: cri.yml
 
 - name: Import and execute kubernetes playbook
   ansible.builtin.import_playbook: kubernetes.yml
@@ -51,5 +54,5 @@
 #- name: Import and execute the bookinfo_apps playbook
   #ansible.builtin.import_playbook: bookinfo_apps.yml
 
-#- name: Import and execute the panoptica playbook
+  #- name: Import and execute the panoptica playbook
   #ansible.builtin.import_playbook: panoptica.yml
