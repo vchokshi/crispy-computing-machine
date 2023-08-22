@@ -39,6 +39,10 @@ load_secrets() {
   export TF_VAR_do_token=$DO_PAT
 }
 
+canary_test(){
+    export AWS_PROFILE=canary
+}
+
 clear_secrets() {
 	unset $(compgen -v | grep AWS)
 	unset $(compgen -v | grep ATLANTIS)
