@@ -1,6 +1,6 @@
 resource "azurerm_network_interface" "web_nic" {
   provider            = azurerm.iot4
-  count               = 2
+  count               = 4
   name                = "${local.stack-color}-web-net-${count.index}"
   location            = azurerm_resource_group.rg.location
   resource_group_name = azurerm_resource_group.rg.name
@@ -14,7 +14,7 @@ resource "azurerm_network_interface" "web_nic" {
 
 resource "azurerm_linux_virtual_machine" "web" {
   provider              = azurerm.iot4
-  count                 = 2
+  count                 = 4
   name                  = "${local.stack-color}-web-${count.index}"
   location              = azurerm_resource_group.rg.location
   resource_group_name   = azurerm_resource_group.rg.name
