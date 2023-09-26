@@ -23,6 +23,22 @@ resource "azurerm_lb" "lb" {
   }
 }
 
+data "azurerm_lb_backend_address_pool" "beap" {
+  provider        = azurerm.iot4
+  name            = "${local.stack-color}-backend-address-pool"
+  loadbalancer_id = azurerm_lb.lb.id
+}
+
+resource "azurerm_network_interface_backend_address_pool_association" "beap_ass" {
+  provider                = azurerm.iot4
+  count                   = 2
+  network_interface_id    = azurerm_network_interface.web_nic[count.index].id
+  ip_configuration_name   = "${local.stack-color}-web-nic-${count.index}-config"
+  backend_address_pool_id = data.azurerm_lb_backend_address_pool.beap.id
+
+}
+
+
 resource "azurerm_dns_a_record" "dvwa" {
   provider            = azurerm.iot4
   name                = "dvwa"

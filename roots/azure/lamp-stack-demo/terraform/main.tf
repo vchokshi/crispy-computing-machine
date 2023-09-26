@@ -103,3 +103,9 @@ resource "azurerm_availability_set" "azaz" {
   platform_update_domain_count = 2
   tags                         = local.common_tags
 }
+
+resource "azurerm_subnet_network_security_group_association" "nsg_ass" {
+  provider                  = azurerm.iot4
+  subnet_id                 = azurerm_subnet.s.id
+  network_security_group_id = azurerm_network_security_group.nsg.id
+}
