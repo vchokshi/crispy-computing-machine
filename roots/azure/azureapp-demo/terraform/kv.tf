@@ -1,12 +1,20 @@
 resource "azurerm_key_vault" "kv" {
-  provider                    = azurerm.asu
+  provider = azurerm.iot4
+  ## You can try to create this in azurem.asu to prove CAF policies work
+  #provider                    = azurerm.asu
   name                        = "azure-webapp-key-vault"
   location                    = azurerm_resource_group.rg.location
   resource_group_name         = azurerm_resource_group.rg.name
   enabled_for_disk_encryption = true
   tenant_id                   = data.azurerm_client_config.current.tenant_id
   soft_delete_retention_days  = 7
-  purge_protection_enabled    = false
+  #tfsec:ignore:azure-keyvault-no-purge
+  purge_protection_enabled = false
+  network_acls {
+    bypass         = "AzureServices"
+    default_action = "Deny"
+
+  }
 
   sku_name = "standard"
 
@@ -24,7 +32,7 @@ data "azuread_service_principal" "web_app_resource_provider" {
 }
 
 resource "azurerm_key_vault_access_policy" "web_app_resource_provider" {
-  provider     = azurerm.asu
+  provider     = azurerm.iot4
   key_vault_id = azurerm_key_vault.kv.id
 
   tenant_id = data.azurerm_client_config.current.tenant_id
@@ -32,18 +40,16 @@ resource "azurerm_key_vault_access_policy" "web_app_resource_provider" {
 
   secret_permissions = [
     "Get"
-
   ]
 
   certificate_permissions = [
     "Get"
-
   ]
 
 }
 
 resource "azurerm_key_vault_certificate" "kvc" {
-  provider     = azurerm.asu
+  provider     = azurerm.iot4
   name         = "azure-webapp-vault-cert"
   key_vault_id = azurerm_key_vault.kv.id
 
@@ -73,7 +79,7 @@ resource "azurerm_key_vault_certificate" "kvc" {
 
 
 resource "azurerm_app_service_certificate" "cv" {
-  provider            = azurerm.asu
+  provider            = azurerm.iot4
   name                = "cv-cert"
   resource_group_name = azurerm_resource_group.rg.name
   location            = azurerm_resource_group.rg.location
