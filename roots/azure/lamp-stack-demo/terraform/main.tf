@@ -25,7 +25,7 @@ resource "azurerm_subnet" "s" {
 
 resource "azurerm_network_security_group" "nsg" {
   provider            = azurerm.iot4
-  name                = "${local.stack-color}-nsg"
+  name                = "${local.stack-color}-jump-nsg"
   location            = azurerm_resource_group.rg.location
   resource_group_name = azurerm_resource_group.rg.name
 
@@ -52,6 +52,14 @@ resource "azurerm_network_security_group" "nsg" {
     source_address_prefix      = "10.0.0.0/24"
     destination_address_prefix = "VirtualNetwork"
   }
+}
+
+resource "azurerm_network_security_group" "web_nsg" {
+  provider            = azurerm.iot4
+  name                = "${local.stack-color}-web-nsg"
+  location            = azurerm_resource_group.rg.location
+  resource_group_name = azurerm_resource_group.rg.name
+
   security_rule {
     name                   = "HTTP_80"
     priority               = 1003
@@ -61,8 +69,8 @@ resource "azurerm_network_security_group" "nsg" {
     source_port_range      = "*"
     destination_port_range = "80"
     #tfsec:ignore:azure-network-no-public-ingress
-    source_address_prefix = "0.0.0.0/0"
-    #source_address_prefix      = chomp(data.http.myip.body)
+    #source_address_prefix = "0.0.0.0/0"
+    source_address_prefix      = chomp(data.http.myip.body)
     destination_address_prefix = "AzureLoadBalancer"
   }
   security_rule {
@@ -74,8 +82,8 @@ resource "azurerm_network_security_group" "nsg" {
     source_port_range      = "*"
     destination_port_range = "808"
     #tfsec:ignore:azure-network-no-public-ingress
-    source_address_prefix = "0.0.0.0/0"
-    #source_address_prefix      = chomp(data.http.myip.body)
+    #source_address_prefix = "0.0.0.0/0"
+    source_address_prefix      = chomp(data.http.myip.body)
     destination_address_prefix = "AzureLoadBalancer"
   }
   security_rule {
@@ -87,8 +95,8 @@ resource "azurerm_network_security_group" "nsg" {
     source_port_range      = "*"
     destination_port_range = "8080"
     #tfsec:ignore:azure-network-no-public-ingress
-    source_address_prefix = "0.0.0.0/0"
-    #source_address_prefix      = chomp(data.http.myip.body)
+    #source_address_prefix = "0.0.0.0/0"
+    source_address_prefix      = chomp(data.http.myip.body)
     destination_address_prefix = "AzureLoadBalancer"
   }
 
@@ -104,8 +112,14 @@ resource "azurerm_availability_set" "azaz" {
   tags                         = local.common_tags
 }
 
-resource "azurerm_subnet_network_security_group_association" "nsg_ass" {
+#resource "azurerm_subnet_network_security_group_association" "nsg_ass" {
+#provider                  = azurerm.iot4
+#subnet_id                 = azurerm_subnet.s.id
+#network_security_group_id = azurerm_network_security_group.nsg.id
+#}
+
+resource "azurerm_network_interface_security_group_association" "nsg_ass_jump" {
   provider                  = azurerm.iot4
-  subnet_id                 = azurerm_subnet.s.id
+  network_interface_id      = azurerm_network_interface.nic.id
   network_security_group_id = azurerm_network_security_group.nsg.id
 }
