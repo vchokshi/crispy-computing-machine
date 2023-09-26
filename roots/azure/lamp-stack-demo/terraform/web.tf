@@ -1,6 +1,6 @@
 resource "azurerm_network_interface" "web_nic" {
   provider            = azurerm.iot4
-  count               = 4
+  count               = 1
   name                = "${local.stack-color}-web-net-${count.index}"
   location            = azurerm_resource_group.rg.location
   resource_group_name = azurerm_resource_group.rg.name
@@ -14,7 +14,7 @@ resource "azurerm_network_interface" "web_nic" {
 
 resource "azurerm_linux_virtual_machine" "web" {
   provider              = azurerm.iot4
-  count                 = 4
+  count                 = 1
   name                  = "${local.stack-color}-web-${count.index}"
   location              = azurerm_resource_group.rg.location
   resource_group_name   = azurerm_resource_group.rg.name
@@ -41,7 +41,7 @@ resource "azurerm_linux_virtual_machine" "web" {
 }
 
 resource "azurerm_managed_disk" "d" {
-  count                = 2
+  count                = 1
   provider             = azurerm.iot4
   name                 = "${local.stack-color}-disk-${count.index}"
   location             = azurerm_resource_group.rg.location
@@ -53,7 +53,7 @@ resource "azurerm_managed_disk" "d" {
 }
 
 resource "azurerm_virtual_machine_data_disk_attachment" "d" {
-  count              = 2
+  count              = 1
   provider           = azurerm.iot4
   managed_disk_id    = azurerm_managed_disk.d[count.index].id
   virtual_machine_id = azurerm_linux_virtual_machine.web[count.index].id
