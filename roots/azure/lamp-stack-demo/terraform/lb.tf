@@ -38,7 +38,6 @@ resource "azurerm_network_interface_backend_address_pool_association" "beap_ass"
 
 }
 
-
 resource "azurerm_dns_a_record" "dvwa" {
   provider            = azurerm.iot4
   name                = "dvwa"
