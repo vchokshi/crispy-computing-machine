@@ -89,10 +89,10 @@
         state: link
     when: data.stat.isdir is defined and data.stat.isdir
 
-  - name: Enable the httpd service
+  - name: DISABLE the httpd service
     service:
       name: apache2
-      state: started
+      state: stopped
       enabled: true
 
 - name: Configure Elk VM with Docker
