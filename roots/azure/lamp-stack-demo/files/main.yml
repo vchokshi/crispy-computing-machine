@@ -38,12 +38,12 @@
   - name: Run the bootstrap script
     shell: /tmp/bootstrap.sh
 
-  - name: DOCKER - DWVA - PORT 808
+  - name: DOCKER - DWVA - PORT 80
     docker_container:
       name: dvwa
       image: cyberxsecurity/dvwa
       state: started
-      published_ports: 808:80
+      published_ports: 80:80
 
   - name: DOCKER - PROJECT1 - PORT 8080
     docker_container:
