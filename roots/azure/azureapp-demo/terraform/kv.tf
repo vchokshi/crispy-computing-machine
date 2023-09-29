@@ -2,7 +2,7 @@ resource "azurerm_key_vault" "kv" {
   provider = azurerm.iot4
   ## You can try to create this in azurem.asu to prove CAF policies work
   #provider                    = azurerm.asu
-  name                        = "azure-webapp-key-vault"
+  name                        = "azweba-key-vault"
   location                    = azurerm_resource_group.rg.location
   resource_group_name         = azurerm_resource_group.rg.name
   enabled_for_disk_encryption = true
@@ -13,23 +13,38 @@ resource "azurerm_key_vault" "kv" {
   network_acls {
     bypass         = "AzureServices"
     default_action = "Deny"
-
+    ip_rules       = [chomp(data.http.myip.response_body)]
   }
 
   sku_name = "standard"
 
-  access_policy {
-    tenant_id = data.azurerm_client_config.current.tenant_id
-    object_id = data.azurerm_client_config.current.object_id
-
-    certificate_permissions = ["Get", "Import", "List", "Delete", "Purge"]
-    key_permissions         = ["Get", "Import", "List", "Delete", "Purge"]
-  }
+  #access_policy {
+  #tenant_id = data.azurerm_client_config.current.tenant_id
+  #object_id = data.azurerm_client_config.current.object_id
+  #
+  #certificate_permissions = ["Create", "Get", "Import", "List", "Delete", "Purge"]
+  #secret_permissions      = ["Get", "List", "Delete", "Purge"]
+  #key_permissions         = ["Create", "Get", "List", "Delete", "Purge", "Sign", "Update", "Verify"]
+  #}
 }
 
 data "azuread_service_principal" "web_app_resource_provider" {
+  # Azure Web Apps
   application_id = "abfa0a7c-a6b6-4736-8310-5855508787cd"
 }
+
+resource "azurerm_key_vault_access_policy" "admin_resource_provider" {
+  provider     = azurerm.iot4
+  key_vault_id = azurerm_key_vault.kv.id
+
+  tenant_id = data.azurerm_client_config.current.tenant_id
+  object_id = data.azurerm_client_config.current.object_id
+
+  certificate_permissions = ["Create", "Get", "Import", "List", "Delete", "Purge"]
+  secret_permissions      = ["Get", "List", "Delete", "Purge"]
+  key_permissions         = ["Create", "Get", "List", "Delete", "Purge", "Sign", "Update", "Verify"]
+}
+
 
 resource "azurerm_key_vault_access_policy" "web_app_resource_provider" {
   provider     = azurerm.iot4
@@ -38,13 +53,16 @@ resource "azurerm_key_vault_access_policy" "web_app_resource_provider" {
   tenant_id = data.azurerm_client_config.current.tenant_id
   object_id = data.azuread_service_principal.web_app_resource_provider.id
 
-  secret_permissions = [
-    "Get"
-  ]
+  certificate_permissions = ["Create", "Get", "Import", "List", "Delete", "Purge"]
+  secret_permissions      = ["Get", "List", "Delete", "Purge"]
+  key_permissions         = ["Create", "Get", "List", "Delete", "Purge", "Sign", "Update", "Verify"]
+}
 
-  certificate_permissions = [
-    "Get"
-  ]
+resource "azurerm_role_assignment" "akv" {
+  provider             = azurerm.iot4
+  scope                = azurerm_key_vault.kv.id
+  role_definition_name = "Key Vault Administrator"
+  principal_id         = data.azurerm_client_config.current.object_id
 
 }
 
@@ -74,15 +92,7 @@ resource "azurerm_key_vault_certificate" "kvc" {
       content_type = "application/x-pkcs12"
     }
   }
-
 }
 
-
-resource "azurerm_app_service_certificate" "cv" {
-  provider            = azurerm.iot4
-  name                = "cv-cert"
-  resource_group_name = azurerm_resource_group.rg.name
-  location            = azurerm_resource_group.rg.location
-  key_vault_secret_id = azurerm_key_vault_certificate.kvc.secret_id
-
-}
+#certificate_permissions = ["Backup", "Create", "DeleteIssuers", "GetIssuers", "Get", "Import", "List", "ListIssuers", "ManageContacts", "ManageIssuers", "Delete", "Purge", "Recover", "Restore", "SetIssuers"]
+#key_permissions         = ["Backup", "Create", "Decrypt", "Encrypt", "Get", "Import", "List", "Delete", "Purge", "Recover", "Restore", "Sign", "UnwrapKey", "Update", "Verify", "WrapKey", "Release", "Rotate", "GetRotationPolicy", "SetRotationPolicy"]

@@ -1,6 +1,6 @@
 resource "azurerm_resource_group" "rg" {
   provider = azurerm.iot4
-  name     = "azure-webapp-resources"
+  name     = "azure-weba-resources"
   location = "West Europe"
 }
 
@@ -34,16 +34,19 @@ resource "azurerm_linux_web_app" "resume" {
     application_stack {
       docker_image     = "vchokshi/www"
       docker_image_tag = "latest"
+      #docker_image_name = "cyberxsecurity/project1-apachewebserver:latest"
     }
   }
 }
-
-resource "azurerm_app_service_custom_hostname_binding" "cv" {
+resource "azurerm_app_service_certificate" "cv" {
   provider            = azurerm.iot4
-  hostname            = "cv.az.iot4.net"
-  app_service_name    = azurerm_linux_web_app.resume.name
+  name                = "cv-cert"
   resource_group_name = azurerm_resource_group.rg.name
+  location            = azurerm_resource_group.rg.location
+  pfx_blob            = filebase64("project1_cert.pfx")
+  password            = "password"
 }
+
 
 resource "azurerm_dns_txt_record" "cv" {
   provider            = azurerm.iot4
@@ -54,6 +57,16 @@ resource "azurerm_dns_txt_record" "cv" {
   record {
     value = azurerm_linux_web_app.resume.custom_domain_verification_id
   }
+}
+resource "azurerm_app_service_custom_hostname_binding" "cv" {
+  depends_on          = [azurerm_dns_txt_record.cv]
+  provider            = azurerm.iot4
+  hostname            = "cv.az.iot4.net"
+  app_service_name    = azurerm_linux_web_app.resume.name
+  resource_group_name = azurerm_resource_group.rg.name
+  ssl_state           = "SniEnabled"
+  thumbprint          = azurerm_app_service_certificate.cv.thumbprint
+  #thumbprint = azurerm_key_vault_certificate.kvc.thumbprint
 }
 
 locals {
