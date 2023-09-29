@@ -20,3 +20,6 @@ instance/
 .coverage
 htmlcov/
 .env
+*.crt
+*.key
+*.pfx

@@ -4,7 +4,7 @@ resource "azurerm_public_ip" "lb_public_ip" {
   location            = azurerm_resource_group.rg.location
   resource_group_name = azurerm_resource_group.rg.name
   tags                = local.common_tags
-  allocation_method   = "Dynamic"
+  allocation_method   = "Static"
 }
 
 output "lb-public-ip" {
@@ -21,6 +21,21 @@ resource "azurerm_lb" "lb" {
     name                 = "${local.stack-color}-frontend-ip-config"
     public_ip_address_id = azurerm_public_ip.lb_public_ip.id
   }
+}
+
+data "azurerm_lb_backend_address_pool" "beap" {
+  provider        = azurerm.iot4
+  name            = "${local.stack-color}-backend-address-pool"
+  loadbalancer_id = azurerm_lb.lb.id
+}
+
+resource "azurerm_network_interface_backend_address_pool_association" "beap_ass" {
+  provider                = azurerm.iot4
+  count                   = 2
+  network_interface_id    = azurerm_network_interface.web_nic[count.index].id
+  ip_configuration_name   = "${local.stack-color}-web-nic-${count.index}-config"
+  backend_address_pool_id = data.azurerm_lb_backend_address_pool.beap.id
+
 }
 
 resource "azurerm_dns_a_record" "dvwa" {
