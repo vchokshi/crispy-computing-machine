@@ -38,15 +38,10 @@ resource "azurerm_linux_web_app" "resume" {
     }
   }
 }
-resource "azurerm_app_service_certificate" "cv" {
-  provider            = azurerm.iot4
-  name                = "cv-cert"
-  resource_group_name = azurerm_resource_group.rg.name
-  location            = azurerm_resource_group.rg.location
-  pfx_blob            = filebase64("project1_cert.pfx")
-  password            = "password"
-}
 
+locals {
+  target_ip = element(azurerm_linux_web_app.resume.outbound_ip_address_list, length(azurerm_linux_web_app.resume.outbound_ip_address_list) - 1)
+}
 
 resource "azurerm_dns_txt_record" "cv" {
   provider            = azurerm.iot4
@@ -58,6 +53,54 @@ resource "azurerm_dns_txt_record" "cv" {
     value = azurerm_linux_web_app.resume.custom_domain_verification_id
   }
 }
+resource "azurerm_dns_txt_record" "cvv" {
+  provider            = azurerm.iot4
+  name                = "asuid.cvv"
+  zone_name           = data.azurerm_dns_zone.iot4.name
+  resource_group_name = data.azurerm_resource_group.global.name
+  ttl                 = 300
+  record {
+    value = azurerm_linux_web_app.resume.custom_domain_verification_id
+  }
+}
+
+resource "azurerm_dns_a_record" "cv" {
+  provider            = azurerm.iot4
+  name                = "cv"
+  zone_name           = data.azurerm_dns_zone.iot4.name
+  resource_group_name = data.azurerm_resource_group.global.name
+  ttl                 = 300
+  records             = [local.target_ip]
+}
+
+resource "azurerm_dns_cname_record" "cvv" {
+  provider            = azurerm.iot4
+  name                = "cvv"
+  zone_name           = data.azurerm_dns_zone.iot4.name
+  resource_group_name = data.azurerm_resource_group.global.name
+  ttl                 = 300
+  record              = azurerm_linux_web_app.resume.default_hostname
+
+}
+#resource "azurerm_dns_a_record" "cvv" {
+#provider            = azurerm.iot4
+#name                = "cvv"
+#zone_name           = data.azurerm_dns_zone.iot4.name
+#resource_group_name = data.azurerm_resource_group.global.name
+#ttl                 = 300
+#records             = [local.target_ip]
+#}
+
+
+resource "azurerm_app_service_certificate" "cv" {
+  provider            = azurerm.iot4
+  name                = "cv-cert"
+  resource_group_name = azurerm_resource_group.rg.name
+  location            = azurerm_resource_group.rg.location
+  pfx_blob            = filebase64("project1_cert.pfx")
+  password            = "password"
+}
+
 resource "azurerm_app_service_custom_hostname_binding" "cv" {
   depends_on          = [azurerm_dns_txt_record.cv]
   provider            = azurerm.iot4
@@ -66,24 +109,38 @@ resource "azurerm_app_service_custom_hostname_binding" "cv" {
   resource_group_name = azurerm_resource_group.rg.name
   ssl_state           = "SniEnabled"
   thumbprint          = azurerm_app_service_certificate.cv.thumbprint
-  #thumbprint = azurerm_key_vault_certificate.kvc.thumbprint
 }
 
-locals {
-  target_ip = element(azurerm_linux_web_app.resume.outbound_ip_address_list, length(azurerm_linux_web_app.resume.outbound_ip_address_list) - 1)
+resource "azurerm_app_service_custom_hostname_binding" "chb" {
+  depends_on          = [azurerm_dns_txt_record.cvv, azurerm_dns_cname_record.cvv]
+  provider            = azurerm.iot4
+  hostname            = "cvv.az.iot4.net"
+  app_service_name    = azurerm_linux_web_app.resume.name
+  resource_group_name = azurerm_resource_group.rg.name
 }
 
-output "url" {
+resource "azurerm_app_service_managed_certificate" "mc" {
+  provider                   = azurerm.iot4
+  custom_hostname_binding_id = azurerm_app_service_custom_hostname_binding.chb.id
+}
+
+resource "azurerm_app_service_certificate_binding" "cvvb" {
+  provider            = azurerm.iot4
+  hostname_binding_id = azurerm_app_service_custom_hostname_binding.chb.id
+  certificate_id      = azurerm_app_service_managed_certificate.mc.id
+  ssl_state           = "SniEnabled"
+
+}
+
+output "url-1" {
+  value = azurerm_linux_web_app.resume.default_hostname
+}
+output "url-2" {
   value = "http://cv.az.iot4.net"
+}
+output "url-3" {
+  value = "http://cvv.az.iot4.net"
 }
 output "target" {
   value = local.target_ip
-}
-resource "azurerm_dns_a_record" "cv" {
-  provider            = azurerm.iot4
-  name                = "cv"
-  zone_name           = data.azurerm_dns_zone.iot4.name
-  resource_group_name = data.azurerm_resource_group.global.name
-  ttl                 = 300
-  records             = [local.target_ip]
 }
