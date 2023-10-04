@@ -1,7 +1,7 @@
 resource "azurerm_resource_group" "rg" {
   provider = azurerm.iot4
-  name     = "azure-weba-resources"
-  location = "West Europe"
+  name     = "azure-webapp-final"
+  location = "Japan East"
 }
 
 resource "azurerm_virtual_network" "vn" {
@@ -18,21 +18,25 @@ resource "azurerm_service_plan" "sp" {
   resource_group_name = azurerm_resource_group.rg.name
   location            = azurerm_resource_group.rg.location
   os_type             = "Linux"
-  sku_name            = "P1v2"
+  sku_name            = "P2v2"
 
 }
 
 resource "azurerm_linux_web_app" "resume" {
   provider            = azurerm.iot4
-  name                = "week-13-app-stack"
+  name                = "azure-web-app-stack"
   resource_group_name = azurerm_resource_group.rg.name
   location            = azurerm_service_plan.sp.location
   service_plan_id     = azurerm_service_plan.sp.id
   https_only          = true
 
+  #app_settings = {
+  #WEBSITE_PORT = "8080"
+  #}
   site_config {
     application_stack {
-      docker_image     = "vchokshi/www"
+      docker_image = "vchokshi/www"
+      #docker_image     = "webgoat/webgoat"
       docker_image_tag = "latest"
       #docker_image_name = "cyberxsecurity/project1-apachewebserver:latest"
     }
@@ -82,27 +86,18 @@ resource "azurerm_dns_cname_record" "cvv" {
   record              = azurerm_linux_web_app.resume.default_hostname
 
 }
-#resource "azurerm_dns_a_record" "cvv" {
-#provider            = azurerm.iot4
-#name                = "cvv"
-#zone_name           = data.azurerm_dns_zone.iot4.name
-#resource_group_name = data.azurerm_resource_group.global.name
-#ttl                 = 300
-#records             = [local.target_ip]
-#}
-
 
 resource "azurerm_app_service_certificate" "cv" {
+  depends_on          = [azurerm_key_vault.kv]
   provider            = azurerm.iot4
   name                = "cv-cert"
   resource_group_name = azurerm_resource_group.rg.name
   location            = azurerm_resource_group.rg.location
-  pfx_blob            = filebase64("project1_cert.pfx")
-  password            = "password"
+  key_vault_secret_id = azurerm_key_vault_certificate.kvc.secret_id
 }
 
 resource "azurerm_app_service_custom_hostname_binding" "cv" {
-  depends_on          = [azurerm_dns_txt_record.cv]
+  depends_on          = [azurerm_dns_txt_record.cv, azurerm_app_service_certificate.cv]
   provider            = azurerm.iot4
   hostname            = "cv.az.iot4.net"
   app_service_name    = azurerm_linux_web_app.resume.name

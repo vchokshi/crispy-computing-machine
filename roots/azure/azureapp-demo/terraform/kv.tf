@@ -2,7 +2,7 @@ resource "azurerm_key_vault" "kv" {
   provider = azurerm.iot4
   ## You can try to create this in azurem.asu to prove CAF policies work
   #provider                    = azurerm.asu
-  name                        = "azweba-key-vault"
+  name                        = "${azurerm_resource_group.rg.location}-key-vault"
   location                    = azurerm_resource_group.rg.location
   resource_group_name         = azurerm_resource_group.rg.name
   enabled_for_disk_encryption = true
@@ -17,15 +17,6 @@ resource "azurerm_key_vault" "kv" {
   }
 
   sku_name = "standard"
-
-  #access_policy {
-  #tenant_id = data.azurerm_client_config.current.tenant_id
-  #object_id = data.azurerm_client_config.current.object_id
-  #
-  #certificate_permissions = ["Create", "Get", "Import", "List", "Delete", "Purge"]
-  #secret_permissions      = ["Get", "List", "Delete", "Purge"]
-  #key_permissions         = ["Create", "Get", "List", "Delete", "Purge", "Sign", "Update", "Verify"]
-  #}
 }
 
 data "azuread_service_principal" "web_app_resource_provider" {
@@ -34,6 +25,7 @@ data "azuread_service_principal" "web_app_resource_provider" {
 }
 
 resource "azurerm_key_vault_access_policy" "admin_resource_provider" {
+  depends_on   = [azurerm_key_vault.kv]
   provider     = azurerm.iot4
   key_vault_id = azurerm_key_vault.kv.id
 
@@ -47,6 +39,7 @@ resource "azurerm_key_vault_access_policy" "admin_resource_provider" {
 
 
 resource "azurerm_key_vault_access_policy" "web_app_resource_provider" {
+  depends_on   = [azurerm_key_vault.kv]
   provider     = azurerm.iot4
   key_vault_id = azurerm_key_vault.kv.id
 
@@ -59,6 +52,7 @@ resource "azurerm_key_vault_access_policy" "web_app_resource_provider" {
 }
 
 resource "azurerm_role_assignment" "akv" {
+  depends_on           = [azurerm_key_vault.kv]
   provider             = azurerm.iot4
   scope                = azurerm_key_vault.kv.id
   role_definition_name = "Key Vault Administrator"
@@ -67,6 +61,7 @@ resource "azurerm_role_assignment" "akv" {
 }
 
 resource "azurerm_key_vault_certificate" "kvc" {
+  depends_on   = [azurerm_key_vault.kv]
   provider     = azurerm.iot4
   name         = "azure-webapp-vault-cert"
   key_vault_id = azurerm_key_vault.kv.id
@@ -93,6 +88,3 @@ resource "azurerm_key_vault_certificate" "kvc" {
     }
   }
 }
-
-#certificate_permissions = ["Backup", "Create", "DeleteIssuers", "GetIssuers", "Get", "Import", "List", "ListIssuers", "ManageContacts", "ManageIssuers", "Delete", "Purge", "Recover", "Restore", "SetIssuers"]
-#key_permissions         = ["Backup", "Create", "Decrypt", "Encrypt", "Get", "Import", "List", "Delete", "Purge", "Recover", "Restore", "Sign", "UnwrapKey", "Update", "Verify", "WrapKey", "Release", "Rotate", "GetRotationPolicy", "SetRotationPolicy"]
