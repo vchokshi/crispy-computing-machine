@@ -1,0 +1,5 @@
+- name: Build the box
+  become: true
+  hosts: all
+  roles:
+    - role: add-os-user

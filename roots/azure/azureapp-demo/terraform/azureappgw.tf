@@ -35,7 +35,7 @@ resource "azurerm_linux_web_app" "resume" {
   #}
   site_config {
     application_stack {
-      docker_image = "vchokshi/www"
+      docker_image = "vchokshi/www-apache"
       #docker_image     = "webgoat/webgoat"
       docker_image_tag = "latest"
       #docker_image_name = "cyberxsecurity/project1-apachewebserver:latest"

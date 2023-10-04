@@ -1,0 +1,48 @@
+- hosts: control_plane
+  become: yes
+  become_user: ubuntu
+  vars:
+  tasks:
+    - name: Add the elastic repo
+      shell: helm repo add elastic https://helm.elastic.co
+      args:
+        chdir: $HOME
+
+    - name: Add the elastic custom resource definitions
+      shell: kubectl create -f https://download.elastic.co/downloads/eck/2.9.0/crds.yaml >> elastic_crds.txt
+      args:
+        chdir: $HOME
+        creates: elastic_crds.txt
+
+    - name: Install the elastic operator
+      shell: kubectl apply -f https://download.elastic.co/downloads/eck/2.9.0/operator.yaml >> elastic_operators.txt
+      args:
+        chdir: $HOME
+        creates: elastic_operators.txt
+
+    - name: Copy all the files over
+      copy:
+        src: "{{ item }}"
+        dest: "$HOME/{{item}}"
+      tags:
+        - build
+      with_items:
+        - elk.yml
+        - beats.yml
+
+    - name: Install the elastic stack
+      shell: kubectl apply -f elk.yml
+      args:
+        chdir: $HOME
+
+    - name: Get the kibana password into a file
+      shell: kubectl get secret elk-es-elastic-user -o=jsonpath='{.data.elastic}' | base64 --decode > kibana.txt
+      args:
+        chdir: $HOME
+
+
+    - name: Install beats
+      shell: kubectl apply -f beats.yml >> beats.txt
+      args:
+        chdir: $HOME
+        creates: beats.txt

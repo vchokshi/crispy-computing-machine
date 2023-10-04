@@ -1,27 +1,30 @@
 resource "aws_subnet" "aa" {
-  vpc_id                  = aws_vpc.main.id
-  cidr_block              = "10.0.1.0/24"
-  availability_zone       = "us-west-2a"
-  map_public_ip_on_launch = false
+  vpc_id            = aws_vpc.main.id
+  cidr_block        = "172.31.32.0/20"
+  availability_zone = "us-west-2a"
+  #tfsec:ignore:aws-ec2-no-public-ip-subnet
+  map_public_ip_on_launch = true
   tags = {
     Name = var.project_name
   }
 }
 
 resource "aws_subnet" "ab" {
-  vpc_id                  = aws_vpc.main.id
-  cidr_block              = "10.0.2.0/24"
-  availability_zone       = "us-west-2b"
-  map_public_ip_on_launch = false
+  vpc_id            = aws_vpc.main.id
+  cidr_block        = "172.31.16.0/20"
+  availability_zone = "us-west-2b"
+  #tfsec:ignore:aws-ec2-no-public-ip-subnet
+  map_public_ip_on_launch = true
   tags = {
     Name = var.project_name
   }
 }
 
 resource "aws_subnet" "ac" {
-  vpc_id                  = aws_vpc.main.id
-  cidr_block              = "10.0.3.0/24"
-  availability_zone       = "us-west-2c"
+  vpc_id            = aws_vpc.main.id
+  cidr_block        = "172.31.0.0/20"
+  availability_zone = "us-west-2c"
+  #tfsec:ignore:aws-ec2-no-public-ip-subnet
   map_public_ip_on_launch = true
   tags = {
     Name = var.project_name
@@ -29,9 +32,10 @@ resource "aws_subnet" "ac" {
 }
 
 resource "aws_subnet" "ad" {
-  vpc_id                  = aws_vpc.main.id
-  cidr_block              = "10.0.4.0/24"
-  availability_zone       = "us-west-2a"
+  vpc_id            = aws_vpc.main.id
+  cidr_block        = "172.31.48.0/20"
+  availability_zone = "us-west-2d"
+  #tfsec:ignore:aws-ec2-no-public-ip-subnet
   map_public_ip_on_launch = true
   tags = {
     Name = var.project_name

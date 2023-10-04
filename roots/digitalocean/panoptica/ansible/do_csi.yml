@@ -1,0 +1,49 @@
+---
+- hosts: controller.do.iot4.net
+  become: yes
+  become_user: ubuntu
+  gather_facts: false
+  tasks:
+    - name: Copy the DOCSI files over
+      copy:
+        src: "{{ item }}"
+        dest: "$HOME/{{item}}"
+      tags:
+        - build
+      with_items:
+        - crds.yaml
+        - driver.yaml
+        - pvc.yml
+        - pod.yml
+
+    - name: Use kubectl to deploy DOCSI CRDs
+      shell: kubectl apply -f crds.yaml
+      args:
+        chdir: $HOME
+        creates: crds.txt
+      tags:
+        - build
+
+    - name: Use kubectl to deploy DOCSI
+      shell: kubectl apply -f driver.yaml
+      args:
+        chdir: $HOME
+        creates: docsi.txt
+      tags:
+        - build
+
+    - name: Use kubectl to create a pvc
+      shell: kubectl apply -f pvc.yml
+      args:
+        chdir: $HOME
+        creates: pvc.txt
+      tags:
+        - build
+
+    - name: Use kubectl to create a pod with the pvc
+      shell: kubectl apply -f pod.yml
+      args:
+        chdir: $HOME
+        creates: pvc.txt
+      tags:
+        - build

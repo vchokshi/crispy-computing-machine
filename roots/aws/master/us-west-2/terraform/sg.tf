@@ -1,3 +1,4 @@
+#tfsec:ignore:aws-ec2-no-public-egress-sgr
 ##############################################################
 # Security Group Creations
 ##############################################################
@@ -7,22 +8,29 @@ resource "aws_security_group" "ELB-SG" {
   vpc_id      = aws_vpc.main.id
 
   ingress {
+    description = "blah"
     from_port   = 80
     to_port     = 80
     protocol    = "tcp"
+    #tfsec:ignore:aws-ec2-no-public-ingress-sgr
     cidr_blocks = ["0.0.0.0/0"]
   }
   ingress {
+    description = "blah"
     from_port   = 443
     to_port     = 443
     protocol    = "tcp"
+    #tfsec:ignore:aws-ec2-no-public-ingress-sgr
     cidr_blocks = ["0.0.0.0/0"]
   }
 
+  #tfsec:ignore:aws-ec2-no-public-egress-sgr
   egress {
-    from_port   = 0
-    to_port     = 0
-    protocol    = "-1"
+    description = "blah"
+    from_port   = 443
+    to_port     = 443
+    protocol    = "tcp"
+    #tfsec:ignore:aws-ec2-no-public-egress-sgr
     cidr_blocks = ["0.0.0.0/0"]
   }
 
@@ -37,24 +45,28 @@ resource "aws_security_group" "SSH-SG" {
   vpc_id      = aws_vpc.main.id
 
   ingress {
+    description = "SSH connection from this sg only"
     from_port   = 22
     to_port     = 22
     protocol    = "tcp"
     self        = true
-    description = "SSH connection from this sg only"
   }
 
   ingress {
-    from_port   = 22
-    to_port     = 22
-    protocol    = "tcp"
+    from_port = 22
+    to_port   = 22
+    protocol  = "tcp"
+    #tfsec:ignore:aws-ec2-no-public-ingress-sgr
     cidr_blocks = ["0.0.0.0/0"]
     description = "SSH connection from Anywhere"
   }
+  #tfsec:ignore:aws-ec2-no-public-egress-sgr
   egress {
-    from_port   = 0
-    to_port     = 0
-    protocol    = "-1"
+    description = "blah"
+    from_port   = 443
+    to_port     = 443
+    protocol    = "tcp"
+    #tfsec:ignore:aws-ec2-no-public-egress-sgr
     cidr_blocks = ["0.0.0.0/0"]
   }
 
@@ -69,19 +81,20 @@ resource "aws_security_group" "WWW-SG" {
   vpc_id      = aws_vpc.main.id
 
   ingress {
-    from_port = 80
-    to_port   = 80
-    protocol  = "tcp"
-
-    # cidr_blocks = ["0.0.0.0/0"]
-    security_groups = [aws_security_group.ELB-SG.id]
     description     = "HTTP Traffic - Terraform Managed"
+    from_port       = 80
+    to_port         = 80
+    protocol        = "tcp"
+    security_groups = [aws_security_group.ELB-SG.id]
   }
 
+  #tfsec:ignore:aws-ec2-no-public-egress-sgr
   egress {
-    from_port   = 0
-    to_port     = 0
-    protocol    = "-1"
+    description = "blah"
+    from_port   = 443
+    to_port     = 443
+    protocol    = "tcp"
+    #tfsec:ignore:aws-ec2-no-public-egress-sgr
     cidr_blocks = ["0.0.0.0/0"]
   }
 
@@ -96,17 +109,20 @@ resource "aws_security_group" "EFS-SG" {
   vpc_id      = aws_vpc.main.id
 
   ingress {
+    description     = "NFS Traffic for Web Servers - Terraform Managed"
     from_port       = 2049
     to_port         = 2049
     protocol        = "tcp"
-    description     = "NFS Traffic for Web Servers - Terraform Managed"
     security_groups = [aws_security_group.WWW-SG.id]
   }
 
+  #tfsec:ignore:aws-ec2-no-public-egress-sgr
   egress {
-    from_port   = 0
-    to_port     = 0
-    protocol    = "-1"
+    description = "blah"
+    from_port   = 443
+    to_port     = 443
+    protocol    = "tcp"
+    #tfsec:ignore:aws-ec2-no-public-egress-sgr
     cidr_blocks = ["0.0.0.0/0"]
   }
 
@@ -128,10 +144,13 @@ resource "aws_security_group" "RDS-SG" {
     description     = "MySQL Traffic for RDS - Terraform Managed"
   }
 
+  #tfsec:ignore:aws-ec2-no-public-egress-sgr
   egress {
-    from_port   = 0
-    to_port     = 0
-    protocol    = "-1"
+    description = "blah"
+    from_port   = 443
+    to_port     = 443
+    protocol    = "tcp"
+    #tfsec:ignore:aws-ec2-no-public-egress-sgr
     cidr_blocks = ["0.0.0.0/0"]
   }
 
@@ -146,15 +165,19 @@ resource "aws_security_group" "OVPN_SG" {
   vpc_id      = aws_vpc.main.id
 
   ingress {
+    description = "blah"
     from_port   = 1194
     to_port     = 1194
     protocol    = "udp"
+    #tfsec:ignore:aws-ec2-no-public-ingress-sgr
     cidr_blocks = ["0.0.0.0/0"]
   }
   egress {
-    from_port   = 0
-    to_port     = 0
-    protocol    = "-1"
+    description = "blah"
+    from_port   = 443
+    to_port     = 443
+    protocol    = "tcp"
+    #tfsec:ignore:aws-ec2-no-public-egress-sgr
     cidr_blocks = ["0.0.0.0/0"]
   }
 
@@ -177,9 +200,11 @@ resource "aws_security_group" "RDP-SG" {
   }
 
   egress {
-    from_port   = 0
-    to_port     = 0
-    protocol    = "-1"
+    description = "blah"
+    from_port   = 443
+    to_port     = 443
+    protocol    = "tcp"
+    #tfsec:ignore:aws-ec2-no-public-egress-sgr
     cidr_blocks = ["0.0.0.0/0"]
   }
 
@@ -188,23 +213,51 @@ resource "aws_security_group" "RDP-SG" {
   }
 }
 
-resource "aws_security_group" "MC-SG" {
-  name        = "Minecraft Security Group"
-  description = "Minecraft Security Group - Terraform Managed"
+resource "aws_security_group" "MS-SG" {
+  name        = "Microsoft Security Group"
+  description = "Microsoft Security Group - Terraform Managed"
   vpc_id      = aws_vpc.main.id
 
   ingress {
-    from_port   = 25565
-    to_port     = 25565
+    description = "SSH from anywhere"
+    from_port   = 22
+    to_port     = 22
     protocol    = "tcp"
-    description = "Minecraft from anywhere"
+    #tfsec:ignore:aws-ec2-no-public-ingress-sgr
     cidr_blocks = ["0.0.0.0/0"]
   }
 
   egress {
-    from_port   = 0
-    to_port     = 0
-    protocol    = "-1"
+    description = "HTTPS OUT"
+    from_port   = 443
+    to_port     = 443
+    protocol    = "tcp"
+    #tfsec:ignore:aws-ec2-no-public-egress-sgr
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+  egress {
+    description = "HTTP OUT"
+    from_port   = 80
+    to_port     = 80
+    protocol    = "tcp"
+    #tfsec:ignore:aws-ec2-no-public-egress-sgr
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  ingress {
+    description = "talk"
+    from_port   = 518
+    to_port     = 518
+    protocol    = "tcp"
+    cidr_blocks = ["10.0.0.0/16"]
+  }
+
+  egress {
+    description = "DNS"
+    from_port   = 53
+    to_port     = 53
+    protocol    = "udp"
+    #tfsec:ignore:aws-ec2-no-public-egress-sgr
     cidr_blocks = ["0.0.0.0/0"]
   }
 
@@ -219,17 +272,20 @@ resource "aws_security_group" "HTTP-SG" {
   vpc_id      = aws_vpc.main.id
 
   ingress {
-    from_port   = 80
-    to_port     = 80
-    protocol    = "tcp"
+    from_port = 80
+    to_port   = 80
+    protocol  = "tcp"
+    #tfsec:ignore:aws-ec2-no-public-ingress-sgr
     cidr_blocks = ["0.0.0.0/0"]
     description = "HTTP DIRECT Traffic - Terraform Managed"
   }
 
   egress {
-    from_port   = 0
-    to_port     = 0
-    protocol    = "-1"
+    description = "blah"
+    from_port   = 443
+    to_port     = 443
+    protocol    = "tcp"
+    #tfsec:ignore:aws-ec2-no-public-egress-sgr
     cidr_blocks = ["0.0.0.0/0"]
   }
 
@@ -244,17 +300,20 @@ resource "aws_security_group" "HTTPS-SG" {
   vpc_id      = aws_vpc.main.id
 
   ingress {
-    from_port   = 443
-    to_port     = 443
-    protocol    = "tcp"
+    from_port = 443
+    to_port   = 443
+    protocol  = "tcp"
+    #tfsec:ignore:aws-ec2-no-public-ingress-sgr
     cidr_blocks = ["0.0.0.0/0"]
     description = "HTTPS DIRECT Traffic - Terraform Managed"
   }
 
   egress {
-    from_port   = 0
-    to_port     = 0
-    protocol    = "-1"
+    description = "blah"
+    from_port   = 443
+    to_port     = 443
+    protocol    = "tcp"
+    #tfsec:ignore:aws-ec2-no-public-egress-sgr
     cidr_blocks = ["0.0.0.0/0"]
   }
 

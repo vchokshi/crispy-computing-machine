@@ -1,5 +1,5 @@
 resource "aws_vpc_dhcp_options" "dhcp" {
-  domain_name         = "iot4.net"
+  domain_name         = "us-west-2.compute.internal"
   domain_name_servers = ["AmazonProvidedDNS"]
 }
 

@@ -14,14 +14,3 @@
       args:
         chdir: $HOME
         creates: hello-kubernetes.txt
-
-    - name: Copy the hello kubernetes ingress template
-      copy:
-        src: hello-kubernetes-ingress.yml
-        dest: $HOME/
-
-    - name: Use kubectl to deploy the hello-kubernetes-ingress service
-      shell: kubectl apply -f hello-kubernetes-ingress.yml >> hello-kubernetes-ingress.txt
-      args:
-        chdir: $HOME
-        creates: hello-kubernetes-ingress.txt
