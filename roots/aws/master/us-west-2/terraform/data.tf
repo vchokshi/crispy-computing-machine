@@ -1,3 +1,6 @@
+data "aws_kms_key" "by_id" {
+  key_id = "77fbd35b-fdb1-41ec-9000-3cb78b4b5d40"
+}
 data "aws_region" "current" {
 }
 
@@ -29,6 +32,11 @@ data "aws_route53_zone" "public" {
   private_zone = false
 }
 
+data "aws_route53_zone" "aws" {
+  name         = "aws.${var.domain}."
+  private_zone = false
+}
+
 output "DNS_Zone" {
   value = data.aws_route53_zone.public.name
 }
@@ -57,7 +65,7 @@ data "aws_ami" "ubuntu" {
 
   filter {
     name   = "name"
-    values = ["ubuntu/images/hvm-ssd/ubuntu-xenial-16.04-amd64-server-*"]
+    values = ["ubuntu/images/hvm-ssd/ubuntu*22.04-amd64-server-*"]
   }
   filter {
     name   = "virtualization-type"
@@ -69,18 +77,18 @@ output "Ubuntu_AMI" {
   value = data.aws_ami.ubuntu.id
 }
 
-#data "aws_ami" "windows" {
-#most_recent      = true
-#owners = ["461346954234"] ##Microsoft
-#filter {
-#name   = "name"
-#values = ["Microsoft*Windows*2019*"]
-#}
-#filter {
-#name   = "virtualization-type"
-#values = ["hvm"]
-#}
-#}
-#output "Windows AMI" {
-#value       = "${data.aws_ami.windows.id}"
-#}
+data "aws_ami" "windows" {
+  most_recent = true
+  owners      = ["801119661308"]
+  filter {
+    name   = "name"
+    values = ["*Windows*2016*Base*"]
+  }
+  filter {
+    name   = "virtualization-type"
+    values = ["hvm"]
+  }
+}
+output "Windows_AMI" {
+  value = data.aws_ami.windows.id
+}

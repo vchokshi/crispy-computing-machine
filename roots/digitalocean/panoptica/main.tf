@@ -2,7 +2,7 @@ resource "digitalocean_droplet" "controller" {
   image    = "ubuntu-20-04-x64"
   name     = "controller"
   region   = "SFO3"
-  size     = "s-8vcpu-16gb"
+  size     = "s-4vcpu-8gb"
   ssh_keys = [digitalocean_ssh_key.vchokshi.fingerprint]
 }
 
@@ -17,41 +17,30 @@ resource "digitalocean_record" "c" {
   ttl    = 30
   value  = digitalocean_droplet.controller.ipv4_address
 }
-resource "digitalocean_droplet" "worker_1" {
+
+variable "instance_count" {
+  type    = number
+  default = 3
+}
+
+resource "digitalocean_droplet" "worker" {
+  count    = var.instance_count
   image    = "ubuntu-20-04-x64"
-  name     = "worker-1"
+  name     = "worker-${count.index}"
   region   = "SFO3"
   size     = "s-8vcpu-16gb"
   ssh_keys = [digitalocean_ssh_key.vchokshi.fingerprint]
 }
 
-output "worker_1" {
-  value = digitalocean_droplet.worker_1.ipv4_address
+output "workers" {
+  value = digitalocean_droplet.worker.*.ipv4_address
 }
 
-resource "digitalocean_droplet" "worker_2" {
-  image    = "ubuntu-20-04-x64"
-  name     = "worker-2"
-  region   = "SFO3"
-  size     = "s-8vcpu-16gb"
-  ssh_keys = [digitalocean_ssh_key.vchokshi.fingerprint]
-}
-
-output "worker_2" {
-  value = digitalocean_droplet.worker_2.ipv4_address
-}
-
-resource "digitalocean_record" "worker_1" {
+resource "digitalocean_record" "worker" {
+  count  = var.instance_count
   domain = "do.iot4.net"
   type   = "A"
-  name   = "worker-1"
+  name   = "worker-${count.index}"
   ttl    = 30
-  value  = digitalocean_droplet.worker_1.ipv4_address
-}
-resource "digitalocean_record" "worker_2" {
-  domain = "do.iot4.net"
-  type   = "A"
-  name   = "worker-2"
-  ttl    = 30
-  value  = digitalocean_droplet.worker_2.ipv4_address
+  value  = digitalocean_droplet.worker[count.index].ipv4_address
 }

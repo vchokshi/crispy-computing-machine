@@ -4,27 +4,27 @@
   become_user: ubuntu
   gather_facts: false
   tasks:
-    - name: Copy the www-nginx template
-      copy:
-        src: www-nginx.yml
-        dest: $HOME/www-nginx.yml
+    #- name: Copy the www-nginx template
+      #copy:
+        #src: www-nginx.yml
+        #dest: $HOME/www-nginx.yml
 
-    - name: Use kubectl to deploy the www service
-      shell: kubectl apply -f www-nginx.yml >> www-nginx.txt
-      args:
-        chdir: $HOME
-        creates: www-nginx.txt
+    #- name: Use kubectl to deploy the www service
+      #shell: kubectl apply -f www-nginx.yml >> www-nginx.txt
+      #args:
+        #chdir: $HOME
+        #creates: www-nginx.txt
 
-    - name: Copy the www-apache template
-      copy:
-        src: www-apache.yml
-        dest: $HOME/www-apache.yml
+    #- name: Copy the www-apache template
+      #copy:
+        #src: www-apache.yml
+        #dest: $HOME/www-apache.yml
 
-    - name: Use kubectl to deploy the www service
-      shell: kubectl apply -f www-apache.yml >> www-apache.txt
-      args:
-        chdir: $HOME
-        creates: www-apache.txt
+    #- name: Use kubectl to deploy the www service
+      #shell: kubectl apply -f www-apache.yml >> www-apache.txt
+      #args:
+        #chdir: $HOME
+        #creates: www-apache.txt
 
     - name: Copy the leza template
       copy:

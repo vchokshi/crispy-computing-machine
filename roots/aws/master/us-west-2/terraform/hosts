@@ -1,0 +1,2 @@
+[all]
+target.aws.iot4.net ansible_user=ubuntu os_user=iman os_user_pub_key=/home/vchokshi/ccm/users/iman.pub

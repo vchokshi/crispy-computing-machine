@@ -20,11 +20,12 @@
     home: "/home/{{os_user}}"
   when: ansible_os_family == 'RedHat'
 
-- name: Transfer {{os_user}} ed25519 ssh key to the Debian host.
+- name: Transfer {{os_user}} key to the Debian host.
   authorized_key:
     user: "{{os_user}}"
-    key: https://github.com/vchokshi.keys
-  ignore_errors: true
+      #key: "{{os_user_pub_key}}"
+    key: "{{ lookup('file', item)  }}"
+  with_fileglob: "{{os_user_pub_key}}"
 
 - name: Adjust comments in /etc/sudoers.d/90-cloud-init-users for CentOS
   lineinfile:

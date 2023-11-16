@@ -17,23 +17,20 @@
         - hello-kubernetes.yml
         - echo.yml
         - fo.yml
+        - pod.yml
+        - elk.yml
+        - beats.yml
+        - hello-kubernetes.yml
       ignore_errors: true
 
-    - name: Use helm to destroy services
-      shell: "helm uninstall {{ item }}"
+    - name: Use kubectl to delete pvc
+      shell: "kubectl delete pvc {{ item }}"
       args:
         chdir: $HOME
       with_items:
-        - kubeview
-      ignore_errors: true
-
-    - name: Use kubectl to destroy services
-      shell: "kubectl delete -f {{ item }}"
-      args:
-        chdir: $HOME
-      with_items:
-        - hello-kubernetes-ingress.yml
-        - do_ccm.yml
+        - csi-pvc
+        - elastic-*
+        - logstash-*
       ignore_errors: true
 
     - name: delete all old files
@@ -59,3 +56,27 @@
         - hello-kubernetes.txt
         - echo.txt
         - fo.txt
+        - pod.txt
+        - pvc.txt
+        - beats.txt
+
+    - name: Use helm to destroy kubeview
+      shell: "helm uninstall {{ item }}"
+      args:
+        chdir: $HOME
+      with_items:
+        - kubeview
+      ignore_errors: true
+
+    - name: Pause for 30 seconds before taking down DNS
+      ansible.builtin.pause:
+        seconds: 30
+
+    - name: Use helm to destroy DNS & Ingress
+      shell: "helm uninstall {{ item }}"
+      args:
+        chdir: $HOME
+      with_items:
+        - external-dns
+        - ingress-nginx
+      ignore_errors: true

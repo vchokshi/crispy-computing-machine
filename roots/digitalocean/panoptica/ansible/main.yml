@@ -2,8 +2,8 @@
 - name: Import and execute the Prequesitues playbook
   ansible.builtin.import_playbook: prereqs.yml
 
-- name: Import and execute the playbook for new relic
-  ansible.builtin.import_playbook: new_relic.yml
+#- name: Import and execute the playbook for new relic
+#ansible.builtin.import_playbook: new_relic.yml
 
 - name: Import and execute container runtime interface playbook
   ansible.builtin.import_playbook: cri.yml
@@ -23,17 +23,20 @@
 - name: Import and execute the doccm playbook
   ansible.builtin.import_playbook: do_ccm.yml
 
+- name: Import and execute the docsi playbook
+  ansible.builtin.import_playbook: do_csi.yml
+
 - name: Import and execute the ingress controller playbook
   ansible.builtin.import_playbook: ingress.yml
 
 - name: Import and execute the kubeview playbook
   ansible.builtin.import_playbook: kubeview.yml
 
-- name: Import and execute the echo playbook
-  ansible.builtin.import_playbook: echo.yml
+#- name: Import and execute the echo playbook
+  #ansible.builtin.import_playbook: echo.yml
 
-- name: Import and execute the hello kubernetes playbook
-  ansible.builtin.import_playbook: hello-kubernetes.yml
+#- name: Import and execute the hello kubernetes playbook
+  #ansible.builtin.import_playbook: hello-kubernetes.yml
 
 - name: Import and execute the www playbook for nginx and apache
   ansible.builtin.import_playbook: www.yml
@@ -41,11 +44,17 @@
 - name: Import and execute the playbook for flask
   ansible.builtin.import_playbook: flask.yml
 
-- name: Import and execute the playbook for atlantis
-  ansible.builtin.import_playbook: atlantis.yml
+#- name: Import and execute the playbook for atlantis
+  #ansible.builtin.import_playbook: atlantis.yml
 
 - name: Import and execute the playbook for financial occult
   ansible.builtin.import_playbook: fo.yml
+
+- name: Launch the elastic stack in the cluster
+  ansible.builtin.import_playbook: elastic.yml
+
+#- name: Instrument the OS with elastic agents
+  #ansible.builtin.import_playbook: instrument.yml
 
 # @bug: externaldns fails when source: ingress is used at the same time as source: istio-gateway
 #- name: Import and execute the istio playbook
@@ -54,5 +63,5 @@
 #- name: Import and execute the bookinfo_apps playbook
   #ansible.builtin.import_playbook: bookinfo_apps.yml
 
-  #- name: Import and execute the panoptica playbook
-  #ansible.builtin.import_playbook: panoptica.yml
+#- name: Import and execute the panoptica playbook
+ #ansible.builtin.import_playbook: panoptica.yml

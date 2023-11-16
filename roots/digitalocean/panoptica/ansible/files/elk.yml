@@ -1,0 +1,134 @@
+apiVersion: elasticsearch.k8s.elastic.co/v1
+kind: Elasticsearch
+metadata:
+  name: elk
+spec:
+  version: 8.6.0
+  volumeClaimDeletePolicy: DeleteOnScaledownAndClusterDeletion
+  nodeSets:
+  - name: default
+    count: 3
+    config:
+      node.store.allow_mmap: false
+---
+apiVersion: kibana.k8s.elastic.co/v1
+kind: Kibana
+metadata:
+  name: elk
+spec:
+  # 8.10.2
+  version: 8.6.0
+  count: 3
+  elasticsearchRef:
+    name: elk
+  enterpriseSearchRef:
+    name: enterprise-search-elk
+  http:
+    tls:
+      selfSignedCertificate:
+        disabled: true
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: kibana-ingress
+spec:
+ ingressClassName: "nginx"
+ rules:
+ - host: "k.do.iot4.net"
+   http:
+     paths:
+     - pathType: Prefix
+       path: /
+       backend:
+         service:
+           name: elk-kb-http
+           port:
+             number: 5601
+---
+apiVersion: logstash.k8s.elastic.co/v1alpha1
+kind: Logstash
+metadata:
+  name: elk
+spec:
+  count: 2
+  elasticsearchRefs:
+    - name: elk
+      clusterName: elk
+  version: 8.6.0
+  pipelines:
+    - pipeline.id: main
+      config.string: |
+        input {
+          beats {
+            port => 5044
+          }
+        }
+        output {
+          elasticsearch {
+            hosts => [ "${QS_ES_HOSTS}" ]
+            user => "${QS_ES_USER}"
+            password => "${QS_ES_PASSWORD}"
+            ssl_certificate_authorities => "${QS_ES_SSL_CERTIFICATE_AUTHORITY}"
+          }
+        }
+  services:
+    - name: beats
+      service:
+        spec:
+          type: NodePort
+          ports:
+            - port: 5044
+              name: "filebeat"
+              protocol: TCP
+              targetPort: 5044
+---
+apiVersion: agent.k8s.elastic.co/v1alpha1
+kind: Agent
+metadata:
+  name: elk
+spec:
+  version: 8.6.0
+  elasticsearchRefs:
+  - name: elk
+  daemonSet:
+    podTemplate:
+      spec:
+        securityContext:
+          runAsUser: 0
+  config:
+    inputs:
+      - name: system-1
+        revision: 1
+        type: system/metrics
+        use_output: default
+        meta:
+          package:
+            name: system
+            version: 0.9.1
+        data_stream:
+          namespace: default
+        streams:
+          - id: system/metrics-system.cpu
+            data_stream:
+              dataset: system.cpu
+              type: metrics
+            metricsets:
+              - cpu
+            cpu.metrics:
+              - percentages
+              - normalized_percentages
+            period: 10s
+---
+apiVersion: enterprisesearch.k8s.elastic.co/v1
+kind: EnterpriseSearch
+metadata:
+  name: enterprise-search-elk
+spec:
+  version: 8.6.0
+  count: 1
+  elasticsearchRef:
+    name: elk
+  config:
+    ent_search.external_url: http://localhost:3002
+    kibana.host: https://k.do.iot4.net:5601
