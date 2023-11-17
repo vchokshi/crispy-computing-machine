@@ -84,18 +84,6 @@
       tags:
         - build
 
-    - name: install unarchive module dependencies (apt, yum, dnf, zypper)
-      become: yes
-      package:
-        name:
-          - tar
-          - unzip
-          - gzip
-        state: present
-      when: ansible_pkg_mgr in ('apt', 'yum', 'dnf', 'zypper')
-      tags:
-        - build
-
     - name: install Helm
       become: yes
       unarchive:

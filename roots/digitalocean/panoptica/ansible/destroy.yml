@@ -8,12 +8,11 @@
       args:
         chdir: $HOME
       with_items:
-        - atlantis.yml
+        - dvwa.yml
+        - webgoat.yml
         - flask-honeycomb.yml
         - flask-newrelic.yml
         - leza.yml
-        - www-apache.yml
-        - www-nginx.yml
         - hello-kubernetes.yml
         - echo.yml
         - fo.yml
@@ -21,6 +20,9 @@
         - elk.yml
         - beats.yml
         - hello-kubernetes.yml
+        - mutillidae.yml
+        - bookinfo-gateway.yaml
+        - bookinfo.yaml
       ignore_errors: true
 
     - name: Use kubectl to delete pvc
@@ -38,7 +40,10 @@
         path: "$HOME/{{ item }}"
         state: absent
       with_items:
-        - atlantis.yml
+        - bookinfo-gateway.txt
+        - bookinfo.txt
+        - dvwa.txt
+        - webgoat.txt
         - flask-honeycomb.yml
         - flask-newrelic.yml
         - leza.yml
@@ -51,14 +56,30 @@
         - flask-honeycomb.txt
         - flask-newrelic.txt
         - leza.txt
-        - www-apache.txt
-        - www-nginx.txt
         - hello-kubernetes.txt
         - echo.txt
         - fo.txt
         - pod.txt
         - pvc.txt
         - beats.txt
+        - mutillidae.txt
+
+    - name: Unintall istio
+      shell: bin/istioctl uninstall --purge -y
+      args:
+        chdir: $HOME/istio-1.20.0
+
+    - name: Use helm to destroy wordpress
+      shell: "helm uninstall {{ item }}"
+      args:
+        chdir: $HOME
+      with_items:
+        - wordpress
+      ignore_errors: true
+
+    - name: Pause for 30 seconds before taking more things down
+      ansible.builtin.pause:
+        seconds: 30
 
     - name: Use helm to destroy kubeview
       shell: "helm uninstall {{ item }}"

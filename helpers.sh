@@ -21,6 +21,7 @@ load_secrets() {
   check_deps
   export AWS_PROFILE=iot4
   export DO_PAT=$(pass DO_API_TOKEN)
+  export SLACK_WEBHOOK=$(pass SLACK_WEBHOOK)
   export ATLANTIS_WEBHOOK_SECRET=$(pass atlantis_webhook_secret)
   export CCM_ROBOT_PAT=$(pass ccm-robot-pat)
   export TF_VAR_atlantis_webhook_secret=$ATLANTIS_WEBHOOK_SECRET

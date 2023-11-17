@@ -4,27 +4,39 @@
   become_user: ubuntu
   gather_facts: false
   tasks:
-    #- name: Copy the www-nginx template
-      #copy:
-        #src: www-nginx.yml
-        #dest: $HOME/www-nginx.yml
+    - name: Copy the dvwa template
+      copy:
+        src: dvwa.yml
+        dest: $HOME/dvwa.yml
 
-    #- name: Use kubectl to deploy the www service
-      #shell: kubectl apply -f www-nginx.yml >> www-nginx.txt
-      #args:
-        #chdir: $HOME
-        #creates: www-nginx.txt
+    - name: Use kubectl to deploy the dvwa service
+      shell: kubectl apply -f dvwa.yml >> dvwa.txt
+      args:
+        chdir: $HOME
+        creates: dvwa.txt
 
-    #- name: Copy the www-apache template
-      #copy:
-        #src: www-apache.yml
-        #dest: $HOME/www-apache.yml
+    - name: Copy the mutillidae template
+      copy:
+        src: mutillidae.yml
+        dest: $HOME/mutillidae.yml
 
-    #- name: Use kubectl to deploy the www service
-      #shell: kubectl apply -f www-apache.yml >> www-apache.txt
-      #args:
-        #chdir: $HOME
-        #creates: www-apache.txt
+    - name: Use kubectl to deploy the mutillidae service
+      shell: kubectl apply -f mutillidae.yml >> mutillidae.txt
+      args:
+        chdir: $HOME
+        creates: mutillidae.txt
+
+
+    - name: Copy the webgoat template
+      copy:
+        src: webgoat.yml
+        dest: $HOME/webgoat.yml
+
+    - name: Use kubectl to deploy the webgoat service
+      shell: kubectl apply -f webgoat.yml >> webgoat.txt
+      args:
+        chdir: $HOME
+        creates: webgoat.txt
 
     - name: Copy the leza template
       copy:
@@ -36,3 +48,31 @@
       args:
         chdir: $HOME
         creates: leza.txt
+
+- hosts: worker-0.do.iot4.net
+  become: yes
+  gather_facts: false
+  tasks:
+    - name: Add apache2 web server on worker-0 using apt
+      apt:
+        name: apache2
+        update_cache: yes
+        state: present
+    - name: Transfer over our index.html file
+      copy:
+        src: index.html
+        dest: /var/www/html
+
+- hosts: worker-1.do.iot4.net
+  become: yes
+  gather_facts: false
+  tasks:
+    - name: Add nginx web server on worker-1 using apt
+      apt:
+        name: nginx
+        update_cache: yes
+        state: present
+    - name: Transfer over our index.html file
+      copy:
+        src: index.html
+        dest: /var/www/html

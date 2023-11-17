@@ -1,0 +1,15 @@
+---
+- hosts: controller.do.iot4.net
+  become: yes
+  become_user: ubuntu
+  gather_facts: false
+  tasks:
+    - name: Copy the helm values file over for wordpress
+      copy:
+        src: wordpress-values.yml
+        dest: $HOME/
+
+    - name: Use helm to deploy the wordpress
+      shell: helm upgrade --install wordpress bitnami/wordpress -f wordpress-values.yml
+      args:
+        chdir: $HOME
