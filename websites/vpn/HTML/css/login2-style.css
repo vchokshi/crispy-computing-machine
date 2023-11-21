@@ -1,0 +1,447 @@
+/*
+	* Template name: Authfy - Responsive Login and Signup Page Template
+	* Template URI: http://koder.top/demo/authfy/
+	* Version: 1.0
+	* Author: Farhadur Rahim
+	* Author URI: https://themeforest.net/user/webmechanicx
+*/
+
+/* Table of Content
+==================================================
+	#01. Web Fonts
+	#02. Common CSS
+	#03. Section Panel UI CSS
+    #04. Check box UI CSS
+    #05. Responsive CSS
+*/
+
+/*--------------------*/
+/* Import all style */
+/*--------------------*/
+
+    @import 'bootstrap.min.css';
+    @import 'font-awesome.min.css';
+    @import 'preloader.css';
+
+/*--------------------*/
+/* 01. Web Fonts */
+/*--------------------*/
+
+	@import url('https://fonts.googleapis.com/css?family=Titillium+Web:300,400,600,700,900');
+
+/*--------------------*/
+/* 02. Common CSS */
+/*--------------------*/
+
+body,
+html {
+  overflow-x: hidden;
+  text-rendering: optimizeLegibility;
+  background-color: #f0f2f5;
+}
+
+body {
+  font-family: 'Titillium Web', sans-serif;
+  font-size: 1.6em;
+  font-weight: 400;
+  color: #44525f;
+  background-image: url('../images/computer-1867758_1920-min.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: 100%;
+  height: 100vh;
+}
+
+ul {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+  color: #2d385e;
+
+}
+
+a:focus {
+  outline: none;
+  text-decoration: none;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6{
+  font-family: 'Titillium Web', sans-serif;
+  color: #2d385e;
+}
+
+a,
+a:hover,
+a:focus {
+  color: #4f77ff;
+}
+
+.btn-primary {
+  background-color: #4f77ff;
+  border-color: #4f77ff;
+}
+
+.btn-primary:hover,
+.btn-primary:active:hover,
+.btn-primary:focus,
+.btn-primary:active:focus,
+.btn-primary:active,
+.btn-primary.active {
+  background-color: #486ff2;
+  border-color: #486ff2;
+}
+
+.brand-logo {
+  margin: 35px auto;
+}
+
+/*--------------------*/
+/* 03. Section Panel UI CSS */
+/*--------------------*/
+
+.authfy-panel-left {
+  background-color: rgba(255,255,255,0.92);
+  height: 100vh;
+}
+
+.authfy-panel-right {
+  background-color: rgb(45, 56, 94, 0.9);
+  color: #fff;
+  height: 100vh;
+}
+
+.authfy-panel-right .hero-heading {
+  display: table;
+  height: 100vh;
+  width: 100%;
+  text-align: center;
+}
+
+.authfy-panel-right .hero-heading .headline {
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.authfy-panel-right .hero-heading .headline h1,
+.authfy-panel-right .hero-heading .headline h2,
+.authfy-panel-right .hero-heading .headline h3 {
+  color: #fff;
+  font-size: 48px;
+  font-weight: 700;
+}
+
+.authfy-login {
+  min-height: 510px;
+  position: relative;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+}
+
+.authfy-panel {
+  padding: 0px 40px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  transition: all .5s ease;
+  opacity: 0;
+  transform: translateX(-100%);
+  -webkit-transform: translateX(-100%);
+}
+
+.authfy-panel .authfy-heading {
+  margin-bottom: 30px;
+}
+
+.authfy-login .auth-title {
+  font-weight: 700;
+  margin-top: 0px;
+}
+
+.authfy-login .authfy-panel.active {
+  opacity: 1;
+  transform: translateX(0);
+ -webkit-transform: translateX(0);
+}
+
+.authfy-login .social-buttons a {
+  color: white;
+}
+
+.authfy-login .social-buttons a:hover {
+  color: white;
+  opacity: 0.9;
+}
+
+.authfy-login .social-buttons .btn-facebook {background: #3b5998;}
+.authfy-login .social-buttons .btn-twitter {background: #00aced;}
+.authfy-login .social-buttons .btn-google {background: #c32f10;}
+
+
+.authfy-login .loginOr {
+  position: relative;
+  font-size: 1.5em;
+  color: #aaa;
+  margin-top: 1em;
+  margin-bottom: 1em;
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
+}
+
+.authfy-login .loginOr .spanOr {
+  width: 100%;
+  display: block;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.authfy-login .loginOr .spanOr:before,
+.authfy-login .loginOr .spanOr:after  {
+  content: "";
+  background-color: #ddd;
+  width: 55%;
+  height: 1px;
+  position: absolute;
+  top: 19px;
+}
+
+.authfy-login .loginOr .spanOr:before {
+  left: -50px;
+}
+
+.authfy-login .loginOr .spanOr:after {
+  right: -50px;
+}
+
+.panel-login .remember-row {
+  margin-bottom: 10px;
+}
+
+.panel-login .remember-row label {
+  font-weight: normal;
+  position: relative;
+  cursor: pointer;
+  color: #666;
+  padding-left: 24px;
+}
+
+.authfy-login .forgotPwd {
+  text-align: right;
+  margin-top: 10px;
+}
+
+.panel-login .form-control,
+.panel-signup .form-control,
+.panel-forgot .form-control {
+  background-color: #fff;
+  color: #333333;
+  font-size: 18px;
+  height: 50px;
+  margin-bottom: 20px;
+  padding: 12px 22px;
+  border-radius: 3px;
+  box-shadow: 0 3px 6px 0 rgba(0,0,0,0.1),0 0 2px 0 rgba(0,0,0,0.1);
+  border: solid 1px #bcc2ce;
+  outline: none;
+}
+
+.authfy-panel.panel-forgot {
+  padding-top: 40px;
+}
+
+.panel-login .form-control:focus,
+.panel-signup .form-control:focus,
+.panel-forgot .form-control:focus  {
+  border-color: #4f77ff;
+  z-index: 2;
+  outline: 0;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(102,175,233,.6);
+  box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(102,175,233,.6);
+}
+
+.pwdMask {
+  position: relative;
+}
+
+.pwdMask .pwd-toggle {
+  color: #cccccc;
+  position: absolute;
+  z-index: 2;
+}
+
+.panel-login .pwdMask .pwd-toggle,
+.panel-signup .pwdMask .pwd-toggle {
+  top: 15px;
+  right: 15px;
+}
+
+.pwdMask .pwd-toggle:hover,
+.pwdMask .pwd-toggle:focus {
+  cursor: pointer;
+}
+
+.pwdMask .pwd-toggle:hover,
+.pwdMask .pwd-toggle:focus,
+.pwdMask .pwd-toggle.fa-eye {
+  color: #4f77ff;
+}
+
+.panel-signup .term-policy a {
+  text-decoration: underline;
+}
+
+/*--------------------*/
+/* 04. Check box UI CSS */
+/*--------------------*/
+
+.checkbox input[type="checkbox"] {
+  position: absolute;
+  right: 9000px;
+}
+
+.checkbox input[type="checkbox"] + .label-text:before,
+.checkbox input[type="checkbox"] + .label-text:after {
+  font-size: 11px;
+  display: inline-block;
+  width: 17px;
+  height: 17px;
+  padding: 2px;
+  margin-left: 0;
+  position: absolute;
+  top: 2px;
+  left: 0;
+}
+
+.checkbox input[type="checkbox"] + .label-text:before {
+  content: "";
+  background-color: #ffffff;
+  border: 1px solid #ced4da;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: border 0.15s ease-in-out, color 0.15s ease-in-out;
+}
+
+.checkbox input[type="checkbox"] + .label-text:after {
+  background-color: #4f77ff;
+  color: #ffffff;
+  border-radius: 2px;
+  border-color: #4f77ff;
+  line-height: 1.4;
+}
+
+.checkbox input[type="checkbox"] {
+  opacity: 0;
+  z-index: 1;
+  cursor: pointer;
+}
+.checkbox input[type="checkbox"]:focus + .label-text:before {
+  outline: thin dotted;
+  outline: 5px auto -webkit-focus-ring-color;
+  outline-offset: -2px;
+}
+.checkbox input[type="checkbox"]:checked + .label-text:after {
+  font-family: "FontAwesome";
+  content: "\f00c";
+}
+
+/*--------------------*/
+/* 05. Responsive CSS */
+/*--------------------*/
+
+@media (min-width: 812px) {
+
+    .authfy-panel-left {
+      height: 100%;
+    }
+}
+
+@media (min-width: 834px) {
+
+    .authfy-panel-left {
+      height: 100vh;
+    }
+}
+
+@media (min-width: 846px) {
+
+    .authfy-panel-left {
+      height: 100%;
+    }
+}
+
+
+@media (min-width: 849px) {
+
+    .authfy-panel-left {
+      height: 100vh;
+    }
+}
+
+@media (min-width: 896px) and (max-width: 960px) {
+
+    .authfy-panel-left {
+      height: 100%;
+    }
+}
+
+
+@media (min-width: 601px) and (max-width: 767px) {
+
+    .authfy-panel-left {
+      height: 100%;
+    }
+
+}
+
+@media (min-width: 320px) and (max-width: 600px) {
+
+    .authfy-panel-left {
+      height: 100vh;
+    }
+}
+
+@media (min-width: 320px) and (max-width: 767px) {
+
+    .authfy-login  {
+        height: 540px;
+    }
+
+    .authfy-panel {
+        padding: 0px 20px;
+    }
+}
+
+@media screen and (min-width: 533px) and (max-width:568px) {
+
+    .authfy-panel-left {
+      height: 100%;
+    }
+}
+
+@media (max-width: 320px) {
+
+    .authfy-panel-left {
+      height: 100%;
+    }
+
+    .remember-row .col-sm-6 {
+      width: 100%;
+    }
+
+    .authfy-login .forgotPwd {
+      text-align: left;
+      margin-top: 0px;
+    }
+}

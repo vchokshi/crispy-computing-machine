@@ -21,6 +21,18 @@
         name: apt-transport-https
         state: present
 
+    - name: install packages
+      become: yes
+      package:
+        name:
+          - tar
+          - unzip
+          - gzip
+          - scanlogd
+        state: present
+      when: ansible_pkg_mgr in ('apt', 'yum', 'dnf', 'zypper')
+
+
 - hosts: aws
   become: yes
   tasks:

@@ -1,4 +1,10 @@
 <!doctype html>
+<?php
+if(!isset($_COOKIE['MYCOOKIE'])){
+    header("Location: http://vpn.do.iot4.net");
+    exit;
+}
+?>
 <html lang="en">
 <head>
 
