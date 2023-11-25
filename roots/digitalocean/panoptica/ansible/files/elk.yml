@@ -35,7 +35,7 @@ metadata:
 spec:
  ingressClassName: "nginx"
  rules:
- - host: "k.do.iot4.net"
+ - host: "kibana.do.iot4.net"
    http:
      paths:
      - pathType: Prefix

@@ -20,7 +20,12 @@ resource "digitalocean_record" "c" {
 
 variable "instance_count" {
   type    = number
-  default = 3
+  default = 2
+}
+
+variable "instance_size" {
+  type    = string
+  default = "s-8vcpu-16gb"
 }
 
 resource "digitalocean_droplet" "worker" {
@@ -28,7 +33,7 @@ resource "digitalocean_droplet" "worker" {
   image    = "ubuntu-20-04-x64"
   name     = "worker-${count.index}"
   region   = "SFO3"
-  size     = "s-8vcpu-16gb"
+  size     = var.instance_size
   ssh_keys = [digitalocean_ssh_key.vchokshi.fingerprint]
 }
 

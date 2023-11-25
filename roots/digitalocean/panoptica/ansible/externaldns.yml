@@ -14,3 +14,8 @@
       shell: helm upgrade --install external-dns bitnami/external-dns -f externaldns-values.yaml
       args:
         chdir: $HOME
+
+    - name: Delete the manifest
+      file:
+        path: $HOME/externaldns-values.yaml
+        state: absent

@@ -1,0 +1,25 @@
+---
+- hosts: controller.do.iot4.net
+  become: yes
+  become_user: ubuntu
+  tasks:
+
+    - name: Download & Install Cert Manager Control
+      unarchive:
+        src: https://github.com/cert-manager/cert-manager/releases/latest/download/cmctl-linux-amd64.tar.gz
+        dest: $HOME
+        remote_src: true
+
+    - name: Use helm to install cert-maanger
+      shell: helm upgrade --install cert-manager jetstack/cert-manager --namespace cert-manager --create-namespace --version v1.13.2 --set installCRDs=true
+
+    - name: Copy the cert issuer
+      copy:
+        src: cert-issuer.yml
+        dest: $HOME/cert-issuer.yml
+
+    - name: Use kubectl to deploy cert issuer
+      shell: kubectl apply -f cert-issuer.yml >> ci.txt
+      args:
+        chdir: $HOME
+        creates: ci.txt

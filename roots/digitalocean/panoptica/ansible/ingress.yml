@@ -10,7 +10,7 @@
         dest: $HOME/
 
     - name: Use helm to deploy the ingress-controller
-      shell: helm upgrade --install ingress-nginx ingress-nginx/ingress-nginx -f ingress-values.yml
+      shell: helm upgrade --install ingress-nginx ingress-nginx/ingress-nginx --namespace ingress-nginx --create-namespace -f ingress-values.yml
       args:
         chdir: $HOME
 
