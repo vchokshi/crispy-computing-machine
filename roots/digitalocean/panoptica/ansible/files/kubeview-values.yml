@@ -20,10 +20,15 @@ fullnameOverride: ""
 # If you want to expose the kubeview service using an ingress
 ingress:
   enabled: true
-  annotations: {}
+  annotations:
+    cert-manager.io/cluster-issuer: "letsencrypt-prod"
   hosts:
     - host: "kubeview.do.iot4.net"
-  tls: []
+  tls:
+    - hosts:
+      - kubeview.do.iot4.net
+      secretName: kuveview-cert
+
   className: "nginx"
 
 # If you want to expose the kubeview service directly

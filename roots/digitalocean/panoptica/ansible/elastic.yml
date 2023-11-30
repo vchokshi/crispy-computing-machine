@@ -24,8 +24,6 @@
       copy:
         src: "{{ item }}"
         dest: "$HOME/{{item}}"
-      tags:
-        - build
       with_items:
         - elk.yml
         - beats.yml

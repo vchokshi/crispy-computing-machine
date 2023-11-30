@@ -3,8 +3,13 @@ kind: Ingress
 metadata:
   name: vpn
   annotations:
-    kubernetes.io/ingress.class: nginx
+    cert-manager.io/cluster-issuer: "letsencrypt-prod"
 spec:
+  ingressClassName: nginx
+  tls:
+   - hosts:
+     - vpn.do.iot4.net
+     secretName: vpn-cert
   rules:
   - host: "vpn.do.iot4.net"
     http:
