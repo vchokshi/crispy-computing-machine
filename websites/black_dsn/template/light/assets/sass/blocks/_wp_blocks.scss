@@ -1,0 +1,49 @@
+.post-full-content, .widget_text {
+  @import "wp-blocks/lists";
+  @import "wp-blocks/bg&color";
+
+}
+
+
+@import "wp-blocks/captions";
+@import "wp-blocks/elements";
+@import "wp-blocks/galleries";
+@import "wp-blocks/forms";
+@import "wp-blocks/tables";
+
+
+.alignleft {
+  float: left;
+  margin-right: 20px;
+}
+
+
+.alignright {
+  float: right;
+  margin-left: 20px;
+}
+
+
+.aligncenter, .aligncenter img {
+  display: block;
+  clear: both;
+  margin-left: auto;
+  margin-right: auto;
+
+}
+
+.wp-block-button.aligncenter {
+  text-align: center;
+}
+
+.post-password-form {
+  input[type="submit"] {
+    background-color: $theme-color;
+    color: $reverse-heading-color;
+    font-weight: 600;
+    font-family: $heading-font;
+    text-transform: uppercase;
+    cursor: pointer;
+
+  }
+}

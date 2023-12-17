@@ -1,0 +1,99 @@
+/* -------------------------------------------------------
+                   Footer
+-------------------------------------------------------- */
+
+
+#dsn_footer {
+  overflow: hidden;
+  @include media_575X768{
+    .grid-col-1{
+      grid-column: 1 / 4;
+    }
+  }
+
+
+  &.container, &.dsn-container{
+    .container, .dsn-container{
+      padding-right: 0;
+      padding-left: 0;
+    }
+  }
+
+  h4.subtitle {
+    margin-bottom: 20px;
+    display: inline-block;
+
+
+    span {
+      padding: 3px 10px;
+      font-size: 16px;
+      letter-spacing: 2px;
+      font-weight: $font-weight-body;
+    }
+  }
+
+
+  ul.menu, ul.sub-menu {
+    li {
+      a {
+        font-weight: 600;
+        font-size: 11px;
+        letter-spacing: 2.5px;
+      }
+
+      &:not(:last-child) a {
+        margin-bottom: 7px;
+      }
+    }
+
+  }
+
+  .list-inline-block {
+    ul.menu li, ul.sub-menu li {
+      display: inline-block;
+
+      a {
+        margin-bottom: 0;
+      }
+
+      &:not(:last-of-type) {
+        margin-left: 5px;
+      }
+    }
+  }
+
+
+  .textwidget {
+    & > *, & p {
+      &:not(:last-child) {
+        margin-bottom: 10px;
+      }
+    }
+  }
+
+  .col-contact {
+    p {
+      font-size: 14px;
+
+
+      strong {
+        color: $heading-color;
+      }
+
+
+      span {
+        margin-right: 5px;
+        margin-left: 5px;
+      }
+
+
+      a {
+        text-transform: none;
+      }
+    }
+  }
+
+
+}
+
+

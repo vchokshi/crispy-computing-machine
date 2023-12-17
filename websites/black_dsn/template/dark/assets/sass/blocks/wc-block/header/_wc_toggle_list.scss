@@ -1,0 +1,42 @@
+.dsn-grid-list-toggle {
+    float: left;
+    margin-top: 5px;
+
+    & + .woocommerce-result-count {
+        margin: 0 15px 30px;
+        line-height: 32px;
+    }
+
+    a {
+        width: 20px;
+        height: 20px;
+        transition: 0.5s $easeInOutBack;
+
+        svg {
+            g, path {
+                fill: $body-color;
+                opacity: 0.5;
+
+            }
+
+        }
+
+
+        &.active {
+            svg {
+                g, path {
+                    fill: $heading-color;
+                    opacity: 1;
+
+                }
+            }
+
+        }
+
+        &:hover {
+            transform: scale(1.3);
+        }
+
+    }
+
+}

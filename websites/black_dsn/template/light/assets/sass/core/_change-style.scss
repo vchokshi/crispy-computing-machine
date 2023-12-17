@@ -1,0 +1,104 @@
+.day-night {
+  position: fixed;
+  z-index: 100;
+  top: 20px;
+  left: 25px;
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+  text-align: center;
+
+  svg {
+    width: 30px;
+    height: 30px;
+  }
+
+  .title-mode {
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    margin-top: 10px;
+    letter-spacing: 7px;
+    background-color: $assistant-color;
+    width: 40px;
+    margin-left: -5px;
+    padding-bottom: 10px;
+    border-radius: 0 0 15px 15px;
+    line-height: 38px;
+
+    &:before {
+      content: "";
+      position: absolute;
+      left: -5px;
+      top: -10px;
+      height: 50px;
+      width: 40px;
+      background-color: inherit;
+      z-index: -1;
+      border-radius: 15px 15px 0 0;
+    }
+  }
+
+  @include media_991 {
+    top: 30px;
+    left: 200px;
+    display: none;
+  }
+
+  @include media_768 {
+    top: 50px;
+    left: 150px;
+    display: none;
+  }
+
+  .night,
+  .moon {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    transition: opacity 0.2s;
+    border-radius: 100%;
+    opacity: 0;
+
+    svg {
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  .night {
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    background-color: #fff;
+    opacity: 1;
+
+    svg {
+      fill: #000;
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  .moon {
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    background-color: #000;
+    opacity: 0;
+
+    svg {
+      transform: rotate(270deg);
+      fill: #f0f0f0;
+    }
+  }
+
+  @include v-light() {
+    .night {
+      opacity: 0;
+    }
+    .moon {
+      opacity: 1;
+    }
+  }
+}

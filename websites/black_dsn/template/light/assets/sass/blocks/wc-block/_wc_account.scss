@@ -1,0 +1,104 @@
+/* Change WC Acct Page Column Widths */
+@media only screen and (min-width: 769px) {
+  .woocommerce-account .woocommerce-MyAccount-navigation {
+    width: 22%;
+  }
+  .woocommerce-account .woocommerce-MyAccount-content {
+    width: 75%;
+  }
+}
+
+
+/* Style WC Account Endpoint Links */
+nav.woocommerce-MyAccount-navigation ul {
+  list-style-type: none;
+  padding-left: 0;
+  max-width: 200px;
+  font-size: 17px;
+  line-height: 26px;
+}
+
+nav.woocommerce-MyAccount-navigation ul li {
+  padding: 10px 20px;
+  background-color: $assistant-color;
+  border-bottom: 1px solid $border-color;
+  margin-bottom: 0;
+}
+
+nav.woocommerce-MyAccount-navigation ul li.is-active a {
+  color: $theme-color;
+}
+
+nav.woocommerce-MyAccount-navigation ul li a {
+  color: $heading-color;
+  letter-spacing: 2px;
+}
+
+nav.woocommerce-MyAccount-navigation ul li.is-active:after {
+  content: "";
+  height: 0;
+  width: 0;
+  border-top: 15px solid transparent;
+  border-left: 15px solid $assistant-color;
+  border-bottom: 15px solid transparent;
+  float: right;
+  margin-right: -34px;
+}
+
+.woocommerce-MyAccount-content p {
+  margin-bottom: 10px;
+}
+
+.u-column1.col-1, .u-column2.col-2 {
+  max-width: 100%;
+
+  .title {
+    .edit {
+      font-size: 14px;
+      padding: 10px;
+      background-color: $assistant-color;
+      line-height: 1.2;
+      border-radius: 3px;
+    }
+
+    + address {
+      margin-top: 10px;
+    }
+  }
+}
+
+.woocommerce form .form-row .required {
+  width: auto;
+}
+
+.woocommerce-EditAccountForm {
+  fieldset, .woocommerce-Button.button {
+    margin-top: 30px;
+  }
+
+  fieldset {
+    border: 1px solid $border-color;
+    background-color: transparent !important;
+  }
+
+  .woocommerce-Button.button {
+    background-color: $assistant-color !important;
+    color: $heading-color !important;
+  }
+
+}
+
+
+.woocommerce form .show-password-input::after, .woocommerce-page form .show-password-input::after {
+  float: right;
+}
+
+.woocommerce .woocommerce-form-login .woocommerce-form-login__rememberme {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+
+  span {
+    margin-left: 10px;
+  }
+}

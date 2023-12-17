@@ -1,0 +1,14 @@
+/* -------------------------------------------------------
+                   09 - Slider
+-------------------------------------------------------- */
+
+
+.main-slider{
+  @import "slider/slider";
+  @import "slider/slider-padding";
+  @import "slider/slider-half";
+  @import "slider/slider-content";
+  @import "slider/control-nav";
+}
+
+

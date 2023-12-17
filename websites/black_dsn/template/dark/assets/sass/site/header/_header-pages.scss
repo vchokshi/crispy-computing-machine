@@ -1,0 +1,31 @@
+.header-personal{
+  .title .p-10{
+    @include media_991(min){
+      font-size: 90px;
+      line-height: 90px;
+      letter-spacing: 2.5px;
+    }
+    @include media_991(){
+      font-size: 50px;
+      line-height: 50px;
+      letter-spacing: 2px;
+    }
+
+  }
+  .dsn-socials{
+    position: absolute;
+    right: 20px;
+    bottom: 20px;
+    --dsn-icon-size: 14px;
+    z-index: 2;
+  }
+  .box-content {
+    position: relative;
+    z-index: 1;
+    .title span:last-child{
+      @include media_768(min){
+        margin-left: -140px;;
+      }
+    }
+  }
+}

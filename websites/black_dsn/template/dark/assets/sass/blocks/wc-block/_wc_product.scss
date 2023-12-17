@@ -1,0 +1,94 @@
+.related {
+    &.products {
+        h2 {
+            font-size: 22px;
+            margin-bottom: 20px;
+        }
+    }
+}
+
+.woocommerce{
+    div.quantity {
+        text-align: center;
+        margin-bottom: 15px;
+
+        input[type="number"] {
+            padding-right: 0;
+            background-color: transparent;
+        }
+        input[type="number"] , .quantity-nav{
+            width: 100%;
+            min-width: 100px;
+        }
+
+        .quantity-nav {
+            position: absolute;
+            height: 42px;
+            float: none;
+            pointer-events: none;
+
+            .quantity-button {
+                border: 0;
+                background-color: transparent;
+
+                &.quantity-up , &.quantity-down{
+                    pointer-events: auto;
+                    top: 50%;
+                    transform: translateY(-50%);
+                }
+
+                &.quantity-up {
+                    right: 4px;
+                }
+
+                &.quantity-down {
+                    left: 4px;
+                    bottom: auto;
+                }
+            }
+        }
+    }
+}
+
+.woocommerce div.product form.cart .variations select {
+    border-radius: 0;
+    height: 37px;
+    line-height: 37px;
+}
+
+.woocommerce div.product form.cart .variations label {
+    line-height: 37px;
+}
+
+.woocommerce div.product div.images .flex-control-thumbs{
+    margin-top: 5px;
+}
+
+
+.woocommerce {
+
+
+    button:not(.xt_wooqv-button , .carousel__button) {
+        background-color: $theme-color !important;
+        color: $heading-color !important;
+        border: 0 !important;
+        font-size: 13px !important;
+        font-weight: 500 !important;
+        text-transform: uppercase;
+        height: 39px;
+        letter-spacing: 1.3px;
+        padding-left: 20px !important;
+        padding-right: 20px !important;
+    }
+
+    table.shop_attributes th {
+        font-size: 15px;
+    }
+}
+
+.woocommerce div.product form.cart .reset_variations{
+    position: absolute;
+    right: 50px;
+    bottom: 50px;
+}
+

@@ -1,0 +1,33 @@
+/*-----------------------------------------------------------------------------------
+
+	Template Name:
+	Template URI:
+	Description:
+	Author: design_grid
+	Author URI:
+	Version: 1.0
+
+-----------------------------------------------------------------------------------*/
+
+/* ----------------------------------------------------------------
+			[ All Css Plugins & Helper Classes File ]
+-----------------------------------------------------------------*/
+
+/* == fontawesome == */
+@import url("plugins/fontawesome-all.min.css");
+
+/* == Swiper == */
+@import url("plugins/swiper.min.css");
+
+/* == animatedheadline == */
+@import url("plugins/jquery.animatedheadline.css");
+
+/* == fancybox popup == */
+@import url("plugins/fancybox.css");
+
+/* == magnific popup == */
+@import url("plugins/fjGallery.css");
+
+/* == Helper Class == */
+@import url("global.css");
+

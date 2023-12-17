@@ -1,0 +1,44 @@
+.wp-caption-text, .wp-caption .wp-caption-dd, .wp-block-embed figcaption, .wp-block-calendar table caption, .wp-block-image figcaption, .blocks-gallery-caption  , .gallery-caption{
+  font-size: 14px;
+  line-height: 1.6;
+  padding-top: 0.5rem;
+  text-align: center;
+}
+.blocks-gallery-caption{
+  width: 100%;
+}
+
+
+.wp-block-embed figcaption {
+  text-align: left;
+}
+
+
+.block-library-rich-text__tinymce dl.wp-caption a {
+  display: inline-block;
+
+}
+
+
+.wp-caption {
+  max-width: 100%;
+}
+
+
+.wp-block-pullquote__citation {
+  margin-top: 5px;
+}
+
+
+.block-editor-block-list__layout.is-root-container > .wp-block[data-align="full"] {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.bypostauthor{
+  position: relative;
+}
+.gallery-caption{
+  position: relative;
+
+}

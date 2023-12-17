@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>blackdsn  Documentation</title>
+	<meta name="description" content="Documentation">
+	<meta charset="utf-8">
+	<meta name="author" content="Dmitry Volkov">
+	<!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1"><![endif]-->
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!-- Bootstrap core CSS -->
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+
+	<!-- Custom styles for this template -->
+	<link rel="stylesheet" href="css/main.css">
+
+</head>
+
+<body data-spy="scroll" data-target=".scroll_bar">
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-xs-12 col-sm-3 sidebar">
+				<nav class="scroll_bar">
+					<ul class="nav">
+						<li><a href="#started">Getting Started</a></li>
+						<li><a href="#structure">HTML structure</a></li>
+						<li><a href="#logo">Logotype</a></li>
+						<li><a href="#home">Navbar</a></li>
+						<li><a href="#about">overlay</a></li>
+						<li><a href="#section">helper class</a></li>
+						<li><a href="#scheme">Color Scheme</a></li>
+						<li><a href="#animation">Animation</a></li>
+						<li><a href="#credits">Credits</a></li>
+						<li><a href="#support">Support</a></li>
+					</ul>
+				</nav>
+			</div>
+
+
+			<div class="col-xs-12 col-sm-9 col-sm-offset-3 content">
+				<div class="title">
+					<h1>blackdsn  Documentation</h1>
+					<p>Hello! Thank you for purchasing!</p>
+					<span>Created: 25/2/2022</span>
+					<span>By: <a href="https://themeforest.net/user/design_grid">design grid</a></span>
+					<span>Email: <a href="mailto:info@dsngrid.com">info@dsngrid.com</a></span>
+				</div>
+
+				<div id="started" class="started">
+					<h2>Getting Started</h2>
+					<p>Unzip the archive and find out the folder Template There are all the template files in this folder. You can
+						open the following files for viewing in browser.</p>
+					<ul>
+						<li><strong>assets/css</strong> — folder with css files.</li>
+						<li><strong>assets/fonts</strong> — folder with icon fonts.</li>
+						<li><strong>assets/img</strong> — folder with image files.</li>
+						<li><strong>assets/js</strong> — folder with javascript files. <br> <br></li>
+					</ul>
+					<p>Upload the template files (inside the folder www) to server with the help of one of the FTP-clients.</p>
+				</div>
+
+				<div id="structure">
+					<h2>HTML structure</h2>
+					<p>In my template I use Bootstrap grid, if you don't know how to use it, <a href="https://getbootstrap.com/docs/4.1/migration/#grid-system">here</a>
+						is a detailed information on its use.</p>
+					<p>The standard section has the following HTML structure:</p>
+					<pre>
+&lt;body class="v-dark dsn-effect-scroll dsn-cursor-effect dsn-ajax"&gt;
+	&lt;main class="main-root"&gt;
+		&lt;div id="dsn-scrollbar"&gt;
+			&lt;div class="main-content"&gt;
+				&lt;div class="wrapper"&gt;
+					&lt;header class="main-slider  has-horizontal p-relative w-100 h-100-v dsn-header-animation"&gt;
+						...
+					&lt;/header&gt;
+				&lt;/div&gt;
+
+				&lt;footer class="footer p-relative background-section"&gt;
+					...
+				&lt;/footer&gt;
+			&lt;/div&gt;
+		&lt;/div&gt;
+	&lt;/main&gt;
+&lt;/body&gt;
+
+</pre>
+				</div>
+
+				<div id="logo" class="logo">
+					<h2>Logotype</h2>
+					<p>To change white logotype, find image <strong>assets/img/logo.png</strong> and replace it with your logo.</p>
+					<p>To change dark logotype, find image <strong>assets/img/logo-dark.png</strong> and replace it with your logo.</p>
+				</div>
+
+				<div id="home" class="header-controller">
+					<h2>Navbar</h2>
+					<p><strong>navbar item</strong></p>
+					<pre>
+&lt;div class="site-header dsn-load-animate dsn-container"&gt;
+  &lt;div class="extend-container d-flex w-100 align-items-baseline justify-content-between align-items-end"&gt;
+	&lt;div class="inner-header p-relative"&gt;
+		&lt;div class="main-logo"&gt;
+			&lt;a href="index.html" data-dsn="parallax"&gt;
+				&lt;img class="light-logo"
+				src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+				data-dsn-src="assets/img/logo.png" alt="" /&gt;
+				&lt;img class="dark-logo"
+				src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+				data-dsn-src="assets/img/logo-dark.png" alt=""/&gt;
+			&lt;/a&gt;
+		&lt;/div&gt;
+	&lt;/div&gt;
+	&lt;nav class="accent-menu dsn-container main-navigation p-absolute  w-100  d-flex align-items-baseline "&gt;
+		&lt;ul class="extend-container p-relative d-flex flex-column justify-content-center h-100"&gt;
+			&lt;li class="dsn-active dsn-drop-down"&gt;	
+				&lt;a href="#" class="user-no-selection"&gt;	
+					&lt;span class="dsn-title-menu"&gt;	
+						drop down
+					&lt;/span&gt;
+
+					&lt;ul&gt;	
+						&lt;li class="dsn-back-menu"&gt;	
+							&lt;li&gt;	
+								&lt;a href="index.html"&gt;	
+									&lt;span class="dsn-title-menu"&gt;	
+										Link
+									&lt;/span&gt;
+								&lt;/a&gt;
+							&lt;/li&gt;
+						&lt;/li&gt;
+					&lt;/ul&gt;	
+				&lt;/a&gt;	
+			&lt;/li&gt;		
+		&lt;/ul&gt;
+	&lt;/nav&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+</pre>
+					<br>
+					<p><strong>overlay</strong></p>
+					<p>To change the background image, open HTML file and replace the value of <code>data-overlay</code> attribute of
+						this construction:</p>
+					<pre>
+&lt;section id="header" class="cover-bg" data-overlay='8'&gt;
+  &lt;div class="container"&gt;
+    ...
+  &lt;/div&gt;
+&lt;/section&gt;
+</pre>
+					<br>
+
+				</div>
+
+				<div id="about" class="about">
+					<h2>helper class</h2>
+					<ul>
+						<li>Custom Margin</li>
+						<li>Custom Padding</li>
+					</ul>
+					<p>For example the helper class with "padding & margin section " style:</p>
+					<pre>
+&lt;section id="about" class="about section-padding section-margin"&gt;
+	&lt;div class="container"&gt;
+		...
+	&lt;/div&gt;
+&lt;/section&gt;
+</pre>
+
+<p>For example the helper class with "Custom Margin" style:</p>
+		<br>
+				<p><strong>pb-50 mb-50</strong> – Section without a lower indentation</p>
+				<pre>
+&lt;section class="section pb-50 mb-50"&gt;
+&lt;div class="container"&gt;
+...
+&lt;/div&gt;
+&lt;/section&gt;
+</pre>
+
+				<br>
+				<p><strong>pt-10 mt-10</strong> – section without an upper indent</p>
+				<pre>
+&lt;section class="section pt-10 mt-10"&gt;
+&lt;div class="container"&gt;
+...
+&lt;/div&gt;
+&lt;/section&gt;	
+</pre>
+
+				</div>
+
+				<div id="grid" class="grid">
+					<h2>Sections Grid</h2>
+					<p>The frog is divided by grid column:</p>
+
+					<p><strong>d-grid</strong> – Divided into 3 column </p>
+					<pre>
+&lt;div class="d-grid grid-lg-3 grid-sm-2"&gt;
+  &lt;div class="item"&gt;
+    ...
+  &lt;/div&gt;
+
+  &lt;div class="item"&gt;
+    ...
+  &lt;/div&gt;
+
+  &lt;div class="item"&gt;
+    ...
+  &lt;/div&gt;
+&lt;/div&gt;
+</pre>
+<br>
+<p><strong>d-grid</strong> – Divided into 2 column </p>
+
+<pre>
+&lt;div class="d-grid grid-lg-2 grid-md-1"&gt;
+	&lt;div class="item"&gt;
+	...
+	&lt;/div&gt;
+
+	&lt;div class="item"&gt;
+	...
+	&lt;/div&gt;
+
+	&lt;div class="item"&gt;
+	...
+	&lt;/div&gt;
+
+	&lt;div class="item"&gt;
+	...
+	&lt;/div&gt;
+&lt;/div&gt;
+	</pre>
+
+					<br>
+					<p><strong> dsn-col </strong> – Determine the distances between each element from below </p>
+					<pre>
+&lt;section class="section  dsn-col"&gt;
+  &lt;div class="dsn-col-lg-3 dsn-col-md-2 dsn-col-sm-1"&gt;
+    ...
+  &lt;/div&gt;
+&lt;/section&gt;
+</pre>
+<p>If the row 3 elements will add a distance at the top after element 4 in the lg screen , And in the md screen, it's going to add a distance at the top before element 3, and in the sm screen it will add a distance at the top after element 2</p>
+				
+				</div>
+
+				<div class="section">
+					<h2>pop up </h2>
+					<p>Open the Images in the popup window: add class <strong>has-popup</strong></p>
+
+					<pre>
+&lt;div class="section-margin has-popup over-hidden p-relative"&gt;
+  &lt;a href="assets/img/project/project1/3.jpg" &gt;
+  	&lt;img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+	  data-dsn-src="assets/img/project/project1/3-sm.jpg"
+	  data-dsn-srcset="assets/img/project/project1/3.jpg 1800w,assets/img/project/project1/3-sm.jpg 768w"
+	  alt="" class="cover-bg-img"&gt;
+  &lt;/a&gt;
+&lt;/div&gt;
+</pre>
+
+
+				</div>
+
+				<div id="scheme" class="scheme">
+					<h2>Color Scheme</h2>
+					<p>To change color scheme, open HTML file and replace the value of <code>href</code> attribute</p>
+					<pre>
+&lt;link rel="stylesheet" href="assets/css/style.css"&gt;
+</pre>
+<img src="img/color.png" alt="">
+					<p>on any available (bg-color = backgroud Color, assistant-color = assistant Backrgound, theme-color = Main Color, font-color = Color body font, heading-color = Color Heading, border-color = Border Color ).</p>
+				</div>
+
+				<div id="animation" class="animation">
+					<h2>Animation</h2>
+					<p>If you want to use appear inimation for some element, you need to add class <code>data-dsn-animate="section"</code> to this
+						element and set data attribute like this:</p>
+					<pre>
+&lt;div class="container section-p section-margin p-relative" data-dsn-animate="section"&gt;
+  &lt;h4 class="dsn-up"&gt;
+	...
+  &lt;/h4&gt;
+&lt;/div&gt;
+</pre>
+
+<pre>
+&lt;div class="section-margin p-relative" data-dsn-animate="section"&gt;
+  &lt;h4 class="dsn-text"&gt;
+	...
+  &lt;/h4&gt;
+&lt;/div&gt;
+</pre>
+
+
+<br>
+<p>section with parallax image</p>
+<pre>
+&lt;section class="section" data-dsn-grid="move-up"&gt;
+   &lt;img class="cover-bg-img " src="assets/img/about-intro.jpg"&gt;
+&lt;/section&gt;
+</pre>
+<p> parallax image Scale</p>
+
+<pre>
+&lt;div class="img-box-parallax" data-dsn-grid="move-up"&gt;
+   &lt;img class="has-bigger-scale" src="assets/img/about-intro.jpg"&gt;
+&lt;/div&gt;
+</pre>
+<p> parallax image speed</p>
+
+<pre>
+&lt;div class="img-container h-100" data-dsn-grid="move-up"&gt;
+   &lt;img class="cover-bg-img " data-dsn-speed="10%" src="assets/img/about-intro.jpg"&gt;
+&lt;/div&gt;
+</pre>
+				</div>
+
+				<div id="credits" class="credits">
+					<h2>Credits</h2>
+					<ul>
+						<li><a href="http://jquery.com/">jQuery</a></li>
+						<li><a href="http://getbootstrap.com/">Bootstrap</a></li>
+						<li><a href="https://swiperjs.com/">swiper Carousel</a></li>
+						<li><a href="http://dimsemenov.com/plugins/magnific-popup/">Magnific Popup</a></li>
+						<li><a href="http://fontawesome.io/">Font Awesome</a></li>
+						<li><a href="https://greensock.com/">greensock</a></li>
+					</ul>
+				</div>
+
+				<div id="support" class="support">
+					<h2>Support</h2>
+					<p>If you have any questions, feel free to contact me at <a href="mailto:dmitry.info@dsngrid.com">info@dsngrid.com</a>.</p>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script src="js/jquery-2.2.4.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script src="js/main.js"></script>
+</body>
+
+</html>

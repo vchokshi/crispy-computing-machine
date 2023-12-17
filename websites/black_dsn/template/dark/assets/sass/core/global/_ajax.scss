@@ -1,0 +1,38 @@
+.dsn-ajax-loader {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: 900199;
+}
+
+.dsn-ajax-effect {
+  overflow: hidden !important;
+}
+
+
+
+.splitting .whitespace {
+  margin-right: 15px;
+}
+
+.border-style {
+  border: 1px solid $border-color;
+}
+
+.word-wrap {
+  word-break: break-word;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-left {
+  text-align: left;
+}
+
+.text-right {
+  text-align: right;
+}
