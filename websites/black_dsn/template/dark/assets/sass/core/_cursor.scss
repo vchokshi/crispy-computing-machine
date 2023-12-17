@@ -1,0 +1,47 @@
+#dsn_cursor, #dsn_cursor_inner {
+  position: fixed;
+  top: 0;
+  left: 0;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 99;
+
+  body:not(.dsn-cursor-effect) & {
+    display: none;
+  }
+
+  @include media_991() {
+    display: none;
+  }
+
+}
+
+
+#dsn_cursor {
+  width: 30px;
+  height: 30px;
+  border: 2px solid $theme-color;
+
+  path {
+    display: none;
+    stroke-dasharray: 400;
+    stroke-dashoffset: 400;
+    stroke-width: 1;
+  }
+}
+
+#dsn_cursor_inner {
+  width: 7px;
+  height: 7px;
+  background-color: $theme-color;
+}
+
+.unique-demos{
+  .box-content{
+    opacity: 0.015;
+    .title{
+      font-size: 8vw;
+    }
+  }
+
+}

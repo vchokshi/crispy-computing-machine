@@ -1,0 +1,128 @@
+
+.dsn-testimonials {
+
+
+  .testimonial-position {
+    color: $body-color;
+    font-size: 14px;
+    font-weight: 400;
+    margin-top: 5px;
+  }
+
+
+  .content-inner {
+    display: flex;
+  }
+
+  .border-top {
+    padding-top: 20px;
+  }
+
+  .testimonial-inner {
+    .testimonial-inner-item{
+      &.border-style , &.background-section , &.background-main , &.background-theme{
+        padding: 50px 30px;
+      }
+
+    }
+    > svg {
+      position: absolute;
+      right: 0;
+      top: 0;
+      width: 247px;
+      height: 192px;
+      opacity: 0.3;
+      fill: $assistant-color;
+
+      .background-section & {
+        fill: $bg-color;
+      }
+
+      [data-widget_type="dsn_testimonial.default"]:not(.quote-box-style) & {
+        display: none;
+      }
+
+    }
+
+
+    .elementor-widget-dsn_testimonial:not(.image-left-style) & .swiper-slide > .avatar {
+      display: none;
+    }
+
+
+    .image-left-style & {
+      @include media_768(min) {
+        .content-inner .avatar {
+          display: none;
+
+          & + .box-text {
+            margin-left: 0;
+            text-align: inherit;
+          }
+        }
+
+        .swiper-slide {
+
+          > .avatar {
+            height: 80px;
+            width: 80px;
+            margin-bottom: 30px;
+
+            &, img {
+              border-radius: 50%;
+            }
+
+            + .testimonial-item {
+              //margin-left: 30px;
+
+              //padding-top: 15px;
+            }
+
+          }
+        }
+
+      }
+      @include media_768() {
+        .swiper-slide > .avatar {
+          display: none;
+        }
+      }
+
+    }
+
+
+  }
+
+
+  .content-inner {
+    .avatar {
+      width: 60px;
+      height: 60px;
+
+      &, img {
+        border-radius: 50%;
+      }
+
+      + .box-text {
+        margin-left: 10px;
+        text-align: left;
+      }
+    }
+  }
+
+
+  h4, h5 {
+    font-family: $body-font;
+  }
+
+  .testimonial-content h4.sm-title-block {
+    letter-spacing: 1.2px;
+    font-size: 18px;
+  }
+
+  .testimonial-name, .testimonial-content h4.sm-title-block {
+    font-weight: 600;
+  }
+
+
+}

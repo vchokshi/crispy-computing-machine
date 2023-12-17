@@ -1,0 +1,58 @@
+pre, blockquote, .post-password-form input[type="password"], code, table th, .wp-block-table.is-style-stripes tbody tr:nth-child(odd), .wp-block-pullquote:before, .wp-block-calendar table th ,
+.wp-block-button__link{
+  background-color: $assistant-color;
+}
+
+
+blockquote code, .wp-block-freeform.block-library-rich-text__tinymce code {
+  background-color: $bg-color;
+}
+
+
+ pre, blockquote, .wp-caption-text, .wp-caption .wp-caption-dd,
+.post-password-form input[type="password"], code, table th, table td, .wp-block-freeform.block-library-rich-text__tinymce code,
+.wp-block-embed figcaption, .wp-block-archives a, .wp-block-archives li::marker, .wp-block-calendar table caption ,  footer.wp-block-latest-comments__comment-meta a , .wp-block-latest-posts a ,
+ .wp-block-image figcaption, .blocks-gallery-caption , .wp-block-button__link , .is-style-outline .wp-block-button__link, .wp-block-button__link.is-style-outline{
+  color: $heading-color;
+
+  a {
+    color: $heading-color;
+    //color: $theme-color;
+  }
+}
+
+
+ .wp-block-freeform.block-library-rich-text__tinymce a, .wp-block-pullquote cite, .wp-block-pullquote:before,
+.wp-block-pullquote .wp-block-pullquote__citation, .wp-block-archives li,
+.wp-block-calendar table td a , .wp-calendar-nav a , footer.wp-block-latest-comments__comment-meta, footer.wp-block-latest-comments__comment-meta time , .wp-block-latest-posts time ,
+.wp-block-tag-cloud a , .wp-block-rss__item a , .wp-block-quote cite {
+  color: $heading-color;
+  //color: $theme-color;
+}
+
+
+blockquote , footer.wp-block-latest-comments__comment-meta , .wp-block-latest-posts , .wp-block-image figcaption{
+  font-family: $body-font;
+
+  a {
+    color: $heading-color;
+    //color: $theme-color;
+  }
+}
+figure figcaption {
+  a {
+    color: $heading-color;
+    //color: $theme-color;
+  }
+}
+
+ul, ol {
+
+
+  &.wp-block-archives {
+    margin: 0;
+    padding: 0;
+  }
+
+}
+

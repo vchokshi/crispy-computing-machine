@@ -1,0 +1,237 @@
+/* -------------------------------------------------------
+                   Blog
+-------------------------------------------------------- */
+
+
+.root-blog {
+
+  counter-reset: compteListe;
+
+  .type-p-nav{
+    margin-top: var(--blog-g , 50px);
+  }
+  .blog-item {
+    padding-left: 60px;
+    padding-top: var(--blog-g , 50px);
+    padding-bottom: var(--blog-g , 50px);
+
+    &:last-of-type {
+      border-bottom: 0;
+      padding-bottom: 0;
+    }
+
+    &:first-of-type {
+      padding-top: 0;
+    }
+
+    .blog-item-inner {
+
+      @include media_991(min) {
+        display: flex;
+      }
+
+      &::before {
+        counter-increment: compteListe 1;
+        color: $heading-color;
+        content: "/ " counter(compteListe);
+        position: absolute;
+        left: -60px;
+        top: 5px;
+        font-size: 13px;
+        letter-spacing: 2px;
+        font-weight: bold;
+      }
+
+
+    }
+
+    .left-box {
+      @include media_991(min) {
+        flex: 0 1 40%;
+      }
+      @include media_991 {
+        margin-bottom: 15px;
+      }
+    }
+
+    .right-box {
+      @include media_991(min) {
+        flex: 0 1 60%;
+        padding-left: 30px;
+      }
+    }
+
+  }
+}
+
+.news-content {
+  position: relative;
+  overflow: hidden;
+
+
+
+  .post-content {
+    position: relative;
+    display: block;
+
+    > * {
+      margin-bottom: 30px;
+    }
+
+    > *:first-child,
+    &:first-child {
+      margin-top: 0;
+    }
+
+    > *:last-child,
+    &:last-child {
+      margin-bottom: 0;
+    }
+
+    p {
+      letter-spacing: -0.6px;
+
+      a {
+        display: inline-block;
+      }
+    }
+
+    blockquote {
+      font-size: 20px;
+      font-family: serif;
+      color: $heading-color;
+      font-style: italic;
+      padding: 10px 0 10px 15px;
+      border-left: 1px solid $border-color;
+    }
+
+    a {
+      position: relative;
+      text-decoration: none;
+      transition: color 670ms linear 417ms;
+
+      &:before {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        height: 45%;
+        left: -0.15em;
+        right: -0.15em;
+        background: rgba(82, 83, 85, 0.19);
+        background-size: 100% 100%;
+        transition: 380ms transform cubic-bezier(0.165, 0.84, 0.44, 1);
+        transform-origin: 50% 100%;
+        transform: scale(0.98, 0) translateZ(0);
+        backface-visibility: hidden;
+        z-index: -1;
+        background-repeat: repeat-x;
+      }
+
+      &:after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        height: 1px;
+        left: -0.025em;
+        right: -0.075em;
+        background: rgba(82, 83, 85, 0.19);
+        background-size: 100% 100%;
+        transition: 190ms opacity cubic-bezier(0.895, 0.03, 0.685, 0.22), background 670ms linear 417ms;
+        transform: translateZ(0);
+      }
+
+      &:hover {
+        &:before {
+          transform: scale(1, 0.99999999) translateZ(0);
+        }
+
+        &:after {
+          opacity: 0;
+          transition: 126.66666667ms opacity cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+      }
+    }
+  }
+
+  .post-tags {
+    position: relative;
+    display: flex;
+    align-items: center;
+    padding: 50px 0 0;
+
+    @include media_768 {
+      padding: 30px 0 0;
+    }
+
+    a {
+      color: $heading-color;
+      margin-right: 30px;
+      display: inline-block;
+      line-height: 1;
+      float: left;
+
+      &:before {
+        content: "#";
+        position: relative;
+        margin-right: 5px;
+        font-size: 14px;
+        background-color: transparent;
+        border: 0;
+      }
+
+      &::after {
+        display: none;
+      }
+    }
+  }
+}
+
+
+
+
+@include col-layout(post, 30);
+
+.pagination-post {
+  position: relative;
+
+  .pagination-item {
+    border: 0;
+  }
+
+  a > span {
+    letter-spacing: 2px;
+  }
+
+  @include media_768() {
+    flex-direction: column;
+    .icon {
+      display: none;
+    }
+    .pagination-item {
+      text-align: left;
+      border: 0;
+
+      &:not(.text-right){
+        border-bottom: 1px solid $border-color;
+      }
+
+      &.border-left {
+        border-top: 1px solid $border-color;
+
+        a {
+          display: flex;
+          flex-direction: column-reverse;
+
+          > span {
+            margin-top: 10px;
+            margin-bottom: 0;
+          }
+        }
+      }
+    }
+  }
+
+}
+
+
+

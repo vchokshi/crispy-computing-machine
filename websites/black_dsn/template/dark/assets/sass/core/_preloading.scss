@@ -1,0 +1,146 @@
+#dsn_preloader {
+  position: fixed;
+  width: 100vw;
+  max-width: 100%;
+  height: 100vh;
+  z-index: 98;
+  flex-direction: column;
+  overflow: hidden;
+  left: 0;
+
+  .bg-load{
+    z-index: -1;
+  }
+
+
+  @include media_991(min){
+    --width-loading-circle : 25vw
+  }
+  @include media_991{
+    --width-loading-circle : 50vw
+  }
+
+
+  svg.v-middle , .loading-circle{
+    width: var(--width-loading-circle);
+    height: var(--width-loading-circle);
+  }
+  svg.v-middle{
+
+    path {
+      display: block;
+      stroke-dasharray: 310px;
+      stroke-dashoffset: 310px;
+      stroke: url(#linearColors);
+      animation: spin 1s infinite linear;
+      transform-origin: center;
+      width: 100%;
+      height: 100%;
+      stroke-width: 1.4;
+    }
+  }
+
+  .loading-circle {
+    font-size: 7vw;
+    border-radius: 50%;
+    border: 1px solid #000;
+
+
+
+  }
+
+  .loading-text {
+    position: absolute;
+    font-size: 22px;
+    color: $heading-color;
+    left: var(--dsn-gap-container);
+    bottom: 50px;
+  }
+
+
+
+
+
+
+
+}
+
+.dsnload {
+  top: 22px;
+  left: var(--dsn-gap-container);
+
+  .dsnload__img {
+    display: block;
+    transform-origin: bottom left;
+    animation: moveIn 2s 0s cubic-bezier(.36, 0, .06, 1) alternate infinite;
+
+    img {
+      width: 96px;
+    }
+  }
+
+  .dsnload__row {
+    &:nth-child(1) {
+      clip-path: polygon(-10% 75%, 110% 75%, 110% 110%, -10% 110%);
+
+      .dsnload__img {
+        transform: translateY(-0.1em);
+      }
+    }
+
+    &:nth-child(2) {
+      clip-path: polygon(-10% 50%, 110% 50%, 110% 75.3%, -10% 75.3%);
+
+      .dsnload__img {
+        transform: translateY(-0.3em) scaleY(1.1);
+      }
+    }
+
+    &:nth-child(3) {
+      clip-path: polygon(-10% 25%, 110% 25%, 110% 50.3%, -10% 50.3%);
+
+      .dsnload__img {
+        transform: translateY(-0.5em) scaleY(1.2);
+      }
+    }
+
+    &:nth-child(4) {
+      clip-path: polygon(-10% 0%, 110% 0%, 110% 25.3%, -10% 25.3%);
+
+      .dsnload__img {
+        transform: translateY(-0.7em) scaleY(1.3);
+      }
+    }
+
+    &.dsnload__row--sibling {
+      position: absolute;
+      top: 0;
+      left: 0;
+      user-select: none;
+    }
+  }
+
+}
+
+@keyframes moveIn {
+  50%, 100% {
+    transform: translateY(0em)
+  }
+  0% {
+    opacity: 0;
+    filter: blur(5px);
+
+  }
+  100% {
+    opacity: 1;
+    filter: blur(0px);
+  }
+}
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

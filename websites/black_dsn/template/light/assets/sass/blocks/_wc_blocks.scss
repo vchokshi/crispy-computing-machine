@@ -1,0 +1,25 @@
+@import "wc-block/header/wc_header";
+@import "wc-block/wc_shop";
+@import "wc-block/wc_single";
+@import "wc-block/wc_cart";
+@import "wc-block/wc_checkout";
+@import "wc-block/wc_category";
+@import "wc-block/wc_product";
+@import "wc-block/wc_sidebar";
+@import "wc-block/wc_pagination";
+@import "wc-block/wc_popup";
+@import "wc-block/wc_account";
+@import "wc-block/wc_note";
+@import "wc-block/wc_preview";
+
+
+body.tax-product_tag , body.tax-product_cat {
+  #dsn_header{
+    margin-bottom: $margin-padding;
+  }
+}
+
+.woocommerce-page.columns-1 ul.products li.product, .woocommerce.columns-1 ul.products li.product {
+  width: 100%;
+  margin: 0;
+}

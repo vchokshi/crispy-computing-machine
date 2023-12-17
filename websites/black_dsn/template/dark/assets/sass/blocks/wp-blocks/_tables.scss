@@ -1,0 +1,41 @@
+/* -------------------------------
+         Table
+------------------------------- */
+table {
+  margin: 0 0 1rem;
+  border-collapse: collapse;
+  width: 100%;
+
+
+}
+
+
+table td,
+table th, .wp-block-table td, .wp-block-table th , .wp-block-calendar tbody td, .wp-block-calendar th ,.wp-block-table.is-style-stripes td, .wp-block-table.is-style-stripes th{
+  padding: 0.5em;
+  border: 1px solid $border-color;
+  word-break: break-all;
+  text-align: center;
+
+  a {
+    color: $theme-color;
+  }
+}
+
+
+.wp-block-table.is-style-stripes tbody tr:nth-child(odd) {
+  background-color: $assistant-color;
+}
+
+
+.wp-block-calendar table caption {
+  margin-bottom: 5px;
+}
+
+.wp-block-calendar a{
+    text-decoration: none;
+}
+
+.wp-block-table.is-style-stripes{
+  border: 0;
+}

@@ -1,0 +1,39 @@
+.button-load-more {
+  transition-property: padding, border-radius, background;
+  transition-duration: 1s;
+  text-align: center;
+  cursor: pointer;
+  padding: 15px 40px;
+  margin-top: var(--dsn-row-item);
+  font-size: 14px;
+  color: $heading-color;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  border-width: 1px;
+  border-style: solid;
+
+  span:not(.icon-circle) {
+    z-index: 1;
+  }
+
+  .dsn-load-progress-ajax, .progress-no-more {
+    display: none;
+  }
+
+
+  &.dsn-loading {
+    border-radius: 3px;
+    padding: 10px 20px;
+
+    .dsn-load-progress-ajax {
+      display: block;
+    }
+
+    .progress-text {
+      display: none;
+    }
+  }
+
+
+}
+

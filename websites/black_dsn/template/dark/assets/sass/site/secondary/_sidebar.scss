@@ -1,0 +1,585 @@
+/**
+  Button And widget-sidebar
+ */
+.dsn-button-sidebar, .dsn-sidebar, .close-wind {
+  position: fixed;
+}
+
+.close-wind {
+  position: fixed;
+  cursor: pointer;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  background-color: $bg-color;
+  opacity: 0.5;
+}
+
+/**
+  Button Style
+ */
+.dsn-button-sidebar {
+  width: 100px;
+  height: 100px;
+  right: -50px;
+  top: 50%;
+
+  border-radius: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  transition: all 0.5s;
+  z-index: 13;
+  color: $heading-color;
+
+  span {
+    position: relative;
+    display: inline-block;
+    transform: translate(-150%, -50%);
+    top: 50%;
+    left: 50%;
+    font-size: 16px;
+    transition: all 0.3s ease-out;
+  }
+
+  &:hover {
+    width: 80px;
+    height: 80px;
+
+    span {
+      font-size: 14px;
+      transform: translate(-210%, -50%);
+    }
+  }
+}
+
+/**
+  widget-sidebar Style
+ */
+.dsn-sidebar {
+  top: 0;
+  right: 0;
+  height: 100%;
+  width: 420px;
+  max-width: 90%;
+  z-index: 999999;
+  box-sizing: content-box;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 1s cubic-bezier(0.45, 0.05, 0.55, 0.95);
+  @include admin-sticky-fix(0, true);
+
+  .sidebar-single {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    opacity: 0;
+    visibility: hidden;
+    right: -100%;
+    padding: 50px 20px;
+    overflow: auto;
+    transition: all 1s cubic-bezier(0.45, 0.05, 0.55, 0.95);
+
+    &-content {
+      padding-bottom: 50px;
+
+      & > *:not(.row) {
+        padding: 30px;
+        background-color: $bg-color;
+
+        @include media_575(){
+          padding: 20px 10px;
+        }
+
+
+        &:not(:first-child) {
+          margin-top: 50px;
+        }
+
+        border-radius: 3px;
+      }
+    }
+
+  }
+
+}
+
+/**
+  open sidebar
+ */
+.dsn-show-sidebar {
+  .site-header {
+    z-index: 1;
+  }
+
+  .dsn-sidebar {
+    opacity: 1;
+    visibility: visible;
+
+    .sidebar-single {
+      right: 0;
+      opacity: 1;
+      visibility: visible;
+    }
+  }
+}
+
+.sidebar-single {
+  .title-s {
+    position: relative;
+    letter-spacing: 1px;
+    font-size: 20px;
+    margin-bottom: 30px;
+    padding-bottom: 15px;
+
+    &::before,
+    &::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      height: 1px;
+    }
+
+    &::before {
+      width: 100%;
+      background-color: $border-color;
+    }
+
+    &::after {
+      width: 60px;
+      background-color: $theme-color;
+    }
+  }
+
+  select {
+    padding: 5px 30px 5px 15px;
+    outline: none;
+    background: url(../img/arrow-icon.png) 93% center no-repeat #fff;
+    color: #000;
+    appearance: none;
+
+  }
+}
+
+
+
+
+/**
+    List Widget ( archive , categories , pages , nav menu , comments )
+ */
+.widget_archive, .widget_categories , .widget_pages, .widget_nav_menu , .widget_recent_comments {
+  position: relative;
+
+  li {
+    color: $theme-color;
+    position: relative;
+    padding-left: 20px;
+
+    margin-top: 15px;
+
+    &:not(:last-child){
+      border-bottom: 1px solid $border-color;
+      padding-bottom: 15px;
+    }
+
+
+    &::before {
+      content: "\f07b";
+      font-family: "Font Awesome 5 Free";
+      font-weight: 900;
+      font-size: 14px;
+      position: absolute;
+      left: 0;
+      top: 0;
+      color: $theme-color;
+      opacity: 0.4;
+    }
+
+    a {
+      padding-right: 5px;
+      color: $heading-color;
+    }
+
+
+
+
+    & > .children  , .sub-menu{
+      position: relative;
+      li {
+        border: 0;
+        padding-bottom: 0;
+      }
+    }
+
+
+  }
+
+
+}
+
+
+.widget_archive li , .widget_recent_comments li{
+  padding-left: 22px;
+}
+
+select {
+  width: 100%;
+}
+
+/* -------------------------------------------------------
+                   widget-search
+ -------------------------------------------------------- */
+
+.widget-search {
+  form {
+    position: relative;
+
+    &:before {
+      position: absolute;
+      top: 18px;
+      right: 17px;
+      font-size: 13px;
+      color: $heading-color;
+      font-family: "Font Awesome 5 Free";
+      font-weight: 900;
+      content: "\f002";
+      -webkit-font-smoothing: antialiased;
+      line-height: 0.5;
+    }
+
+    input {
+      padding: 11px 25px 10px 14px;
+      width: 100%;
+      outline: none;
+      font-size: 15px;
+      color: #fff;
+      font-weight: 500;
+      background-color: $bg-color;
+      border: 2px solid $border-color;
+      border-radius: 0;
+      margin-bottom: 0;
+    }
+  }
+}
+
+/* -------------------------------------------------------
+                   .widget_archive & Pages
+ -------------------------------------------------------- */
+
+.widget_archive,
+.widget_pages {
+  .screen-reader-text {
+    display: none;
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 15px;
+    color: $heading-color;
+  }
+
+  li {
+    font-size: 15px;
+  }
+}
+
+
+/* -------------------------------------------------------
+                calendar_wrap
+-------------------------------------------------------- */
+.calendar_wrap {
+  tr:nth-child(even) {
+    background-color: inherit !important;
+  }
+
+  .wp-calendar-nav-prev,
+  .wp-calendar-nav-next, caption {
+    color: $theme-color;
+  }
+
+  table th, caption {
+    font-family: $heading-font;
+
+  }
+
+  table {
+    tr {
+      text-align: center;
+      overflow: hidden;
+
+      th {
+        color: $heading-color;
+        font-weight: bold;
+        padding: 10px 5px;
+      }
+
+      td {
+        position: relative;
+        color: $heading-color;
+        padding: 10px 5px;
+        font-size: 13px;
+        word-break: inherit;
+
+        &#today {
+          color: $theme-color;
+          font-weight: bold;
+          background-color: $assistant-color;
+        }
+      }
+    }
+  }
+
+  tfoot {
+    margin-top: 30px;
+  }
+
+  caption {
+    caption-side: top;
+    text-align: left;
+    letter-spacing: 1.5px;
+    margin-bottom: 15px;
+  }
+}
+
+
+/* -------------------------------------------------------
+                    widget_categories
+  -------------------------------------------------------- */
+
+.widget_categories {
+  /* -------------------------------------------------------
+                       select box
+     -------------------------------------------------------- */
+  form {
+    .screen-reader-text {
+      display: none;
+    }
+
+  }
+  li:before{
+    content: "\f054";
+  }
+}
+
+/* -------------------------------------------------------
+                    widget_pages
+  -------------------------------------------------------- */
+.widget_pages, .widget_nav_menu {
+
+  li:before{
+    content: "\f054";
+  }
+}
+
+
+/* -------------------------------------------------------
+                      widget_tag_cloud , widget_meta
+    -------------------------------------------------------- */
+.widget_tag_cloud,
+.widget_meta,
+.widget_rss {
+  .tagcloud,
+  ul {
+    position: relative;
+
+    a {
+      cursor: pointer;
+      padding: 6px 12px;
+      position: relative;
+      font-size: 14px;
+      margin: 5px 10px 5px 0;
+      border-radius: 2px;
+      border: 1px solid $border-color;
+      display: inline-block;
+
+      &:last-child {
+        margin-bottom: 0 !important;
+      }
+
+      &.rsswidget {
+        color: $heading-color;
+        display: block;
+        font-weight: 600;
+        margin-bottom: 0;
+        padding-bottom: 0;
+      }
+
+      &.tag-cloud-link {
+        font-size: 14px !important;
+        letter-spacing: 1.5px;
+        color: $heading-color;
+      }
+
+
+      .tag-link-count {
+        margin-left: 5px;
+        color: $heading-color;
+
+      }
+    }
+  }
+}
+
+.widget_rss {
+  li {
+    border-bottom: 1px solid $border-color;
+    padding-bottom: 15px;
+  }
+
+  img {
+    width: auto;
+  }
+}
+
+.widget_meta,
+.widget_rss {
+  ul li a {
+    background-color: inherit;
+    border: 0;
+    padding-left: 0;
+
+    &:hover {
+      background-color: inherit;
+    }
+  }
+
+  // rss
+  .rssSummary {
+    color: inherit;
+    font-size: 14px;
+    line-height: 20px;
+    margin-bottom: 5px;
+    margin-top: 10px;
+  }
+
+  .rss-date {
+    text-transform: uppercase;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 2px;
+  }
+
+  cite {
+    color: $heading-color;
+  }
+}
+
+
+/* -------------------------------------------------------
+                       widget_recent_comments , widget_recent_entries
+     -------------------------------------------------------- */
+
+
+
+.widget_recent_comments,
+.widget_recent_entries {
+  position: relative;
+
+  li {
+    position: relative;
+    font-size: 15px;
+    color: $heading-color;
+    margin-right: 5px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid $border-color;
+
+
+    &.recentcomments {
+      color: $body-color;
+
+      .url {
+        color: $heading-color;
+      }
+
+      span {
+        color: $theme-color;
+      }
+    }
+
+    .comment-author-link {
+      color: $heading-color;
+    }
+
+    span.post-date {
+      padding: 0 3px;
+      line-height: 1.7;
+    }
+
+    &:last-child {
+      margin-bottom: 0 !important;
+      padding-bottom: 0;
+      border: none;
+    }
+
+    a {
+      line-height: 1.7;
+      color: $theme-color;
+
+      &:hover {
+        color: $heading-color;
+      }
+    }
+  }
+}
+
+.widget_recent_comments {
+
+  li:before{
+    content: "\f27a";
+    top: 4px;
+  }
+
+}
+
+
+/**
+    TEXT
+ */
+.widget_text {
+  .textwidget {
+    & > *,
+    & p {
+      &:not(:first-child):not(:last-child) {
+        margin-top: 15px;
+        margin-bottom: 15px;
+      }
+    }
+  }
+
+}
+
+.post-password-form .wp-block-search__button, .wp-block-search .wp-block-search__button {
+  background-color: $theme-color;
+}
+
+.dsn-sidebar .wp-block-latest-comments__comment-excerpt p {
+  margin-bottom: 0;
+}
+
+.widget_calendar {
+  .wp-calendar-table {
+    th {
+      background-color: $assistant-color;
+    }
+  }
+
+}
+
+.wp-block-calendar table caption, .wp-block-calendar table tbody {
+  color: $body-color;
+}
+.search-form {
+  [type=search] {
+    color: $heading-color;
+    background-color: $assistant-color;
+    padding: 5px 15px;
+  }
+
+  [type=button], [type=reset], [type=submit], button {
+    background-color: $assistant-color;
+    color: $heading-color;
+    border: 2px solid $theme-color;
+    height: 34px;
+    padding: 0 15px;
+  }
+}

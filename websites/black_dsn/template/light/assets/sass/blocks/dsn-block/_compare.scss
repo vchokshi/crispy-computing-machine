@@ -1,0 +1,124 @@
+.dsn-compare-container {
+  position: relative;
+  height: 500px;
+  $wh: 35px ;
+
+  .img-comp-img, .img-overlay, .dsn-handle-slider, .dsn-handle-slider:after, .dsn-handle-slider:before, .dsn-circle, .dsn-circle:after, .dsn-circle:before {
+    position: absolute;
+  }
+
+  .img-comp-img, .dsn-handle-slider, .img-overlay {
+    height: 100%;
+  }
+
+  .img-comp-img {
+    width: 100%;
+    overflow: hidden;
+
+    img {
+      display: block;
+      vertical-align: middle;
+    }
+  }
+
+  .dsn-handle-slider {
+    top: 0;
+    width: $wh;
+    z-index: 40;
+    pointer-events: none;
+
+    &, .dsn-circle {
+      &:before, &:after {
+        content: "";
+      }
+    }
+
+    &:before, &:after {
+
+      background: white;
+      width: 3px;
+      left: 50%;
+      transform: translateX(-50%);
+      height: calc(50% - #{$wh} / 2);
+    }
+
+    &:before {
+      top: 0;
+    }
+
+    &:after {
+      bottom: 0;
+    }
+
+
+    .dsn-circle {
+      width: $wh;
+      height: $wh;
+      border-radius: 50%;
+      border: 3px solid #fff;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      pointer-events: all;
+      cursor: pointer;
+
+      &:before, &:after {
+
+        width: 0;
+        height: 0;
+        border: 6px inset transparent;
+        top: 50%;
+        margin-top: -6px;
+      }
+
+      &:before {
+        border-right: 6px solid #fff;
+        left: 50%;
+        margin-left: -17px;
+      }
+
+      &:after {
+        border-left: 6px solid #fff;
+        right: 50%;
+        margin-right: -17px;
+      }
+    }
+
+
+  }
+
+  .img-overlay {
+    width: 100%;
+    left: 0;
+    top: 0;
+    z-index: 39;
+    background-color: rgba(0, 0, 0, 0.2);
+    opacity: 0;
+    transition: 0.5s;
+
+    &:after, &:before {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(255, 255, 255, 0.6);
+      color: #000;
+      line-height: 38px;
+      padding: 0 20px;
+      border-radius: 2px;
+    }
+
+    &:before {
+      content: attr(data-before);
+      left: 10px;
+    }
+
+    &:after {
+      content: attr(data-after);
+      right: 10px;
+    }
+  }
+
+  &:hover .img-overlay {
+    opacity: 1;
+  }
+}

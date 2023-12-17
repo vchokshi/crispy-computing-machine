@@ -1,0 +1,256 @@
+.woocommerce {
+  .woocommerce-ordering {
+    margin-bottom: 30px;
+  }
+
+  .blackdsn-product-image{
+    overflow: hidden;
+    width: 100%;
+  }
+
+  ul.dsn-shop.products.list li.product {
+    float: inherit;
+    width: 100%;
+    display: flex;
+    align-items: center;
+
+
+    .blackdsn-product-image {
+      flex: 0 0 25%;
+      max-width: 25%;
+    }
+
+    .blackdsn-product-content {
+      flex: 0 0 75%;
+      max-width: 75%;
+      margin-left: 30px;
+      text-align: left;
+
+
+      .woocommerce-product-details__short-description {
+        display: block;
+        margin-top: 5px;
+        margin-bottom: 15px;
+      }
+    }
+  }
+
+
+  ul.dsn-shop.products li.product {
+
+
+
+
+    .onsale.dsn-blackdsn-sale {
+      position: absolute;
+      display: inline-block;
+      top: 10px;
+      left: 0;
+      right: auto;
+      text-align: center;
+      background-color: #DA3F3F;
+      color: #fff;
+      padding: 7px 10px;
+      font-size: 12px;
+      font-weight: 400;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      border-radius: 0;
+      margin: 0;
+      line-height: inherit;
+      min-height: auto;
+      box-shadow: 0 2px 5px 0 #DA3F3F;
+      z-index: 10;
+
+      .number {
+        margin-bottom: 2px;
+        font-size: 16px;
+
+        sup {
+          position: relative;
+          top: -3px;
+          left: -4px;
+        }
+      }
+
+      .text-sale {
+
+      }
+
+    }
+
+    .button {
+      position: absolute;
+      width: 100%;
+      left: 0;
+      bottom: 0;
+      padding-top: 0;
+      padding-bottom: 0;
+      min-width: 50px;
+      min-height: 30px;
+      background-color: transparent;
+
+      span {
+        color: $heading-color !important;
+      }
+
+      &.added:after {
+        display: none;
+      }
+
+    }
+
+    > *:not(.blackdsn-product-image , a) {
+      padding-left: 15px;
+      padding-right: 15px;
+    }
+
+    .added_to_cart {
+      display: none;
+    }
+
+
+    .attachment-woocommerce_thumbnail, .dsn-quick-view, .dsn-quick-view .icon-view svg, .dsn-add-cart, .dsn-add-cart:before, .dsn-price {
+      transition: 0.5s $easeInOutBack;
+      width: 100%;
+    }
+
+
+    .xt_wooqv-show-on-all {
+      display: none;
+    }
+
+    .dsn-quick-view {
+      opacity: 0;
+      visibility: hidden;
+
+      .icon-view {
+        width: 60px;
+        cursor: pointer;
+
+        svg {
+          transform: translateY(-20px);
+        }
+
+      }
+
+    }
+
+    .blackdsn-product-content {
+      width: 100%;
+    }
+
+    .woocommerce-loop-product__title {
+      padding: 0;
+      margin-top: 10px;
+      font-size: 18px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+
+
+    .star-rating {
+      &:before, span:before {
+        color: $theme-color;
+      }
+    }
+
+    .dsn-price {
+      margin: 0;
+
+      del {
+        color: $body-color;
+        margin-right: 5px;
+        padding: 0 5px;
+        position: relative;
+
+        &:after {
+          position: absolute;
+          content: '';
+          width: 100%;
+          height: 1px;
+          top: 50%;
+          left: 0;
+          background-color: $heading-color;
+        }
+      }
+
+      ins, bdi {
+        color: $heading-color;
+      }
+    }
+
+
+    .dsn-add-cart {
+      position: absolute;
+      bottom: 0;
+      padding-left: 23px;
+
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-10px);
+
+      &:after, &:before {
+        content: '';
+        position: absolute;
+        display: block;
+        background-color: $heading-color;
+      }
+
+      &:before {
+        width: 18px;
+        height: 2px;
+        left: 10px;
+        top: 50%;
+
+      }
+
+      &:after {
+        width: 2px;
+        height: 18px;
+        left: 8px;
+        top: 0;
+      }
+
+
+    }
+
+
+    &:hover {
+      .dsn-quick-view {
+        opacity: 1;
+        visibility: visible;
+
+        .icon-view svg {
+          transform: none;
+        }
+      }
+
+      .attachment-woocommerce_thumbnail {
+        transform: scale(1.2);
+      }
+
+      .dsn-price {
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(10px);
+      }
+
+      .dsn-add-cart {
+        opacity: 1;
+        visibility: visible;
+        transform: none;
+
+        &:before {
+          left: 0;
+        }
+      }
+    }
+
+    .woocommerce-product-details__short-description {
+      display: none;
+    }
+
+  }
+}

@@ -1,0 +1,138 @@
+.type-p-nav {
+  border-top: 1px solid $border-color;
+  padding-top: 50px;
+
+  .dsn-pagination {
+    flex-wrap: wrap;
+
+    .page-numbers:not(.next):not(.prev) {
+      position: relative;
+      margin-right: 15px;
+      transition: all 0.45s cubic-bezier(0.08, 0.58, 0.17, 0.94);
+      padding: 10px;
+      font-size: 20px;
+      border: 1px solid $border-color;
+
+
+
+      &.current , &:hover  {
+        color: var(--theme-color-font , $heading-color);
+        background-color: $assistant-color;
+      }
+
+    }
+
+
+    .page-numbers {
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 10px;
+    }
+
+    .next, .prev {
+      position: relative;
+      text-align: center;
+      width: 90px;
+
+
+      &:before {
+        content: "";
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: -1;
+        background: $assistant-color;
+        transition: all 0.45s cubic-bezier(0.08, 0.58, 0.17, 0.94);
+        transform: scale(0.8);
+      }
+
+      svg {
+        width: 30px;
+        position: absolute;
+        top: 1px;
+
+        fill: $heading-color;
+        z-index: 1;
+        height: 100%;
+        opacity: 1;
+        transition: all 0.3s ease-out;
+
+
+      }
+
+      span {
+        position: relative;
+        z-index: 2;
+        font-weight: 400;
+        font-size: 12px;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        color: $heading-color;
+        transition: all 0.3s ease-out;
+      }
+
+      &:hover {
+        &:before {
+          transform: scale(0.7);
+        }
+
+        svg {
+          opacity: 0;
+        }
+
+        span {
+          transform: translateX(0) translateY(2px);
+        }
+      }
+
+      &:hover {
+        background-color: transparent;
+      }
+    }
+
+    .next {
+      margin-left: 10px;
+
+      svg {
+        transform: translateX(20%);
+        left: -10%;
+      }
+
+      span {
+        transform: translateX(20%) translateY(2px);
+      }
+    }
+
+    .prev {
+      margin-right: 25px;
+
+      svg {
+        transform: translateX(-20%) rotate(180deg);
+        right: -10%;
+      }
+
+      span {
+        transform: translateX(-20%) translateY(2px);
+      }
+    }
+
+
+  }
+
+}
+
+.pagination-pages {
+  .post-page-numbers {
+    margin: 0 10px;
+  }
+
+  a {
+    color: $theme-color;
+  }
+}

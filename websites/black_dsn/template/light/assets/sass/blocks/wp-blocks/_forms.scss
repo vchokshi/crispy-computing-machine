@@ -1,0 +1,97 @@
+.post-password-form,
+.wp-block-search {
+  input {
+    padding: 15px 25px;
+    margin-top: 10px;
+    display: inline-block;
+  }
+
+  label {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .wp-block-search__button {
+    padding: 15px 25px;
+    margin-top: 10px;
+  }
+}
+
+fieldset {
+  input[type="reset"],
+  input[type="submit"] {
+    padding: 10px 30px !important;
+    background-color: $assistant-color;
+    color: $heading-color;
+    border: 1px solid $heading-color !important;
+    border-radius: 7px !important;
+    margin-right: 10px;
+    min-height: auto !important;
+    letter-spacing: 1px;
+    font-weight: 600;
+    font-size: 15px;
+  }
+
+  input[type="text"],
+  textarea {
+    padding: 15px 25px;
+    margin-top: 10px;
+    border-radius: 7px;
+  }
+}
+
+//.wp-block-archives-dropdown, .wp-block-categories-dropdown {
+select {
+  font-size: 14px;
+  line-height: 2;
+  color: $heading-color;
+  border-color: $border-color;
+  box-shadow: none;
+  border-radius: 3px;
+  padding: 0 24px 0 8px;
+  min-height: 30px;
+  max-width: 25rem;
+  -webkit-appearance: none;
+  background: $bg-color
+    url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20width%3D%2220%22%20height%3D%2220%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Cpath%20d%3D%22M5%206l5%205%205-5%202%201-7%207-7-7%202-1z%22%20fill%3D%22%23555%22%2F%3E%3C%2Fsvg%3E")
+    no-repeat 98.5%;
+
+  background-size: 16px 16px;
+
+  cursor: pointer;
+  vertical-align: middle;
+}
+
+.is-style-outline .wp-block-button__link,
+.wp-block-button__link.is-style-outline {
+  background-color: transparent;
+}
+
+.wp-block-button__link {
+  border-radius: 0;
+}
+
+.post-password-form {
+  p {
+    display: flex;
+    align-items: flex-end;
+
+    label {
+      flex: 0 1 70%;
+
+      input {
+        border: 1px solid $border-color;
+        border-bottom: 1px solid $border-color;
+      }
+    }
+  }
+
+  input[type="submit"] {
+    height: 48px;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+    padding-left: 30px;
+    padding-right: 30px;
+    margin-left: 15px;
+  }
+}

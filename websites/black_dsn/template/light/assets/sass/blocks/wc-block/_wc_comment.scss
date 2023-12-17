@@ -1,0 +1,62 @@
+.woocommerce {
+  #reviews {
+    #comments {
+      @include media_991(min) {
+        margin-right: 30px;
+      }
+
+      .woocommerce-Reviews-title {
+        display: none;
+      }
+
+      .woocommerce-review__author {
+        color: $heading-color;
+      }
+
+      ol.commentlist li {
+        img.avatar {
+          width: 60px;
+          border-radius: 50%;
+        }
+
+        .comment-text {
+          margin-left: 70px;
+          border: 1px solid $border-color;
+        }
+      }
+
+    }
+
+    #review_form {
+      #respond {
+        .comment-form-rating {
+          label, p.stars {
+            display: inline-block;
+          }
+
+          p.stars {
+            margin-bottom: 0;
+            margin-left: 10px;
+            line-height: 1.2;
+          }
+
+        }
+
+        .entry-form, .comment-notes {
+          margin-bottom: 20px;
+        }
+
+        input#submit {
+          color: $heading-color;
+          background-color: $theme-color;
+          padding: 15px 30px;
+          letter-spacing: 2px;
+          font-weight: 600;
+          font-size: 14px;
+        }
+      }
+    }
+
+  }
+
+}
