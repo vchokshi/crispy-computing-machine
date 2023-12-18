@@ -20,8 +20,7 @@ provider "registry.terraform.io/hashicorp/azurerm" {
 }
 
 provider "registry.terraform.io/hashicorp/google" {
-  version     = "5.8.0"
-  constraints = ">= 3.43.0, 5.8.0, < 6.0.0"
+  version = "5.8.0"
   hashes = [
     "h1:9mNsWh+t0hMWobCrDScvH215IWj32v/nbJ3jcYnX1M4=",
     "zh:1e9114e4b6c9886ee37dfb7a2fa5776f2977df44f076fb2ca8d8015a19f2cd2b",

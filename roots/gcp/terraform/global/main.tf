@@ -43,3 +43,18 @@ resource "google_dns_managed_zone" "gkezone" {
   }
   project = "globals-408419"
 }
+
+#tfsec:ignore:google-iam-no-default-network
+resource "google_project" "ngdc2" {
+  name       = "The NEW NGDC Project"
+  project_id = "ngdc-project-id"
+
+}
+
+output "ngdc_project_id" {
+  value = google_project.ngdc2.id
+}
+
+output "ngdc_project_number" {
+  value = google_project.ngdc2.number
+}
