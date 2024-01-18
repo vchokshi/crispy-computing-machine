@@ -111,9 +111,22 @@ resource "aws_route53_record" "gcp" {
   type    = "NS"
   ttl     = "300"
   records = [
-    "ns-cloud-e1.googledomains.com",
-    "ns-cloud-e2.googledomains.com",
-    "ns-cloud-e3.googledomains.com",
-    "ns-cloud-e4.googledomains.com",
+    "ns-cloud-c1.googledomains.com",
+    "ns-cloud-c2.googledomains.com",
+    "ns-cloud-c3.googledomains.com",
+    "ns-cloud-c4.googledomains.com",
+  ]
+}
+
+resource "aws_route53_record" "gke" {
+  zone_id = aws_route53_zone.iot.zone_id
+  name    = "gke.iot4.net"
+  type    = "NS"
+  ttl     = "300"
+  records = [
+    "ns-cloud-a1.googledomains.com",
+    "ns-cloud-a2.googledomains.com",
+    "ns-cloud-a3.googledomains.com",
+    "ns-cloud-a4.googledomains.com",
   ]
 }
