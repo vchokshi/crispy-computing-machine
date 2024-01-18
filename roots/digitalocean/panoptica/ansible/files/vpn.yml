@@ -57,6 +57,6 @@ spec:
           - name: SLACK_WEBHOOK
             valueFrom:
               secretKeyRef:
-                name: slackwebhook
+                name: slackwebhookvpn
                 key: url
                 optional: false

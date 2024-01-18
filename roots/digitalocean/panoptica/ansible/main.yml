@@ -14,14 +14,14 @@
 - name: Install helm as a package manager for k8s
   ansible.builtin.import_playbook: helm.yml
 
+- name: Import and execute the cert-manager
+  ansible.builtin.import_playbook: cert-manager.yml
+
 - name: Import and execute the secrets playbook
   ansible.builtin.import_playbook: secrets.yml
 
 - name: Import and execute the ingress controller playbook
   ansible.builtin.import_playbook: ingress.yml
-
-- name: Import and execute the cert-manager
-  ansible.builtin.import_playbook: cert-manager.yml
 
 # @bug: externaldns fails when source: ingress is used at the same time as source: istio-gateway
 #- name: Import and execute the istio playbook

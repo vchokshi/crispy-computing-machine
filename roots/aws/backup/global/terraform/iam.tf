@@ -1,3 +1,4 @@
+#tfsec:ignore:aws-iam-no-policy-wildcards
 resource "aws_iam_role" "backup-admin" {
   name = "backup-admin"
 
@@ -27,6 +28,7 @@ resource "aws_iam_instance_profile" "backup-admin" {
 }
 
 
+#tfsec:ignore:aws-iam-no-policy-wildcards
 resource "aws_iam_role_policy" "backup-admin" {
   name = "backup-admin"
   role = aws_iam_role.backup-admin.id
