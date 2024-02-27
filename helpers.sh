@@ -31,7 +31,7 @@ load_secrets() {
   export TF_VAR_atlantis_webhook_secret=$ATLANTIS_WEBHOOK_SECRET
   export TF_VAR_ccm_robot_pat=$CCM_ROBOT_PAT
   export ELASTIO_API_KEY=$(pass elastio)
-  export GITHUB_TOKEN=$(pass github/vchokhsi)
+  export GITHUB_TOKEN=$(pass github/vchokshi)
   export HONEYCOMB_TOKEN=$(pass honeycomb.io)
   export NEWRELIC_TOKEN=$(pass newrelic_ingest)
   export NEWRELIC_API_KEY=$(pass newrelic_api_key)
