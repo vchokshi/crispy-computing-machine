@@ -1,8 +1,16 @@
-DOCKER_USERNAME ?= vchokshi
+REGISTRY ?= registry.digitalocean.com
+REPO ?= do
 APPLICATION_NAME ?= black
+GIT_HASH ?= $(shell git log --format="%h" -n 1)
 
 build:
-	docker build --tag ${DOCKER_USERNAME}/${APPLICATION_NAME} .
+	docker build --tag ${REGISTRY}/${REPO}/${APPLICATION_NAME}:${GIT_HASH} .
 
 push:
-	docker push ${DOCKER_USERNAME}/${APPLICATION_NAME}
+	docker push ${REGISTRY}/${REPO}/${APPLICATION_NAME}:${GIT_HASH}
+
+
+release:
+	docker pull ${REGISTRY}/${REPO}/${APPLICATION_NAME}:${GIT_HASH}
+	docker tag ${REGISTRY}/${REPO}/${APPLICATION_NAME}:${GIT_HASH} ${REGISTRY}/${REPO}/${APPLICATION_NAME}:latest
+	docker push ${REGISTRY}/${REPO}/${APPLICATION_NAME}:latest

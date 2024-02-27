@@ -1,7 +1,7 @@
 locals {
   project       = "finance"
   owner         = "Vihar Chokshi"
-  email_address = "vchokshi@vipert491"
+  email_address = "vchokshi@control"
 
   ec2_instance_type    = "t3.micro"
   dns_hosted_zone_name = "finance.iot4.net"

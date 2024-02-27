@@ -4,6 +4,8 @@ if [ -x /usr/bin/dircolors ]; then
     alias grep='grep --color=auto'
 fi
 
+export TF_PLUGIN_CACHE_DIR="$HOME/.terraform.d/plugin-cache"
+
 alias ll='ls -l'
 alias l='ls -CF'
 
@@ -21,14 +23,15 @@ load_secrets() {
   check_deps
   export AWS_PROFILE=iot4
   export DO_PAT=$(pass DO_API_TOKEN)
-  export SLACK_WEBHOOK=$(pass SLACK_WEBHOOK)
+  export SLACK_WEBHOOK_VPN=$(pass slack/webhook/vpn)
+  export SLACK_WEBHOOK_DARKNET=$(pass slack/webhook/darknet)
   export ATLANTIS_WEBHOOK_SECRET=$(pass atlantis_webhook_secret)
   export CCM_ROBOT_PAT=$(pass ccm-robot-pat)
   export VP=$(pass vihars_password)
   export TF_VAR_atlantis_webhook_secret=$ATLANTIS_WEBHOOK_SECRET
   export TF_VAR_ccm_robot_pat=$CCM_ROBOT_PAT
   export ELASTIO_API_KEY=$(pass elastio)
-  export GITHUB_TOKEN=$(pass github)
+  export GITHUB_TOKEN=$(pass github/vchokshi)
   export HONEYCOMB_TOKEN=$(pass honeycomb.io)
   export NEWRELIC_TOKEN=$(pass newrelic_ingest)
   export NEWRELIC_API_KEY=$(pass newrelic_api_key)
@@ -56,12 +59,13 @@ clear_secrets() {
 	unset $(compgen -v | grep TWILIO_TOKEN)
 	unset $(compgen -v | grep TF_VAR)
 	unset $(compgen -v | grep OPENAI)
+	unset $(compgen -v | grep SLACK)
 }
 
 aws_assume_role() {
   account=$(pass aws/$1/acctnumber)
   ROLE=OrganizationAccountAccessRole
-  OUT=$(aws sts assume-role --role-arn arn:aws:iam::$account:role/$ROLE --role-session-name vc@control);\
+  OUT=$(aws sts assume-role --role-arn arn:aws:iam::$account:role/$ROLE --role-session-name vc@control@$1);\
 	export AWS_ACCESS_KEY_ID=$(echo $OUT | jq -r '.Credentials''.AccessKeyId');\
 	export AWS_SECRET_ACCESS_KEY=$(echo $OUT | jq -r '.Credentials''.SecretAccessKey');\
 	export AWS_SESSION_TOKEN=$(echo $OUT | jq -r '.Credentials''.SessionToken');
@@ -127,7 +131,7 @@ cherrypick() {
     GIT_AUTHOR_DATE='$1' GIT_COMMITTER_DATE='$2' git cherry-pick $3
 }
 cleanup() {
-    find ~ -type d -name .terraform -exec rm -r {} \;
+    find ~/ccm -type d -name node_modules -exec rm -r {} \;
+    rm -r $HOME/.terraform.d/plugin-cache/registry.terraform.io/hashicorp/aws/*
     docker system prune -a -f
-    rm -rf ~/.venvs
 }

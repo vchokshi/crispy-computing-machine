@@ -4,6 +4,13 @@ provider "aws" {
 }
 
 terraform {
+  backend "s3" {
+    bucket  = "iot4-tfstate"
+    key     = "roots/aws/finance/eu-west-1.tfstate"
+    region  = "us-east-1"
+    encrypt = "true"
+  }
+
   required_providers {
     aws = {
       source  = "hashicorp/aws"

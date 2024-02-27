@@ -26,7 +26,7 @@ resource "aws_iam_instance_profile" "elastio" {
   role = aws_iam_role.elastio.name
 }
 
-
+#tfsec:ignore:aws-iam-no-policy-wildcards
 resource "aws_iam_role_policy" "elastio" {
   name = "elastio"
   role = aws_iam_role.elastio.id

@@ -26,7 +26,7 @@ resource "aws_iam_instance_profile" "f" {
   role = aws_iam_role.f.name
 }
 
-
+#tfsec:ignore:aws-iam-no-policy-wildcards
 resource "aws_iam_role_policy" "f" {
   name = "finance"
   role = aws_iam_role.f.id
