@@ -1,0 +1,53 @@
+#xt_wooqv.xt_wooqv-animate-width{
+  background-color: $bg-color;
+}
+.xt_wooqv-is-light-bg {
+  .xt_wooqv-item-info , .xt_wooqv-close-icon{
+    color: $heading-color;
+  }
+
+  .xt_wooqv-item-info {
+    .product_title{
+      color: $heading-color;
+      font-family: $heading-font;
+    }
+  }
+
+}
+.xt_wooqv-is-light-bg .xt_wooqv-item-info .woocommerce-product-details__short-description, .xt_wooqv-is-light-bg .xt_wooqv-item-info .woocommerce-variation-description, .xt_wooqv-is-light-bg .xt_wooqv-item-info p ,
+.xt_wooqv-is-light-bg .xt_wooqv-item-info .product_meta > span
+{
+  color: $heading-color;
+  letter-spacing: 2px;
+}
+
+.xt_wooqv-is-light-bg .xt_wooqv-item-info .product_meta > span > span{
+  color: $body-color;
+}
+
+.xt_wooqv-is-light-bg .xt_wooqv-item-info .product_meta a{
+  color: $theme-color;
+}
+
+.woocommerce div.quantity input[type="number"]{
+  color: $heading-color;
+}
+
+
+.woocommerce #respond input#submit.alt, .woocommerce a.button.alt, .woocommerce button.button.alt, .woocommerce input.button.alt{
+  & , &:hover{
+    background-color: $theme-color;
+  }
+
+}
+
+.xt_wooqv-button.xt_wooqv-more-info.button{
+  margin-left: 10px !important;
+  border: 1px solid $border-color;
+
+  & ,&:hover{
+    background-color: transparent;
+    color: $heading-color;
+  }
+
+}

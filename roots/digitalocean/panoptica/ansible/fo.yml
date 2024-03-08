@@ -12,14 +12,3 @@
       args:
         chdir: $HOME
         creates: fo.txt
-
-    - name: Copy the leza template
-      copy:
-        src: leza.yml
-        dest: $HOME/leza.yml
-
-    - name: Use kubectl to deploy the leza service
-      shell: kubectl apply -f leza.yml >> leza.txt
-      args:
-        chdir: $HOME
-        creates: leza.txt

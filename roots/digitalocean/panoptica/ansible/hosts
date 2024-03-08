@@ -1,13 +1,8 @@
 [control_plane]
 controller.do.iot4.net ansible_user=root
-#controller.aws.iot4.net ansible_user=admin
 
 [workers]
-worker-0.do.iot4.net ansible_user=root
-worker-1.do.iot4.net ansible_user=root
-worker-2.do.iot4.net ansible_user=root
-#worker-1.aws.iot4.net ansible_user=admin
-#worker-2.aws.iot4.net ansible_user=admin
+worker-[0:4].do.iot4.net ansible_user=root
 
 [aws]
 #controller.aws.iot4.net ansible_user=admin
@@ -16,9 +11,7 @@ worker-2.do.iot4.net ansible_user=root
 
 [do]
 controller.do.iot4.net ansible_user=root
-worker-0.do.iot4.net ansible_user=root
-worker-1.do.iot4.net ansible_user=root
-worker-2.do.iot4.net ansible_user=root
+worker-[0:4].do.iot4.net ansible_user=root
 
 [all:vars]
 ansible_python_interpreter=/usr/bin/python3

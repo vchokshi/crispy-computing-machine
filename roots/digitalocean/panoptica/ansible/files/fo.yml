@@ -50,6 +50,6 @@ spec:
     spec:
       containers:
       - name: fo
-        image: vchokshi/fo
+        image: public.ecr.aws/n7r0o9o5/fo
         ports:
         - containerPort: 3000

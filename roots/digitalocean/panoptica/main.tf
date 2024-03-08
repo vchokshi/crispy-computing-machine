@@ -20,7 +20,7 @@ resource "digitalocean_record" "c" {
 
 variable "instance_count" {
   type    = number
-  default = 3
+  default = 5
 }
 
 variable "instance_size" {

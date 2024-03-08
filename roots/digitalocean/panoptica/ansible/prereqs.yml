@@ -20,6 +20,10 @@
       apt:
         name: apt-transport-https
         state: present
+      retries: 3
+      delay: 5
+      register: result
+      until: "result is not failed"
 
     - name: install packages
       become: yes
@@ -32,6 +36,10 @@
           - golang-go
         state: present
       when: ansible_pkg_mgr in ('apt', 'yum', 'dnf', 'zypper')
+      retries: 3
+      delay: 5
+      register: result
+      until: "result is not failed"
 
 
     - name: Download & Install Cert Manager Control

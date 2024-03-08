@@ -50,7 +50,7 @@ spec:
     spec:
       containers:
       - name: leza
-        image: vchokshi/leza
+        image: vchokshi/leza:fc3ede0
         resources:
           requests:
             memory: "64Mi"

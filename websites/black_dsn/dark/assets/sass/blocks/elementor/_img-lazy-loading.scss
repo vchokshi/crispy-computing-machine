@@ -1,0 +1,7 @@
+.dsn-lazy-loading {
+  filter: blur(13px);
+}
+
+img:not(.dsn-lazy-loading) {
+  transition: filter 1s $easeInOutExpo;
+}

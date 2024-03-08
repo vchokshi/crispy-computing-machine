@@ -1,0 +1,25 @@
+
+.wrapper > *:first-child {
+
+  @media only screen and (min-width: 992px) {
+    &.dsn-under-header {
+      position: relative;
+      margin-top: -80px;
+      z-index: 2;
+
+      &.hero-under-header {
+        margin-top: -150px;
+      }
+
+
+
+    }
+  }
+
+}
+
+.hero-under-header {
+  img {
+      box-shadow: 0 3px 10px 0 rgba(0, 0, 0, 0.2);
+  }
+}

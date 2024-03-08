@@ -1,0 +1,42 @@
+---
+- hosts: workers
+  become: yes
+  gather_facts: false
+  tasks:
+    - name: Add apache2 web server on workers using apt
+      apt:
+        name: apache2
+        update_cache: yes
+        state: present
+    - name: Transfer over our index.html file
+      copy:
+        src: index.html
+        dest: /var/www/html
+
+    - name: Add nginx web server on workers using apt
+      apt:
+        name: nginx
+        update_cache: yes
+        state: present
+
+    - name: Modify the port to 81
+      ansible.builtin.lineinfile:
+        path: /etc/nginx/sites-enabled/default
+        regexp: 'listen 80 default_server;'
+        line: listen 81 default_server;
+
+    - name: Modify the port to 81
+      ansible.builtin.lineinfile:
+        path: /etc/nginx/sites-enabled/default
+        regexp: 'listen \[\:\:\]\:80 default_server;'
+        line: listen [::]:81 default_server;
+
+
+    - name: Transfer over our index.html file
+      copy:
+        src: index.html
+        dest: /var/www/html
+    - name: Restart nginx
+      service:
+        name: nginx
+        state: restarted

@@ -1,0 +1,129 @@
+
+.wp-block-gallery {
+  clear: both;
+}
+
+
+/*----------------------------
+        block-gallery
+ ----------------------------*/
+
+.gallery {
+  display: flex;
+  flex-flow: row wrap;
+  list-style-type: none;
+  padding: 0;
+
+
+  .gallery-item {
+    display: inline-block;
+    margin-bottom: $base-margin;
+    text-align: center;
+    vertical-align: top;
+    width: 100%;
+
+
+    figure {
+      height: 100%;
+    }
+
+
+    img {
+      display: block;
+      height: auto;
+      max-width: 100%;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+
+    figcaption {
+
+      img {
+        display: inline;
+      }
+
+    }
+
+  }
+
+
+  &.gallery-columns-1 {
+    .gallery-item {
+      width: 100%;
+      margin-right: 0;
+    }
+  }
+
+
+  &.alignleft, &.alignright {
+    width: 100%;
+    max-width: 305px;
+  }
+
+
+  &.aligncenter .gallery-item figure {
+    justify-content: center
+  }
+
+
+  &.is-cropped {
+    .gallery-item {
+      a, img {
+        width: 100%;
+      }
+    }
+  }
+
+}
+
+
+@media (min-width: 600px) {
+
+  @for $i from 2 through 9 {
+    $x: (($i)-1) ;
+    .gallery.gallery-columns-#{$i} {
+
+      .gallery-item {
+        width: calc((100% - #{$x}px) / #{$i});
+        padding-right: 15px
+      }
+    }
+
+  }
+
+  @for $i from 1 through 9 {
+    .gallery.gallery-columns-#{$i} .gallery-item:nth-of-type(#{$i}n) {
+      padding-right: 0;
+    }
+  }
+
+  @for $i from 6 through 9 {
+    .gallery.gallery-columns-#{$i} .gallery-item .wp-caption-text {
+      display: none;
+    }
+
+  }
+
+
+}
+
+
+.wp-block-cover-image .wp-block-cover-image-text, .wp-block-cover .wp-block-cover-text, section.wp-block-cover-image > h2 {
+  max-width: 100%;
+}
+
+
+
+
+
+.wp-block-cover .wp-block-cover__inner-container a {
+  color: $heading-color;
+}
+
+.wp-block-gallery , {
+  & , .blocks-gallery-caption{
+    margin-bottom: 16px;
+  }
+
+}
