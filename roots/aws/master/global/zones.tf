@@ -13,6 +13,7 @@ resource "aws_route53_zone" "internal_iot" {
 resource "aws_route53_zone" "viharc" {
   name = "viharc.com"
 }
+
 resource "aws_route53_zone" "vchokshi" {
   name = "vchokshi.com"
 }

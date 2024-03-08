@@ -1,0 +1,106 @@
+#canvas {
+  position: relative
+}
+body {
+  color: red;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  overflow: hidden;
+  background-color: black;
+}
+
+.typing {
+  height: 100vh;
+  width: auto;
+  top: 10px;
+  left: 10px;
+  display: flex;
+  justify-content: left;
+  align-items: left;
+  position: absolute;
+}
+
+.effect-typing {
+  position: relative;
+  text-align: left;
+  font-weight: normal;
+}
+
+#typed {
+  font-weight: bold;
+  color: white;
+
+}
+
+#blue {
+  color: #0A3161;
+}
+#red {
+  color: #B31942;
+}
+
+#white {
+  color: white;
+}
+.cursor {
+  display: inline-block;
+  background-color: #b31942;
+  animation: blinker 800ms infinite;
+}
+
+.cursor.typing-true {
+  animation: none;
+}
+
+@keyframes blinker {
+	0% { background-color: #b31942; }
+	50% { background-color: transparent; }
+	100% { background-color: #0a3161; }
+}
+
+svg {
+  position: absolute;
+  top: calc(50% + 150px);
+  left: 0;
+  width: 0px;
+  height: 0px;
+  background: transparent;
+}
+
+image {
+  width: 150px;
+  height: 150px;
+}
+
+#appear {
+	-moz-animation: cssAnimation 0s ease-in 130s forwards;
+    /* Firefox */
+    -webkit-animation: cssAnimation 0s ease-in 130s forwards;
+    /* Safari and Chrome */
+    -o-animation: cssAnimation 0s ease-in 130s forwards;
+    /* Opera */
+    animation: cssAnimation 0s ease-in 130s forwards;
+    -webkit-animation-fill-mode: forwards;
+    animation-fill-mode: forwards;
+}
+
+@keyframes cssAnimation {
+    to {
+        width:190px;
+        height:190px;
+        overflow:hidden;
+    }
+}
+@-webkit-keyframes cssAnimation {
+    to {
+        width:190px;
+        height:190px;
+        visibility:hidden;
+    }
+}
