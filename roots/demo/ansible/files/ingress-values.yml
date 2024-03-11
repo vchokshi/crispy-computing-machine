@@ -475,7 +475,7 @@ controller:
             # -- Annotations are mandatory for the load balancer to come up. Varies with the cloud service.
             annotations: {
             # loadBalancerIP: ""
-    		  external-dns.alpha.kubernetes.io/hostname: ingress.do.iot4.net
+            external-dns.alpha.kubernetes.io/hostname: ingress.do.iot4.net
             }
 
             # -- Restrict access For LoadBalancer service. Defaults to 0.0.0.0/0.

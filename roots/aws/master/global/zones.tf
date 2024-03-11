@@ -157,3 +157,37 @@ resource "aws_route53_record" "vchokshi" {
     "ns3.digitalocean.com.",
   ]
 }
+
+resource "aws_route53_record" "observability" {
+  zone_id = aws_route53_zone.iot.zone_id
+  name    = "obs.vchokshi.com"
+  type    = "NS"
+  ttl     = "300"
+  records = [
+    "ns1.digitalocean.com.",
+    "ns2.digitalocean.com.",
+    "ns3.digitalocean.com.",
+  ]
+}
+resource "aws_route53_record" "apps" {
+  zone_id = aws_route53_zone.iot.zone_id
+  name    = "apps.viharc.com"
+  type    = "NS"
+  ttl     = "300"
+  records = [
+    "ns1.digitalocean.com.",
+    "ns2.digitalocean.com.",
+    "ns3.digitalocean.com.",
+  ]
+}
+resource "aws_route53_record" "pen" {
+  zone_id = aws_route53_zone.iot.zone_id
+  name    = "pen.iot4.net"
+  type    = "NS"
+  ttl     = "300"
+  records = [
+    "ns1.digitalocean.com.",
+    "ns2.digitalocean.com.",
+    "ns3.digitalocean.com.",
+  ]
+}

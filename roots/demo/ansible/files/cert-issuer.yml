@@ -19,6 +19,11 @@ spec:
       selector:
         dnsZones:
         - 'do.iot4.net'
+        - 'do.vchokshi.com'
+        - 'obs.vchokshi.com'
+        - 'do.viharc.com'
+        - 'apps.viharc.com'
+        - 'pen.iot4.net'
     - http01:
         ingress:
           ingressClassName: nginx
@@ -46,6 +51,12 @@ spec:
       selector:
         dnsZones:
         - 'do.iot4.net'
+        - 'do.vchokshi.com'
+        - 'do.viharc.com'
+        - 'obs.vchokshi.com'
+        - 'do.viharc.com'
+        - 'apps.viharc.com'
+        - 'pen.iot4.net'
     - http01:
         ingress:
           ingressClassName: nginx

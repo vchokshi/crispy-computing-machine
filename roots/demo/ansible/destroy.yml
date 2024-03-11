@@ -21,6 +21,7 @@
         - vpn.yml
         - keycloak.yaml
         - elk.yml
+        - https://download.elastic.co/downloads/eck/2.9.0/operator.yaml
         - beats.yml
       ignore_errors: true
 
