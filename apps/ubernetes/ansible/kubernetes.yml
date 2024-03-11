@@ -1,0 +1,94 @@
+---
+- hosts: all
+  become: yes
+  gather_facts: false
+  vars:
+    version: "1.27.3-1.1"
+  tasks:
+    - name: add Kubernetes apt-key
+      apt_key:
+        url: https://pkgs.k8s.io/core:/stable:/v1.27/deb/Release.key
+        state: present
+
+    - name: add Kubernetes' APT repository
+      apt_repository:
+       repo: deb https://pkgs.k8s.io/core:/stable:/v1.27/deb/ /
+       state: present
+       filename: 'kubernetes'
+
+    - name: install kubelet
+      apt:
+        name: "kubelet={{version}}"
+        state: present
+        update_cache: true
+
+    - name: install kubeadm
+      apt:
+        name: "kubeadm={{version}}"
+        state: present
+
+- hosts: control_plane
+  become: yes
+  gather_facts: false
+  vars:
+    version: "1.27.3-1.1"
+  tasks:
+    - name: install kubectl
+      apt:
+        name: "kubectl={{version}}"
+        state: present
+        force: yes
+
+- hosts: control_plane
+  become: yes
+  tasks:
+    - name: initialize the cluster
+      shell: kubeadm init --pod-network-cidr=10.244.0.0/16 >> cluster_initialized.txt
+      args:
+        chdir: $HOME
+        creates: cluster_initialized.txt
+
+    - name: create .kube directory
+      become: yes
+      become_user: ubuntu
+      file:
+        path: $HOME/.kube
+        state: directory
+        mode: 0755
+
+    - name: copy admin.conf to user's kube config
+      copy:
+        src: /etc/kubernetes/admin.conf
+        dest: /home/ubuntu/.kube/config
+        remote_src: yes
+        owner: ubuntu
+        mode: 0400
+
+    - name: install Pod network
+      become: yes
+      become_user: ubuntu
+      shell: kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml >> pod_network_setup.txt
+      args:
+        chdir: $HOME
+        creates: pod_network_setup.txt
+
+- hosts: control_plane
+  become: yes
+  gather_facts: false
+  tasks:
+    - name: get join command
+      shell: kubeadm token create --print-join-command
+      register: join_command_raw
+
+    - name: set join command
+      set_fact:
+        join_command: "{{ join_command_raw.stdout_lines[0] }}"
+
+- hosts: workers
+  become: yes
+  tasks:
+    - name: join cluster
+      shell: "{{ hostvars['controller.do.iot4.net'].join_command }} >> node_joined.txt"
+      args:
+        chdir: $HOME
+        creates: node_joined.txt

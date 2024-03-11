@@ -135,7 +135,7 @@ resource "aws_route53_record" "gke" {
 }
 
 resource "aws_route53_record" "viharc" {
-  zone_id = aws_route53_zone.iot.zone_id
+  zone_id = aws_route53_zone.viharc.zone_id
   name    = "do.viharc.com"
   type    = "NS"
   ttl     = "300"
@@ -147,7 +147,7 @@ resource "aws_route53_record" "viharc" {
 }
 
 resource "aws_route53_record" "vchokshi" {
-  zone_id = aws_route53_zone.iot.zone_id
+  zone_id = aws_route53_zone.vchokshi.zone_id
   name    = "do.vchokshi.com"
   type    = "NS"
   ttl     = "300"
@@ -159,7 +159,7 @@ resource "aws_route53_record" "vchokshi" {
 }
 
 resource "aws_route53_record" "observability" {
-  zone_id = aws_route53_zone.iot.zone_id
+  zone_id = aws_route53_zone.vchokshi.zone_id
   name    = "obs.vchokshi.com"
   type    = "NS"
   ttl     = "300"
@@ -170,7 +170,7 @@ resource "aws_route53_record" "observability" {
   ]
 }
 resource "aws_route53_record" "apps" {
-  zone_id = aws_route53_zone.iot.zone_id
+  zone_id = aws_route53_zone.viharc.zone_id
   name    = "apps.viharc.com"
   type    = "NS"
   ttl     = "300"

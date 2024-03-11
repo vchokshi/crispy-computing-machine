@@ -1,0 +1,15 @@
+---
+- hosts: controller.do.iot4.net
+  become: yes
+  become_user: ubuntu
+  gather_facts: false
+  tasks:
+    - name: Copy the financial occult manifest over
+      copy:
+        src: fo.yml
+        dest: $HOME/fo.yml
+    - name: Use kubectl to deploy financial occult
+      shell: kubectl apply -f fo.yml >> fo.txt
+      args:
+        chdir: $HOME
+        creates: fo.txt

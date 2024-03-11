@@ -1,0 +1,51 @@
+@font-face {
+  font-family: 'Montserrat-Light';
+  src: url('../fonts/Montserrat-Light.eot');
+  src: url('../fonts/Montserrat-Light.woff2') format('woff2'),
+       url('../fonts/Montserrat-Light.woff') format('woff'),
+       url('../fonts/Montserrat-Light.ttf') format('truetype'),
+       url('../fonts/Montserrat-Light.svg#Montserrat-Light') format('svg'),
+       url('../fonts/Montserrat-Light.eot?#iefix') format('embedded-opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Montserrat-SemiBold';
+  src: url('../fonts/Montserrat-SemiBold.eot');
+  src: url('../fonts/Montserrat-SemiBold.woff2') format('woff2'),
+       url('../fonts/Montserrat-SemiBold.woff') format('woff'),
+       url('../fonts/Montserrat-SemiBold.ttf') format('truetype'),
+       url('../fonts/Montserrat-SemiBold.svg#Montserrat-SemiBold') format('svg'),
+       url('../fonts/Montserrat-SemiBold.eot?#iefix') format('embedded-opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'flexslider-icon';
+  src: url('../fonts/flexslider-icon.eot');
+  src: url('../fonts/flexslider-icon.woff2') format('woff2'),
+       url('../fonts/flexslider-icon.woff') format('woff'),
+       url('../fonts/flexslider-icon.ttf') format('truetype'),
+       url('../fonts/flexslider-icon.svg#flexslider-icon') format('svg'),
+       url('../fonts/flexslider-icon.eot?#iefix') format('embedded-opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'revicons';
+  src: url('../fonts/revicons.eot');
+  src: url('../fonts/revicons.woff2') format('woff2'),
+       url('../fonts/revicons.woff') format('woff'),
+       url('../fonts/revicons.ttf') format('truetype'),
+       url('../fonts/revicons.svg#revicons') format('svg'),
+       url('../fonts/revicons.eot?#iefix') format('embedded-opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+
+
+
