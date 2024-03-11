@@ -18,6 +18,10 @@
         name: docker.io
         state: present
         update_cache: true
+      retries: 5
+      delay: 10
+      register: result
+      until: "result is not failed"
 
 
 - hosts: aws
