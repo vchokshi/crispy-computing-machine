@@ -2,7 +2,7 @@
 controller.do.iot4.net ansible_user=root
 
 [workers]
-worker-[0:4].do.iot4.net ansible_user=root
+worker-[0:3].do.iot4.net ansible_user=root
 
 [aws]
 #controller.aws.iot4.net ansible_user=admin
@@ -11,7 +11,7 @@ worker-[0:4].do.iot4.net ansible_user=root
 
 [do]
 controller.do.iot4.net ansible_user=root
-worker-[0:4].do.iot4.net ansible_user=root
+worker-[0:3].do.iot4.net ansible_user=root
 
 [all:vars]
 ansible_python_interpreter=/usr/bin/python3

@@ -26,11 +26,11 @@
         src: "{{ item }}"
         dest: "$HOME/{{item}}"
       with_items:
-        - elk.yml
+        - elastic.yml
         - beats.yml
 
     - name: Install the elastic stack
-      shell: kubectl apply -f elk.yml >> elk.yml
+      shell: kubectl apply -f elastic.yml >> elk.yml
       args:
         chdir: $HOME
         creates: elk.yml

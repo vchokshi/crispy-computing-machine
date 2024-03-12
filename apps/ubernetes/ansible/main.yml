@@ -2,6 +2,9 @@
 - name: Import and execute the Prequesitues playbook
   ansible.builtin.import_playbook: prereqs.yml
 
+- name: Import and execute the workerers work
+  ansible.builtin.import_playbook: workerers.yml
+
 - name: Import and execute container runtime interface playbook
   ansible.builtin.import_playbook: cri.yml
 
@@ -39,6 +42,9 @@
 - name: Import and execute the kubeview playbook
   ansible.builtin.import_playbook: kubeview.yml
 
+- name: Import and execute the elastic playbook
+  ansible.builtin.import_playbook: elastic.yml
+
 - name: Import and execute the vpn playbook
   ansible.builtin.import_playbook: vpn.yml
 
@@ -63,9 +69,6 @@
 - name: Import and execute the leza app
   ansible.builtin.import_playbook: leza.yml
 
-- name: Import and execute the workerers work
-  ansible.builtin.import_playbook: workerers.yml
-
 - name: Import and execute the keycloak playbook
   ansible.builtin.import_playbook: keycloak.yml
 
@@ -81,8 +84,8 @@
 #- name: Instrument the OS with elastic agents
   #ansible.builtin.import_playbook: instrument.yml
 
-- name: Import and execute the bookinfo_apps playbook
-  ansible.builtin.import_playbook: bookinfo_apps.yml
+#- name: Import and execute the bookinfo_apps playbook
+  #ansible.builtin.import_playbook: bookinfo_apps.yml
 
 - name: Import and execute the playbook for new relic
   ansible.builtin.import_playbook: new_relic.yml

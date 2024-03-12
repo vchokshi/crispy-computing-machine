@@ -1,6 +1,8 @@
 provider "aws" {
-  region              = "us-east-1"
-  allowed_account_ids = ["308948682972"]
+  region = "us-east-1"
+  allowed_account_ids = [
+    "308948682972"
+  ]
 }
 terraform {
   required_providers {

@@ -1,7 +1,46 @@
 ---
+- hosts: controller.do.iot4.net
+  become: yes
+  tasks:
+    - name: Set hostname of box
+      hostname:
+        name: "bot-controller"
+
+- hosts: worker-0.do.iot4.net
+  become: yes
+  tasks:
+    - name: Set hostname of box
+      hostname:
+        name: "bot-worker-0"
+
+- hosts: worker-1.do.iot4.net
+  become: yes
+  tasks:
+    - name: Set hostname of box
+      hostname:
+        name: "bot-worker-1"
+
+
+- hosts: worker-2.do.iot4.net
+  become: yes
+  tasks:
+    - name: Set hostname of box
+      hostname:
+        name: "bot-worker-2"
+
+
+- hosts: worker-3.do.iot4.net
+  become: yes
+  tasks:
+    - name: Set hostname of box
+      hostname:
+        name: "bot-worker-3"
 - hosts: all
   become: yes
   tasks:
+    - name: Set hostname of box
+      hostname:
+        name: "{{ ansible_host  }}"
     - name: create the 'ubuntu' user
       user: name=ubuntu append=yes state=present createhome=yes shell=/bin/bash
 
@@ -40,14 +79,6 @@
       delay: 10
       register: result
       until: "result is not failed"
-
-
-    - name: Download & Install Cert Manager Control
-      unarchive:
-        src: https://github.com/cert-manager/cert-manager/releases/latest/download/cmctl-linux-amd64.tar.gz
-        dest: $HOME
-        remote_src: true
-
 
 - hosts: aws
   become: yes

@@ -86,6 +86,7 @@
 
 - hosts: workers
   become: yes
+  gather_facts: false
   tasks:
     - name: join cluster
       shell: "{{ hostvars['controller.do.iot4.net'].join_command }} >> node_joined.txt"

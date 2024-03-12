@@ -7,6 +7,7 @@
     targets:
       - infrastructure
       - logs
+      - apache
   environment:
     NEW_RELIC_API_KEY: "{{ lookup('env', 'NEWRELIC_API_KEY') }}"
     NEW_RELIC_ACCOUNT_ID: "{{ lookup('env', 'NEWRELIC_ACCOUNT_NUMBER') }}"

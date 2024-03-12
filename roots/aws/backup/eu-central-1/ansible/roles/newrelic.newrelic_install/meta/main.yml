@@ -1,0 +1,51 @@
+---
+galaxy_info:
+  author: New Relic
+  namespace: newrelic
+  description: Role for New Relic's Targeted Installs
+  company: New Relic, Inc
+  role_name: newrelic_install
+  license: Apache-2.0
+  min_ansible_version: "2.10"
+
+  platforms:
+    - name: EL
+      versions:
+        - "5"
+        - "6"
+        - "7"
+    - name: Amazon
+      versions:
+        - all
+    - name: Debian
+      versions:
+        - wheezy
+        - jessie
+        - stretch
+        - buster
+    - name: Ubuntu
+      versions:
+        - precise
+        - trusty
+        - xenial
+        - bionic
+        - focal
+    - name: Windows
+      versions:
+        - all
+
+  galaxy_tags:
+    - monitoring
+    - observability
+    - scalability
+    - performance
+    - infrastructure
+    - cloud
+    - logging
+    - host
+    - linux
+    - windows
+
+collections:
+  - ansible.utils
+  - ansible.windows

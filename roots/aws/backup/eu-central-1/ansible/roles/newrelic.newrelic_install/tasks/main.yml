@@ -1,0 +1,24 @@
+---
+- name: Validate variables
+  ansible.builtin.import_tasks: validate.yml
+  run_once: true
+
+- name: Validate MySQL required variables
+  ansible.builtin.import_tasks: validate_mysql.yml
+  run_once: true
+  when:
+    - os_name != 'windows'
+    - '"mysql" in targets'
+
+- name: Run Linux install
+  ansible.builtin.import_tasks: linux.yml
+  when:
+    - os_name != 'windows'
+
+- name: Run Windows install
+  ansible.builtin.import_tasks: windows.yml
+  when:
+    - os_name == 'windows'
+
+- name: Summarize results
+  ansible.builtin.import_tasks: summary.yml
