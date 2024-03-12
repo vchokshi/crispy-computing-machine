@@ -1,6 +1,7 @@
 # Crispy Computing Machine
 
 [![Prohibited Files](https://github.com/vchokshi/crispy-computing-machine/actions/workflows/prohibit_files.yml/badge.svg)](https://github.com/vchokshi/crispy-computing-machine/actions/workflows/prohibit_files.yml)
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fvchokshi%2Fcrispy-computing-machine.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2Fvchokshi%2Fcrispy-computing-machine?ref=badge_shield)
 
 ## Introduction
 
@@ -34,3 +35,7 @@ Vihar
 ## Sponsorship
 
 Sponsorship can be sent to the following BTC address: bc1q6ytsxxluzq3v3dgdwhkurml5tprva9wz8h6cpd
+
+
+## License
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fvchokshi%2Fcrispy-computing-machine.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2Fvchokshi%2Fcrispy-computing-machine?ref=badge_large)
