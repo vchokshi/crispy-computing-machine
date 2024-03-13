@@ -1,0 +1,83 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: flask-honeycomb
+  annotations:
+    cert-manager.io/cluster-issuer: "letsencrypt-prod"
+spec:
+  ingressClassName: nginx
+  tls:
+   - hosts:
+     - flask-honeycomb.apps.viharc.com
+     secretName: flask-honeycomb-cert
+  rules:
+  - host: "flask-honeycomb.apps.viharc.com"
+    http:
+      paths:
+      - pathType: Prefix
+        path: "/"
+        backend:
+          service:
+            name: flask-honeycomb
+            port:
+              number: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: flask-honeycomb
+spec:
+  ports:
+  - port: 80
+    targetPort: 5000
+  selector:
+    app: flask-honeycomb
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: flask-honeycomb
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: flask-honeycomb
+  template:
+    metadata:
+      labels:
+        app: flask-honeycomb
+    spec:
+      containers:
+      - name: openai
+        image: vchokshi/openai
+        ports:
+        - containerPort: 5000
+          protocol: TCP
+        env:
+          - name: OPENAI_API_KEY
+            valueFrom:
+              secretKeyRef:
+                name: openaiapikey
+                key: access-token
+                optional: false
+          - name: HONEYCOMB_API_KEY
+            valueFrom:
+              secretKeyRef:
+                name: honeycombapikey
+                key: access-token
+                optional: false
+          - name: FLASK_APP
+            value: "app"
+          - name: FLASK_ENV
+            value: "production"
+          - name: HONEYCOMB_DATASET
+            value: "flask-honeycomb"
+          - name: SERVICE_NAME
+            value: "flask-honeycomb"
+          - name: OTEL_EXPORTER_OTLP_HEADERS
+            value: "x-honeycomb-team=$(HONEYCOMB_API_KEY)"
+          - name: OTEL_EXPORTER_OTLP_ENDPOINT
+            value: "https://api.honeycomb.io"
+          - name: OTEL_SERVICE_NAME
+            value: "flask-honeycomb"

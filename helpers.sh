@@ -23,6 +23,7 @@ load_secrets() {
   check_deps
   export AWS_PROFILE=iot4
   export DO_PAT=$(pass DO_API_TOKEN)
+  export DO_REGISTRY_DOCKERCONFIG=$(pass do/registry/dockerconfigjson)
   export SLACK_WEBHOOK_VPN=$(pass slack/webhook/vpn)
   export SLACK_WEBHOOK_DARKNET=$(pass slack/webhook/darknet)
   export ATLANTIS_WEBHOOK_SECRET=$(pass atlantis_webhook_secret)
@@ -134,4 +135,7 @@ cleanup() {
     find ~/ccm -type d -name node_modules -exec rm -r {} \;
     rm -r $HOME/.terraform.d/plugin-cache/registry.terraform.io/hashicorp/aws/*
     docker system prune -a -f
+    sudo journalctl --vacuum-time=2d
+    sudo apt-get clean
+    npm cache clean --force
 }

@@ -1,0 +1,27 @@
+.dsn-tabs .tabs {
+  &__button {
+    background-color: $assistant-color;
+    padding: 15px 0;
+
+    ul {
+      list-style: none;
+
+      li {
+        cursor: pointer;
+        line-height: inherit;
+        padding: 10px 20px;
+        margin-bottom: 0;
+        font-size: 14px;
+
+        &.active {
+          background-color: $bg-color;
+        }
+
+        &:not(:last-child) {
+          margin-right: 5px;
+        }
+
+      }
+    }
+  }
+}

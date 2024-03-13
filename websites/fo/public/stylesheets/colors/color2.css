@@ -1,0 +1,163 @@
+/**
+  * Color
+  * Border Color
+  * Background Color
+  * Shadow Color
+*/
+
+/* Color
+-------------------------------------------------------------- */
+a:hover,
+a:focus,
+#mainnav .menu .has-sub:hover:before,
+#mainnav > ul > li > a:hover,
+#mainnav > ul > li.home > a,
+.wrap-icon-nav #searchform #searchsubmit:hover,
+.tp-banner .title-slide span,
+.flat-icon .iconbox.left .box-header i:before,
+.page-title.parallax2 .flat-counter:before,
+.flat-portfolio .portfolio-filter > li a:hover,
+.flat-portfolio .portfolio-filter > li.active a,
+.post-wrap .entry .link .icon-zoom i,
+.flat-portfolio .item .link .icon-zoom i,
+.flat-member .cs-post-header .position,
+.member-post .cs-post-footer .cs-footer-share i:hover:before,
+.flat-reviews .item .title-testimonial .post-title p,
+.post-wrap .entry .entry-meta span a:hover,
+.post-wrap-single-v1 .entry .entry-meta span a:hover,
+.post-wrap .entry .content-post .title-post a:hover,
+.footer .widget-quick-link ul li a:hover,
+.go-top i,
+.tp-banner-container .flat-socials li i:hover:before,
+.flat-information > li > a:hover,
+.top .flat-socials li i:hover:before,
+.flat-icon .iconbox.center .box-header i:before,
+.social-media p a i:hover:before,
+.team-member .name .position,
+.testimonial-text .fade-text .title-testimonial .title-post a:hover,
+.testimonial-text .fade-text .title-testimonial p,
+.breadcrumbs ul li a:hover,
+.blog-single .entry .wrap-share .category-post li a:hover,
+.comment-post .comment-detail .comment-author a:hover,
+.comment-post .comment-detail .comment-date a:hover,
+.blog-single .comment-post .comment-detail .comment-reply:before,
+.flat-contact-us .contact-us a:hover,
+.flat-icon .iconbox.icon-left .box-header i:before,
+.flat-portfolio .item .item-content .link-v1 .title,
+.flat-talk .title-section span,
+.widget-subscribe-us #searchform .submit-button:hover,
+.flat-portfolio .portfolio-wrap .item .link .title,
+.flat-icon .icon-circle .iconbox .icon-post .comment-reply,
+.flat-news .company-news .post-us.v4 .item .meta-post a,
+.flat-services .services-post .item .post .comment-reply,
+.case-single .content-post .title-post .title,
+.case-single .content-post .list-post .title:before,
+.widget-categories ul li a:hover,
+.entry .content-post ul li a:hover,
+.widget-recent-posts ul li a:hover,
+.widget-archives ul li a:hover,
+.post-wrap.blog-v2 .entry .content-post .submit-wrap button,
+.blog-single .comment-post .comment-detail .comment-reply,
+.flat-history .post-history .post .year-post p,
+.footer-logo .map a:hover,
+.widget-follow-us .follow-us li a:hover,
+.widget-our-services .our_services li a:hover,
+.widget-testimonials .avata .post .title a,
+.flat-team .post-wrap .post .comment-reply,
+.flat-overview .post-overview .post-list .box .list p:before,
+.flat-portfolio.v3 .item.v3:hover .link-v3 .title
+ {
+	color: #ff1616;
+}
+
+/* Border Color
+-------------------------------------------------------------- */
+.wrap-icon-nav.v1 input[type="text"]:focus,
+.tp-caption.flat-button:hover,
+.flat-reviews .item .thumb-title img,
+.flat-reviews .owl-theme .owl-dots .owl-dot.active span,
+.flat-reviews .owl-theme .owl-dots .owl-dot:hover span,
+.flat-newsletter .form-newsletter input[type="email"]:focus,
+.comment-respond input[type="text"]:focus,
+.comment-respond textarea:focus,
+.sw-even a:hover,
+.testimonial-avatar img,
+.blog-pagination .flat-pagination li.active a,
+.blog-pagination .flat-pagination li a:hover,
+.flat-creative .creative-footer i:hover:before,
+.blog-single .entry .wrap-share,
+.flat-contact .contact-form .style-1 input[type="text"]:focus,
+.flat-contact .contact-form textarea:focus,
+.tp-caption.flat-button-slider.bg-orange,
+.flat-reviews .owl-theme .owl-dots .owl-dot.active span,
+.flat-reviews .owl-theme .owl-dots .owl-dot:hover span,
+.blog-pagination .flat-pagination li:hover,
+.blog-pagination .flat-pagination li.active,
+input[type="email"]:focus
+ {
+	border-color: #ff1616;
+}
+
+/* Background Color
+-------------------------------------------------------------- */
+#mainnav ul.submenu > li > a:hover,
+.tp-caption.flat-button:hover,
+.title-section .title:before,
+.flat-progress .post:before,
+.member-post:hover .cs-post,
+.flat-pricing .post:hover .price-post,
+.flat-pricing .post:hover .list-menu .flat-button,
+.flat-newsletter .form-newsletter input[type="submit"],
+.post-wrap .entry .feature-post .overlay,
+.flat-button,
+.bottom,
+.go-top:hover,
+.switcher-container h2 a,
+.sw-even a:hover,
+.blog-pagination .flat-pagination li.active a,
+.blog-pagination .flat-pagination li a:hover,
+.flat-creative .creative-footer i:hover:before,
+.widget .widget-title:before,
+.post-wrap-single-v1 .entry .entry-post .blockqoute-text:before,
+.comment-post .comment-respond .comment-title:before,
+.comment-post .comment-list-wrap .comment-title:before,
+.flat-contact-us .contact-us .title:before,
+.flat-contact .post-contact .title:before,
+.top .style-box .box-text,
+.tp-caption.flat-button-slider.bg-orange,
+.flat-portfolio .portfolio-filter > li:before,
+.widget-subscribe-us #searchform .submit-button,
+.flat-portfolio.v3 .portfolio-filter > li:hover,
+.flat-portfolio.v3 .portfolio-filter > li.active,
+.post-wrap .entry .content-post .submit-wrap button,
+.wrap-share .share-post ul li i:hover:before,
+input[type="submit"],
+.flat-partner .post-wrap.v2 .post .comment-reply,
+.flat-team .post-wrap.v2 .post .comment-reply
+ {
+	background-color: #ff1616;
+}
+
+
+.flat-pricing .post:hover .name-post .title
+ {
+	background-color: #dd1313;
+}
+
+.flat-pricing .post:hover .price-post:before {
+    border-left: 369px solid #ff1616;
+    border-right: 0px solid #ff1616;
+}
+
+.bottom .copyright {
+  color: #fff;
+}
+
+.wrap-share .share-post ul li i:hover:before,
+.wrap-share .share-post ul li.twitter i:hover:before,
+.wrap-share .share-post ul li.google i:hover:before,
+.wrap-share .share-post ul li.linkedIn i:hover:before,
+input[type="submit"] {
+  color: #fff;
+}
+

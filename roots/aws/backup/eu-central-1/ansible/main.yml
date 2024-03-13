@@ -1,0 +1,33 @@
+- name: Build the stack
+  become: true
+  hosts: all
+  roles:
+  - role: newrelic.newrelic_install
+  environment:
+    NEW_RELIC_API_KEY: "{{ lookup('env', 'NEWRELIC_API_KEY') }}"
+    NEW_RELIC_ACCOUNT_ID: "{{ lookup('env', 'NEWRELIC_ACCOUNT_NUMBER') }}"
+  vars:
+    targets:
+      - infrastructure
+      - logs
+      - apache
+  tasks:
+  - name: Set hostname of box
+    hostname:
+      name: "{{ ansible_host }}"
+  - name: Install yum dependencies
+    yum:
+      name: [httpd, python-pip, python-wheel]
+      update_cache: yes
+      state: present
+
+  - name: Transfer over our index.html file
+    template:
+      src: index.html.j2
+      dest: /var/www/html/index.html
+
+  - name: Enable the httpd service
+    service:
+      name: httpd
+      state: started
+      enabled: true

@@ -1,0 +1,55 @@
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: dvwa
+  annotations:
+    cert-manager.io/cluster-issuer: "letsencrypt-prod"
+spec:
+  ingressClassName: nginx
+  tls:
+   - hosts:
+     - dvwa.pen.iot4.net
+     secretName: dvwa-cert
+  rules:
+  - host: "dvwa.pen.iot4.net"
+    http:
+      paths:
+      - pathType: Prefix
+        path: "/"
+        backend:
+          service:
+            name: dvwa
+            port:
+              number: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: dvwa
+spec:
+  ports:
+  - port: 80
+    targetPort: 80
+  selector:
+    app: dvwa
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dvwa
+spec:
+  selector:
+    matchLabels:
+      app: dvwa
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: dvwa
+    spec:
+      containers:
+      - name: dvwa
+        image: cyberxsecurity/dvwa
+        ports:
+        - containerPort: 80

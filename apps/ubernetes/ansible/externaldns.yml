@@ -1,0 +1,21 @@
+---
+- hosts: controller.do.iot4.net
+  become: yes
+  become_user: ubuntu
+  vars:
+    helm_version: '3.10.2'
+  tasks:
+    - name: Template the helm dns values file over
+      template:
+        src: externaldns-values.yaml.j2
+        dest: $HOME/externaldns-values.yaml
+
+    - name: Install external dns via helm
+      shell: helm upgrade --install external-dns bitnami/external-dns -f externaldns-values.yaml
+      args:
+        chdir: $HOME
+
+          #- name: Delete the manifest
+          #file:
+          #path: $HOME/externaldns-values.yaml
+          #state: absent

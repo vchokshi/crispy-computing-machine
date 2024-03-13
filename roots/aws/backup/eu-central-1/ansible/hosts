@@ -1,0 +1,23 @@
+[all:children]
+east
+eu
+
+[east]
+bot-us-east-1-0.backup.iot4.net
+bot-us-east-1-1.backup.iot4.net
+
+[west]
+
+[eu]
+bot-eu-central-1-0.backup.iot4.net
+bot-eu-central-1-1.backup.iot4.net
+
+[all:vars]
+ansible_python_interpreter=/usr/bin/python3
+ansible_ssh_extra_args='-o StrictHostKeyChecking=no'
+
+[west:vars]
+
+[east:vars]
+
+[eu:vars]

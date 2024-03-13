@@ -1,0 +1,15 @@
+---
+provider: digitalocean
+digitalocean:
+  apiToken: {{ lookup('env', 'DO_PAT')}}
+
+policy: sync
+interval: "15s"
+replicas: 1
+
+sources:
+- ingress
+- service
+# Ingress and istio-gateway don't play nice
+# We only need istio-gateway for the bookstore so for now we're going to comment this out.
+#- istio-gateway

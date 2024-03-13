@@ -1,0 +1,65 @@
+---
+apiVersion: cert-manager.io/v1
+kind: ClusterIssuer
+metadata:
+  name: letsencrypt-staging
+  namespace: cert-maanger
+spec:
+  acme:
+    server: https://acme-staging-v02.api.letsencrypt.org/directory
+    email: vc@iot4.net
+    privateKeySecretRef:
+      name: letsencrypt-staging
+    solvers:
+    - dns01:
+        digitalocean:
+          tokenSecretRef:
+            name: digitalocean
+            key: access-token
+      selector:
+        dnsZones:
+        - 'do.iot4.net'
+        - 'do.vchokshi.com'
+        - 'obs.vchokshi.com'
+        - 'do.viharc.com'
+        - 'apps.viharc.com'
+        - 'pen.iot4.net'
+    - http01:
+        ingress:
+          ingressClassName: nginx
+      selector:
+        matchLabels:
+          "use-http01-solver": "true"
+---
+apiVersion: cert-manager.io/v1
+kind: ClusterIssuer
+metadata:
+  name: letsencrypt-prod
+  namespace: cert-maanger
+spec:
+  acme:
+    server: https://acme-v02.api.letsencrypt.org/directory
+    email: vc@iot4.net
+    privateKeySecretRef:
+      name: letsencrypt-prod
+    solvers:
+    - dns01:
+        digitalocean:
+          tokenSecretRef:
+            name: digitalocean
+            key: access-token
+      selector:
+        dnsZones:
+        - 'do.iot4.net'
+        - 'do.vchokshi.com'
+        - 'do.viharc.com'
+        - 'obs.vchokshi.com'
+        - 'do.viharc.com'
+        - 'apps.viharc.com'
+        - 'pen.iot4.net'
+    - http01:
+        ingress:
+          ingressClassName: nginx
+      selector:
+        matchLabels:
+          "use-http01-solver": "true"

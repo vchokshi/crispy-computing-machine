@@ -1,0 +1,2 @@
+---
+os_name: "{{ ansible_os_family | lower }}"
