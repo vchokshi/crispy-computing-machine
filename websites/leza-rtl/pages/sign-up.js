@@ -8,14 +8,14 @@ const SignUp = () => {
     return (
         <>
             <Navbar />
-
-            <PageBanner
-                pageTitle="Sign Up"
-                homePageUrl="/"
-                homePageText="Home"
-                activePageText="Sign Up"
-                imgClass="item-bg-8"
-            />
+            
+            <PageBanner 
+                pageTitle="Sign Up" 
+                homePageUrl="/" 
+                homePageText="Home" 
+                activePageText="Sign Up" 
+                imgClass="item-bg-8" 
+            /> 
 
             <div className="signup-area ptb-100">
                 <div className="container">
@@ -64,7 +64,7 @@ const SignUp = () => {
                     </div>
                 </div>
             </div>
-
+  
             <Footer />
         </>
     )

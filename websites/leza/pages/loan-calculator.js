@@ -10,18 +10,18 @@ const LoanCalculator = () => {
         <>
             <Navbar />
 
-            <PageBanner
-                pageTitle="Loan Calculator"
-                homePageUrl="/"
-                homePageText="Home"
-                activePageText="Loan Calculator"
-                imgClass="item-bg-7"
-            />
+            <PageBanner 
+                pageTitle="Loan Calculator" 
+                homePageUrl="/" 
+                homePageText="Home" 
+                activePageText="Loan Calculator" 
+                imgClass="item-bg-7" 
+            /> 
 
             <LoanCalculatorForm />
-
+            
             <LoanTable />
-
+            
             <Footer />
         </>
     )

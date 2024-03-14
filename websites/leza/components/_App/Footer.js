@@ -75,7 +75,7 @@ const Footer = () => {
                                         </Link>
                                     </li>
                                 </ul>
-                            </div>
+                            </div>    
                         </div>
 
                         <div className="col-lg-3 col-md-6">
@@ -109,7 +109,7 @@ const Footer = () => {
                                         </Link>
                                     </li>
                                 </ul>
-                            </div>
+                            </div>    
                         </div>
 
                         <div className="col-lg-3 col-md-6">
@@ -145,7 +145,7 @@ const Footer = () => {
                     </div>
                 </div>
             </footer>
-
+         
             <div className="copy-right-area">
                 <div className="container">
                     <div className="copy-right-content">

@@ -10,13 +10,13 @@ const Services = () => {
         <>
             <Navbar />
 
-            <PageBanner
-                pageTitle="Services"
-                homePageUrl="/"
-                homePageText="Home"
-                activePageText="Services"
-                imgClass="item-bg-5"
-            />
+            <PageBanner 
+                pageTitle="Services" 
+                homePageUrl="/" 
+                homePageText="Home" 
+                activePageText="Services" 
+                imgClass="item-bg-5" 
+            /> 
 
             <div className="services-area bg-color ptb-100">
                 <div className="container">
@@ -104,7 +104,7 @@ const Services = () => {
                                 </Link>
                             </div>
                         </div>
-
+ 
                         <div className="col-lg-4 col-md-6">
                             <div className="services-item">
                                 <div className="icon">
@@ -181,9 +181,9 @@ const Services = () => {
                     </div>
                 </div>
             </div>
-
+      
             <CallUsStyleTwo />
-
+            
             <Footer />
         </>
     )

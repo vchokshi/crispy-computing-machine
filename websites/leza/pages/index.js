@@ -26,7 +26,7 @@ const Index = () => {
             <OurCompanyValues />
 
             <Services />
-
+            
             <ApplyForLoanStyleOne />
 
             <ProjectsSlider />
@@ -36,7 +36,7 @@ const Index = () => {
             <Partner />
 
             <RecentNews />
-
+            
             <Footer />
         </>
     )

@@ -502,11 +502,11 @@ html {
 .widget-area .widget_appointment .form-group .form-control {
     text-align: right;
 }
-.owl-carousel {
+.owl-carousel { 
     direction: ltr;
 }
-.owl-carousel .owl-item {
-    direction: rtl;
+.owl-carousel .owl-item { 
+    direction: rtl; 
 }
 .search-overlay .search-overlay-form form .input-search {
      padding-right: 15px;

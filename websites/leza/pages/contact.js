@@ -8,15 +8,15 @@ const Contact = () => {
     return (
         <>
             <Navbar />
-
-            <PageBanner
-                pageTitle="Contact Us"
-                homePageUrl="/"
-                homePageText="Home"
-                activePageText="Contact Us"
-                imgClass="item-bg-3"
-            />
-
+            
+            <PageBanner 
+                pageTitle="Contact Us" 
+                homePageUrl="/" 
+                homePageText="Home" 
+                activePageText="Contact Us" 
+                imgClass="item-bg-3" 
+            /> 
+            
             <ContactForm />
 
             <div className="map">

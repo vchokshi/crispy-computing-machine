@@ -11,7 +11,7 @@ const MainBanner = () => {
                             <span>We are here for</span>
                             <h1>Start or grow your own business</h1>
                             <p>Loans are advantageous as a relatively inexpensive way of borrowing money. We believe in those made to do more.</p>
-
+                            
                             <div className="banner-btn">
                                 <Link href="/services">
                                     <a className="default-btn">
@@ -51,7 +51,7 @@ const MainBanner = () => {
                     </div>
                 </div>
             </div>
-
+            
             {/* Approvals Area */}
             <div className="approvals-area">
                 <div className="container-fluid">

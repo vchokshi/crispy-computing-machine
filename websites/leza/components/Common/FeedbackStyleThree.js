@@ -22,7 +22,7 @@ const FeedbackStyleThree = () => {
     React.useEffect(() => {
         setDisplay(true);
     }, [])
-
+    
     return (
         <div className="clients-area bg-color ptb-100">
             <div className="container">
@@ -32,7 +32,7 @@ const FeedbackStyleThree = () => {
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
                 </div>
 
-                {display ? <OwlCarousel
+                {display ? <OwlCarousel 
                     className="clients-slider owl-carousel owl-theme"
                     {...options}
                 >

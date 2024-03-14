@@ -11,20 +11,20 @@ const Projects = () => {
         <>
             <Navbar />
 
-            <PageBanner
-                pageTitle="Projects"
-                homePageUrl="/"
-                homePageText="Home"
-                activePageText="Projects"
-                imgClass="item-bg-4"
-            />
+            <PageBanner 
+                pageTitle="Projects" 
+                homePageUrl="/" 
+                homePageText="Home" 
+                activePageText="Projects" 
+                imgClass="item-bg-4" 
+            /> 
 
             <ProjectsSlider />
 
             <ProfessionalServices />
 
             <Partner />
-
+            
             <Footer />
         </>
     )

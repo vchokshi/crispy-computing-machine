@@ -5,5 +5,4 @@ module.exports = {
         includePaths: [path.join(__dirname, 'styles')],
     },
     trailingSlash: true,
-    output: 'standalone',
 }

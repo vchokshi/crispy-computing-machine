@@ -10,7 +10,7 @@ const FillUpLoanInquiryForm = () => {
                             <h3>Start-up loan Inquiry</h3>
                             <p>Please complete the short form below with your details and one of our advisors will be touch shortly</p>
                         </div>
-
+    
                         <form className="inquiry-form">
                             <div className="row">
                                 <div className="col-lg-6">
@@ -19,35 +19,35 @@ const FillUpLoanInquiryForm = () => {
                                         <input type="text" className="form-control" />
                                     </div>
                                 </div>
-
+    
                                 <div className="col-lg-6">
                                     <div className="form-group">
                                         <label>Phone Number*</label>
                                         <input type="text" className="form-control" />
                                     </div>
                                 </div>
-
+    
                                 <div className="col-lg-6">
                                     <div className="form-group">
                                         <label>Email Address</label>
                                         <input type="email" className="form-control" />
                                     </div>
                                 </div>
-
+    
                                 <div className="col-lg-6">
                                     <div className="form-group">
                                         <label>Postcode*</label>
                                         <input type="text" className="form-control" />
-                                    </div>
+                                    </div>    
                                 </div>
-
+    
                                 <div className="col-lg-6">
                                     <div className="form-group">
                                         <label>Date of Birth</label>
                                         <input type="date" className="form-control" />
                                     </div>
                                 </div>
-
+    
                                 <div className="col-lg-6">
                                     <div className="form-group">
                                         <label>Address</label>
@@ -61,7 +61,7 @@ const FillUpLoanInquiryForm = () => {
                                         <input type="text" className="form-control" />
                                     </div>
                                 </div>
-
+    
                                 <div className="col-lg-6">
                                     <div className="form-group">
                                         <label>How long have you been trading?</label>
@@ -69,7 +69,7 @@ const FillUpLoanInquiryForm = () => {
                                     </div>
                                 </div>
                             </div>
-
+                            
                             <div className="inquiry-btn">
                                 <button type="submit" className="btn default-btn">
                                     Submit <span></span>

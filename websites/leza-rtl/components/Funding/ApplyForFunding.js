@@ -38,7 +38,7 @@ const ApplyForFunding = () => {
                                 <div className="form-group">
                                     <label>Work Email*</label>
                                     <input type="email" className="form-control" />
-                                </div>
+                                </div>    
                             </div>
 
                             <div className="col-lg-6">

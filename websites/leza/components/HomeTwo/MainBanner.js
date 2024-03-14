@@ -11,7 +11,7 @@ const MainBanner = () => {
                             <span>We are here for</span>
                             <h1>We believe in those made to do more</h1>
                             <p>Loans are advantageous as a relatively inexpensive way of borrowing money. Start or grow your own business</p>
-
+                            
                             <div className="banner-btn">
                                 <Link href="/services">
                                     <a className="default-btn">

@@ -12,7 +12,7 @@ const MainBanner = () => {
                                 <div className="main-banner-content">
                                     <h1>The funds have helped us move your business forward</h1>
                                     <p>Loans are advantageous as a relatively inexpensive way of borrowing money. Start or grow your own business</p>
-
+                                    
                                     <div className="banner-btn">
                                         <Link href="/services">
                                             <a className="default-btn">

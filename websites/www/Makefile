@@ -11,6 +11,9 @@ push:
 	docker push ${DOCKER_USERNAME}/${APPLICATION_NAME}-nginx:${GIT_HASH}
 
 release:
-	docker pull ${REGISTRY}/${REPO}/${APPLICATION_NAME}:${GIT_HASH}
-	docker tag ${REGISTRY}/${REPO}/${APPLICATION_NAME}:${GIT_HASH} ${REGISTRY}/${REPO}/${APPLICATION_NAME}:latest
-	docker push ${REGISTRY}/${REPO}/${APPLICATION_NAME}:latest
+	docker pull ${DOCKER_USERNAME}/${APPLICATION_NAME}-apache:${GIT_HASH}
+	docker tag ${DOCKER_USERNAME}/${APPLICATION_NAME}-apache:${GIT_HASH} ${DOCKER_USERNAME}/${APPLICATION_NAME}-apache:latest
+	docker push ${DOCKER_USERNAME}/${APPLICATION_NAME}-apache:latest
+	docker pull ${DOCKER_USERNAME}/${APPLICATION_NAME}-nginx:${GIT_HASH}
+	docker tag ${DOCKER_USERNAME}/${APPLICATION_NAME}-nginx:${GIT_HASH} ${DOCKER_USERNAME}/${APPLICATION_NAME}-nginx:latest
+	docker push ${DOCKER_USERNAME}/${APPLICATION_NAME}-nginx:latest
