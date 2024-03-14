@@ -10,7 +10,11 @@ resource "aws_instance" "e" {
   instance_type               = local.ec2_instance_type
   associate_public_ip_address = true
   key_name                    = aws_key_pair.v.key_name
-  volume_tags                 = local.common_tags
+  volume_tags = merge(
+    local.common_tags,
+    {
+      Name = "bot-volume-${count.index}"
+  })
   tags = merge(
     local.common_tags,
     {
@@ -43,8 +47,11 @@ resource "aws_instance" "east" {
   subnet_id                   = module.vpc-east.public_subnets[count.index]
   instance_type               = local.ec2_instance_type
   associate_public_ip_address = true
-  key_name                    = aws_key_pair.w.key_name
-  volume_tags                 = local.common_tags
+  volume_tags = merge(
+    local.common_tags,
+    {
+      Name = "bot-volume-${count.index}"
+  })
   tags = merge(
     local.common_tags,
     {
