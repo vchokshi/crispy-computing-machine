@@ -1,16 +1,14 @@
 locals {
-  project       = "iot-elastio"
+  project       = "Secubernetes"
   owner         = "Vihar Chokshi"
-  email_address = "backup@iot4.net"
+  email_address = "scuby@iot4.net"
 
   dns_hosted_zone_name = "backup.iot4.net"
 
   ec2_instance_type = "t3.micro"
 
   common_tags = {
-    Name    = "${local.dns_hosted_zone_name}"
-    Owner   = local.owner
-    Email   = local.email_address
-    elastio = "False"
+    Owner = local.owner
+    Email = local.email_address
   }
 }
