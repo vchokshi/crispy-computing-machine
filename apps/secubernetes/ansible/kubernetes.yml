@@ -1,5 +1,5 @@
 ---
-- hosts: all
+- hosts: do
   become: yes
   gather_facts: false
   vars:

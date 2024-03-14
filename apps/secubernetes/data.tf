@@ -46,16 +46,8 @@ data "aws_ami" "debian-11" {
   }
 
 }
-
-data "aws_route53_zone" "iot" {
-  name = "backup.iot4.net"
-
-}
-
-data "http" "myip" {
-  url = "http://ipv4.icanhazip.com"
-}
-data "aws_ami" "amazon-linux-2" {
+data "aws_ami" "east-amazon-linux-2" {
+  provider    = aws.us-east-1
   most_recent = true
   owners      = ["amazon"]
 
@@ -69,8 +61,32 @@ data "aws_ami" "amazon-linux-2" {
     values = ["amzn2-ami-hvm*"]
   }
 }
-data "aws_ami" "east-amazon-linux-2" {
-  provider    = aws.us-east-1
+data "aws_ami" "west-amazon-linux-2" {
+  provider    = aws.us-west-2
+  most_recent = true
+  owners      = ["amazon"]
+
+  filter {
+    name   = "owner-alias"
+    values = ["amazon"]
+  }
+
+  filter {
+    name   = "name"
+    values = ["amzn2-ami-hvm*"]
+  }
+}
+
+
+data "aws_route53_zone" "iot" {
+  name = "backup.iot4.net"
+
+}
+
+data "http" "myip" {
+  url = "http://ipv4.icanhazip.com"
+}
+data "aws_ami" "amazon-linux-2" {
   most_recent = true
   owners      = ["amazon"]
 

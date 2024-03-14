@@ -6,9 +6,6 @@ resource "digitalocean_droplet" "controller" {
   ssh_keys = [digitalocean_ssh_key.vchokshi.fingerprint]
 }
 
-output "controller_ip" {
-  value = digitalocean_droplet.controller.ipv4_address
-}
 
 resource "digitalocean_record" "c" {
   domain = "do.iot4.net"
@@ -16,6 +13,10 @@ resource "digitalocean_record" "c" {
   name   = "controller"
   ttl    = 30
   value  = digitalocean_droplet.controller.ipv4_address
+}
+
+output "controller_name" {
+  value = digitalocean_record.c.fqdn
 }
 
 variable "instance_count" {
@@ -37,10 +38,6 @@ resource "digitalocean_droplet" "worker" {
   ssh_keys = [digitalocean_ssh_key.vchokshi.fingerprint]
 }
 
-output "workers" {
-  value = digitalocean_droplet.worker.*.ipv4_address
-}
-
 resource "digitalocean_record" "worker" {
   count  = var.instance_count
   domain = "do.iot4.net"
@@ -48,4 +45,8 @@ resource "digitalocean_record" "worker" {
   name   = "worker-${count.index}"
   ttl    = 30
   value  = digitalocean_droplet.worker[count.index].ipv4_address
+}
+
+output "workers" {
+  value = digitalocean_record.worker.*.fqdn
 }

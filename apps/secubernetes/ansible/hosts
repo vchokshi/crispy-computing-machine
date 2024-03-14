@@ -1,0 +1,44 @@
+[all]
+controller.do.iot4.net ansible_user=root
+worker-[0:3].do.iot4.net ansible_user=root
+bot-us-east-1-0.backup.iot4.net
+bot-us-east-1-1.backup.iot4.net
+bot-eu-central-1-0.backup.iot4.net
+bot-eu-central-1-1.backup.iot4.net
+bot-us-west-2-0.backup.iot4.net
+bot-us-west-2-1.backup.iot4.net
+
+[all:vars]
+ansible_python_interpreter=/usr/bin/python3
+ansible_ssh_extra_args='-o StrictHostKeyChecking=no'
+
+[control_plane]
+controller.do.iot4.net ansible_user=root
+
+[workers]
+worker-[0:3].do.iot4.net ansible_user=root
+
+[do]
+controller.do.iot4.net ansible_user=root
+worker-[0:3].do.iot4.net ansible_user=root
+
+
+[east]
+bot-us-east-1-0.backup.iot4.net
+bot-us-east-1-1.backup.iot4.net
+
+[eu]
+bot-eu-central-1-0.backup.iot4.net
+bot-eu-central-1-1.backup.iot4.net
+
+[west]
+bot-us-west-2-0.backup.iot4.net
+bot-us-west-2-1.backup.iot4.net
+
+[botnet]
+bot-us-east-1-0.backup.iot4.net
+bot-us-east-1-1.backup.iot4.net
+bot-eu-central-1-0.backup.iot4.net
+bot-eu-central-1-1.backup.iot4.net
+bot-us-west-2-0.backup.iot4.net
+bot-us-west-2-1.backup.iot4.net
