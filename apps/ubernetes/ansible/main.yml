@@ -1,4 +1,7 @@
 ---
+- name: Impoart and build the botnet
+  ansible.builtin.import_playbook: bot.yml
+
 - name: Import and execute the Prequesitues playbook
   ansible.builtin.import_playbook: prereqs.yml
 

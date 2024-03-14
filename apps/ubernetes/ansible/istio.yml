@@ -1,5 +1,5 @@
 ---
-- hosts: control_plane
+- hosts: controlller
   become: yes
   become_user: ubuntu
   gather_facts: false

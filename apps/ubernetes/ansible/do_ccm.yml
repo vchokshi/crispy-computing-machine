@@ -1,5 +1,5 @@
 ---
-- hosts: controller.do.iot4.net
+- hosts: controller
   become: yes
   become_user: ubuntu
   gather_facts: false
@@ -19,14 +19,10 @@
       tags:
         - build
 
-- hosts: controller.do.iot4.net
-  become: yes
-  gather_facts: false
-  tasks:
-     - name: install doctl
-       snap:
-         name:
-           - doctl
-         state: present
-       tags:
-         - build
+    - name: install doctl
+      snap:
+        name:
+          - doctl
+        state: present
+      tags:
+        - build

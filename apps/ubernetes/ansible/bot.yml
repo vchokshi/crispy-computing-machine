@@ -1,0 +1,35 @@
+- name: Build the stack
+  user: ec2-user
+  become: true
+  gather_facts: true
+  hosts: botnet
+  roles:
+  - role: newrelic.newrelic_install
+  environment:
+    NEW_RELIC_API_KEY: "{{ lookup('env', 'NEWRELIC_API_KEY') }}"
+    NEW_RELIC_ACCOUNT_ID: "{{ lookup('env', 'NEWRELIC_ACCOUNT_NUMBER') }}"
+  vars:
+    targets:
+      - infrastructure
+      - logs
+      - apache
+  pre_tasks:
+  - name: Set hostname of box
+    hostname:
+      name: "{{ ansible_host }}"
+  - name: Install yum dependencies
+    yum:
+      name: [httpd, python-pip, python-wheel, ca-certificates, curl, gnupg, lsb-release, apt-transport-https]
+      update_cache: yes
+      state: present
+
+  - name: Transfer over our index.html file
+    template:
+      src: bot-index.html.j2
+      dest: /var/www/html/index.html
+
+  - name: Enable the httpd service
+    service:
+      name: httpd
+      state: started
+      enabled: true

@@ -1,4 +1,4 @@
-- hosts: control_plane
+- hosts: controlller
   become: yes
   gather_facts: false
   become_user: ubuntu

@@ -1,0 +1,4 @@
+html_root: /var/www/html
+s3_target: s3://iot4-backup-liquid
+s3_infect: s3://iot4-backup-malware
+s3_detonate: s3://iot4-backup-lazy
