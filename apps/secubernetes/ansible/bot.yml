@@ -1,4 +1,4 @@
-- name: Build the stack
+- name: Build the Botnet
   user: ec2-user
   become: true
   gather_facts: true
@@ -19,7 +19,7 @@
       name: "{{ ansible_host }}"
   - name: Install yum dependencies
     yum:
-      name: [httpd, python-pip, python-wheel, ca-certificates, curl, gnupg, lsb-release, apt-transport-https]
+      name: [httpd, python-pip, python-wheel, ca-certificates, gnupg ]
       update_cache: yes
       state: present
 

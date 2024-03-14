@@ -20,9 +20,6 @@ module "vpc" {
   create_database_subnet_route_table     = false
   create_database_internet_gateway_route = false
 }
-output "vpc_id" {
-  value = module.vpc.vpc_id
-}
 
 #tfsec:ignore:aws-ec2-require-vpc-flow-logs-for-all-vpcs
 #tfsec:ignore:aws-ec2-no-public-ip-subnet
@@ -49,9 +46,6 @@ module "vpc-east" {
   create_database_subnet_route_table     = false
   create_database_internet_gateway_route = false
 }
-output "vpc_east_id" {
-  value = module.vpc-east.vpc_id
-}
 
 #tfsec:ignore:aws-ec2-require-vpc-flow-logs-for-all-vpcs
 #tfsec:ignore:aws-ec2-no-public-ip-subnet
@@ -77,7 +71,4 @@ module "vpc-west" {
   create_database_subnet_group           = false
   create_database_subnet_route_table     = false
   create_database_internet_gateway_route = false
-}
-output "vpc_west_id" {
-  value = module.vpc-west.vpc_id
 }
