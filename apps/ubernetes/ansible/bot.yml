@@ -2,7 +2,7 @@
   user: ec2-user
   become: true
   gather_facts: true
-  hosts: east,eu
+  hosts: botnet
   roles:
   - role: newrelic.newrelic_install
   environment:
@@ -19,7 +19,7 @@
       name: "{{ ansible_host }}"
   - name: Install yum dependencies
     yum:
-      name: [httpd, python-pip, python-wheel]
+      name: [httpd, python-pip, python-wheel, ca-certificates, curl, gnupg, lsb-release, apt-transport-https]
       update_cache: yes
       state: present
 

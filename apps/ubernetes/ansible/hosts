@@ -1,4 +1,4 @@
-[control_plane]
+[controller]
 controller.do.iot4.net ansible_user=root
 
 [workers]
@@ -17,5 +17,11 @@ bot-us-east-1-0.backup.iot4.net
 bot-us-east-1-1.backup.iot4.net
 
 [eu]
+bot-eu-central-1-0.backup.iot4.net
+bot-eu-central-1-1.backup.iot4.net
+
+[botnet]
+bot-us-east-1-0.backup.iot4.net
+bot-us-east-1-1.backup.iot4.net
 bot-eu-central-1-0.backup.iot4.net
 bot-eu-central-1-1.backup.iot4.net

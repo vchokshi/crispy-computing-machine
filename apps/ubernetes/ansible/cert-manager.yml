@@ -1,5 +1,5 @@
 ---
-- hosts: controller.do.iot4.net
+- hosts: controller
   become: yes
   gather_facts: false
   become_user: ubuntu
