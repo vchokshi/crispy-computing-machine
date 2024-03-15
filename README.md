@@ -11,7 +11,7 @@ I affectionaly named this repository the *Crispy Computing Machine*, becasue its
 
 The structure and orgniztation of the code is by no means perfect, but it serves its purpose well. As the code evolves, so does its structure.
 
-[![Watch This Video](https://www.youtube.com/watch?v=tgDI88-QFOw)] to learn about the Crispy Computing Machine and Secubernetes!
+[![Watch This Video](https://img.youtube.com/vi/tgDI88-QFOw/0.jpg)](https://www.youtube.com/watch?v=tgDI88-QFOw) to learn about the Crispy Computing Machine and Secubernetes!
 
 ## Contributing
 
