@@ -15,7 +15,7 @@
       args:
         chdir: $HOME
 
-          #- name: Delete the manifest
-          #file:
-          #path: $HOME/externaldns-values.yaml
-          #state: absent
+    - name: Delete the manifest
+      file:
+        path: $HOME/externaldns-values.yaml
+        state: absent

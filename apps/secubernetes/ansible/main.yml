@@ -28,8 +28,8 @@
   ansible.builtin.import_playbook: ingress.yml
 
 # @bug: externaldns fails when source: ingress is used at the same time as source: istio-gateway
-#- name: Import and execute the istio playbook
-  #ansible.builtin.import_playbook: istio.yml
+- name: Import and execute the istio playbook
+  ansible.builtin.import_playbook: istio.yml
 
 - name: Use helm to install externaldns
   ansible.builtin.import_playbook: externaldns.yml
@@ -88,8 +88,8 @@
 #- name: Instrument the OS with elastic agents
   #ansible.builtin.import_playbook: instrument.yml
 
-#- name: Import and execute the bookinfo_apps playbook
-  #ansible.builtin.import_playbook: bookinfo_apps.yml
-
 - name: Import and execute the playbook for new relic
   ansible.builtin.import_playbook: new_relic.yml
+
+- name: Import and execute the bookinfo_apps playbook
+  ansible.builtin.import_playbook: bookinfo_apps.yml

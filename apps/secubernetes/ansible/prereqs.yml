@@ -2,10 +2,6 @@
 - hosts: do
   become: yes
   tasks:
-    - name: Set hostname of box
-      hostname:
-        name: "{{ ansible_host  }}"
-
     - name: create the 'ubuntu' user
       user: name=ubuntu append=yes state=present createhome=yes shell=/bin/bash
 

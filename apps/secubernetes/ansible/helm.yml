@@ -1,7 +1,6 @@
 ---
 - hosts: control_plane
   become: yes
-  gather_facts: false
   vars:
     helm_architecture: 'amd64'
     helm_mirror: 'https://get.helm.sh'
@@ -129,5 +128,11 @@
 
     - name: Add the jetpack repo and update helm
       shell: helm repo add jetstack https://charts.jetstack.io && helm repo update
+      args:
+        chdir: $HOME
+
+
+    - name: Add the new relic repo and update helm
+      shell: helm repo add newrelic https://helm-charts.newrelic.com && helm repo update
       args:
         chdir: $HOME

@@ -22,6 +22,7 @@
         - keycloak.yaml
         - https://download.elastic.co/downloads/eck/2.9.0/operator.yaml
         - beats.yml
+        - hello-kubernetes.yml
       ignore_errors: true
 
     - name: Unintall istio

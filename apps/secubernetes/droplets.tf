@@ -1,3 +1,4 @@
+/*
 resource "digitalocean_droplet" "controller" {
   image    = "ubuntu-20-04-x64"
   name     = "controller"
@@ -50,3 +51,4 @@ resource "digitalocean_record" "worker" {
 output "workers" {
   value = digitalocean_record.worker.*.fqdn
 }
+*/
