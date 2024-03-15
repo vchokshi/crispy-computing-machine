@@ -5,9 +5,9 @@
 
 ## Introduction
 
-Welcome to my code repository. The contents of this repositiry are varied but single in purpose. Contents are varied becasue this repository of code contains mostly prototypes, minimial viable products (MVP), demonstrations, and proof of concepts. Single purpose in that this is my lab, and its evolving.
+Welcome to my code repository. The contents of this repositiry are varied but single in purpose. Contents are varied becasue this repository of code contains mostly prototypes, minimial viable products (MVP), demonstrations, and proof of concepts. Single purpose in that this is a lab, and its evolving.
 
-I affectionaly named this repository my *Crispy Computing Machine*, becasue its my digital playground.
+I affectionaly named this repository the *Crispy Computing Machine*, becasue its a digital playground.
 
 The structure and orgniztation of the code is by no means perfect, but it serves its purpose well. As the code evolves, so does its structure.
 
