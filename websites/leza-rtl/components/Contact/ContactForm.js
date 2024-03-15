@@ -70,71 +70,71 @@ const ContactForm = () => {
                                     <div className="col-lg-6 col-md-6">
                                         <div className="form-group">
                                             <label>Name</label>
-                                            <input
-                                                type="text"
-                                                name="name"
-                                                placeholder="Name"
-                                                className="form-control"
+                                            <input 
+                                                type="text" 
+                                                name="name" 
+                                                placeholder="Name" 
+                                                className="form-control" 
                                                 value={contact.name}
-                                                onChange={handleChange}
-                                                required
+                                                onChange={handleChange} 
+                                                required 
                                             />
                                         </div>
                                     </div>
                                     <div className="col-lg-6 col-md-6">
                                         <div className="form-group">
                                             <label>Email Address</label>
-                                            <input
-                                                type="text"
-                                                name="email"
-                                                placeholder="Email"
-                                                className="form-control"
+                                            <input 
+                                                type="text" 
+                                                name="email" 
+                                                placeholder="Email" 
+                                                className="form-control" 
                                                 value={contact.email}
-                                                onChange={handleChange}
-                                                required
+                                                onChange={handleChange} 
+                                                required 
                                             />
                                         </div>
                                     </div>
                                     <div className="col-lg-6 col-md-6">
                                         <div className="form-group">
                                             <label>Phone Number</label>
-                                            <input
-                                                type="text"
-                                                name="number"
-                                                placeholder="Phone number"
-                                                className="form-control"
+                                            <input 
+                                                type="text" 
+                                                name="number" 
+                                                placeholder="Phone number" 
+                                                className="form-control" 
                                                 value={contact.number}
-                                                onChange={handleChange}
-                                                required
+                                                onChange={handleChange} 
+                                                required 
                                             />
                                         </div>
                                     </div>
                                     <div className="col-lg-6 col-md-6">
                                         <div className="form-group">
                                             <label>Subject</label>
-                                            <input
-                                                type="text"
-                                                name="subject"
-                                                placeholder="Subject"
-                                                className="form-control"
+                                            <input 
+                                                type="text" 
+                                                name="subject" 
+                                                placeholder="Subject" 
+                                                className="form-control" 
                                                 value={contact.subject}
-                                                onChange={handleChange}
-                                                required
+                                                onChange={handleChange} 
+                                                required 
                                             />
                                         </div>
                                     </div>
                                     <div className="col-lg-12 col-md-12">
                                         <div className="form-group">
                                             <label>Message</label>
-                                            <textarea
-                                                name="text"
-                                                cols="30"
-                                                rows="6"
-                                                placeholder="Write your message..."
-                                                className="form-control"
+                                            <textarea 
+                                                name="text" 
+                                                cols="30" 
+                                                rows="6" 
+                                                placeholder="Write your message..." 
+                                                className="form-control" 
                                                 value={contact.text}
-                                                onChange={handleChange}
-                                                required
+                                                onChange={handleChange} 
+                                                required 
                                             />
                                         </div>
                                     </div>
@@ -153,7 +153,7 @@ const ContactForm = () => {
                             <div className="title">
                                 <h3>Contact Info</h3>
                             </div>
-
+        
                             <div className="info-box">
                                 <div className="icon">
                                     <i className="flaticon-clock"></i>

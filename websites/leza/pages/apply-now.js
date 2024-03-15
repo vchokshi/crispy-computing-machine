@@ -7,14 +7,14 @@ const ApplyNow = () => {
     return (
         <>
             <Navbar />
-
-            <PageBanner
-                pageTitle="Apply Now"
-                homePageUrl="/"
-                homePageText="Home"
-                activePageText="Apply Now"
-                imgClass="item-bg-2"
-            />
+            
+            <PageBanner 
+                pageTitle="Apply Now" 
+                homePageUrl="/" 
+                homePageText="Home" 
+                activePageText="Apply Now" 
+                imgClass="item-bg-2" 
+            /> 
 
             <div className="apply-area ptb-100">
                 <div className="container">
@@ -141,7 +141,7 @@ const ApplyNow = () => {
                     </form>
                 </div>
             </div>
-
+      
             <Footer />
         </>
     )

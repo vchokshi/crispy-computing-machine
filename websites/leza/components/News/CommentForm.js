@@ -7,7 +7,7 @@ const CommentForm = () => {
             <form className="comment-form">
                 <p className="comment-notes">
                     <span id="email-notes">Your email address will not be published.</span>
-                    Required fields are marked
+                    Required fields are marked 
                     <span className="required">*</span>
                 </p>
                 <p className="comment-form-author">

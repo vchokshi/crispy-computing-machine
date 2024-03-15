@@ -13,13 +13,13 @@ const Loans = () => {
         <>
             <Navbar />
 
-            <PageBanner
-                pageTitle="Loans"
-                homePageUrl="/"
-                homePageText="Home"
-                activePageText="Loans"
-                imgClass="item-bg-8"
-            />
+            <PageBanner 
+                pageTitle="Loans" 
+                homePageUrl="/" 
+                homePageText="Home" 
+                activePageText="Loans" 
+                imgClass="item-bg-8" 
+            /> 
 
             <LoansContent />
 
@@ -60,7 +60,7 @@ const Loans = () => {
             <FillUpLoanInquiryForm />
 
             <CallUsStyleTwo />
-
+            
             <Footer />
         </>
     )

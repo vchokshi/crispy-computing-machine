@@ -91,7 +91,7 @@ export default class ProfessionalServices extends Component {
                                                 <li>Home renovation</li>
                                                 <li>Land purchase</li>
                                             </ul>
-
+                                    
                                             <h3>Agricultural loan - Eligibility</h3>
                                             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
 
@@ -118,13 +118,13 @@ export default class ProfessionalServices extends Component {
 
                                             <h3>Get financing for whatever you need now</h3>
                                             <ul className="list">
-
+                                                
                                                 <li>New home</li>
                                                 <li>Home improvement loan</li>
                                                 <li>Home renovation</li>
                                                 <li>Land purchase</li>
                                             </ul>
-
+                                        
                                             <h3>Personal loan - Eligibility</h3>
                                             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
 
@@ -156,7 +156,7 @@ export default class ProfessionalServices extends Component {
                                                 <li>Home renovation</li>
                                                 <li>Land purchase</li>
                                             </ul>
-
+                                    
                                             <h3>Business loan - Eligibility</h3>
                                             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
 
@@ -188,7 +188,7 @@ export default class ProfessionalServices extends Component {
                                                 <li>Home renovation</li>
                                                 <li>Land purchase</li>
                                             </ul>
-
+                            
                                             <h3>Education loan - Eligibility</h3>
                                             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
 
@@ -220,7 +220,7 @@ export default class ProfessionalServices extends Component {
                                                 <li>Home renovation</li>
                                                 <li>Land purchase</li>
                                             </ul>
-
+                                    
                                             <h3>Home Loan - Eligibility</h3>
                                             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
 
@@ -252,7 +252,7 @@ export default class ProfessionalServices extends Component {
                                                 <li>Home renovation</li>
                                                 <li>Land purchase</li>
                                             </ul>
-
+                                    
                                             <h3>Payday loan - Eligibility</h3>
                                             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
 

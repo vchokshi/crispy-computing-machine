@@ -10,18 +10,18 @@ const Faq = () => {
         <>
             <Navbar />
 
-            <PageBanner
-                pageTitle="FAQ"
-                homePageUrl="/"
-                homePageText="Home"
-                activePageText="FAQ"
-                imgClass="item-bg-4"
-            />
+            <PageBanner 
+                pageTitle="FAQ" 
+                homePageUrl="/" 
+                homePageText="Home" 
+                activePageText="FAQ" 
+                imgClass="item-bg-4" 
+            /> 
 
             <FaqContent />
 
             <CallUsStyleTwo />
-
+            
             <Footer />
         </>
     )

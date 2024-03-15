@@ -9,13 +9,13 @@ const Team = () => {
         <>
             <Navbar />
 
-            <PageBanner
-                pageTitle="Team"
-                homePageUrl="/"
-                homePageText="Home"
-                activePageText="Team"
-                imgClass="item-bg-9"
-            />
+            <PageBanner 
+                pageTitle="Team" 
+                homePageUrl="/" 
+                homePageText="Home" 
+                activePageText="Team" 
+                imgClass="item-bg-9" 
+            /> 
 
             <div className="team-area bg-white pt-100 pb-70">
                 <div className="container">
@@ -310,7 +310,7 @@ const Team = () => {
             </div>
 
             <CallUsStyleTwo />
-
+            
             <Footer />
         </>
     )

@@ -65,7 +65,7 @@ const ApplyForLoanStyleTwo = () => {
 
                                 <div className="form-group">
                                     <label>Select The Month/Years</label>
-
+                                     
                                     <select className="form-select">
                                         <option value="5">1 month</option>
                                         <option value="1">2 month</option>

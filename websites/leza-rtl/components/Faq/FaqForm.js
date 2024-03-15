@@ -55,73 +55,73 @@ const FaqForm = () => {
             <div className="section-title">
                 <h2>Still, have questions?</h2>
             </div>
-
+            
             <div className="faq-contact-form">
                 <form onSubmit={handleSubmit}>
                     <div className="row">
                         <div className="col-lg-6 col-md-6">
                             <div className="form-group">
-                                <input
-                                    type="text"
-                                    name="name"
-                                    placeholder="Name"
-                                    className="form-control"
+                                <input 
+                                    type="text" 
+                                    name="name" 
+                                    placeholder="Name" 
+                                    className="form-control" 
                                     value={contact.name}
-                                    onChange={handleChange}
-                                    required
+                                    onChange={handleChange} 
+                                    required 
                                 />
                             </div>
                         </div>
                         <div className="col-lg-6 col-md-6">
                             <div className="form-group">
-                                <input
-                                    type="text"
-                                    name="email"
-                                    placeholder="Email"
-                                    className="form-control"
+                                <input 
+                                    type="text" 
+                                    name="email" 
+                                    placeholder="Email" 
+                                    className="form-control" 
                                     value={contact.email}
-                                    onChange={handleChange}
-                                    required
+                                    onChange={handleChange} 
+                                    required 
                                 />
                             </div>
                         </div>
                         <div className="col-lg-6 col-md-6">
                             <div className="form-group">
-                                <input
-                                    type="text"
-                                    name="number"
-                                    placeholder="Phone number"
-                                    className="form-control"
+                                <input 
+                                    type="text" 
+                                    name="number" 
+                                    placeholder="Phone number" 
+                                    className="form-control" 
                                     value={contact.number}
-                                    onChange={handleChange}
-                                    required
+                                    onChange={handleChange} 
+                                    required 
                                 />
                             </div>
                         </div>
                         <div className="col-lg-6 col-md-6">
                             <div className="form-group">
-                                <input
-                                    type="text"
-                                    name="subject"
-                                    placeholder="Subject"
-                                    className="form-control"
+                                <input 
+                                    type="text" 
+                                    name="subject" 
+                                    placeholder="Subject" 
+                                    className="form-control" 
                                     value={contact.subject}
-                                    onChange={handleChange}
-                                    required
+                                    onChange={handleChange} 
+                                    required 
                                 />
                             </div>
                         </div>
                         <div className="col-lg-12 col-md-12">
                             <div className="form-group">
-                                <textarea
-                                    name="text"
-                                    cols="30"
-                                    rows="6"
-                                    placeholder="Write your message..."
-                                    className="form-control"
+                                <textarea 
+                                    name="text" 
+                                    cols="30" 
+                                    rows="6" 
+                                    placeholder="Write your message..." 
+                                    className="form-control" 
                                     value={contact.text}
-                                    onChange={handleChange}
-                                    required
+                                    onChange={handleChange} 
+                                    required 
                                 />
                             </div>
                         </div>

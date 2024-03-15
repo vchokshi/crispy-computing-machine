@@ -43,7 +43,7 @@ const HowToApplyForLoan = () => {
                             </div>
                         </div>
                     </div>
-
+                    
                     <div className="col-lg-6">
                         <div className="default-image">
                             <img src="/images/loan2.png" alt="image" />

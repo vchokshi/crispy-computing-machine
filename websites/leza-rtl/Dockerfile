@@ -1,5 +1,5 @@
 FROM node:14-alpine AS base
-LABEL org.opencontainers.image.source https://github.com/OWNER/REPO
+LABEL org.opencontainers.image.source https://github.com/vchokshi/crispy-computing-machine
 
 # Install dependencies only when needed
 FROM base AS deps

@@ -87,7 +87,7 @@ const ServiceSidebar = () => {
 
             <div className="widget widget_appointment">
                 <h3 className="widget-title">Book an Appointment</h3>
-
+                
                 <form id="contactForm">
                     <div className="form-group">
                         <input type="text" name="name" id="name" className="form-control" placeholder="Name" />

@@ -32,7 +32,7 @@ const Partner = () => {
     return (
         <div className="partner-area ptb-100">
             <div className="container">
-                {display ? <OwlCarousel
+                {display ? <OwlCarousel 
                     className="partner-slider owl-carousel owl-theme"
                     {...options}
                 >

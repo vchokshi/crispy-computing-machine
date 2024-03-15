@@ -10,14 +10,14 @@ const NewsDetails = () => {
     return (
         <>
             <Navbar />
-
-            <PageBanner
-                pageTitle="News Details"
-                homePageUrl="/"
-                homePageText="Home"
-                activePageText="News Details"
-                imgClass="item-bg-1"
-            />
+            
+            <PageBanner 
+                pageTitle="News Details" 
+                homePageUrl="/" 
+                homePageText="Home" 
+                activePageText="News Details" 
+                imgClass="item-bg-1" 
+            /> 
 
             <div className="blog-details-area ptb-100">
                 <div className="container">
@@ -106,7 +106,7 @@ const NewsDetails = () => {
                     </div>
                 </div>
             </div>
-
+         
             <Footer />
         </>
     )

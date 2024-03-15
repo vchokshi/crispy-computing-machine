@@ -39,7 +39,7 @@ const Index2 = () => {
             <TeamMember />
 
             <RecentNews />
-
+            
             <Footer />
         </>
     )

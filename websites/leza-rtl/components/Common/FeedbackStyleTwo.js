@@ -30,7 +30,7 @@ const FeedbackStyleTwo = () => {
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
                 </div>
 
-                {display ? <OwlCarousel
+                {display ? <OwlCarousel 
                     className="clients-slider owl-carousel owl-theme"
                     {...options}
                 >
@@ -43,7 +43,7 @@ const FeedbackStyleTwo = () => {
                                     <span>Founder</span>
                                 </div>
                             </div>
-
+                            
                             <div className="col-lg-6">
                                 <div className="clients-image">
                                     <img src="/images/clients/man1.png" alt="image" />
@@ -64,7 +64,7 @@ const FeedbackStyleTwo = () => {
                                     <span>Founder</span>
                                 </div>
                             </div>
-
+                            
                             <div className="col-lg-6">
                                 <div className="clients-image">
                                     <img src="/images/clients/man1.png" alt="image" />
@@ -85,7 +85,7 @@ const FeedbackStyleTwo = () => {
                                     <span>Founder</span>
                                 </div>
                             </div>
-
+                            
                             <div className="col-lg-6">
                                 <div className="clients-image">
                                     <img src="/images/clients/man1.png" alt="image" />

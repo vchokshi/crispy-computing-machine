@@ -12,13 +12,13 @@ const Funding = () => {
         <>
             <Navbar />
 
-            <PageBanner
-                pageTitle="Funding"
-                homePageUrl="/"
-                homePageText="Home"
-                activePageText="Funding"
-                imgClass="item-bg-5"
-            />
+            <PageBanner 
+                pageTitle="Funding" 
+                homePageUrl="/" 
+                homePageText="Home" 
+                activePageText="Funding" 
+                imgClass="item-bg-5" 
+            /> 
 
             <AboutFunding />
 
@@ -27,7 +27,7 @@ const Funding = () => {
             <HowItWork />
 
             <ApplyForFunding />
-
+            
             <Footer />
         </>
     )
