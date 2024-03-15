@@ -14,3 +14,20 @@
     NEW_RELIC_API_KEY: "{{ lookup('env', 'NEWRELIC_API_KEY') }}"
     NEW_RELIC_ACCOUNT_ID: "{{ lookup('env', 'NEWRELIC_ACCOUNT_NUMBER') }}"
     NEW_RELIC_REGION: US
+
+- hosts: controller.do.iot4.net
+  become: yes
+  become_user: ubuntu
+  tasks:
+    - name: Template the helm new-relic values file over
+      template:
+        src: helm-new-relic-values.yml.j2
+        dest: $HOME/helm-new-relic-values.yml
+
+    - name: Create the namespace
+      shell: kubectl create namespace newrelic
+
+    - name: Install new-relic k8s integration via helm
+      shell: helm upgrade --install newrelic-bundle newrelic/nri-bundle -f helm-new-relic-values.yml
+      args:
+        chdir: $HOME

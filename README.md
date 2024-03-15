@@ -11,12 +11,7 @@ I affectionaly named this repository my *Crispy Computing Machine*, becasue its 
 
 The structure and orgniztation of the code is by no means perfect, but it serves its purpose well. As the code evolves, so does its structure.
 
-## Visualizing
-
-If you interested in seeing visually how my crispy computing machine looks, click below.
-
-[![Watch The Video](http://img.youtube.com/vi/ILsi_kC2pLw/0.jpg)](http://www.youtube.com/watch?v=ILsi_kC2pLw
-"Gource Visualization of CCM")
+[![Watch This Video](https://www.youtube.com/watch?v=tgDI88-QFOw)] to learn about the Crispy Computing Machine and Secubernetes!
 
 ## Contributing
 

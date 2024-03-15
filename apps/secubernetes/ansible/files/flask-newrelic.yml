@@ -51,7 +51,7 @@ spec:
     spec:
       containers:
       - name: openai
-        image: vchokshi/openai
+        image: vchokshi/openai:latest
         ports:
         - containerPort: 5000
           protocol: TCP

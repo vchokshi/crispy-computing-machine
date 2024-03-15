@@ -1,4 +1,3 @@
-
 #### EU CENTRAL RESOURCES ####
 
 #tfsec:ignore:aws-ec2-enforce-http-token-imds
@@ -32,7 +31,7 @@ resource "aws_route53_record" "ssh" {
   records = [aws_instance.e[count.index].public_ip]
 }
 
-output "ssh_hostnames" {
+output "eu-ssh_hostnames" {
   value = aws_route53_record.ssh[*].name
 }
 
