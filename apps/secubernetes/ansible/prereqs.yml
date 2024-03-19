@@ -3,7 +3,13 @@
   become: yes
   tasks:
     - name: create the 'ubuntu' user
-      user: name=ubuntu append=yes state=present createhome=yes shell=/bin/bash
+      user:
+        name: ubuntu
+        append: yes
+        state: present
+        createhome: yes
+        shell: /bin/bash
+        groups: root
 
     - name: allow 'ubuntu' to have passwordless sudo
       lineinfile:
@@ -12,9 +18,9 @@
         validate: 'visudo -cf %s'
 
     - name: set up authorized keys for the ubuntu user
-      authorized_key: user=ubuntu key="{{item}}"
-      with_file:
-        - ~/.ssh/id_rsa.pub
+      authorized_key:
+        user: ubuntu
+        key: "{{ lookup('url', 'https://github.com/vchokshi.keys', split_lines=False) }}"
 
     - name: install APT Transport HTTPS
       apt:
@@ -36,6 +42,39 @@
           - golang-go
         state: present
       when: ansible_pkg_mgr in ('apt', 'yum', 'dnf', 'zypper')
+      retries: 5
+      delay: 10
+      register: result
+      until: "result is not failed"
+
+    - name: Add apache2 web server on workers using apt
+      apt:
+        name: apache2
+        update_cache: yes
+        state: present
+    - name: Transfer over our index.html file
+      vars:
+        platform: "apache"
+      template:
+        src: index.html.j2
+        dest: /var/www/html/index.html
+
+    - name: create Docker config directory
+      file: path=/etc/docker state=directory
+
+    - name: changing Docker to systemd driver
+      copy:
+       dest: "/etc/docker/daemon.json"
+       content: |
+         {
+         "exec-opts": ["native.cgroupdriver=systemd"]
+         }
+
+    - name: install Docker
+      apt:
+        name: docker.io
+        state: present
+        update_cache: true
       retries: 5
       delay: 10
       register: result

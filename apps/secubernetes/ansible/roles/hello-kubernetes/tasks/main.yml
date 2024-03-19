@@ -1,0 +1,11 @@
+---
+- name: Copy the hello kubernetes template
+  copy:
+    src: hello-kubernetes.yml
+    dest: $HOME/
+
+- name: Use kubectl to deploy the hello-kubernetes service
+  shell: kubectl apply -f hello-kubernetes.yml >> hello-kubernetes.txt
+  args:
+    chdir: $HOME
+    creates: hello-kubernetes.txt

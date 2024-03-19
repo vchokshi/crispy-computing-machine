@@ -1,0 +1,11 @@
+---
+- name: Copy the viharc template
+  copy:
+    src: viharc.yml
+    dest: $HOME/viharc.yml
+
+- name: Use kubectl to deploy the viharc service
+  shell: kubectl apply -f viharc.yml >> viharc.txt
+  args:
+    chdir: $HOME
+    creates: viharc.txt

@@ -1,0 +1,22 @@
+---
+- name: Copy the flask template instrumented using honeycomb
+  copy:
+    src: flask-honeycomb.yml
+    dest: $HOME/
+
+- name: Use kubectl to deploy the flask service instrumented with honeycomb
+  shell: kubectl apply -f flask-honeycomb.yml >> flask-honeycomb.txt
+  args:
+    chdir: $HOME
+    creates: flask-honeycomb.txt
+
+- name: Copy the flask template instrumented with new relic
+  copy:
+    src: flask-newrelic.yml
+    dest: $HOME/
+
+- name: Use kubectl to deploy the flask service instrumented with new relic
+  shell: kubectl apply -f flask-newrelic.yml >> flask-newrelic.txt
+  args:
+    chdir: $HOME
+    creates: flask-newrelic.txt

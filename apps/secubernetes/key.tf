@@ -8,6 +8,11 @@ resource "aws_key_pair" "v" {
   public_key = file("/home/vchokshi/.ssh/id_rsa.pub")
 }
 
+resource "aws_key_pair" "y" {
+  key_name   = "windows.iot4.net"
+  public_key = file("/home/vchokshi/.ssh/id_ssh_rsa.pub")
+}
+
 resource "aws_key_pair" "w" {
   provider   = aws.us-east-1
   key_name   = local.email_address

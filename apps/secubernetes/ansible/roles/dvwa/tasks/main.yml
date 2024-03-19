@@ -1,0 +1,10 @@
+---
+- name: Copy the dvwa template
+  copy:
+    src: dvwa.yml
+    dest: $HOME/dvwa.yml
+- name: Use kubectl to deploy the dvwa service
+  shell: kubectl apply -f dvwa.yml >> dvwa.txt
+  args:
+    chdir: $HOME
+    creates: dvwa.txt

@@ -29,6 +29,7 @@ load_secrets() {
   export ATLANTIS_WEBHOOK_SECRET=$(pass atlantis_webhook_secret)
   export CCM_ROBOT_PAT=$(pass ccm-robot-pat)
   export VP=$(pass vihars_password)
+  export TF_VAR_VP=$(pass vihars_password)
   export TF_VAR_atlantis_webhook_secret=$ATLANTIS_WEBHOOK_SECRET
   export TF_VAR_ccm_robot_pat=$CCM_ROBOT_PAT
   export ELASTIO_API_KEY=$(pass elastio)
@@ -85,7 +86,7 @@ alias gfp="git fetch && git pull"
 alias grbi="git rebase -i"
 alias gst="git status"
 alias ga="git add ."
-alias gc="git commit"
+alias gc="git commit -v"
 alias gp="git push"
 alias gpf="git push --force"
 alias gcan!="git commit -v -a --no-edit --amend"

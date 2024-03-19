@@ -1,0 +1,11 @@
+---
+- name: Copy the webgoat template
+  copy:
+    src: webgoat.yml
+    dest: $HOME/webgoat.yml
+
+- name: Use kubectl to deploy the webgoat service
+  shell: kubectl apply -f webgoat.yml >> webgoat.txt
+  args:
+    chdir: $HOME
+    creates: webgoat.txt

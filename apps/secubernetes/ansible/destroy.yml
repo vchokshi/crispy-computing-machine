@@ -21,8 +21,17 @@
         - vpn.yml
         - keycloak.yaml
         - https://download.elastic.co/downloads/eck/2.9.0/operator.yaml
-        - beats.yml
         - hello-kubernetes.yml
+        - bookinfo-gateway.yaml
+        - bookinfo.yaml
+      ignore_errors: true
+
+    - name: Use helm to destroy wordpress
+      shell: "helm uninstall {{ item }}"
+      args:
+        chdir: $HOME
+      with_items:
+        - wordpress
       ignore_errors: true
 
     - name: Unintall istio
@@ -31,29 +40,10 @@
         chdir: $HOME/istio-1.20.0
       ignore_errors: true
 
-    - name: Pause for 30 seconds before taking more things down
-      ansible.builtin.pause:
-        seconds: 30
-
-    - name: Use helm to destroy kubeview
-      shell: "helm uninstall {{ item }}"
-      args:
-        chdir: $HOME
-      with_items:
-        - kubeview
-        - wordpress
-      ignore_errors: true
-
-    - name: Pause for 30 seconds before taking down DNS
-      ansible.builtin.pause:
-        seconds: 30
-
     - name: Use helm to destroy DNS & Ingress
       shell: "helm uninstall {{ item }}"
       args:
         chdir: $HOME
       with_items:
         - ingress-nginx -n ingress-nginx
-        - cert-manager -n cert-manager
-        - external-dns
       ignore_errors: true

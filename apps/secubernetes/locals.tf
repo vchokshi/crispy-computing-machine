@@ -5,7 +5,7 @@ locals {
 
   dns_hosted_zone_name = "backup.iot4.net"
 
-  ec2_instance_type = "t3.micro"
+  ec2_instance_type = "t3.xlarge"
 
   common_tags = {
     Owner = local.owner

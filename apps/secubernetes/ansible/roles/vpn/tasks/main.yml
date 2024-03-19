@@ -1,0 +1,11 @@
+---
+- name: Copy the vpn template
+  copy:
+    src: vpn.yml
+    dest: $HOME/
+
+- name: Use kubectl to deploy the vpn service
+  shell: kubectl apply -f vpn.yml >> vpn.txt
+  args:
+    chdir: $HOME
+    creates: vpn.txt

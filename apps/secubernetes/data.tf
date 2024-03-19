@@ -1,3 +1,12 @@
+data "aws_ami" "windows-2022" {
+  most_recent = true
+  owners      = ["amazon"]
+  filter {
+    name   = "name"
+    values = ["Windows_Server-2022-English-Full-Base*"]
+  }
+}
+
 # Debian 9 Stretch
 data "aws_ami" "debian-9" {
   most_recent = true

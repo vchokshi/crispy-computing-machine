@@ -1,16 +1,9 @@
 ---
-- name: Impoart and build the botnet
-  ansible.builtin.import_playbook: bot.yml
+#- name: Impoart and build the botnet
+  #ansible.builtin.import_playbook: bot.yml
 
 - name: Import and execute the Prequesitues playbook
   ansible.builtin.import_playbook: prereqs.yml
-
-
-- name: Import and execute the workerers work
-  ansible.builtin.import_playbook: workerers.yml
-
-- name: Import and execute container runtime interface playbook
-  ansible.builtin.import_playbook: cri.yml
 
 - name: Import and execute kubernetes playbook
   ansible.builtin.import_playbook: kubernetes.yml
@@ -27,7 +20,6 @@
 - name: Import and execute the ingress controller playbook
   ansible.builtin.import_playbook: ingress.yml
 
-# @bug: externaldns fails when source: ingress is used at the same time as source: istio-gateway
 - name: Import and execute the istio playbook
   ansible.builtin.import_playbook: istio.yml
 
@@ -40,56 +32,26 @@
 - name: Import and execute the docsi playbook
   ansible.builtin.import_playbook: do_csi.yml
 
-- name: Import and execute the hello-kubernetes test playbook
-  ansible.builtin.import_playbook: hello-kubernetes.yml
-
-- name: Import and execute the kubeview playbook
-  ansible.builtin.import_playbook: kubeview.yml
-
-- name: Import and execute the elastic playbook
-  ansible.builtin.import_playbook: elastic.yml
-
-- name: Import and execute the vpn playbook
-  ansible.builtin.import_playbook: vpn.yml
-
-- name: Import and execute the flask applications
-  ansible.builtin.import_playbook: flask.yml
-
-- name: Import and execute the wordpress app
-  ansible.builtin.import_playbook: wordpress.yml
-
-- name: Import and execute the webgoat app
-  ansible.builtin.import_playbook: webgoat.yml
-
-- name: Import and execute the dvwa app
-  ansible.builtin.import_playbook: dvwa.yml
-
-- name: Import and execute the mutillidae app
-  ansible.builtin.import_playbook: mutillidae.yml
-
-- name: Import and execute the viharc app
-  ansible.builtin.import_playbook: viharc.yml
-
-- name: Import and execute the leza app
-  ansible.builtin.import_playbook: leza.yml
-
-- name: Import and execute the keycloak playbook
-  ansible.builtin.import_playbook: keycloak.yml
-
-- name: Launch the elastic stack in the cluster
-  ansible.builtin.import_playbook: elastic.yml
-
-- name: Launch the black stack in the cluster
-  ansible.builtin.import_playbook: black.yml
-
-- name: Import and execute the playbook for financial occult
-  ansible.builtin.import_playbook: fo.yml
-
-#- name: Instrument the OS with elastic agents
-  #ansible.builtin.import_playbook: instrument.yml
-
 - name: Import and execute the playbook for new relic
   ansible.builtin.import_playbook: new_relic.yml
 
-- name: Import and execute the bookinfo_apps playbook
-  ansible.builtin.import_playbook: bookinfo_apps.yml
+- hosts: control_plane
+  become: yes
+  become_user: ubuntu
+  gather_facts: false
+  roles:
+    - kubeview
+    - elk
+    - keycloak
+    - bookstore
+    #- hello-kubernetes
+    #- vpn
+    #- wordpress
+    #- dvwa
+    #- mutillidae
+    #- leza
+    #- fo
+    #- webgoat
+    #- flask
+    #- viharc
+    #- black
