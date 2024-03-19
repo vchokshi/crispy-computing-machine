@@ -13,8 +13,6 @@
       with_items:
         - crds.yaml
         - driver.yaml
-        - pvc.yml
-        - pod.yml
 
     - name: Use kubectl to deploy DOCSI CRDs
       shell: kubectl apply -f crds.yaml

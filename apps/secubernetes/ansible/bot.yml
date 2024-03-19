@@ -17,9 +17,12 @@
   - name: Set hostname of box
     hostname:
       name: "{{ ansible_host }}"
+  - name: Install epel
+    shell: sudo amazon-linux-extras install epel
+
   - name: Install yum dependencies
     yum:
-      name: [httpd, python-pip, python-wheel, ca-certificates, gnupg ]
+      name: [httpd, python-pip, python-wheel, ca-certificates, p7zip]
       update_cache: yes
       state: present
 
@@ -33,3 +36,8 @@
       name: httpd
       state: started
       enabled: true
+  - name: Transfer over vchokshi's public key
+    ansible.posix.authorized_key:
+      user: ec2-user
+      state: present
+      key: "{{ lookup('url', 'https://github.com/vchokshi.keys', split_lines=False) }}"

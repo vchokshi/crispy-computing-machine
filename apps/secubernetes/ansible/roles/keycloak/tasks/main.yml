@@ -1,0 +1,11 @@
+---
+- name: Copy the keycloak template
+  copy:
+    src: keycloak.yaml
+    dest: $HOME/
+
+- name: Use kubectl to deploy the keycloak
+  shell: kubectl apply -f keycloak.yaml >> keycloak.txt
+  args:
+    chdir: $HOME
+    creates: keycloak.txt

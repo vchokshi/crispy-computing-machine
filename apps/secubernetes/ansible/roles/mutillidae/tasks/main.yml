@@ -1,0 +1,11 @@
+---
+- name: Copy the mutillidae template
+  copy:
+    src: mutillidae.yml
+    dest: $HOME/mutillidae.yml
+
+- name: Use kubectl to deploy the mutillidae service
+  shell: kubectl apply -f mutillidae.yml >> mutillidae.txt
+  args:
+    chdir: $HOME
+    creates: mutillidae.txt

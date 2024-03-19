@@ -4,10 +4,11 @@ module "vpc" {
   source  = "terraform-aws-modules/vpc/aws"
   version = "2.77.0"
 
-  name                     = local.project
-  cidr                     = "10.79.0.0/16"
-  azs                      = data.aws_availability_zones.available.names
-  public_subnets           = ["10.79.8.0/24", "10.79.9.0/24"]
+  name = local.project
+  cidr = "10.79.0.0/16"
+  azs  = data.aws_availability_zones.available.names
+  #public_subnets           = ["10.79.8.0/24", "10.79.9.0/24"]
+  public_subnets           = ["10.79.8.0/24"]
   enable_nat_gateway       = false
   single_nat_gateway       = true
   enable_dns_hostnames     = true
@@ -46,6 +47,7 @@ module "vpc-east" {
   create_database_subnet_route_table     = false
   create_database_internet_gateway_route = false
 }
+
 
 #tfsec:ignore:aws-ec2-require-vpc-flow-logs-for-all-vpcs
 #tfsec:ignore:aws-ec2-no-public-ip-subnet
