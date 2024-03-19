@@ -1,6 +1,13 @@
 # See https://pre-commit.com for more information
 # See https://pre-commit.com/hooks.html for more hooks
 repos:
+      ## Scans too many files for one commit. Be careful when enabling
+      ## Requires python >=3.10
+      # Be careful when enabling
+      #-   repo: https://github.com/ansible-community/ansible-lint
+      #rev: v24.2.1
+      #hooks:
+      #- id: ansible-lint
 -   repo: https://github.com/antonbabenko/pre-commit-terraform
     rev: v1.77.1
     hooks:
@@ -11,10 +18,6 @@ repos:
     rev: v4.4.0
     hooks:
     -   id: trailing-whitespace
-        name: Trim Trailing Whitespace
-        description: This hook trims trailing whitespace.
-        entry: trailing-whitespace-fixer
-        language: python
     -   id: end-of-file-fixer
     -   id: check-yaml
         name: Check YAML
@@ -23,3 +26,6 @@ repos:
     -   id: check-json
     -   id: detect-private-key
     -   id: requirements-txt-fixer
+    -   id: check-ast
+    -   id: check-docstring-first
+    -   id: check-executables-have-shebangs
