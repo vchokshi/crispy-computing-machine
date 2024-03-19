@@ -9,13 +9,14 @@ repos:
       #hooks:
       #- id: ansible-lint
 -   repo: https://github.com/antonbabenko/pre-commit-terraform
-    rev: v1.77.1
+    rev: v1.88.2
     hooks:
       - id: terraform_fmt
-        # - id: terraform_tflint
+        #- id: terraform_tflint
       - id: terraform_tfsec
+      - id: terraform_docs_replace
 -   repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v4.4.0
+    rev: v4.5.0
     hooks:
     -   id: trailing-whitespace
     -   id: end-of-file-fixer
@@ -24,7 +25,9 @@ repos:
         args: [--allow-multiple-documents]
     -   id: check-added-large-files
     -   id: check-json
+    -   id: pretty-format-json
     -   id: detect-private-key
+    -   id: detect-aws-credentials
     -   id: requirements-txt-fixer
     -   id: check-ast
     -   id: check-docstring-first
