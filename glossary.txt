@@ -1,0 +1,57 @@
+NSC - National Security Council
+ONCD - Office of National Cyber Director
+CHIPS - Creating Helpful Incentives to Produce Semiconductors and Sciences Act
+SLTT - State Local, Tribal and Territorial Partners
+CISA - Cybersecurity and Infrastructure Security Agency
+NIST - National Institute of Standards and Technologies
+OMB - Office of Management and Budget
+SRMA - Sector Risk Management Agencies
+ISAO - Information Sharing and Analysis Organizations
+ISAC - Information Sharing and Analysis Centers
+JCDC - Joint Cyber Defence Collaborative
+NCIJTF - National Cyber Investigative Joint Task Force
+CTIIC - Cyber Threat Intelligence Integration Center
+DOE - Department of Energy
+ETAC - Energy’s Threat Analysis Center
+DCISE - Defense Industrial Base Collaborative Information Sharing Environment
+NSA - National Security Agency
+DOJ - Department of Justice
+NCIRP - National Cyber Incident Response Plan
+DHS - Department of Homeland Security
+CIRCIA - Cyber Incident Reporting for Critical Infrastructure Act of 2002
+CSRB - Cyber Safety Review Board
+FCEB - Federal Civilian Executive Branch
+SBOM - Software Bill of Materials
+NSS - National Security Systems
+NCFTA - National Cyber Forensics and Training Alliance
+CRI - Counter Ransomware Initiative
+JRTF - Joint Ransomware Task Force
+AML/CFT - Anti-Money Laundering and Countering of Financing of Terrorism
+KYC - Know your Customer
+CCFI - Civil Cyber-Fraud Initiative
+NSF - National Science Foundation
+SDO - Standards Developing Organizations
+FFRDC - Federally Funded Research and Development Centers
+CECA - Clean Energy Cybersecurity Accelerator
+NICE - National Institute for Cybersecurity Education
+DFI - Declaration for the Future of the Intenet
+IPEF - Indo-Pacific Economic Framework for Prosperity
+APEP - Americas Partnership for Economic Propserity
+TTC - US-EU Trade and Technology Council
+AUKUS - Australia United Kingdom United States Trilateral Security and Technology Pact
+Open RAN - Open Radio Access Networks
+CNCI - Comprehensive National Cybersecurity Initiative
+WEF - World Economic Forum
+MFA - Multi-factor Authentication
+CNAPP - Cloud-Native Application Protection Platform
+CSPM - Cloud Security Posture Management
+CASB - Cloud Access Service Broker
+CWPP - Cloud Workload Protection Platform
+DSPM  - Data Security Posture Management
+CIEM - Cloud Infrastructure Entitlement Management
+CSNS - Cloud Service Network Security
+CNSS - Committee on National Security Systems
+NSS - National Security Systems
+NCCIC - National Cybersecurity & Communications Integration Center
+SME - Small Medium Enterprise
+SME - Subject Matter Expert

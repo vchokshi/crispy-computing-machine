@@ -1,7 +1,7 @@
 
 const typedSpan = document.getElementById("typed")
 
-var url = 'https://raw.githubusercontent.com/vchokshi/vchokshi/main/RESUME.md';
+var url = 'https://raw.githubusercontent.com/vchokshi/vchokshi/main/README.md';
 var storedText;
 var newline = 0;
 fetch(url)
