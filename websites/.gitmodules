@@ -1,0 +1,3 @@
+[submodule "cowrie"]
+	path = cowrie
+	url = https://github.com/crispy-computing-robot/cowrie
