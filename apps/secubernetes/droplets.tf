@@ -26,7 +26,7 @@ variable "instance_count" {
 
 variable "instance_size" {
   type    = string
-  default = "s-8vcpu-16gb"
+  default = "s-4vcpu-8gb"
 }
 
 resource "digitalocean_droplet" "worker" {

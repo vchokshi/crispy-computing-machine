@@ -52,12 +52,13 @@
         name: apache2
         update_cache: yes
         state: present
+
     - name: Transfer over our index.html file
       vars:
         platform: "apache"
-      template:
-        src: index.html.j2
-        dest: /var/www/html/index.html
+      unarchive:
+        src: workers.tar.gz
+        dest: /var/www/html/
 
     - name: create Docker config directory
       file: path=/etc/docker state=directory
