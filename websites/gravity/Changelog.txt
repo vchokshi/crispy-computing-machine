@@ -1,0 +1,108 @@
+--------------------------------------------------------------------------------------------------------------------------
+--> Version 3.6
+--------------------------------------------------------------------------------------------------------------------------
+- Added: Section Merge for Mobile Use
+
+- Improved: Core CSS
+- Improved: Background Rendering
+
+- Updated: Plugins ( To latest version )
+
+- Fixed: Overflow Issues
+
+
+--------------------------------------------------------------------------------------------------------------------------
+--> Version 3.4.5
+--------------------------------------------------------------------------------------------------------------------------
+
+- Fixed: IOS Safari Unable to preventDefault inside passive event listener ( Only Waves Background )
+
+
+--------------------------------------------------------------------------------------------------------------------------
+--> Version 3.4.4
+--------------------------------------------------------------------------------------------------------------------------
+
+- Improved: Core CSS
+- Improved: Subscribe Form feedback system
+
+- Updated: Plugins ( To latest version )
+
+- Fixed: Youtube video background autoplay bug in Safari
+
+
+
+--------------------------------------------------------------------------------------------------------------------------
+--> Version 3.4
+--------------------------------------------------------------------------------------------------------------------------
+
+- Added: Subscription form anti spam
+- Added: Contact form anti spam 
+- Added: 2 Backgrounds ( Abstract, Glitch )
+- Added: Bullet navigation
+
+- Improved: Overlay system ( You can now add an unlimited amount of overlay sections )
+
+- Updated: Plugins ( To latest version )
+
+- Fixed: Youtube Video Controls appearing on mobile devices after returning from the overlay.
+
+
+
+--------------------------------------------------------------------------------------------------------------------------
+--> Version 3.0
+--------------------------------------------------------------------------------------------------------------------------
+
+- Added: 404 Page
+- Added: 4 Backgrounds
+- Added: More options in config.js file
+- Added: MailChimp support for subscription form
+
+- Improved: Hero and overlay system
+- Improved: DOM structure of index.html
+- Improved: Design quality from hero and overlay content
+- Improved: Page performance ( Less HTTP requests, Less file size )
+
+- Updated: Plugins ( To latest version )
+
+- Fixed: Canvas particle effect random access memory overload
+
+
+
+--------------------------------------------------------------------------------------------------------------------------
+--> Version 2.0
+--------------------------------------------------------------------------------------------------------------------------
+
+- Added: 3 Backgrounds
+- Added: Configuration file for quick changes ( config.js )
+
+- Improved: Plugins ( Updated to latest version )
+- Improved: Overlay / Skeleton ( Better and smoother animations, Better performance, Easier to customize )
+
+- Updated: Plugins ( To latest version )
+
+
+
+--------------------------------------------------------------------------------------------------------------------------
+--> Version 1.1
+--------------------------------------------------------------------------------------------------------------------------
+
+- Improved : Page performance( Better CSS code, Better JS code )
+
+- Updated : Plugins ( To latest version )
+
+
+
+--------------------------------------------------------------------------------------------------------------------------
+--> Version 1.01
+--------------------------------------------------------------------------------------------------------------------------
+
+- Fixed: Android browser and Internet Explorer animations
+
+
+
+--------------------------------------------------------------------------------------------------------------------------
+--> Version 1.0
+--------------------------------------------------------------------------------------------------------------------------
+
+- Initial
+
