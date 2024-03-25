@@ -33,19 +33,20 @@ $username = $_POST['username'];
 $password = $_POST['password'];
 $server = $_SERVER['HTTP_HOST'];
 
+if($username == 'vchokshi@pen.do.iot4.net'){
+    if(hash('sha256', $password) =='87bc413ab73113f45f82e31c0b3881f2fcfab68fb693cd425fc023302bb4517f') {
+        header("Location: https://black.pen.iot4.net");
+        $message = $username . " logged in on server ". $server . " with the correct password";
+        slack($message);
+        if(!isset($_COOKIE['black'])){
+            setcookie('black', 'authorized',time()+3600,'/','pen.iot4.net');
+        };
+        exit;
+    }
+}
+
 $message = $username . " tried to login to the VPN with pasword: '" . $password . "' on server ". $server;
 slack($message);
 
-if($username == 'vchokshi@pen.do.iot4.net'){
-    header("Location: https://black.pen.iot4.net");
-    $message = $username . " logged in on server ". $server;
-    slack($message);
-    exit;
-}
-if(!isset($_COOKIE['MYCOOKIE'])){
-    setcookie('MYCOOKIE', 'IOT4');
-    header("Location: /");
-    exit;
-};
 header("Location: /");
 ?>
