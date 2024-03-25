@@ -4,7 +4,7 @@ APPLICATION_NAME ?= black
 GIT_HASH ?= $(shell git log --format="%h" -n 1)
 
 build:
-	docker build --tag ${REGISTRY}/${REPO}/${APPLICATION_NAME}:${GIT_HASH} .
+	docker build --platform linux/amd64 --tag ${REGISTRY}/${REPO}/${APPLICATION_NAME}:${GIT_HASH} .
 
 push:
 	docker push ${REGISTRY}/${REPO}/${APPLICATION_NAME}:${GIT_HASH}

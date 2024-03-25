@@ -5,7 +5,7 @@ GIT_HASH ?= $(shell git log --format="%h" -n 1)
 
 
 build:
-	docker build -t ${DOCKER_USERNAME}/${APPLICATION_NAME}:${GIT_HASH} .
+	docker build --platform linux/amd64 -t ${DOCKER_USERNAME}/${APPLICATION_NAME}:${GIT_HASH} .
 
 push:
 	docker push ${DOCKER_USERNAME}/${APPLICATION_NAME}:${GIT_HASH}
