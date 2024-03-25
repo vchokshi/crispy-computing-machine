@@ -3,7 +3,7 @@ APPLICATION_NAME ?= leza
 GIT_HASH ?= $(shell git log --format="%h" -n 1)
 
 build:
-	docker build --tag ${NAMESPACE}/${APPLICATION_NAME}:${GIT_HASH} .
+	docker build --platform linux/amd64 --tag ${NAMESPACE}/${APPLICATION_NAME}:${GIT_HASH} .
 push:
 	docker push ${NAMESPACE}/${APPLICATION_NAME}:${GIT_HASH}
 
