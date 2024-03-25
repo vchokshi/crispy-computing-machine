@@ -50,7 +50,7 @@ spec:
     spec:
       containers:
       - name: black
-        image: registry.digitalocean.com/do/black:12a79b8
+        image: registry.digitalocean.com/do/black:latest
         ports:
         - containerPort: 80
       imagePullSecrets:
