@@ -80,7 +80,7 @@ if($_POST) {
 		$headers .= "Reply-To: " . $clientEmail;
 		
         #mail($emailTo, $emailIdentifier, $message, $headers);
-        $toSend = $name . " (" . $email . ") said: " . $message;
+        $toSend = $name . " (" . $clientEmail . ") said: " . $message;
         slack($toSend);
 		
     }
