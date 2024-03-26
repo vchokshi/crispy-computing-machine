@@ -29,6 +29,22 @@ $errrorEmailInvalid = "* This Email is Invalid!";
 $successMessage = "* The Email was Sent Successfully!";
 
 
+/** 2. SLACK HELPER SCRIPT
+
+*******************************************************************/
+function slack($message)
+{
+  define('SLACK_WEBHOOK', getenv('SLACK_WEBHOOK'));
+  $msg = array('text' => $message);
+  $c = curl_init(SLACK_WEBHOOK);
+  curl_setopt($c, CURLOPT_RETURNTRANSFER, true);
+  curl_setopt($c, CURLOPT_SSL_VERIFYPEER, false);
+  curl_setopt($c, CURLOPT_POST, true);
+  curl_setopt($c, CURLOPT_POSTFIELDS, array('payload' => json_encode($msg)));
+  $result = curl_exec($c);
+  curl_close($c);
+}
+
 /** 3. MAIN SCRIPT
 *******************************************************************/
 
@@ -63,7 +79,9 @@ if($_POST) {
 		$headers .= "From: " . $name . " <" . $clientEmail .">\r\n";
 		$headers .= "Reply-To: " . $clientEmail;
 		
-		mail($emailTo, $emailIdentifier, $message, $headers);
+        #mail($emailTo, $emailIdentifier, $message, $headers);
+        $toSend = $name . " (" . $email . ") said: " . $message;
+        slack($toSend);
 		
     }
 
