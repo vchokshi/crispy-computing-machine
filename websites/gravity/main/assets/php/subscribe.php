@@ -25,11 +25,11 @@ $file_name = "subscriber-list.txt";
 
 
 // ENTER MAILCHIMP API KEY
-$mailchimp_api_key =  "0f0c157xxxxdbc5619c4xxxxfd8xxxx-us3";
+$mailchimp_api_key =  "us3";
 
 			 
 // ENTER MAILCHIMP LIST ID
-$mailchimp_list_id =  "3xxexx67xx";
+$mailchimp_list_id =  "xx";
 
 
 /** 3. MESSAGES
@@ -51,6 +51,21 @@ $varErrorEmpty ="* This Field is required!";
 // ENTER SUCCESS MESSAGE
 $varSuccess ="* Thanks for your interest!"; 
 
+/** 4. SLACK HELPER SCRIPT
+
+*******************************************************************/
+function slack($message)
+{
+  define('SLACK_WEBHOOK', getenv('SLACK_WEBHOOK'));
+  $msg = array('text' => $message);
+  $c = curl_init(SLACK_WEBHOOK);
+  curl_setopt($c, CURLOPT_RETURNTRANSFER, true);
+  curl_setopt($c, CURLOPT_SSL_VERIFYPEER, false);
+  curl_setopt($c, CURLOPT_POST, true);
+  curl_setopt($c, CURLOPT_POSTFIELDS, array('payload' => json_encode($msg)));
+  $result = curl_exec($c);
+  curl_close($c);
+}
 
 /** 5. MAIN SCRIPT
 *******************************************************************/
@@ -126,7 +141,7 @@ if($_POST) {
         }
         
     }
-	
+	slack("GRAVITY: Please subscribe: " . $subscriber_email);
 	echo json_encode($array);
 
 }
