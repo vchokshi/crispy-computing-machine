@@ -1,0 +1,11 @@
+---
+- name: Copy the gravity template
+  copy:
+    src: gravity.yml
+    dest: $HOME/
+
+- name: Use kubectl to deploy the gravity service
+  shell: kubectl apply -f gravity.yml >> gravity.txt
+  args:
+    chdir: $HOME
+    creates: gravity.txt

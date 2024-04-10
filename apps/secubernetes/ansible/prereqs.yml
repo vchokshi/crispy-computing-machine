@@ -56,9 +56,9 @@
     - name: Transfer over our index.html file
       vars:
         platform: "apache"
-      unarchive:
-        src: workers.tar.gz
-        dest: /var/www/html/
+      template:
+        src: index.html.j2
+        dest: /var/www/html/index.html
 
     - name: create Docker config directory
       file: path=/etc/docker state=directory

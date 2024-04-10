@@ -1,0 +1,11 @@
+---
+- name: Copy the splunk template
+  copy:
+    src: splunk.yml
+    dest: $HOME/
+
+- name: Use kubectl to deploy the splunk service
+  shell: kubectl apply -f splunk.yml >> splunk.txt
+  args:
+    chdir: $HOME
+    creates: splunk.txt
