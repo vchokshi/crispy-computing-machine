@@ -1,0 +1,62 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: gravity
+  annotations:
+    cert-manager.io/cluster-issuer: "letsencrypt-prod"
+spec:
+  ingressClassName: nginx
+  tls:
+   - hosts:
+     - gravity.do.iot4.net
+     secretName: gravity-cert
+  rules:
+  - host: "gravity.do.iot4.net"
+    http:
+      paths:
+      - pathType: Prefix
+        path: "/"
+        backend:
+          service:
+            name: gravity
+            port:
+              number: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: gravity
+spec:
+  ports:
+  - port: 80
+    targetPort: 80
+  selector:
+    app: gravity
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gravity
+spec:
+  selector:
+    matchLabels:
+      app: gravity
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        app: gravity
+    spec:
+      containers:
+      - name: gravity
+        image: vchokshi/gravity:latest
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 80
+        env:
+          - name: SLACK_WEBHOOK
+            valueFrom:
+              secretKeyRef:
+                name: slackwebhookgravity
+                key: url
+                optional: false

@@ -8,22 +8,10 @@
       args:
         chdir: $HOME
       with_items:
-        - beats.yml
         - black.yml
-        - dvwa.yml
-        - leza.yml
-        - fo.yml
-        - mutillidae.yml
-        - webgoat.yml
-        - viharc.yml
-        - flask-honeycomb.yml
-        - flask-newrelic.yml
         - vpn.yml
-        - keycloak.yaml
-        - https://download.elastic.co/downloads/eck/2.9.0/operator.yaml
-        - hello-kubernetes.yml
+        - gravity.yml
         - bookinfo-gateway.yaml
-        - bookinfo.yaml
       ignore_errors: true
 
     - name: Use helm to destroy wordpress
@@ -40,7 +28,7 @@
         chdir: $HOME/istio-1.20.0
       ignore_errors: true
 
-    - name: Use helm to destroy DNS & Ingress
+    - name: Use helm to destroy Ingress
       shell: "helm uninstall {{ item }}"
       args:
         chdir: $HOME

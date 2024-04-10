@@ -26,6 +26,7 @@ load_secrets() {
   export DO_REGISTRY_DOCKERCONFIG=$(pass do/registry/dockerconfigjson)
   export SLACK_WEBHOOK_VPN=$(pass slack/webhook/vpn)
   export SLACK_WEBHOOK_DARKNET=$(pass slack/webhook/darknet)
+  export SLACK_WEBHOOK_GRAVITY=$(pass slack/webhook/gravity)
   export ATLANTIS_WEBHOOK_SECRET=$(pass atlantis_webhook_secret)
   export CCM_ROBOT_PAT=$(pass ccm-robot-pat)
   export VP=$(pass vihars_password)
