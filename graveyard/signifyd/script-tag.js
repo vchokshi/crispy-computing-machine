@@ -1,4 +1,3 @@
-# Open Source code imported for use by author. Use make to update per Apache 2.0
 function a0_0x1b34() {
     var _0x2be5c2 = [
         'w2txo5aa',
