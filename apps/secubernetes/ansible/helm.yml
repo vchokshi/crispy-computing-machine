@@ -136,3 +136,9 @@
       shell: helm repo add newrelic https://helm-charts.newrelic.com && helm repo update
       args:
         chdir: $HOME
+
+
+    - name: Add the kubernetes dashboard repo and update helm
+      shell: helm repo add kubernetes-dashboard https://kubernetes.github.io/dashboard/
+      args:
+        chdir: $HOME

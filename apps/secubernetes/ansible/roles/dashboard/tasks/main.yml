@@ -1,0 +1,33 @@
+---
+## https://github.com/kubernetes/dashboard/blob/master/docs/user/access-control/creating-sample-user.md
+- name: Copy our values file over
+  copy:
+    src: dashboard-values.yml
+    dest: $HOME/dashboard-values.yml
+
+- name: Copy the service-account and cluster role binding  manifest over
+  copy:
+    src: service-account.yml
+    dest: $HOME/service-account.yml
+
+- name: Create the service account and bind it to the cluster
+  shell: kubectl apply -f service-account.yml
+  args:
+    chdir: $HOME
+
+- name: Get the long lived password and debug it
+  shell: kubectl get secret admin-user -o jsonpath={".data.token"} | base64 -d
+  register: admin_user_raw
+
+#- name: Set password
+  #set_fact:
+    #admin_user: "{{ admin_user_raw.stdout_lines[0] }}"
+
+- name: Debug the bearer token
+  debug:
+    msg: " {{ admin_user_raw }} "
+
+- name: Install Dashboard
+  shell: helm upgrade --install kubernetes-dashboard kubernetes-dashboard/kubernetes-dashboard -f dashboard-values.yml
+  args:
+    chdir: $HOME

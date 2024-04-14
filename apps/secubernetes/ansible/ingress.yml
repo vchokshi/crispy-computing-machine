@@ -14,6 +14,6 @@
       args:
         chdir: $HOME
 
-    - name: Pause for 30 seconds becasue ingress sometimes needs some time.
-      ansible.builtin.pause:
-        seconds: 30
+    #- name: Pause for 30 seconds becasue ingress sometimes needs some time.
+      #ansible.builtin.pause:
+        #seconds: 30
