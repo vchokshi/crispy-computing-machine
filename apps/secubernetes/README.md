@@ -63,7 +63,7 @@
 |------|-------------|------|---------|:--------:|
 | <a name="input_VP"></a> [VP](#input\_VP) | Vihar's Password | `string` | n/a | yes |
 | <a name="input_do_token"></a> [do\_token](#input\_do\_token) | n/a | `any` | n/a | yes |
-| <a name="input_instance_count"></a> [instance\_count](#input\_instance\_count) | n/a | `number` | `2` | no |
+| <a name="input_instance_count"></a> [instance\_count](#input\_instance\_count) | n/a | `number` | `4` | no |
 | <a name="input_instance_size"></a> [instance\_size](#input\_instance\_size) | n/a | `string` | `"s-4vcpu-8gb"` | no |
 | <a name="input_project_name"></a> [project\_name](#input\_project\_name) | n/a | `string` | `"DevOps Observability"` | no |
 

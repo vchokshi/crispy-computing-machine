@@ -21,7 +21,7 @@ output "controller_name" {
 
 variable "instance_count" {
   type    = number
-  default = 2
+  default = 4
 }
 
 variable "instance_size" {
