@@ -7,5 +7,17 @@ regions:
 account-blocklist:
 - "999999999999" # production
 
+resource-types:
+  targets:
+  - SQSQueue
+  - KMSAlias
+  - KMSKey
+  - LambdaEventSourceMapping
+  - LambdaFunction
+  - LambdaLayer
+  excludes:
+  - IAMRole
+  - Route53
+  - VPC
 accounts:
   "438513923646": {}

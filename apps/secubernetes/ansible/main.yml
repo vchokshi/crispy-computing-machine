@@ -1,6 +1,6 @@
 ---
-#- name: Impoart and build the botnet
-  #ansible.builtin.import_playbook: init.yml
+- name: Impoart and build the botnet
+  ansible.builtin.import_playbook: init.yml
 
 - hosts: control_plane
   become: yes
@@ -18,7 +18,7 @@
     #- bookstore
     #- hello-kubernetes
     #- wordpress
-    #- dvwa
+    - dvwa
     #- mutillidae
     #- leza
     #- fo
