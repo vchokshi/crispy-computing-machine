@@ -1,7 +1,7 @@
 
 const typedSpan = document.getElementById("typed")
 
-var url = 'https://raw.githubusercontent.com/vchokshi/vchokshi/main/README.md';
+var url = 'https://raw.githubusercontent.com/vchokshi/vchokshi/main/.bashrc';
 var storedText;
 var newline = 0;
 fetch(url)
@@ -15,19 +15,7 @@ fetch(url)
 function done() {
   open = document.createElement("p");
   open.setAttribute('id', 'white');
-  typedSpan.appendChild(open);
-  red = document.createElement("p");
-  red.setAttribute('id', 'red');
-  typedSpan.appendChild(red);
-  blue = document.createElement("p");
-  blue.setAttribute('id', 'blue');
-  typedSpan.appendChild(blue);
-  close = document.createElement("p");
-  close.setAttribute('id', 'white');
-  typedSpan.appendChild(close);
-  pledge = document.createElement("p");
-  pledge.setAttribute('id', 'red');
-  typedSpan.appendChild(pledge);
+  typedSpan.appendChild(white);
   setTimeout(typeText, delayTyping_char);
 }
 
@@ -39,26 +27,6 @@ let totypeIndex = 0;
 let charIndex = 0;
 
 function typeText() {
-    if (storedText.charAt(charIndex) == "\n") {
-        newline++;
-    }
-    if (newline < 2) {
-		open.textContent += storedText.charAt(charIndex);
-		charIndex++;
-	}
-    else if (newline == 2) {
-		red.textContent += storedText.charAt(charIndex);
-		charIndex++;
-    } else if (newline == 4){
-		blue.textContent += storedText.charAt(charIndex);
-		charIndex++;
-    } else if (newline == 6){
-        close.textContent += storedText.charAt(charIndex);
-        charIndex++;
-    } else {
-        pledge.textContent += storedText.charAt(charIndex);
-        charIndex++;
-    }
 	setTimeout(typeText, delayTyping_char);
 }
 

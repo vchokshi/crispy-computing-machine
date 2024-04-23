@@ -60,6 +60,7 @@ resource "aws_acm_certificate" "viharc" {
 
 }
 
+
 #tfsec:ignore:aws-cloudfront-enable-waf
 #tfsec:ignore:aws-cloudfront-use-secure-tls-policy
 #tfsec:ignore:aws-cloudfront-enable-logging
@@ -124,6 +125,7 @@ resource "aws_s3_bucket_public_access_block" "viharc_pab" {
   restrict_public_buckets = false
 }
 
+
 output "website_url" {
   description = "Website URL (HTTPS)"
   value       = aws_cloudfront_distribution.distribution.domain_name
@@ -150,6 +152,11 @@ resource "aws_route53_record" "www_viharc" {
 
 }
 
+output "viharc" {
+  description = "Route54 URL (HTTPS)"
+  value       = aws_route53_record.www_viharc.name
+}
+
 resource "aws_route53_record" "www_vchokshi" {
   zone_id = aws_route53_zone.vchokshi.zone_id
   name    = "www.vchokshi.com"
@@ -164,6 +171,10 @@ resource "aws_route53_record" "www_vchokshi" {
 
 }
 
+output "vchokshi" {
+  description = "Route54 URL (HTTPS)"
+  value       = aws_route53_record.www_vchokshi.name
+}
 resource "aws_route53_record" "www_iot4" {
   zone_id = aws_route53_zone.iot.zone_id
   name    = "www.iot4.net"
@@ -176,4 +187,10 @@ resource "aws_route53_record" "www_iot4" {
 
   }
 
+}
+
+
+output "iot4" {
+  description = "Route54 URL (HTTPS)"
+  value       = aws_route53_record.www_iot4.name
 }
