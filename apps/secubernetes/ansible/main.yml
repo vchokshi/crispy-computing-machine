@@ -13,15 +13,15 @@
     - black
     - gravity
     - splunk
-    #- elk
-    #- keycloak
-    #- bookstore
-    #- hello-kubernetes
-    #- wordpress
+    - elk
+    - keycloak
+    - bookstore
+    - hello-kubernetes
+    - wordpress
     - dvwa
-    #- mutillidae
+    - mutillidae
     #- leza
     #- fo
     #- webgoat
     #- flask
-    #- viharc
+    - viharc

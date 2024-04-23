@@ -60,8 +60,6 @@ No modules.
 | [aws_route53_record.security](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/route53_record) | resource |
 | [aws_route53_record.vchokshi](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/route53_record) | resource |
 | [aws_route53_record.viharc](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/route53_record) | resource |
-| [aws_route53_record.www_iot4](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/route53_record) | resource |
-| [aws_route53_record.www_vchokshi](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/route53_record) | resource |
 | [aws_route53_record.www_viharc](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/route53_record) | resource |
 | [aws_route53_zone.aws](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/route53_zone) | resource |
 | [aws_route53_zone.internal_iot](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/route53_zone) | resource |
@@ -92,8 +90,6 @@ No inputs.
 
 | Name | Description |
 |------|-------------|
-| <a name="output_iot4"></a> [iot4](#output\_iot4) | Route54 URL (HTTPS) |
 | <a name="output_s3_url"></a> [s3\_url](#output\_s3\_url) | S3 hosting URL (HTTP) |
-| <a name="output_vchokshi"></a> [vchokshi](#output\_vchokshi) | Route54 URL (HTTPS) |
 | <a name="output_viharc"></a> [viharc](#output\_viharc) | Route54 URL (HTTPS) |
 | <a name="output_website_url"></a> [website\_url](#output\_website\_url) | Website URL (HTTPS) |

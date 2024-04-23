@@ -1,6 +1,6 @@
 ---
-#- name: Impoart and build the botnet
-  #ansible.builtin.import_playbook: bot.yml
+- name: Impoart and build the botnet
+  ansible.builtin.import_playbook: bot.yml
 
 - name: Import and execute the Prequesitues playbook
   ansible.builtin.import_playbook: prereqs.yml
@@ -20,8 +20,8 @@
 - name: Import and execute the ingress controller playbook
   ansible.builtin.import_playbook: ingress.yml
 
-#- name: Import and execute the istio playbook
-  #ansible.builtin.import_playbook: istio.yml
+- name: Import and execute the istio playbook
+  ansible.builtin.import_playbook: istio.yml
 
 - name: Use helm to install externaldns
   ansible.builtin.import_playbook: externaldns.yml

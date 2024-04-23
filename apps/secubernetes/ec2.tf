@@ -1,4 +1,3 @@
-/*
 #### EU CENTRAL RESOURCES ####
 #tfsec:ignore:aws-ec2-enforce-http-token-imds
 #tfsec:ignore:aws-ec2-enable-at-rest-encryption
@@ -151,4 +150,3 @@ resource "aws_route53_record" "west-ssh" {
 output "west-ssh_hostnames" {
   value = aws_route53_record.west-ssh[*].name
 }
-*/

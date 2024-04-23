@@ -30,10 +30,18 @@
 | [aws_default_security_group.default](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/default_security_group) | resource |
 | [aws_default_security_group.east](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/default_security_group) | resource |
 | [aws_default_security_group.west](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/default_security_group) | resource |
+| [aws_instance.e](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/instance) | resource |
+| [aws_instance.east](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/instance) | resource |
+| [aws_instance.west](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/instance) | resource |
+| [aws_instance.win](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/instance) | resource |
 | [aws_key_pair.v](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/key_pair) | resource |
 | [aws_key_pair.w](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/key_pair) | resource |
 | [aws_key_pair.x](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/key_pair) | resource |
 | [aws_key_pair.y](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/key_pair) | resource |
+| [aws_route53_record.east-ssh](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/route53_record) | resource |
+| [aws_route53_record.ssh](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/route53_record) | resource |
+| [aws_route53_record.west-ssh](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/route53_record) | resource |
+| [aws_route53_record.win-ssh](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/route53_record) | resource |
 | [digitalocean_droplet.controller](https://registry.terraform.io/providers/digitalocean/digitalocean/latest/docs/resources/droplet) | resource |
 | [digitalocean_droplet.worker](https://registry.terraform.io/providers/digitalocean/digitalocean/latest/docs/resources/droplet) | resource |
 | [digitalocean_record.c](https://registry.terraform.io/providers/digitalocean/digitalocean/latest/docs/resources/record) | resource |
@@ -72,4 +80,8 @@
 | Name | Description |
 |------|-------------|
 | <a name="output_controller_name"></a> [controller\_name](#output\_controller\_name) | n/a |
+| <a name="output_east-ssh_hostnames"></a> [east-ssh\_hostnames](#output\_east-ssh\_hostnames) | n/a |
+| <a name="output_eu-ssh_hostnames"></a> [eu-ssh\_hostnames](#output\_eu-ssh\_hostnames) | n/a |
+| <a name="output_eu-win"></a> [eu-win](#output\_eu-win) | n/a |
+| <a name="output_west-ssh_hostnames"></a> [west-ssh\_hostnames](#output\_west-ssh\_hostnames) | n/a |
 | <a name="output_workers"></a> [workers](#output\_workers) | n/a |
