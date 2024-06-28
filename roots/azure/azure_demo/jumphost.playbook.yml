@@ -56,16 +56,3 @@
       with_items:
           - { src: 'main.yml', dest: '~/main.yml'  }
           - { src: 'hosts', dest: '~/hosts'  }
-          - { src: 'filebeat-ansible.yml', dest: '~/filebeat-ansible.yml'  }
-          - { src: 'metricbeat-ansible.yml', dest: '~/metricbeat-ansible.yml'  }
-
-    - name: Make files dir
-      command: mkdir -p ~/files
-
-    - name: Copy config files over from files directory
-      copy: src={{ item.src  }} dest={{ item.dest  }}
-      with_items:
-          - { src: 'filebeat-config.yml', dest: '~/files/filebeat-config.yml'  }
-          - { src: 'metricbeat-config.yml', dest: '~/files/metricbeat-config.yml'  }
-          - { src: 'bootstrap.sh', dest: '~/files/bootstrap.sh'  }
-          - { src: 'index.html', dest: '~/files/index.html'  }

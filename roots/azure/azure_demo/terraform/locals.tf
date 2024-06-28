@@ -1,8 +1,8 @@
 locals {
   project     = "week-13-stack"
   owner       = "Vihar Chokshi"
-  email       = "vchokhi23@gmail.com"
-  stack-color = "cyan"
+  email       = "vchokshi23@gmail.com"
+  stack-color = "blue"
 
   common_tags = {
     Name  = local.project

@@ -40,28 +40,14 @@ resource "azurerm_linux_virtual_machine" "web" {
   tags                = local.common_tags
 }
 
-resource "azurerm_managed_disk" "d" {
-  count                = 2
-  provider             = azurerm.iot4
-  name                 = "${local.stack-color}-disk-${count.index}"
-  location             = azurerm_resource_group.rg.location
-  resource_group_name  = azurerm_resource_group.rg.name
-  storage_account_type = "Standard_LRS"
-  create_option        = "Empty"
-  disk_size_gb         = 12
-
-}
-
-resource "azurerm_virtual_machine_data_disk_attachment" "d" {
-  count              = 2
-  provider           = azurerm.iot4
-  managed_disk_id    = azurerm_managed_disk.d[count.index].id
-  virtual_machine_id = azurerm_linux_virtual_machine.web[count.index].id
-  lun                = "10"
-  caching            = "ReadWrite"
-
-}
-
 output "web_ips" {
   value = azurerm_linux_virtual_machine.web.*.private_ip_address
+}
+
+
+resource "azurerm_network_interface_security_group_association" "nsg_ass_web" {
+  count                     = 2
+  provider                  = azurerm.iot4
+  network_interface_id      = azurerm_network_interface.web_nic[count.index].id
+  network_security_group_id = azurerm_network_security_group.nsg.id
 }
