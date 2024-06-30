@@ -40,18 +40,13 @@
           - gzip
           - scanlogd
           - golang-go
+          - apache2
         state: present
       when: ansible_pkg_mgr in ('apt', 'yum', 'dnf', 'zypper')
       retries: 5
       delay: 10
       register: result
       until: "result is not failed"
-
-    - name: Add apache2 web server on workers using apt
-      apt:
-        name: apache2
-        update_cache: yes
-        state: present
 
     - name: Transfer over our index.html file
       vars:

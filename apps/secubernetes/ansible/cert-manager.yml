@@ -7,7 +7,7 @@
 
     - name: Download & Install Cert Manager Control
       unarchive:
-        src: https://github.com/cert-manager/cert-manager/releases/latest/download/cmctl-linux-amd64.tar.gz
+        src: https://github.com/cert-manager/cert-manager/releases/download/v1.13.2/cmctl-linux-amd64.tar.gz
         dest: $HOME
         remote_src: true
 

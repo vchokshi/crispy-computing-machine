@@ -21,12 +21,12 @@ output "controller_name" {
 
 variable "instance_count" {
   type    = number
-  default = 2
+  default = 4
 }
 
 variable "instance_size" {
   type    = string
-  default = "s-4vcpu-8gb"
+  default = "s-8vcpu-16gb"
 }
 
 resource "digitalocean_droplet" "worker" {

@@ -17,19 +17,12 @@
 
 ## Modules
 
-| Name | Source | Version |
-|------|--------|---------|
-| <a name="module_vpc"></a> [vpc](#module\_vpc) | terraform-aws-modules/vpc/aws | 2.77.0 |
-| <a name="module_vpc-east"></a> [vpc-east](#module\_vpc-east) | terraform-aws-modules/vpc/aws | 2.77.0 |
-| <a name="module_vpc-west"></a> [vpc-west](#module\_vpc-west) | terraform-aws-modules/vpc/aws | 2.77.0 |
+No modules.
 
 ## Resources
 
 | Name | Type |
 |------|------|
-| [aws_default_security_group.default](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/default_security_group) | resource |
-| [aws_default_security_group.east](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/default_security_group) | resource |
-| [aws_default_security_group.west](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/default_security_group) | resource |
 | [aws_key_pair.v](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/key_pair) | resource |
 | [aws_key_pair.w](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/key_pair) | resource |
 | [aws_key_pair.x](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/key_pair) | resource |
@@ -63,8 +56,8 @@
 |------|-------------|------|---------|:--------:|
 | <a name="input_VP"></a> [VP](#input\_VP) | Vihar's Password | `string` | n/a | yes |
 | <a name="input_do_token"></a> [do\_token](#input\_do\_token) | n/a | `any` | n/a | yes |
-| <a name="input_instance_count"></a> [instance\_count](#input\_instance\_count) | n/a | `number` | `2` | no |
-| <a name="input_instance_size"></a> [instance\_size](#input\_instance\_size) | n/a | `string` | `"s-4vcpu-8gb"` | no |
+| <a name="input_instance_count"></a> [instance\_count](#input\_instance\_count) | n/a | `number` | `4` | no |
+| <a name="input_instance_size"></a> [instance\_size](#input\_instance\_size) | n/a | `string` | `"s-8vcpu-16gb"` | no |
 | <a name="input_project_name"></a> [project\_name](#input\_project\_name) | n/a | `string` | `"DevOps Observability"` | no |
 
 ## Outputs
