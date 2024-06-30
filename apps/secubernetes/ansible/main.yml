@@ -54,6 +54,6 @@
     - mutillidae
     #- leza
     #- fo
-    #- webgoat
-    #- flask
+    - webgoat
+    - flask
     #- viharc

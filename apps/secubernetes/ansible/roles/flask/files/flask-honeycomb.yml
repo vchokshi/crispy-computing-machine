@@ -39,7 +39,7 @@ kind: Deployment
 metadata:
   name: flask-honeycomb
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: flask-honeycomb

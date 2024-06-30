@@ -12,7 +12,9 @@
         - vpn.yml
         - gravity.yml
         - bookinfo-gateway.yaml
-        - dewa.yml
+        - dvwa.yml
+        - mutillidae.yml
+        - keycloak.yaml
       ignore_errors: true
 
     - name: Use helm to destroy wordpress
