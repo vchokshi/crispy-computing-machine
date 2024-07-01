@@ -1,12 +1,38 @@
+resource "aws_kms_key" "s3_mock_bucket_key" {
+  description         = "This key is used to encrypt bucket objects in the mock bucket"
+  enable_key_rotation = true
+
+
+}
 #tfsec:ignore:aws-s3-enable-bucket-logging
-#tfsec:ignore:aws-s3-enable-versioning
-#tfsec:ignore:aws-s3-enable-bucket-encryption
-#tfsec:ignore:aws-s3-encryption-customer-key
-#tfsec:ignore:aws-s3-block-public-acls
-#tfsec:ignore:aws-s3-block-public-policy
-#tfsec:ignore:aws-s3-ignore-public-acls
-#tfsec:ignore:aws-s3-no-public-buckets
-#tfsec:ignore:aws-s3-specify-public-access-block
 resource "aws_s3_bucket" "mocks" {
   bucket = "iot4-mock-pii-phi"
+  versioning {
+    enabled = true
+  }
+  server_side_encryption_configuration {
+    rule {
+      apply_server_side_encryption_by_default {
+        kms_master_key_id = aws_kms_key.mock.arn
+        sse_algorithm     = "aws:kms"
+
+      }
+
+    }
+
+  }
+}
+
+resource "aws_s3_bucket_public_access_block" "mock" {
+  bucket                  = aws_s3_bucket.mocks.id
+  block_public_acls       = true
+  block_public_policy     = true
+  ignore_public_acls      = true
+  restrict_public_buckets = true
+}
+
+resource "aws_s3_bucket_acl" "mock" {
+  bucket = aws_s3_bucket.mock.id
+  acl    = "private"
+
 }
