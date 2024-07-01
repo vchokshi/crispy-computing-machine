@@ -1,4 +1,4 @@
-resource "aws_kms_key" "s3_mock_bucket_key" {
+resource "aws_kms_key" "mocks" {
   description         = "This key is used to encrypt bucket objects in the mock bucket"
   enable_key_rotation = true
 
@@ -13,7 +13,7 @@ resource "aws_s3_bucket" "mocks" {
   server_side_encryption_configuration {
     rule {
       apply_server_side_encryption_by_default {
-        kms_master_key_id = aws_kms_key.mock.arn
+        kms_master_key_id = aws_kms_key.mocks.arn
         sse_algorithm     = "aws:kms"
 
       }
@@ -29,10 +29,4 @@ resource "aws_s3_bucket_public_access_block" "mock" {
   block_public_policy     = true
   ignore_public_acls      = true
   restrict_public_buckets = true
-}
-
-resource "aws_s3_bucket_acl" "mock" {
-  bucket = aws_s3_bucket.mock.id
-  acl    = "private"
-
 }
