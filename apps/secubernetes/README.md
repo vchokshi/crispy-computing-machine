@@ -35,7 +35,6 @@ No modules.
 | [aws_ami.amazon-linux-2](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/ami) | data source |
 | [aws_ami.debian-10](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/ami) | data source |
 | [aws_ami.debian-11](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/ami) | data source |
-| [aws_ami.debian-9](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/ami) | data source |
 | [aws_ami.east-amazon-linux-2](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/ami) | data source |
 | [aws_ami.west-amazon-linux-2](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/ami) | data source |
 | [aws_ami.windows-2022](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/ami) | data source |
