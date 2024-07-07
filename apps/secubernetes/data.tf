@@ -7,22 +7,6 @@ data "aws_ami" "windows-2022" {
   }
 }
 
-# Debian 9 Stretch
-data "aws_ami" "debian-9" {
-  most_recent = true
-  owners      = ["379101102735"]
-  filter {
-    name   = "name"
-    values = ["debian-stretch-*"]
-
-  }
-  filter {
-    name   = "virtualization-type"
-    values = ["hvm"]
-
-  }
-
-}
 # Debian 10 Buster
 data "aws_ami" "debian-10" {
   most_recent = true

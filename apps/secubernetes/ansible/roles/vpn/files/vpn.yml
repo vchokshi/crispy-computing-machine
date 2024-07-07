@@ -49,7 +49,7 @@ spec:
     spec:
       containers:
       - name: vpn
-        image: vchokshi/vpn:latest
+        image: vchokshi/vpn:c0ec58e
         imagePullPolicy: Always
         ports:
         - containerPort: 80
