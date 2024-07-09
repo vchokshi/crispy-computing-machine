@@ -11,7 +11,10 @@ RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" \
     && php -r "unlink('composer-setup.php');" \
     && mv composer.phar /usr/local/bin/composer
 
-COPY composer.json composer.json
+RUN mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini"
+
+WORKDIR /var/www/html
+COPY main/ ./
 
 RUN composer install \
     --no-interaction \
@@ -19,6 +22,5 @@ RUN composer install \
     --no-scripts \
     --no-dev \
     --prefer-dist
-RUN mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini"
-COPY main/ /var/www/html/
+
 EXPOSE 80
