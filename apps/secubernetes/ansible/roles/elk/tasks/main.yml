@@ -24,15 +24,20 @@
     - beats.yml
 
 - name: Install the elastic stack
-  shell: kubectl apply -f elastic.yml >> elk.yml
+  shell: kubectl apply -f elastic.yml >> txt.yml
   args:
     chdir: $HOME
-    creates: elk.yml
+    creates: elk.txt
 
 - name: Get the kibana password into a file
-  shell: kubectl get secret elk-es-elastic-user -o=jsonpath='{.data.elastic}' | base64 --decode > kibana.txt
+  shell: kubectl get secret elk-es-elastic-user -o=jsonpath='{.data.elastic}' | base64 --decode 
+  register: elk_pass_raw
   args:
     chdir: $HOME
+
+- name: "*** Debug ELK PASS *****"
+  debug:
+    var: elk_pass_raw.stdout_lines[0]
 
 - name: Install beats
   shell: kubectl apply -f beats.yml >> beats.txt

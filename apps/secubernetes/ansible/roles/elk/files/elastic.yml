@@ -35,7 +35,7 @@ metadata:
 spec:
  ingressClassName: "nginx"
  rules:
- - host: "kibana.obs.vchokshi.com"
+ - host: "elk.labs.vchokshi.com"
    http:
      paths:
      - pathType: Prefix

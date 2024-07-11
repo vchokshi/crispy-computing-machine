@@ -8,10 +8,10 @@ spec:
   ingressClassName: nginx
   tls:
    - hosts:
-     - splunk.do.iot4.net
+     - splunk.labs.iot4.net
      secretName: splunk-cert
   rules:
-  - host: "splunk.do.iot4.net"
+  - host: "splunk.labs.iot4.net"
     http:
       paths:
       - pathType: Prefix
