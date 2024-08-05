@@ -9,10 +9,10 @@ spec:
   ingressClassName: nginx
   tls:
    - hosts:
-     - dvwa.pen.iot4.net
+     - dvwa.labs.iot4.net
      secretName: dvwa-cert
   rules:
-  - host: "dvwa.pen.iot4.net"
+  - host: "dvwa.labs.iot4.net"
     http:
       paths:
       - pathType: Prefix

@@ -9,10 +9,10 @@ spec:
   ingressClassName: nginx
   tls:
    - hosts:
-     - goat.pen.iot4.net
+     - goat.labs.iot4.net
      secretName: webgoat-cert
   rules:
-  - host: "goat.pen.iot4.net"
+  - host: "goat.labs.iot4.net"
     http:
       paths:
       - pathType: Prefix

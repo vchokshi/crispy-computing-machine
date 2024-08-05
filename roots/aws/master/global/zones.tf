@@ -157,6 +157,17 @@ resource "aws_route53_record" "vchokshi" {
     "ns3.digitalocean.com.",
   ]
 }
+resource "aws_route53_record" "labs" {
+  zone_id = aws_route53_zone.vchokshi.zone_id
+  name    = "labs.vchokshi.com"
+  type    = "NS"
+  ttl     = "300"
+  records = [
+    "ns1.digitalocean.com.",
+    "ns2.digitalocean.com.",
+    "ns3.digitalocean.com.",
+  ]
+}
 
 resource "aws_route53_record" "observability" {
   zone_id = aws_route53_zone.vchokshi.zone_id

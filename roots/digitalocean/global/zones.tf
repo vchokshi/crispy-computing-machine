@@ -21,3 +21,7 @@ resource "digitalocean_domain" "apps" {
 resource "digitalocean_domain" "pen" {
   name = "pen.iot4.net"
 }
+
+resource "digitalocean_domain" "labs" {
+  name = "labs.vchokshi.com"
+}

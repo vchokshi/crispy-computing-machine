@@ -9,10 +9,10 @@ spec:
   ingressClassName: nginx
   tls:
    - hosts:
-     - mutillidae.pen.iot4.net
+     - mutillidae.labs.iot4.net
      secretName: mutillidae-cert
   rules:
-  - host: "mutillidae.pen.iot4.net"
+  - host: "mutillidae.labs.iot4.net"
     http:
       paths:
       - pathType: Prefix
