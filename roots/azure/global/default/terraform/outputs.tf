@@ -1,6 +1,6 @@
-#output "azurerm_subscription" {
-#value = data.azurerm_subscription.current
-#}
+output "azurerm_subscription" {
+  value = data.azurerm_subscription.current
+}
 
 output "available_subscriptions" {
   value = data.azurerm_subscriptions.available.subscriptions

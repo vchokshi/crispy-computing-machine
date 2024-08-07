@@ -17,7 +17,7 @@ module "enterprise_scale" {
   version = "6.0.0"
   #version = "2.4.0"
 
-  deploy_demo_landing_zones = false
+  deploy_demo_landing_zones = true
   disable_telemetry         = true
   default_location          = var.default_location
 
@@ -32,3 +32,16 @@ module "enterprise_scale" {
   }
   deploy_connectivity_resources = false
 }
+
+data "azurerm_management_group" "conn" {
+  name = "SHI-connectivity"
+}
+
+output "connectivity_management_group" {
+  value = data.azurerm_management_group.conn.id
+}
+#resource "azurerm_management_group_subscription_association" "conn" {
+#management_group_id = data.azurerm_management_group.conn.id
+#subscription_id     = data.azurerm_subscriptions.conn.subscriptions[0].subscription_id
+#}
+
