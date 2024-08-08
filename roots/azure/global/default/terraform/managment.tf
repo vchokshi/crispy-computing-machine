@@ -1,5 +1,5 @@
 data "azurerm_subscriptions" "iottest" {
-  display_name_prefix = "IOT4 Test Policy Group"
+  display_name_prefix = "IOT4 Policy Based Subscription"
 }
 resource "azurerm_management_group" "iot4" {
   display_name     = "IOT4 Managment Group"
@@ -18,12 +18,4 @@ resource "azurerm_subscription_policy_assignment" "auditvms" {
   display_name         = "Audit VMs without managed disks assignment"
   subscription_id      = data.azurerm_subscriptions.iottest.subscriptions[0].id
 
-}
-resource "azurerm_management_group" "rand" {
-  display_name     = "Research and Development"
-  subscription_ids = []
-}
-resource "azurerm_management_group" "ce" {
-  display_name     = "Clinical Enterprise"
-  subscription_ids = []
 }
