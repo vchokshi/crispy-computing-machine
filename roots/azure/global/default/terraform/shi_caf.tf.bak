@@ -40,8 +40,3 @@ data "azurerm_management_group" "conn" {
 output "connectivity_management_group" {
   value = data.azurerm_management_group.conn.id
 }
-#resource "azurerm_management_group_subscription_association" "conn" {
-#management_group_id = data.azurerm_management_group.conn.id
-#subscription_id     = data.azurerm_subscriptions.conn.subscriptions[0].subscription_id
-#}
-
