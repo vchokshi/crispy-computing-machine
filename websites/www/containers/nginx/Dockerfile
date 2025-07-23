@@ -1,4 +1,4 @@
-FROM debian
+FROM debian:12.11
 
 # Install Nginx
 RUN apt-get -y update && apt-get -y install nginx
